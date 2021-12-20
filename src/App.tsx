@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 // Imported Components
-import HelloWorld from './components/hello-world/hello-world.components';
+// import CustomAppBar from './components/app-bar/app-bar.components';
+import TemporaryDrawer from './components/side-nav-drawer/side-nav-drawer.components';
 
 function App() {
-  return <HelloWorld></HelloWorld>;
+  return <TemporaryDrawer></TemporaryDrawer>;
 }
 
 export default App;
