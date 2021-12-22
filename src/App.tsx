@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
 
-// Imported Components
-// import CustomAppBar from './components/app-bar/app-bar.components';
-import TemporaryDrawer from './components/side-nav-drawer/side-nav-drawer.components';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
-  return <TemporaryDrawer></TemporaryDrawer>;
-}
+import Homepage from './pages/homepage/homepage.pages';
+
+const App = () => {
+	return (
+		<div>
+			<Routes>
+				<Route path='/' element={<Homepage />} />
+			</Routes>
+		</div>
+	);
+};
 
 export default App;
