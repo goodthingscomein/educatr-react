@@ -4,10 +4,12 @@ import Drawer from '@mui/material/Drawer';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
-import { CustomMapStateToProps } from '../../services/redux/root-reducer';
 
 // Import Required Redux Actions
-import { setDrawerIsOpen } from '../../services/redux/navigation/navigation.actions';
+import { setDrawerIsOpen } from '../../redux/navigation/navigation.actions';
+import { State } from '../../redux/root-reducer';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
 
 type Props = {
 	isDrawerOpen: boolean;
@@ -16,36 +18,23 @@ type Props = {
 	children?: JSX.Element | JSX.Element[];
 };
 
-const SideNavDrawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, drawerWidth, children }) => {
-	// Toggle Drawer Function
-	const toggleDrawer = (open: boolean) => (event: any) => {
-		if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-			return;
-		}
-		setDrawerIsOpen(open);
-	};
+const SideNavDrawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, drawerWidth, children }) => (
+	<Drawer anchor='left' open={isDrawerOpen} onClose={() => setDrawerIsOpen(false)}>
+		<Box
+			sx={{ width: drawerWidth }}
+			role='presentation'
+			onClick={() => setDrawerIsOpen(false)}
+			onKeyDown={() => setDrawerIsOpen(false)}>
+			{children}
+		</Box>
+	</Drawer>
+);
 
-	// Render Side Drawer
-	return (
-		<Drawer anchor='left' open={isDrawerOpen} onClose={toggleDrawer(false)}>
-			<Box
-				sx={{ width: drawerWidth }}
-				role='presentation'
-				onClick={toggleDrawer(false)}
-				onKeyDown={toggleDrawer(false)}>
-				{children}
-			</Box>
-		</Drawer>
-	);
-};
-
-// Get props
-const mapStateToProps = (state: CustomMapStateToProps) => ({
+const mapStateToProps = (state: State) => ({
 	isDrawerOpen: state.navigation.isDrawerOpen,
 });
 
-// Set props
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
 	setDrawerIsOpen: (open: boolean) => dispatch(setDrawerIsOpen(open)),
 });
 
