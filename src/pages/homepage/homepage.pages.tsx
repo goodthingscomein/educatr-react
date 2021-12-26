@@ -1,17 +1,33 @@
 import React from 'react';
 
-// Import Page Templates
-import AppBar_SideDrawer_PageTemplate from '../../templates/page-templates/app-bar_side-drawer.page-template';
+// Import Env Constants
+import { WEBSITE } from '../../assets/environment.consts';
 
-// Import Component Templates
-import AppBar_SideDrawer_Standard from '../../templates/component-templates/app-bars/supports-side-drawer/app-bar_side-drawer_standard.template';
-import SideDrawer_Standard from '../../templates/component-templates/side-drawer/side-drawer-standard.template';
+// MUI Components
+import { Box, Button, IconButton, Typography } from '@mui/material';
 
-const Homepage: React.FC = () => (
-	<AppBar_SideDrawer_PageTemplate
-		appBarType={<AppBar_SideDrawer_Standard />}
-		sideDrawerType={<SideDrawer_Standard />}
-	/>
-);
+// MUI Icons
+import MenuIcon from '@mui/icons-material/Menu';
+
+// Custom Components
+import CustomAppBar from '../../components/app-bar/app-bar.components';
+
+// Homepage Functional Component
+const Homepage: React.FC = () => {
+	return (
+		<>
+			<CustomAppBar>
+				<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+					{WEBSITE.SITE_TITLE}
+				</Typography>
+			</CustomAppBar>
+			<Box sx={{ flexGrow: 1, minHeight: '100vh' }}>
+				<Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize: '260%', textAlign: 'center' }}>
+					Connecting <span>Influencers</span> and <span>Brands</span>
+				</Typography>
+			</Box>
+		</>
+	);
+};
 
 export default Homepage;

@@ -11,7 +11,7 @@ type Props = {
 const CustomAppBar: React.FC<Props> = ({ children }) => {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position='static'>
+			<AppBar position="static">
 				<Toolbar>{children}</Toolbar>
 			</AppBar>
 		</Box>

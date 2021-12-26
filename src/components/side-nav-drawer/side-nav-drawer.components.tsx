@@ -19,12 +19,13 @@ type Props = {
 };
 
 const SideNavDrawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, drawerWidth, children }) => (
-	<Drawer anchor='left' open={isDrawerOpen} onClose={() => setDrawerIsOpen(false)}>
+	<Drawer anchor="left" open={isDrawerOpen} onClose={() => setDrawerIsOpen(false)}>
 		<Box
 			sx={{ width: drawerWidth }}
-			role='presentation'
+			role="presentation"
 			onClick={() => setDrawerIsOpen(false)}
-			onKeyDown={() => setDrawerIsOpen(false)}>
+			onKeyDown={() => setDrawerIsOpen(false)}
+		>
 			{children}
 		</Box>
 	</Drawer>

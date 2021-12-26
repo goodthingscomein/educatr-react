@@ -1,19 +1,16 @@
-import React from 'react';
-import './App.css';
-
 import { Route, Routes } from 'react-router-dom';
 
 import Homepage from './pages/homepage/homepage.pages';
-import CreateAccountPage from './pages/create-account/create-account.pages';
-import LoginPage from './pages/login/login.pages';
+
+// Import CSS Baseline from MUI
+import { CssBaseline } from '@mui/material';
 
 const App = () => {
 	return (
 		<div>
+			<CssBaseline />
 			<Routes>
-				<Route path='/' element={<Homepage />} />
-				<Route path='/create-account' element={<CreateAccountPage />} />
-				<Route path='/login' element={<LoginPage />} />
+				<Route path="/" element={<Homepage />} />
 			</Routes>
 		</div>
 	);
