@@ -1,6 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -19,16 +17,16 @@ type Props = {
 };
 
 const SideNavDrawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, drawerWidth, children }) => (
-	<Drawer anchor="left" open={isDrawerOpen} onClose={() => setDrawerIsOpen(false)}>
-		<Box
-			sx={{ width: drawerWidth }}
-			role="presentation"
-			onClick={() => setDrawerIsOpen(false)}
-			onKeyDown={() => setDrawerIsOpen(false)}
-		>
-			{children}
-		</Box>
-	</Drawer>
+	<div></div>
+	// <Drawer anchor='left' open={isDrawerOpen} onClose={() => setDrawerIsOpen(false)}>
+	// 	<Box
+	// 		sx={{ width: drawerWidth }}
+	// 		role='presentation'
+	// 		onClick={() => setDrawerIsOpen(false)}
+	// 		onKeyDown={() => setDrawerIsOpen(false)}>
+	// 		{children}
+	// 	</Box>
+	// </Drawer>
 );
 
 const mapStateToProps = (state: State) => ({
