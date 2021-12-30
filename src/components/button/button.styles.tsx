@@ -1,118 +1,65 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import {ColorTypes} from '../../type-declarations/styled';
 
-// To add props
-interface ButtonProps {
-	color: 'primary' | 'textDark' | 'accent' | 'white' | 'black';
-}
+// Button Props
+type ButtonContainerProps = {
+  size: 'small' | 'medium' | 'large';
 
-// All button styles
-const ButtonStyles = css`
-	padding: 0.7em 1.4em;
-	border: none;
-	outline: none;
-	text-decoration: none;
-	border-radius: 0.6em;
-	:active {
-		box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
-	}
-	cursor: pointer;
-`;
+  backgroundColor: ColorTypes;
+  hoverBackgroundColor: ColorTypes;
+  activeBackgroundColor: ColorTypes;
 
-// Solid button
-export const SolidButton = styled.button<ButtonProps>`
-	// Import standard button styles
-	${ButtonStyles}
+  outlineColor: ColorTypes;
+  hoverOutlineColor: ColorTypes;
+  activeOutlineColor: ColorTypes;
 
-	// Create variable of the selected color
-  --selected-color: ${(props) => {
-		switch (props.color) {
-			case 'primary':
-				return props.theme.colors.primary;
-			case 'textDark':
-				return props.theme.colors.textDark;
-			case 'accent':
-				return props.theme.colors.accent;
-			case 'white':
-				return props.theme.colors.white;
-			case 'black':
-				return props.theme.colors.black;
-		}
-	}};
+  textColor: ColorTypes;
+  hoverTextColor: ColorTypes;
+  activeTextColor: ColorTypes;
+};
 
-	// Color of the text (inverted)
-	color: ${(props) => {
-		switch (props.color) {
-			case 'primary':
-				return props.theme.colors.white;
-			case 'textDark':
-				return props.theme.colors.white;
-			case 'accent':
-				return props.theme.colors.white;
-			case 'white':
-				return props.theme.colors.textDark;
-			case 'black':
-				return props.theme.colors.white;
-		}
-	}};
+// Render Button
+export const ButtonContainer = styled.a<ButtonContainerProps>`
+  // Standard CSS properties
+  padding: 6px 12px;
+  outline: none;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 0.6em;
 
-	// Custom button styles
-	background-color: var(--selected-color);
-	box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17), inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
-		inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
-`;
+  // Font size based on button size
+  font-size: ${(props) => {
+    switch (props.size) {
+      case 'small':
+        return 70;
+      case 'medium':
+        return 85;
+      case 'large':
+        return 100;
+    }
+  }}%;
 
-export const OutlineButton = styled.button<ButtonProps>`
-	// Import standard button styles
-	${ButtonStyles}
+  // Transitions
+  transition: color 0.1s, background-color 0.1s, border 0.1s;
 
-	// Create variable of the selected color
-  --selected-color: ${(props) => {
-		switch (props.color) {
-			case 'primary':
-				return props.theme.colors.primary;
-			case 'textDark':
-				return props.theme.colors.textDark;
-			case 'accent':
-				return props.theme.colors.accent;
-			case 'white':
-				return props.theme.colors.white;
-			case 'black':
-				return props.theme.colors.black;
-		}
-	}};
+  // Default colors
+  color: ${(props) => props.theme.getColor(props.textColor)};
+  background-color: ${(props) => props.theme.getColor(props.backgroundColor)};
+  border: 2px solid ${(props) => props.theme.getColor(props.outlineColor)};
 
-	// Color of the text
-	color: var(--selected-color);
+  // Hover effects
+  :hover {
+    color: ${(props) => props.theme.getColor(props.hoverTextColor)};
+    background-color: ${(props) => props.theme.getColor(props.hoverBackgroundColor)};
+    border: 2px solid ${(props) => props.theme.getColor(props.hoverOutlineColor)};
+  }
 
-	// Custom button styles
-	background-color: ${(props) => props.theme.colors.transparent};
-	border: 3px solid var(--selected-color);
-`;
-
-export const TextButton = styled.button<ButtonProps>`
-	// Import standard button styles
-	${ButtonStyles}
-
-	// Create variable of the selected color
-  --selected-color: ${(props) => {
-		switch (props.color) {
-			case 'primary':
-				return props.theme.colors.primary;
-			case 'textDark':
-				return props.theme.colors.textDark;
-			case 'accent':
-				return props.theme.colors.accent;
-			case 'white':
-				return props.theme.colors.white;
-			case 'black':
-				return props.theme.colors.black;
-		}
-	}};
-
-	// Color of the text
-	color: var(--selected-color);
-
-	// Custom button styles
-	background-color: ${(props) => props.theme.colors.transparent};
-	border: none;
+  // Active effect
+  :active {
+    transition: color 0s, background-color 0s, border 0s;
+    color: ${(props) => props.theme.getColor(props.activeTextColor)};
+    background-color: ${(props) => props.theme.getColor(props.activeBackgroundColor)};
+    border: 2px solid ${(props) => props.theme.getColor(props.activeOutlineColor)};
+  }
+  cursor: pointer;
 `;
