@@ -10,11 +10,14 @@ interface ButtonSharedProps {
   textColor: ColorTypes;
   hoverTextColor: ColorTypes;
   activeTextColor: ColorTypes;
+
+  // Actions
+  href?: 'string';
+  clickAction?: () => unknown;
 }
 
 interface SolidButtonProps extends ButtonSharedProps {
   variant: 'solid';
-  size: 'small' | 'medium' | 'large';
   backgroundColor: ColorTypes;
   hoverBackgroundColor: ColorTypes;
   activeBackgroundColor: ColorTypes;
@@ -24,14 +27,12 @@ interface SolidButtonProps extends ButtonSharedProps {
 }
 interface OutlineButtonProps extends ButtonSharedProps {
   variant: 'outline';
-  size: 'small' | 'medium' | 'large';
   outlineColor: ColorTypes;
   hoverOutlineColor: ColorTypes;
   activeOutlineColor: ColorTypes;
 }
 interface TextButtonProps extends ButtonSharedProps {
   variant: 'text';
-  size: 'small' | 'medium' | 'large';
 }
 
 // Component Props Interface
@@ -54,6 +55,8 @@ const Button: React.FC<Props> = ({children, ...otherProps}) => {
           textColor={otherProps.textColor}
           hoverTextColor={otherProps.hoverTextColor}
           activeTextColor={otherProps.activeTextColor}
+          // href={otherProps.href}
+          // onClick={otherProps.clickAction ? () => otherProps.clickAction() : undefined}
         >
           {children}
         </ButtonContainer>
@@ -71,6 +74,7 @@ const Button: React.FC<Props> = ({children, ...otherProps}) => {
           textColor={otherProps.textColor}
           hoverTextColor={otherProps.hoverTextColor}
           activeTextColor={otherProps.activeTextColor}
+          // href={otherProps.href}
         >
           {children}
         </ButtonContainer>
@@ -88,6 +92,7 @@ const Button: React.FC<Props> = ({children, ...otherProps}) => {
           textColor={otherProps.textColor}
           hoverTextColor={otherProps.hoverTextColor}
           activeTextColor={otherProps.activeTextColor}
+          // href={otherProps.href}
         >
           {children}
         </ButtonContainer>

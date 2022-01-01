@@ -2,7 +2,7 @@ import React from 'react';
 import {ColorTypes} from '../../type-declarations/styled';
 
 // Import styles
-import {HeroContainer} from './hero-section.styles';
+import {ColumnContainer} from './column.styles';
 
 // Component Props Interface
 type Props = {
@@ -13,10 +13,10 @@ type Props = {
 };
 
 // Render Component
-const HeroSection: React.FC<Props> = ({children, backgroundColor, imgUrl, imgDarken}) => (
-  <HeroContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken}>
+const Column: React.FC<Props> = ({children, backgroundColor, imgUrl, imgDarken}) => (
+  <ColumnContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken}>
     {children}
-  </HeroContainer>
+  </ColumnContainer>
 );
 
-export default HeroSection;
+export default Column;

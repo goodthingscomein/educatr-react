@@ -1,17 +1,51 @@
 import React from 'react';
+import {ColorTypes} from '../../type-declarations/styled';
+
+// Import styles
+import {SectionContainer} from './section.styles';
 
 // Component Props Interface
 type Props = {
-  children?: JSX.Element | JSX.Element[];
-  // var-name: type
-  // var-function: () => any
+  children?: React.ReactNode;
+  backgroundColor?: ColorTypes;
+  imgUrl?: string;
+  imgDarken?: number;
+
+  // Section Padding
+  horizontalPadding?: number;
+  verticalPadding?: number;
+  hasColumns?: boolean;
+
+  // Hero Section for landing page
+  isHeroSection?: boolean;
 };
 
 // Render Component
-const Section: React.FC<Props> = ({children}) => (
-  <div>
-    <h1>Hello World!</h1>
-  </div>
+const Section: React.FC<Props> = ({
+  children,
+  backgroundColor,
+  imgUrl,
+  imgDarken,
+
+  // Padding
+  horizontalPadding,
+  verticalPadding,
+  hasColumns,
+
+  // Hero section
+  isHeroSection,
+}) => (
+  <SectionContainer
+    backgroundColor={backgroundColor}
+    imgUrl={imgUrl}
+    imgDarken={imgDarken}
+    horizontalPadding={horizontalPadding}
+    verticalPadding={verticalPadding}
+    hasColumns={hasColumns}
+    isHeroSection={isHeroSection}
+  >
+    {children}
+  </SectionContainer>
 );
 
 export default Section;

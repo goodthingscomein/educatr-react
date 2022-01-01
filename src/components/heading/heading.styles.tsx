@@ -19,7 +19,7 @@ export const H1 = styled.h1<HeadingProps>`
   ${HeadingStyles}
   color: ${(props) => props.theme.getColor(props.color)};
   font-size: 300%;
-  font-weight: 400;
+  font-weight: 200;
 `;
 
 // H2

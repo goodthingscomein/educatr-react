@@ -8,6 +8,7 @@ export const MainTheme: DefaultTheme = {
     textDark: '#1A1A1A',
     textLight: '#6F6F6F',
     white: '#FFFFFF',
+    lightGrey: '#EFEFEF',
     black: '#000000',
     transparent: 'transparent',
   },
@@ -25,6 +26,8 @@ export const MainTheme: DefaultTheme = {
         return '#6F6F6F';
       case 'white':
         return '#FFFFFF';
+      case 'lightGrey':
+        return '#EFEFEF';
       case 'black':
         return '#000000';
       case 'transparent':

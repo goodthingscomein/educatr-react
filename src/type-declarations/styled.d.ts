@@ -8,6 +8,7 @@ export type ColorTypes =
   | 'textDark'
   | 'textLight'
   | 'white'
+  | 'lightGrey'
   | 'black'
   | 'transparent';
 
@@ -21,6 +22,7 @@ declare module 'styled-components' {
       textDark: string;
       textLight: string;
       white: string;
+      lightGrey: string;
       black: string;
       transparent: string;
     };
