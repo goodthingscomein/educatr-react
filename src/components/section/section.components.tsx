@@ -18,6 +18,9 @@ type Props = {
 
   // Hero Section for landing page
   isHeroSection?: boolean;
+
+  // Inset box shadow at top of section
+  hasBoxShadow?: boolean;
 };
 
 // Render Component
@@ -34,6 +37,9 @@ const Section: React.FC<Props> = ({
 
   // Hero section
   isHeroSection,
+
+  // Inset box shadow at top of section
+  hasBoxShadow,
 }) => (
   <SectionContainer
     backgroundColor={backgroundColor}
@@ -43,6 +49,7 @@ const Section: React.FC<Props> = ({
     verticalPadding={verticalPadding}
     hasColumns={hasColumns}
     isHeroSection={isHeroSection}
+    hasBoxShadow={hasBoxShadow}
   >
     {children}
   </SectionContainer>

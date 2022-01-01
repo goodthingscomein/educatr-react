@@ -18,8 +18,8 @@ const HeadingStyles = css`
 export const H1 = styled.h1<HeadingProps>`
   ${HeadingStyles}
   color: ${(props) => props.theme.getColor(props.color)};
-  font-size: 300%;
-  font-weight: 200;
+  font-size: 220%;
+  font-weight: 700;
 `;
 
 // H2
@@ -27,7 +27,7 @@ export const H2 = styled.h2<HeadingProps>`
   ${HeadingStyles}
   color: ${(props) => props.theme.getColor(props.color)};
   font-size: 220%;
-  font-weight: 300;
+  font-weight: 400;
 `;
 
 // H3
@@ -35,7 +35,7 @@ export const H3 = styled.h3<HeadingProps>`
   ${HeadingStyles}
   color: ${(props) => props.theme.getColor(props.color)};
   font-size: 160%;
-  font-weight: 300;
+  font-weight: 400;
 `;
 
 // H4

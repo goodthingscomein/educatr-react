@@ -7,17 +7,18 @@ import {HomepageContainer, AppBarButtonsContainer, AppBarTextButtonContainer} fr
 import AppBar from '../../components/app-bar/app-bar.components';
 import Logo from '../../components/logo/logo.components';
 import Button from '../../components/button/button.components';
-import {H1, H3} from '../../components/heading/heading.styles';
+import {H1, H2, H3} from '../../components/heading/heading.styles';
 import Section from '../../components/section/section.components';
 import CardList from '../../components/card-list/card-list.components';
 import Card from '../../components/card/card.components';
-import CardImage from '../../components/card-image/card-image.components';
 import Column from '../../components/column/column.components';
+import Margin from '../../components/margin/margin.components';
 
 // Homepage Functional Component
 const Homepage: React.FC = () => {
   return (
     <HomepageContainer>
+      {/* App Bar */}
       <AppBar color='textDark'>
         <Logo variant='h4' firstColor='primary' secondColor='white' />
         <AppBarButtonsContainer>
@@ -52,21 +53,26 @@ const Homepage: React.FC = () => {
           </Button>
         </AppBarButtonsContainer>
       </AppBar>
-      <Section imgUrl='https://images.unsplash.com/photo-1614030424754-24d0eebd46b2' imgDarken={0.6} isHeroSection>
-        <H1 color='white'>Connecting like-minded influencers.</H1>
-        <H3 color='primary'>It is a pleasure to see you!</H3>
+      {/* Hero Section */}
+      <Section backgroundColor='white' isHeroSection hasColumns hasBoxShadow>
+        <Column />
+        <Column>
+          <H1 color='textDark'>Connecting like-minded influencers.</H1>
+          <H3 color='primary'>It is a pleasure to see you!</H3>
+        </Column>
       </Section>
-      <Section backgroundColor='lightGrey'>
+      {/* Card Section */}
+      <Section backgroundColor='lightGrey' horizontalPadding={220} verticalPadding={80}>
+        <H2 color='primary'>Card Section</H2>
+        <Margin height={40} />
         <CardList>
-          <Card height={300} width={220} backgroundColor='white'>
-            <CardImage src='https://images.unsplash.com/photo-1614030424754-24d0eebd46b2' alt='Image' />
-          </Card>
-          <Card height={300} width={220} backgroundColor='white'></Card>
-          <Card height={300} width={220} backgroundColor='white'></Card>
-          <Card height={300} width={220} backgroundColor='white'></Card>
+          <Card height={360} width={270} backgroundColor='white'></Card>
+          <Card height={360} width={270} backgroundColor='white'></Card>
+          <Card height={360} width={270} backgroundColor='white'></Card>
         </CardList>
       </Section>
-      <Section backgroundColor='secondary'>
+      {/* Column Section */}
+      <Section backgroundColor='secondary' hasColumns>
         <Column imgUrl='https://images.unsplash.com/photo-1614030424754-24d0eebd46b2' />
         <Column>
           <H3 color='white'>Col 2</H3>

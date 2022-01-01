@@ -19,8 +19,10 @@ const BackgroundImageStyles = css<ColumnContainerProps>`
 
 export const ColumnContainer = styled.div<ColumnContainerProps>`
   width: 50%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 80px 12px;
   overflow: hidden;
 

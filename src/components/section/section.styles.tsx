@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 import {ColorTypes} from '../../type-declarations/styled';
 
-// Colored background
+// Section props
 interface SectionContainerProps {
   backgroundColor?: ColorTypes;
   imgUrl?: string;
@@ -14,6 +14,9 @@ interface SectionContainerProps {
 
   // Hero Section for landing page
   isHeroSection?: boolean;
+
+  // Inset box shadow
+  hasBoxShadow?: boolean;
 }
 
 // Css for background image
@@ -25,15 +28,6 @@ const BackgroundImageStyles = css<SectionContainerProps>`
     url(${(props) => props.imgUrl});
 `;
 
-// Css for column support
-const ColumnSectionStyles = css`
-  flex-direction: row;
-  padding: 0 120px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 // Css for Hero Section for landing pages
 const HeroSectionStyles = css`
   height: calc(100vh - ${(props) => props.theme.appBar.appBarHeight});
@@ -42,10 +36,24 @@ const HeroSectionStyles = css`
   align-items: center;
 `;
 
+// Css for column support
+const ColumnSectionStyles = css`
+  flex-direction: row;
+  padding: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+// Css for inset box shadow
+const BoxShadowStyles = css`
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+`;
+
 export const SectionContainer = styled.div<SectionContainerProps>`
   width: 100%;
   margin: 0;
-  padding: 80px 160px;
+  padding: ${(props) => props.verticalPadding ?? 80}px ${(props) => props.horizontalPadding ?? 160}px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -54,6 +62,9 @@ export const SectionContainer = styled.div<SectionContainerProps>`
   // Background
   background-color: ${(props) => props.theme.getColor(props.backgroundColor || 'black')};
   ${(props) => (props.imgUrl ? BackgroundImageStyles : '')}
+
+  // Inset box shadow
+  ${(props) => (props.hasBoxShadow ? BoxShadowStyles : '')}
 
   // Hero section for landing page
   ${(props) => (props.isHeroSection ? HeroSectionStyles : '')}
