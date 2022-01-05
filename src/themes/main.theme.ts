@@ -7,6 +7,7 @@ export const MainTheme: DefaultTheme = {
     tertiary: '#df4811',
     primaryAccent: '#0652DD',
     secondaryAccent: '#04399b',
+    tertiaryAccent: '#032769',
     textDark: '#1A1A1A',
     textLight: '#6F6F6F',
     white: '#FFFFFF',
@@ -26,6 +27,8 @@ export const MainTheme: DefaultTheme = {
         return '#0652DD';
       case 'secondaryAccent':
         return '#04399b';
+      case 'tertiaryAccent':
+        return '#032769';
       case 'textDark':
         return '#1A1A1A';
       case 'textLight':

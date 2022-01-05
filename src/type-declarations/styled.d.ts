@@ -7,6 +7,7 @@ export type ColorTypes =
   | 'tertiary'
   | 'primaryAccent'
   | 'secondaryAccent'
+  | 'tertiaryAccent'
   | 'textDark'
   | 'textLight'
   | 'white'
@@ -26,6 +27,7 @@ declare module 'styled-components' {
       tertiary: string;
       primaryAccent: string;
       secondaryAccent: string;
+      tertiaryAccent: string;
       textDark: string;
       textLight: string;
       white: string;

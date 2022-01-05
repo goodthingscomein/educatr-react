@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => (
       hasGradientBackground
       gradientColor1='primaryAccent'
       gradientColor2='secondaryAccent'
-      gradientColor3='secondaryAccent'
+      gradientColor3='tertiaryAccent'
     >
       <Column>
         <Card height={600}>
@@ -65,7 +65,8 @@ const LoginPage: React.FC = () => (
             <Link
               fontSize='small'
               fontWeight={300}
-              color={'primaryAccent'}
+              color='primaryAccent'
+              hoverColor='tertiaryAccent'
               underlineEffect='never'
               href='signup'
               horizontalMargin={4}
