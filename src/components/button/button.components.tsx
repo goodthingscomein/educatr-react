@@ -1,35 +1,42 @@
 import React from 'react';
-import {ColorTypes} from '../../type-declarations/styled';
+import {ColorTypes, FontSizes, FontWeight} from '../../type-declarations/styled';
 
 // Import styles
 import {ButtonContainer} from './button.styles';
 
 // All typings of different button types
 interface ButtonSharedProps {
-  size: 'small' | 'medium' | 'large';
+  size: FontSizes;
+  fontWeight?: FontWeight;
   textColor: ColorTypes;
-  hoverTextColor: ColorTypes;
-  activeTextColor: ColorTypes;
+  hoverTextColor?: ColorTypes;
+  activeTextColor?: ColorTypes;
+
+  maxWidth?: boolean;
+
+  // Padding
+  verticalPadding?: number;
+  horizontalPadding?: number;
 
   // Actions
-  href?: 'string';
+  href?: string;
   clickAction?: () => unknown;
 }
 
 interface SolidButtonProps extends ButtonSharedProps {
   variant: 'solid';
   backgroundColor: ColorTypes;
-  hoverBackgroundColor: ColorTypes;
-  activeBackgroundColor: ColorTypes;
-  outlineColor: ColorTypes;
-  hoverOutlineColor: ColorTypes;
-  activeOutlineColor: ColorTypes;
+  hoverBackgroundColor?: ColorTypes;
+  activeBackgroundColor?: ColorTypes;
+  outlineColor?: ColorTypes;
+  hoverOutlineColor?: ColorTypes;
+  activeOutlineColor?: ColorTypes;
 }
 interface OutlineButtonProps extends ButtonSharedProps {
   variant: 'outline';
-  outlineColor: ColorTypes;
-  hoverOutlineColor: ColorTypes;
-  activeOutlineColor: ColorTypes;
+  outlineColor?: ColorTypes;
+  hoverOutlineColor?: ColorTypes;
+  activeOutlineColor?: ColorTypes;
 }
 interface TextButtonProps extends ButtonSharedProps {
   variant: 'text';
@@ -39,60 +46,99 @@ interface TextButtonProps extends ButtonSharedProps {
 type Props = SolidButtonProps | OutlineButtonProps | TextButtonProps;
 
 // Render Component
-const Button: React.FC<Props> = ({children, ...otherProps}) => {
+const Button: React.FC<Props> = ({children, clickAction, ...otherProps}) => {
   switch (otherProps.variant) {
+    /*
+      Solid styled button
+    */
     case 'solid':
       return (
         <ButtonContainer
-          // Button visuals
+          /*
+            Button Styling
+          */
           size={otherProps.size}
+          maxWidth={otherProps.maxWidth}
+          fontWeight={otherProps.fontWeight}
           backgroundColor={otherProps.backgroundColor}
-          hoverBackgroundColor={otherProps.hoverBackgroundColor}
-          activeBackgroundColor={otherProps.activeBackgroundColor}
-          outlineColor={otherProps.outlineColor}
-          hoverOutlineColor={otherProps.hoverOutlineColor}
-          activeOutlineColor={otherProps.activeOutlineColor}
+          hoverBackgroundColor={otherProps.hoverBackgroundColor || otherProps.backgroundColor}
+          outlineColor={otherProps.outlineColor || 'transparent'}
+          hoverOutlineColor={otherProps.hoverOutlineColor || otherProps.outlineColor || 'transparent'}
           textColor={otherProps.textColor}
-          hoverTextColor={otherProps.hoverTextColor}
-          activeTextColor={otherProps.activeTextColor}
-          // href={otherProps.href}
-          // onClick={otherProps.clickAction ? () => otherProps.clickAction() : undefined}
+          hoverTextColor={otherProps.hoverTextColor || otherProps.textColor}
+          /*
+            Padding
+          */
+          verticalPadding={otherProps.verticalPadding}
+          horizontalPadding={otherProps.horizontalPadding}
+          /*
+            On Click Functionality
+          */
+          href={otherProps.href}
+          onClick={clickAction ? () => clickAction() : undefined}
         >
           {children}
         </ButtonContainer>
       );
+    /*
+      Outlined styled button
+    */
     case 'outline':
       return (
         <ButtonContainer
+          /*
+            Button Styling
+          */
           size={otherProps.size}
+          fontWeight={otherProps.fontWeight}
           backgroundColor='transparent'
           hoverBackgroundColor='transparent'
-          activeBackgroundColor='transparent'
-          outlineColor={otherProps.outlineColor}
-          hoverOutlineColor={otherProps.hoverOutlineColor}
-          activeOutlineColor={otherProps.activeOutlineColor}
+          outlineColor={otherProps.outlineColor || 'transparent'}
+          hoverOutlineColor={otherProps.hoverOutlineColor || otherProps.outlineColor || 'transparent'}
           textColor={otherProps.textColor}
-          hoverTextColor={otherProps.hoverTextColor}
-          activeTextColor={otherProps.activeTextColor}
-          // href={otherProps.href}
+          hoverTextColor={otherProps.hoverTextColor || otherProps.textColor}
+          /*
+            Padding
+          */
+          verticalPadding={otherProps.verticalPadding}
+          horizontalPadding={otherProps.horizontalPadding}
+          /*
+            On Click Functionality
+          */
+          href={otherProps.href}
+          onClick={clickAction ? () => clickAction() : undefined}
         >
           {children}
         </ButtonContainer>
       );
+    /*
+      Text styled button
+    */
     case 'text':
+      console.log(otherProps.horizontalPadding);
       return (
         <ButtonContainer
+          /*
+            Button Styling
+          */
           size={otherProps.size}
+          fontWeight={otherProps.fontWeight}
           backgroundColor='transparent'
           hoverBackgroundColor='transparent'
-          activeBackgroundColor='transparent'
           outlineColor='transparent'
           hoverOutlineColor='transparent'
-          activeOutlineColor='transparent'
           textColor={otherProps.textColor}
-          hoverTextColor={otherProps.hoverTextColor}
-          activeTextColor={otherProps.activeTextColor}
-          // href={otherProps.href}
+          hoverTextColor={otherProps.hoverTextColor || otherProps.textColor}
+          /*
+            Padding
+          */
+          verticalPadding={otherProps.verticalPadding}
+          horizontalPadding={otherProps.horizontalPadding}
+          /*
+            On Click Functionality
+          */
+          href={otherProps.href}
+          onClick={clickAction ? () => clickAction() : undefined}
         >
           {children}
         </ButtonContainer>

@@ -1,9 +1,16 @@
 import styled from 'styled-components';
+import {ColorTypes} from '../../type-declarations/styled';
 
 // To add props
 interface AppBarContainerProps {
-  color: 'primary' | 'textDark' | 'transparent';
+  color: ColorTypes;
 }
+
+export const AppBarRelativeContainer = styled.div`
+  position: relative;
+  height: 0;
+  width: 100%;
+`;
 
 export const AppBarContainer = styled.div<AppBarContainerProps>`
   width: 100%;
@@ -14,4 +21,8 @@ export const AppBarContainer = styled.div<AppBarContainerProps>`
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
 `;

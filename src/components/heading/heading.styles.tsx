@@ -1,8 +1,9 @@
 import styled, {css} from 'styled-components';
+import {ColorTypes} from '../../type-declarations/styled';
 
 // Heading props
 interface HeadingProps {
-  color: 'primary' | 'textDark' | 'textLight' | 'accent' | 'white' | 'black';
+  color: ColorTypes;
 }
 
 // All heading styles
@@ -18,8 +19,10 @@ const HeadingStyles = css`
 export const H1 = styled.h1<HeadingProps>`
   ${HeadingStyles}
   color: ${(props) => props.theme.getColor(props.color)};
-  font-size: 220%;
+  font-size: 280%;
   font-weight: 700;
+  line-height: 100%;
+  margin-bottom: 12px;
 `;
 
 // H2
@@ -44,6 +47,7 @@ export const H4 = styled.h4<HeadingProps>`
   color: ${(props) => props.theme.getColor(props.color)};
   font-size: 120%;
   font-weight: 700;
+  margin: 4px 0;
 `;
 
 // H5

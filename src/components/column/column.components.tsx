@@ -2,7 +2,7 @@ import React from 'react';
 import {ColorTypes} from '../../type-declarations/styled';
 
 // Import styles
-import {ColumnContainer} from './column.styles';
+import {ColumnHalfContainer} from './column.styles';
 
 // Component Props Interface
 type Props = {
@@ -14,9 +14,9 @@ type Props = {
 
 // Render Component
 const Column: React.FC<Props> = ({children, backgroundColor, imgUrl, imgDarken}) => (
-  <ColumnContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken}>
+  <ColumnHalfContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken}>
     {children}
-  </ColumnContainer>
+  </ColumnHalfContainer>
 );
 
 export default Column;

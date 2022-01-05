@@ -4,7 +4,9 @@ import 'styled-components';
 export type ColorTypes =
   | 'primary'
   | 'secondary'
-  | 'accent'
+  | 'tertiary'
+  | 'primaryAccent'
+  | 'secondaryAccent'
   | 'textDark'
   | 'textLight'
   | 'white'
@@ -12,13 +14,18 @@ export type ColorTypes =
   | 'black'
   | 'transparent';
 
+export type FontSizes = 'small' | 'medium' | 'large' | 'x-large';
+export type FontWeight = 200 | 300 | 400 | 700;
+
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       primary: string;
       secondary: string;
-      accent: string;
+      tertiary: string;
+      primaryAccent: string;
+      secondaryAccent: string;
       textDark: string;
       textLight: string;
       white: string;
@@ -27,6 +34,7 @@ declare module 'styled-components' {
       transparent: string;
     };
     getColor: (input: ColorTypes) => string;
+    getFontSize: (input: FontSizes) => string;
     appBar: {
       appBarHeight: string;
     };

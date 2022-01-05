@@ -8,13 +8,12 @@ import {CardContainer} from './card.styles';
 type Props = {
   children?: React.ReactNode;
   height: number;
-  width: number;
-  backgroundColor: ColorTypes;
+  backgroundColor?: ColorTypes;
 };
 
 // Render Component
-const Card: React.FC<Props> = ({children, height, width, backgroundColor}) => (
-  <CardContainer height={height} width={width} backgroundColor={backgroundColor} cardHoverGrowMultiplier={1.06}>
+const Card: React.FC<Props> = ({children, height, backgroundColor}) => (
+  <CardContainer height={height} backgroundColor={backgroundColor}>
     {children}
   </CardContainer>
 );

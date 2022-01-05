@@ -2,14 +2,14 @@ import styled, {css} from 'styled-components';
 import {ColorTypes} from '../../type-declarations/styled';
 
 // Column props
-interface ColumnContainerProps {
+interface ColumnHalfContainerProps {
   backgroundColor?: ColorTypes;
   imgUrl?: string;
   imgDarken?: number;
 }
 
 // Css for background image
-const BackgroundImageStyles = css<ColumnContainerProps>`
+const BackgroundImageStyles = css<ColumnHalfContainerProps>`
   background: linear-gradient(
       rgba(0, 0, 0, ${(props) => props.imgDarken ?? 0.5}),
       rgba(0, 0, 0, ${(props) => props.imgDarken ?? 0.5})
@@ -17,13 +17,13 @@ const BackgroundImageStyles = css<ColumnContainerProps>`
     url(${(props) => props.imgUrl});
 `;
 
-export const ColumnContainer = styled.div<ColumnContainerProps>`
+export const ColumnHalfContainer = styled.div<ColumnHalfContainerProps>`
   width: 50%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 12px;
+  padding: 80px 24px;
   overflow: hidden;
 
   // Background

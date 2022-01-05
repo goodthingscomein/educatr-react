@@ -2,9 +2,11 @@ import {DefaultTheme} from 'styled-components';
 
 export const MainTheme: DefaultTheme = {
   colors: {
-    primary: '#E67E22',
-    secondary: '#D35400',
-    accent: '#1ABC9C',
+    primary: '#F79F1F',
+    secondary: '#EE5A24',
+    tertiary: '#df4811',
+    primaryAccent: '#0652DD',
+    secondaryAccent: '#04399b',
     textDark: '#1A1A1A',
     textLight: '#6F6F6F',
     white: '#FFFFFF',
@@ -15,11 +17,15 @@ export const MainTheme: DefaultTheme = {
   getColor: (input) => {
     switch (input) {
       case 'primary':
-        return '#E67E22';
+        return '#F79F1F';
       case 'secondary':
-        return '#D35400';
-      case 'accent':
-        return '#1ABC9C';
+        return '#EE5A24';
+      case 'tertiary':
+        return '#df4811';
+      case 'primaryAccent':
+        return '#0652DD';
+      case 'secondaryAccent':
+        return '#04399b';
       case 'textDark':
         return '#1A1A1A';
       case 'textLight':
@@ -32,6 +38,18 @@ export const MainTheme: DefaultTheme = {
         return '#000000';
       case 'transparent':
         return 'transparent';
+    }
+  },
+  getFontSize: (input) => {
+    switch (input) {
+      case 'small':
+        return '70%';
+      case 'medium':
+        return '85%';
+      case 'large':
+        return '100%';
+      case 'x-large':
+        return '120%';
     }
   },
   appBar: {

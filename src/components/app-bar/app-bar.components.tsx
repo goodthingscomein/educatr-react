@@ -1,16 +1,21 @@
 import * as React from 'react';
+import {ColorTypes} from '../../type-declarations/styled';
 
 // Import styles
-import { AppBarContainer } from './app-bar.styles';
+import {AppBarRelativeContainer, AppBarContainer} from './app-bar.styles';
 
 // Props to be passed into component
 type Props = {
-	children?: React.ReactNode;
-	color: 'primary' | 'textDark' | 'transparent';
+  children?: React.ReactNode;
+  color: ColorTypes;
 };
 
-const AppBar: React.FC<Props> = ({ children, color }) => {
-	return <AppBarContainer color={color}>{children}</AppBarContainer>;
+const AppBar: React.FC<Props> = ({children, color}) => {
+  return (
+    <AppBarRelativeContainer>
+      <AppBarContainer color={color}>{children}</AppBarContainer>
+    </AppBarRelativeContainer>
+  );
 };
 
 export default AppBar;
