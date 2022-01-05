@@ -1,4 +1,9 @@
 import React from 'react';
+
+// Import styles
+import {LoginPageContainer, SignUpText} from './login.styles';
+
+// Import custom components
 import AppBar from '../../components/app-bar/app-bar.components';
 import Button from '../../components/button/button.components';
 import Card from '../../components/card/card.components';
@@ -11,8 +16,8 @@ import Logo from '../../components/logo/logo.components';
 import Margin from '../../components/margin/margin.components';
 import Section from '../../components/section/section.components';
 
-// Import styles
-import {LoginPageContainer, SignUpText} from './login.styles';
+// Import SVGs
+import {ReactComponent as LoginHeroImage} from '../../assets/login-orange.svg';
 
 // Render Component
 const LoginPage: React.FC = () => (
@@ -70,7 +75,9 @@ const LoginPage: React.FC = () => (
           </SignUpText>
         </Card>
       </Column>
-      <Column />
+      <Column>
+        <LoginHeroImage />
+      </Column>
     </Section>
   </LoginPageContainer>
 );

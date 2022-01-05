@@ -6,6 +6,7 @@ interface ColumnHalfContainerProps {
   backgroundColor?: ColorTypes;
   imgUrl?: string;
   imgDarken?: number;
+  overflow?: string;
 }
 
 // Css for background image
@@ -24,7 +25,7 @@ export const ColumnHalfContainer = styled.div<ColumnHalfContainerProps>`
   flex-direction: column;
   justify-content: center;
   padding: 80px 24px;
-  overflow: hidden;
+  overflow: ${(props) => props.overflow ?? 'hidden'};
 
   // Background
   background-color: ${(props) => props.theme.getColor(props.backgroundColor ?? 'transparent')};

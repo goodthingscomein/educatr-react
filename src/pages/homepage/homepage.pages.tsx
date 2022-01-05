@@ -4,7 +4,7 @@ import React from 'react';
 import {HomepageContainer} from './hompage.styles';
 import './homepage.styles.css';
 
-// Custom Components
+// Import custom components
 import AppBar from '../../components/app-bar/app-bar.components';
 import Logo from '../../components/logo/logo.components';
 import Button from '../../components/button/button.components';
@@ -15,6 +15,9 @@ import Margin from '../../components/margin/margin.components';
 import AppBarItemsContainer from '../../components/app-bar-items-container/app-bar-items-container.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import Link from '../../components/link/link.components';
+
+// Import SVGs
+import {ReactComponent as HeroImage} from '../../assets/test.svg';
 
 // Homepage Functional Component
 const Homepage: React.FC = () => {
@@ -62,8 +65,8 @@ const Homepage: React.FC = () => {
       </AppBar>
       {/* Hero Section */}
       <Section backgroundColor='primary' isHeroSection hasColumns hasGradientBackground>
-        <Column>
-          <div className='custom-shape-divider-bottom-1641161177'></div>
+        <Column overflow='visible'>
+          <HeroImage className='shift' />
         </Column>
         <Column>
           <H1 color='white'>

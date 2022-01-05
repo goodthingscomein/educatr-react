@@ -1,5 +1,6 @@
 .custom-shape-divider-bottom-1641161177 {
   position: absolute;
+  z-index: 999;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -17,4 +18,9 @@
 
 .custom-shape-divider-bottom-1641161177 .shape-fill {
   fill: #ffffff;
+}
+
+.shift {
+  transform: translate(-35%, 5%);
+  width: 140%;
 }

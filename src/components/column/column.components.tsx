@@ -10,11 +10,12 @@ type Props = {
   backgroundColor?: ColorTypes;
   imgUrl?: string;
   imgDarken?: number;
+  overflow?: string;
 };
 
 // Render Component
-const Column: React.FC<Props> = ({children, backgroundColor, imgUrl, imgDarken}) => (
-  <ColumnHalfContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken}>
+const Column: React.FC<Props> = ({children, backgroundColor, imgUrl, imgDarken, overflow}) => (
+  <ColumnHalfContainer backgroundColor={backgroundColor} imgUrl={imgUrl} imgDarken={imgDarken} overflow={overflow}>
     {children}
   </ColumnHalfContainer>
 );

@@ -1,13 +1,13 @@
 import React from 'react';
 
+// Import styles
+import {LoginText, SignUpPageContainer} from './sign-up.styles';
+
 // Import components
 import AppBar from '../../components/app-bar/app-bar.components';
 import Column from '../../components/column/column.components';
 import Logo from '../../components/logo/logo.components';
 import Section from '../../components/section/section.components';
-
-// Import styles
-import {LoginText, SignUpPageContainer} from './sign-up.styles';
 import Input from '../../components/input/input.components';
 import Card from '../../components/card/card.components';
 import Margin from '../../components/margin/margin.components';
@@ -15,6 +15,9 @@ import {H4} from '../../components/heading/heading.styles';
 import CopyText from '../../components/copy-text/copy-text.components';
 import Button from '../../components/button/button.components';
 import Link from '../../components/link/link.components';
+
+// Import SVGs
+import {ReactComponent as SignUpHeroImage} from '../../assets/sign-up-orange.svg';
 
 // Render Component
 const SignUpPage: React.FC = () => (
@@ -74,7 +77,9 @@ const SignUpPage: React.FC = () => (
           </LoginText>
         </Card>
       </Column>
-      <Column />
+      <Column>
+        <SignUpHeroImage />
+      </Column>
     </Section>
   </SignUpPageContainer>
 );
