@@ -1,44 +1,39 @@
-import styled, {css} from 'styled-components';
-import {ColorTypes, FontSizes, FontWeight} from '../../type-declarations/styled';
+import styled from 'styled-components';
+import { ColorTypes, FontSizes, FontWeight, SocialColorTypes } from '../../type-declarations/styled';
 
 // Link props
 interface LinkTextProps {
-  color: ColorTypes;
-  hoverColor: ColorTypes;
-  underlineEffect?: 'never' | 'hover' | 'always';
-  fontSize?: FontSizes;
-  fontWeight?: FontWeight;
+	color: ColorTypes;
+	hoverColor: ColorTypes | SocialColorTypes;
+	underlineEffect?: 'never' | 'hover' | 'always';
+	fontSize?: FontSizes;
+	fontWeight?: FontWeight;
 
-  // Padding
-  horizontalMargin?: number;
-  verticalMargin?: number;
+	// Padding
+	margin?: string;
+	verticalMargin?: number;
 }
 
-// Underline CSS styles
-const UnderlineStyles = css<LinkTextProps>`
-  border-bottom: 2px solid;
-  ${(props) => (props.underlineEffect === 'never' ? 'border: none' : '')};
-`;
-
 export const LinkText = styled.a<LinkTextProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: ${(props) => props.verticalMargin || 0}px ${(props) => props.horizontalMargin || 0}px;
-  padding: 0;
-  color: ${(props) => props.theme.getColor(props.color)};
-  text-decoration: none;
-  font-size: ${(props) => props.theme.getFontSize(props.fontSize || 'medium')};
-  font-weight: ${(props) => props.fontWeight || 400};
-  ${UnderlineStyles};
-  border-color: ${(props) =>
-    props.underlineEffect === 'always' ? props.theme.getColor(props.color) : props.theme.colors.transparent};
-  cursor: pointer;
-  width: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: ${(props) => props.margin || '0 0'};
+	padding: 0;
+	color: ${(props) => props.theme.getColor(props.color)};
+	text-decoration: none;
+	font-size: ${(props) => props.theme.getFontSize(props.fontSize || 'medium')};
+	font-weight: ${(props) => props.fontWeight || 400};
+	border: 2px solid ${(props) => props.theme.colors.transparent};
+	border-bottom-color: ${(props) =>
+		props.underlineEffect === 'always' ? props.theme.getColor(props.color) : props.theme.colors.transparent};
+	cursor: pointer;
+	width: fit-content;
 
-  // Hover effects
-  :hover {
-    color: ${(props) => props.theme.getColor(props.hoverColor)};
-    border-color: ${(props) => props.theme.getColor(props.hoverColor)};
-  }
+	// Hover effects
+	:hover {
+		color: ${(props) => props.theme.getColor(props.hoverColor)};
+		border-bottom-color: ${(props) =>
+			props.underlineEffect === 'hover' ? props.theme.getColor(props.hoverColor) : props.theme.colors.transparent};
+	}
 `;

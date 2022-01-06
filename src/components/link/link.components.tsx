@@ -1,55 +1,51 @@
 import React from 'react';
-import {ColorTypes, FontSizes} from '../../type-declarations/styled';
+import { ColorTypes, FontSizes, SocialColorTypes } from '../../type-declarations/styled';
 
 // Import styles
-import {LinkText} from './link.styles';
+import { LinkText } from './link.styles';
 
 // Component Props Interface
 type Props = {
-  children: string;
+	children: React.ReactNode;
 
-  // Text decoration
-  color: ColorTypes;
-  hoverColor?: ColorTypes;
-  underlineEffect?: 'never' | 'hover' | 'always';
-  fontSize?: FontSizes;
-  fontWeight?: 300 | 400 | 700;
+	// Text decoration
+	color: ColorTypes;
+	hoverColor?: ColorTypes | SocialColorTypes;
+	underlineEffect?: 'never' | 'hover' | 'always';
+	fontSize?: FontSizes;
+	fontWeight?: 300 | 400 | 700;
 
-  // Margin
-  horizontalMargin?: number;
-  verticalMargin?: number;
+	// Margin
+	margin?: string;
 
-  // Function
-  href?: string;
-  clickAction?: () => unknown;
+	// Function
+	href?: string;
+	clickAction?: () => unknown;
 };
 
 // Render Component
 const Link: React.FC<Props> = ({
-  children,
-  color,
-  hoverColor,
-  underlineEffect,
-  fontSize,
-  fontWeight,
-  horizontalMargin,
-  verticalMargin,
-  href,
-  clickAction,
+	children,
+	color,
+	hoverColor,
+	underlineEffect,
+	fontSize,
+	fontWeight,
+	margin,
+	href,
+	clickAction,
 }) => (
-  <LinkText
-    color={color}
-    hoverColor={hoverColor || color}
-    underlineEffect={underlineEffect}
-    fontSize={fontSize}
-    fontWeight={fontWeight}
-    horizontalMargin={horizontalMargin}
-    verticalMargin={verticalMargin}
-    href={href}
-    onClick={clickAction ? () => clickAction() : undefined}
-  >
-    {children}
-  </LinkText>
+	<LinkText
+		color={color}
+		hoverColor={hoverColor || color}
+		underlineEffect={underlineEffect}
+		fontSize={fontSize}
+		fontWeight={fontWeight}
+		margin={margin}
+		href={href}
+		onClick={clickAction ? () => clickAction() : undefined}>
+		{children}
+	</LinkText>
 );
 
 export default Link;
