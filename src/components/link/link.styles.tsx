@@ -24,9 +24,9 @@ export const LinkText = styled.a<LinkTextProps>`
 	text-decoration: none;
 	font-size: ${(props) => props.theme.getFontSize(props.fontSize || 'medium')};
 	font-weight: ${(props) => props.fontWeight || 400};
-	border: 2px solid ${(props) => props.theme.colors.transparent};
+	border: 2px solid ${(props) => props.theme.themeColors.transparent};
 	border-bottom-color: ${(props) =>
-		props.underlineEffect === 'always' ? props.theme.getColor(props.color) : props.theme.colors.transparent};
+		props.underlineEffect === 'always' ? props.theme.getColor(props.color) : props.theme.themeColors.transparent};
 	cursor: pointer;
 	width: fit-content;
 
@@ -34,6 +34,6 @@ export const LinkText = styled.a<LinkTextProps>`
 	:hover {
 		color: ${(props) => props.theme.getColor(props.hoverColor)};
 		border-bottom-color: ${(props) =>
-			props.underlineEffect === 'hover' ? props.theme.getColor(props.hoverColor) : props.theme.colors.transparent};
+			props.underlineEffect === 'hover' ? props.theme.getColor(props.hoverColor) : props.theme.themeColors.transparent};
 	}
 `;

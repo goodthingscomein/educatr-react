@@ -1,42 +1,51 @@
 import React, { useState } from 'react';
 
+// Import services
+import { CreateUser } from '../../services/auth/auth.services';
+
 // Import styles
-import { LoginPageContainer, SignUpText } from './login.styles';
+import { LoginText, RegisterPageContainer } from './register.styles';
 
 // Import custom components
 import AppBar from '../../components/app-bar/app-bar.components';
-import Button from '../../components/button/button.components';
-import Card from '../../components/card/card.components';
 import Column from '../../components/column/column.components';
-import CopyText from '../../components/copy-text/copy-text.components';
-import { H4 } from '../../components/heading/heading.styles';
-import Input from '../../components/input/input.components';
-import Link from '../../components/link/link.components';
 import Logo from '../../components/logo/logo.components';
-import Margin from '../../components/margin/margin.components';
 import Section from '../../components/section/section.components';
+import Input from '../../components/input/input.components';
+import Card from '../../components/card/card.components';
+import Margin from '../../components/margin/margin.components';
+import { H4 } from '../../components/heading/heading.styles';
+import CopyText from '../../components/copy-text/copy-text.components';
+import Button from '../../components/button/button.components';
+import Link from '../../components/link/link.components';
 
 // Import SVGs
-import { ReactComponent as LoginHeroImage } from '../../assets/images/login/login-orange.svg';
+import { ReactComponent as RegisterHeroImage } from '../../assets/images/signup/sign-up-orange.svg';
 import SvgContainer from '../../components/svg-container/svg-container.components';
 import Form from '../../components/form/form.components';
 
 // Render Component
-const LoginPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
+	// Local Page State
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
+	const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
 
 	// Register user when button pressed
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
 		event.preventDefault();
-		console.log(emailInput + ' ' + passwordInput);
+		// CreateUser(emailInput, passwordInput, confirmPasswordInput).then((response) => {
+		// 	console.log(response);
+		// });
+		console.log(emailInput + ' ' + passwordInput + ' ' + confirmPasswordInput);
 		setEmailInput('');
 		setPasswordInput('');
+		setConfirmPasswordInput('');
 	};
 
-	// Render Login Page
+	// Render Sign Up Page
 	return (
-		<LoginPageContainer>
+		<RegisterPageContainer>
 			<AppBar color='transparent'>
 				<Logo variant='h4' firstColor='white' secondColor='white' href='/'></Logo>
 			</AppBar>
@@ -51,12 +60,12 @@ const LoginPage: React.FC = () => {
 				gradientColor3='tertiaryAccent'>
 				<Column>
 					<Card>
-						<H4 color='textDark'>Log in</H4>
+						<H4 color='textDark'>Sign up</H4>
 						<Margin height={4} />
 						<CopyText color='textLight' size={'medium'} fontWeight={200}>
 							Continue to Datafluence
 						</CopyText>
-						<Margin height={40} />
+						<Margin height={28} />
 						<Form handleSubmit={(e) => handleSubmit(e)}>
 							<Input
 								value={emailInput}
@@ -73,6 +82,14 @@ const LoginPage: React.FC = () => {
 								hasPassword
 								onChangeStateDispatch={setPasswordInput}
 							/>
+							<Input
+								value={confirmPasswordInput}
+								type='password'
+								label='Confirm Password'
+								inputId='confirmPassword'
+								hasPassword
+								onChangeStateDispatch={setConfirmPasswordInput}
+							/>
 							<Margin height={12} />
 							<Button
 								variant='solid'
@@ -80,36 +97,38 @@ const LoginPage: React.FC = () => {
 								maxWidth
 								backgroundColor='primary'
 								hoverBackgroundColor='secondary'
-								textColor='white'>
-								Log in
+								textColor='white'
+								type='submit'>
+								Sign up
 							</Button>
 						</Form>
 						<Margin />
-						<SignUpText>
+						<LoginText>
 							<CopyText size={'small'} fontWeight={300} color={'textLight'}>
-								New to Datafluence?
+								Already have an account?
 							</CopyText>
+							<p> </p>
 							<Link
 								fontSize='small'
 								fontWeight={300}
 								color='primaryAccent'
 								hoverColor='tertiaryAccent'
 								underlineEffect='never'
-								href='signup'
+								href='login'
 								margin='0 4px'>
-								Get started
+								Log in
 							</Link>
-						</SignUpText>
+						</LoginText>
 					</Card>
 				</Column>
 				<Column>
-					<SvgContainer scalePercent={75} posTranslate='-10%, 20%'>
-						<LoginHeroImage />
+					<SvgContainer scalePercent={65} posTranslate='-10%, -15%'>
+						<RegisterHeroImage />
 					</SvgContainer>
 				</Column>
 			</Section>
-		</LoginPageContainer>
+		</RegisterPageContainer>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -1,21 +1,23 @@
-type CreateUserInput = {
-	email: string;
-	password: string;
-};
-// type CreateUserResponse = {};
-// type CreateUserError = {};
+// Import validators
+import { createUserValidators } from './auth.validators';
 
 /*
   Posts data to endpoint
   Cache response in Redux reducer
 */
-export const CreateUser = async ({ email, password }: CreateUserInput) => {
+export const CreateUser = async (email: string, password: string, confirmPassword: string) => {
+	if (!createUserValidators(email, password, confirmPassword)) {
+		return console.error('Invalid user input: Create User');
+	}
+
 	const fetchPostOptions: RequestInit = {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: {
+			'Content-Type': 'application/json',
+		},
 		body: JSON.stringify({
-			email,
-			password,
+			email: email,
+			password: password,
 		}),
 	};
 

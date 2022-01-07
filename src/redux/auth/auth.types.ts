@@ -1,8 +1,13 @@
-import { NAVIGATION_TYPES } from './auth.enum';
+import { AUTH_TYPES } from './auth.enum';
 
-interface SetIsDrawerOpenAction {
-	type: NAVIGATION_TYPES.SET_IS_DRAWER_OPEN;
-	payload: boolean;
+// Set auth token action types
+export interface SetAuthTokenPayload {
+	authToken: string;
+	authTokenExpiry: number;
+}
+interface SetAuthTokenAction {
+	type: AUTH_TYPES.SET_AUTH_TOKEN;
+	payload: SetAuthTokenPayload;
 }
 
-export type NavigationAction = SetIsDrawerOpenAction;
+export type AuthAction = SetAuthTokenAction;

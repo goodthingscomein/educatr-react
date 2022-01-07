@@ -16,6 +16,15 @@ export type ColorTypes =
 	| 'transparent';
 
 export type SocialColorTypes = 'twitter' | 'facebook' | 'linkedin' | 'youtube' | 'instagram' | 'tiktok' | 'pinterest';
+export type MessageColorTypes =
+	| 'infoLight'
+	| 'infoDark'
+	| 'successLight'
+	| 'successDark'
+	| 'warningLight'
+	| 'warningDark'
+	| 'errorLight'
+	| 'errorDark';
 
 export type FontSizes = 'small' | 'medium' | 'large' | 'x-large';
 export type FontWeight = 200 | 300 | 400 | 700;
@@ -23,7 +32,7 @@ export type FontWeight = 200 | 300 | 400 | 700;
 // and extend them!
 declare module 'styled-components' {
 	export interface DefaultTheme {
-		colors: {
+		themeColors: {
 			primary: string;
 			secondary: string;
 			tertiary: string;
@@ -46,7 +55,17 @@ declare module 'styled-components' {
 			tiktok: string;
 			pinterest: string;
 		};
-		getColor: (input: ColorTypes | SocialColorTypes) => string;
+		messageColors: {
+			infoLight: string;
+			infoDark: string;
+			successLight: string;
+			successDark: string;
+			warningLight: string;
+			warningDark: string;
+			errorLight: string;
+			errorDark: string;
+		};
+		getColor: (input: ColorTypes | SocialColorTypes | MessageColorTypes) => string;
 		getFontSize: (input: FontSizes) => string;
 		appBar: {
 			appBarHeight: string;

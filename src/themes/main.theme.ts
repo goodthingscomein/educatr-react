@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 export const MainTheme: DefaultTheme = {
-	colors: {
+	themeColors: {
 		primary: '#F79F1F',
 		secondary: '#EE5A24',
 		tertiary: '#df4811',
@@ -23,6 +23,16 @@ export const MainTheme: DefaultTheme = {
 		instagram: '#E4405F',
 		tiktok: '#EE1D51',
 		pinterest: '#BD081C',
+	},
+	messageColors: {
+		infoLight: '#BDE5F8',
+		infoDark: '#00529B',
+		successLight: '#DFF2BF',
+		successDark: '#4F8A10',
+		warningLight: '#FEEFB3',
+		warningDark: '#9F6000',
+		errorLight: '#FFD2D2',
+		errorDark: '#D8000C',
 	},
 	getColor: (input) => {
 		switch (input) {
@@ -64,6 +74,22 @@ export const MainTheme: DefaultTheme = {
 				return '#EE1D51';
 			case 'pinterest':
 				return '#BD081C';
+			case 'infoLight':
+				return '#BDE5F8';
+			case 'infoDark':
+				return '#00529B';
+			case 'successLight':
+				return '#DFF2BF';
+			case 'successDark':
+				return '#4F8A10';
+			case 'warningLight':
+				return '#FEEFB3';
+			case 'warningDark':
+				return '#9F6000';
+			case 'errorLight':
+				return '#FFD2D2';
+			case 'errorDark':
+				return '#D8000C';
 		}
 	},
 	getFontSize: (input) => {

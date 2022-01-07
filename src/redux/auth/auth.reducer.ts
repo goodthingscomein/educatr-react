@@ -1,24 +1,23 @@
-import { NAVIGATION_TYPES } from './auth.enum';
-import { NavigationAction } from './auth.types';
+import { AUTH_TYPES } from './auth.enum';
+import { AuthAction } from './auth.types';
 
-interface NavigationState {
-	isDrawerOpen: boolean;
+interface AuthState {
+	authToken: string;
+	authTokenExpiry: number;
 }
 
 const INITIAL_STATE = {
-	isDrawerOpen: false,
-} as NavigationState;
+	authToken: '',
+	authTokenExpiry: 0,
+} as AuthState;
 
-const navigationReducer = (state: NavigationState = INITIAL_STATE, action: NavigationAction) => {
+const authReducer = (state: AuthState = INITIAL_STATE, action: AuthAction) => {
 	switch (action.type) {
-		case NAVIGATION_TYPES.SET_IS_DRAWER_OPEN:
-			return {
-				...state,
-				isDrawerOpen: action.payload,
-			};
+		case AUTH_TYPES.SET_AUTH_TOKEN:
+			return action.payload;
 		default:
 			return state;
 	}
 };
 
-export default navigationReducer;
+export default authReducer;
