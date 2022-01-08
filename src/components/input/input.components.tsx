@@ -5,6 +5,17 @@ import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 // Import styles
 import { InputFieldContainer, InputField, InputFieldLabel, PasswordHiddenToggleButton } from './input.styles';
 
+// Used to identify fields for error detection
+export enum INPUT_FIELD_ERROR_ID {
+	EMAIL,
+	PASSWORD,
+	CONFIRM_PASSWORD,
+}
+export type InputErrorMessage = {
+	fieldId: INPUT_FIELD_ERROR_ID;
+	message: string;
+};
+
 // Component Props Interface
 type Props = {
 	type: React.HTMLInputTypeAttribute;
@@ -13,7 +24,9 @@ type Props = {
 	hasPassword?: boolean;
 	value: string | number;
 	onChangeStateDispatch: React.Dispatch<React.SetStateAction<any>>;
+	errorId?: INPUT_FIELD_ERROR_ID;
 	hasError?: boolean;
+	errorMessage?: string;
 };
 
 // Render Component

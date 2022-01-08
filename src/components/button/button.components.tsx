@@ -10,36 +10,30 @@ interface ButtonSharedProps {
 	fontWeight?: FontWeight;
 	textColor: ColorTypes;
 	hoverTextColor?: ColorTypes;
-	activeTextColor?: ColorTypes;
 
-	maxWidth?: boolean;
+	entireWidth?: boolean;
+	minWidth?: string;
 
 	// Padding
-	verticalPadding?: number;
-	horizontalPadding?: number;
+	padding?: string;
+	margin?: string;
 
 	// Actions
 	href?: string;
 	clickAction?: () => unknown;
-
-	// Button type
-	type?: string;
 }
 
 interface SolidButtonProps extends ButtonSharedProps {
 	variant: 'solid';
 	backgroundColor: ColorTypes;
 	hoverBackgroundColor?: ColorTypes;
-	activeBackgroundColor?: ColorTypes;
 	outlineColor?: ColorTypes;
 	hoverOutlineColor?: ColorTypes;
-	activeOutlineColor?: ColorTypes;
 }
 interface OutlineButtonProps extends ButtonSharedProps {
 	variant: 'outline';
 	outlineColor?: ColorTypes;
 	hoverOutlineColor?: ColorTypes;
-	activeOutlineColor?: ColorTypes;
 }
 interface TextButtonProps extends ButtonSharedProps {
 	variant: 'text';
@@ -61,7 +55,8 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
             Button Styling
           */
 					size={otherProps.size}
-					maxWidth={otherProps.maxWidth}
+					entireWidth={otherProps.entireWidth}
+					minWidth={otherProps.minWidth}
 					fontWeight={otherProps.fontWeight}
 					backgroundColor={otherProps.backgroundColor}
 					hoverBackgroundColor={otherProps.hoverBackgroundColor || otherProps.backgroundColor}
@@ -72,14 +67,13 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             Padding
           */
-					verticalPadding={otherProps.verticalPadding}
-					horizontalPadding={otherProps.horizontalPadding}
+					padding={otherProps.padding}
+					margin={otherProps.margin}
 					/*
             On Click Functionality
           */
 					href={otherProps.href}
-					onClick={clickAction ? () => clickAction() : undefined}
-					type={otherProps.type}>
+					onClick={clickAction ? () => clickAction() : undefined}>
 					{children}
 				</ButtonContainer>
 			);
@@ -103,8 +97,8 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             Padding
           */
-					verticalPadding={otherProps.verticalPadding}
-					horizontalPadding={otherProps.horizontalPadding}
+					padding={otherProps.padding}
+					margin={otherProps.margin}
 					/*
             On Click Functionality
           */
@@ -117,7 +111,6 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
       Text styled button
     */
 		case 'text':
-			console.log(otherProps.horizontalPadding);
 			return (
 				<ButtonContainer
 					/*
@@ -134,8 +127,8 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             Padding
           */
-					verticalPadding={otherProps.verticalPadding}
-					horizontalPadding={otherProps.horizontalPadding}
+					padding={otherProps.padding}
+					margin={otherProps.margin}
 					/*
             On Click Functionality
           */

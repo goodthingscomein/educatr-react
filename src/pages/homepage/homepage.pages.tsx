@@ -7,7 +7,7 @@ import { HomepageContainer } from './hompage.styles';
 import AppBar from '../../components/app-bar/app-bar.components';
 import Logo from '../../components/logo/logo.components';
 import Button from '../../components/button/button.components';
-import { H1, H2, H3 } from '../../components/heading/heading.styles';
+import HeadingText from '../../components/heading/heading.components';
 import Section from '../../components/section/section.components';
 import Column from '../../components/column/column.components';
 import Margin from '../../components/margin/margin.components';
@@ -64,7 +64,7 @@ const Homepage: React.FC = () => {
 						backgroundColor='transparent'
 						hoverBackgroundColor='white'
 						outlineColor='white'
-						horizontalPadding={30}
+						padding='8px 30px'
 						href='signup'>
 						Sign Up
 					</Button>
@@ -78,7 +78,9 @@ const Homepage: React.FC = () => {
 					</SvgContainer>
 				</Column>
 				<Column>
-					<H1 color='white'>Social is your superpower.</H1>
+					<HeadingText variant='h1' color='white'>
+						Social is your superpower.
+					</HeadingText>
 					<CopyText color='white' size='large' fontWeight={300}>
 						Easily manage all your social media and get results with Hootsuite.
 					</CopyText>
@@ -106,7 +108,9 @@ const Homepage: React.FC = () => {
 			{/* 2 COLUMN SECTIONS */}
 			<Section backgroundColor='white' hasColumns padding='80px 15%'>
 				<Column>
-					<H3 color='textDark'>Meet like-minded influencers.</H3>
+					<HeadingText variant='h3' color='textDark'>
+						Meet like-minded influencers.
+					</HeadingText>
 					<CopyText color='textLight' fontWeight={200} size='x-large'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 						dolore magna aliqua.
@@ -125,7 +129,9 @@ const Homepage: React.FC = () => {
 					</SvgContainer>
 				</Column>
 				<Column>
-					<H3 color='textDark'>Plan your next collaboration.</H3>
+					<HeadingText variant='h3' color='textDark'>
+						Plan your next collaboration.
+					</HeadingText>
 					<CopyText color='textLight' fontWeight={200} size='x-large'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 						dolore magna aliqua.
@@ -134,7 +140,9 @@ const Homepage: React.FC = () => {
 			</Section>
 			<Section backgroundColor='white' hasColumns padding='80px 15%'>
 				<Column>
-					<H3 color='textDark'>Engagement groups on steroids...</H3>
+					<HeadingText variant='h3' color='textDark'>
+						Engagement groups on steroids...
+					</HeadingText>
 					<CopyText color='textLight' fontWeight={200} size='x-large'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 						dolore magna aliqua.
@@ -153,7 +161,9 @@ const Homepage: React.FC = () => {
 					</SvgContainer>
 				</Column>
 				<Column>
-					<H3 color='textDark'>Find trends your fans love.</H3>
+					<HeadingText variant='h3' color='textDark'>
+						Find trends your fans love.
+					</HeadingText>
 					<CopyText color='textLight' fontWeight={200} size='x-large'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 						dolore magna aliqua.
@@ -162,7 +172,9 @@ const Homepage: React.FC = () => {
 			</Section>
 			<Section backgroundColor='white' hasColumns padding='80px 15% 120px 15%'>
 				<Column>
-					<H3 color='textDark'>All analytics in one place.</H3>
+					<HeadingText variant='h3' color='textDark'>
+						All analytics in one place.
+					</HeadingText>
 					<CopyText color='textLight' fontWeight={200} size='x-large'>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 						dolore magna aliqua.
@@ -176,14 +188,16 @@ const Homepage: React.FC = () => {
 			</Section>
 			{/* SINGLE COLUMN SECTION */}
 			<Section
-				backgroundColor='secondary'
+				backgroundColor='primaryAccent'
 				padding='80px 15% 120px 15%'
 				hasGradientBackground
 				gradientColor1='primaryAccent'
 				gradientColor2='secondaryAccent'
 				gradientColor3='secondaryAccent'>
 				<Margin />
-				<H2 color='white'>Take your influencer journey to the next level.</H2>
+				<HeadingText variant='h2' color='white'>
+					Take your influencer journey to the next level.
+				</HeadingText>
 				<Button
 					variant='solid'
 					size='x-large'

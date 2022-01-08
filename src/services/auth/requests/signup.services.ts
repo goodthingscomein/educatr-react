@@ -1,15 +1,12 @@
 // Import validators
-import { createUserValidators } from './auth.validators';
+import { validateSignUpUserInputs } from '../validators/auth.validators';
 
-/*
-  Posts data to endpoint
-  Cache response in Redux reducer
-*/
-export const CreateUser = async (email: string, password: string, confirmPassword: string) => {
-	if (!createUserValidators(email, password, confirmPassword)) {
-		return console.error('Invalid user input: Create User');
+export const SignUpUser = async (email: string, password: string, confirmPassword: string) => {
+	// Check input is valid...
+	if (validateSignUpUserInputs(email, password, confirmPassword).length > 0) {
+		return console.error('Validators Failed: SignUpUser');
 	}
-
+	// Request auth server
 	const fetchPostOptions: RequestInit = {
 		method: 'POST',
 		headers: {
@@ -20,10 +17,7 @@ export const CreateUser = async (email: string, password: string, confirmPasswor
 			password: password,
 		}),
 	};
-
 	const response = await fetch('http://localhost:5000/api/v1/auth/register', fetchPostOptions);
 	const data = await response.json();
-
-	// Return the data
 	return { response, data };
 };

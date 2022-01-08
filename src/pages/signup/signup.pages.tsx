@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-// Import services
-import { CreateUser } from '../../services/auth/auth.services';
+// Import services + validators
+import { SignUpUser } from '../../services/auth/requests/signup.services';
+import { validateSignUpUserInputs } from '../../services/auth/validators/auth.validators';
 
 // Import styles
-import { LoginText, RegisterPageContainer } from './register.styles';
+import { LoginText, SignUpPageContainer } from './signup.styles';
 
 // Import custom components
 import AppBar from '../../components/app-bar/app-bar.components';
@@ -14,30 +15,34 @@ import Section from '../../components/section/section.components';
 import Input from '../../components/input/input.components';
 import Card from '../../components/card/card.components';
 import Margin from '../../components/margin/margin.components';
-import { H4 } from '../../components/heading/heading.styles';
+import HeadingText from '../../components/heading/heading.components';
 import CopyText from '../../components/copy-text/copy-text.components';
-import Button from '../../components/button/button.components';
 import Link from '../../components/link/link.components';
 
 // Import SVGs
-import { ReactComponent as RegisterHeroImage } from '../../assets/images/signup/sign-up-orange.svg';
+import { ReactComponent as SignUpHeroImage } from '../../assets/images/signup/sign-up-orange.svg';
 import SvgContainer from '../../components/svg-container/svg-container.components';
 import Form from '../../components/form/form.components';
+import SubmitButton from '../../components/submit-button/submit-button.components';
 
 // Render Component
-const RegisterPage: React.FC = () => {
+const SignUpPage: React.FC = () => {
 	// Local Page State
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 	const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
 
-	// Register user when button pressed
-	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+	// SignUp user when button pressed
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault();
-		// CreateUser(emailInput, passwordInput, confirmPasswordInput).then((response) => {
-		// 	console.log(response);
-		// });
-		console.log(emailInput + ' ' + passwordInput + ' ' + confirmPasswordInput);
+		// Make sure inputs are valid
+		if (validateSignUpUserInputs(emailInput, passwordInput, confirmPasswordInput).length > 0) return;
+
+		// Sign Up user with auth
+		const response = await SignUpUser(emailInput, passwordInput, confirmPasswordInput);
+		console.log(response);
+
+		// Reset state
 		setEmailInput('');
 		setPasswordInput('');
 		setConfirmPasswordInput('');
@@ -45,12 +50,12 @@ const RegisterPage: React.FC = () => {
 
 	// Render Sign Up Page
 	return (
-		<RegisterPageContainer>
+		<SignUpPageContainer>
 			<AppBar color='transparent'>
 				<Logo variant='h4' firstColor='white' secondColor='white' href='/'></Logo>
 			</AppBar>
 			<Section
-				backgroundColor='primary'
+				backgroundColor='primaryAccent'
 				hasColumns
 				padding='0'
 				minHeight='100vh'
@@ -60,7 +65,9 @@ const RegisterPage: React.FC = () => {
 				gradientColor3='tertiaryAccent'>
 				<Column>
 					<Card>
-						<H4 color='textDark'>Sign up</H4>
+						<HeadingText variant='h4' color='textDark'>
+							Sign up
+						</HeadingText>
 						<Margin height={4} />
 						<CopyText color='textLight' size={'medium'} fontWeight={200}>
 							Continue to Datafluence
@@ -91,23 +98,15 @@ const RegisterPage: React.FC = () => {
 								onChangeStateDispatch={setConfirmPasswordInput}
 							/>
 							<Margin height={12} />
-							<Button
-								variant='solid'
-								size='x-large'
-								maxWidth
-								backgroundColor='primary'
-								hoverBackgroundColor='secondary'
-								textColor='white'
-								type='submit'>
+							<SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
 								Sign up
-							</Button>
+							</SubmitButton>
 						</Form>
 						<Margin />
 						<LoginText>
 							<CopyText size={'small'} fontWeight={300} color={'textLight'}>
 								Already have an account?
 							</CopyText>
-							<p> </p>
 							<Link
 								fontSize='small'
 								fontWeight={300}
@@ -123,12 +122,12 @@ const RegisterPage: React.FC = () => {
 				</Column>
 				<Column>
 					<SvgContainer scalePercent={65} posTranslate='-10%, -15%'>
-						<RegisterHeroImage />
+						<SignUpHeroImage />
 					</SvgContainer>
 				</Column>
 			</Section>
-		</RegisterPageContainer>
+		</SignUpPageContainer>
 	);
 };
 
-export default RegisterPage;
+export default SignUpPage;

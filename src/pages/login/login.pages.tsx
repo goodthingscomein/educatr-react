@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 
+// Import services + validators
+import { LoginUser } from '../../services/auth/requests/login.services';
+import { validateLoginUserInputs } from '../../services/auth/validators/auth.validators';
+
 // Import styles
 import { LoginPageContainer, SignUpText } from './login.styles';
 
 // Import custom components
 import AppBar from '../../components/app-bar/app-bar.components';
-import Button from '../../components/button/button.components';
 import Card from '../../components/card/card.components';
 import Column from '../../components/column/column.components';
 import CopyText from '../../components/copy-text/copy-text.components';
-import { H4 } from '../../components/heading/heading.styles';
+import HeadingText from '../../components/heading/heading.components';
 import Input from '../../components/input/input.components';
 import Link from '../../components/link/link.components';
 import Logo from '../../components/logo/logo.components';
@@ -20,6 +23,7 @@ import Section from '../../components/section/section.components';
 import { ReactComponent as LoginHeroImage } from '../../assets/images/login/login-orange.svg';
 import SvgContainer from '../../components/svg-container/svg-container.components';
 import Form from '../../components/form/form.components';
+import SubmitButton from '../../components/submit-button/submit-button.components';
 
 // Render Component
 const LoginPage: React.FC = () => {
@@ -27,9 +31,16 @@ const LoginPage: React.FC = () => {
 	const [passwordInput, setPasswordInput] = useState('');
 
 	// Register user when button pressed
-	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault();
-		console.log(emailInput + ' ' + passwordInput);
+		// Make sure inputs are valid
+		if (validateLoginUserInputs(emailInput).length > 0) return;
+
+		// Sign Up user with auth
+		const response = await LoginUser(emailInput, passwordInput);
+		console.log(response);
+
+		// Reset state
 		setEmailInput('');
 		setPasswordInput('');
 	};
@@ -41,7 +52,7 @@ const LoginPage: React.FC = () => {
 				<Logo variant='h4' firstColor='white' secondColor='white' href='/'></Logo>
 			</AppBar>
 			<Section
-				backgroundColor='primary'
+				backgroundColor='primaryAccent'
 				hasColumns
 				padding='0'
 				minHeight='100vh'
@@ -51,7 +62,9 @@ const LoginPage: React.FC = () => {
 				gradientColor3='tertiaryAccent'>
 				<Column>
 					<Card>
-						<H4 color='textDark'>Log in</H4>
+						<HeadingText variant='h4' color='textDark'>
+							Log in
+						</HeadingText>
 						<Margin height={4} />
 						<CopyText color='textLight' size={'medium'} fontWeight={200}>
 							Continue to Datafluence
@@ -74,15 +87,9 @@ const LoginPage: React.FC = () => {
 								onChangeStateDispatch={setPasswordInput}
 							/>
 							<Margin height={12} />
-							<Button
-								variant='solid'
-								size='x-large'
-								maxWidth
-								backgroundColor='primary'
-								hoverBackgroundColor='secondary'
-								textColor='white'>
+							<SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
 								Log in
-							</Button>
+							</SubmitButton>
 						</Form>
 						<Margin />
 						<SignUpText>
