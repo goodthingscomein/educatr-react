@@ -9,7 +9,7 @@ export const ApplicationPageContainer = styled.div`
 	overflow: hidden;
 `;
 
-export const ApplicationPageDrawerContainer = styled.div`
+export const DrawerContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	flex-grow: 1;
@@ -19,10 +19,12 @@ export const ApplicationPageDrawerContainer = styled.div`
 	align-items: center;
 `;
 
-export const SideDrawerLinksContainer = styled.div`
+export const ContentContainer = styled.div`
+	height: 100%;
 	width: 100%;
+	padding-top: ${(props) => props.theme.appBar.appBarHeight};
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 `;

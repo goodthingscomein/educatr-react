@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { ColorTypes } from '../../type-declarations/styled';
 
-// To add props
-interface AppBarContainerProps {
-	color: ColorTypes;
-	padding?: string;
-}
-
 export const AppBarRelativeContainer = styled.div`
 	position: relative;
 	height: 0;
 	width: 100%;
 `;
+
+// To add props
+interface AppBarContainerProps {
+	color: ColorTypes;
+	padding?: string;
+	justifyContent?: string;
+}
 
 export const AppBarContainer = styled.div<AppBarContainerProps>`
 	width: 100%;
@@ -20,7 +21,7 @@ export const AppBarContainer = styled.div<AppBarContainerProps>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: ${(props) => props.justifyContent || 'space-between'};
 	padding: ${(props) => props.padding || '0 40px'};
 	position: absolute;
 	top: 0;

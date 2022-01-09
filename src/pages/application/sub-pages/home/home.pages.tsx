@@ -4,11 +4,11 @@ import HeadingText from '../../../../components/heading/heading.components';
 import Margin from '../../../../components/margin/margin.components';
 
 // Import styles
-import { WelcomePageButtonsContainer, WelcomePageContainer } from './welcome.styles';
+import { PageContainer, PageButtonsContainer } from './home.styles';
 
 // Render Component
-const WelcomeSubPage: React.FC = () => (
-	<WelcomePageContainer>
+const Application_HomePage: React.FC = () => (
+	<PageContainer>
 		<HeadingText variant='h1' color='white'>
 			Welcome to the platform
 		</HeadingText>
@@ -16,7 +16,7 @@ const WelcomeSubPage: React.FC = () => (
 			You have successfully logged in to reach this page.
 		</HeadingText>
 		<Margin height={40} />
-		<WelcomePageButtonsContainer>
+		<PageButtonsContainer>
 			<Button
 				variant='solid'
 				size='large'
@@ -41,8 +41,8 @@ const WelcomeSubPage: React.FC = () => (
 				href='/signup'>
 				Sign Up
 			</Button>
-		</WelcomePageButtonsContainer>
-	</WelcomePageContainer>
+		</PageButtonsContainer>
+	</PageContainer>
 );
 
-export default WelcomeSubPage;
+export default Application_HomePage;

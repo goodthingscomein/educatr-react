@@ -9,12 +9,13 @@ type Props = {
 	children?: React.ReactNode;
 	color: ColorTypes;
 	padding?: string;
+	justifyContent?: string;
 };
 
-const AppBar: React.FC<Props> = ({ children, color, padding }) => {
+const AppBar: React.FC<Props> = ({ children, color, padding, justifyContent }) => {
 	return (
 		<AppBarRelativeContainer>
-			<AppBarContainer color={color} padding={padding}>
+			<AppBarContainer color={color} padding={padding} justifyContent={justifyContent}>
 				{children}
 			</AppBarContainer>
 		</AppBarRelativeContainer>

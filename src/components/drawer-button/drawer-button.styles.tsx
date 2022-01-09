@@ -17,6 +17,7 @@ export const DrawerButtonContainer = styled.a<DrawerButtonContainerProps>`
 	font-size: ${(props) => props.theme.getFontSize(props.size || 'medium')};
 	font-weight: ${(props) => props.fontWeight || 400};
 	background-color: ${(props) => props.theme.themeColors.transparent};
+	text-decoration: none;
 	border: none;
 	display: flex;
 	justify-content: ${(props) => (props.isDrawerOpen ? 'flex-start' : 'center')};

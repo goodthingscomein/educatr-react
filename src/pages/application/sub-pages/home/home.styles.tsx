@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WelcomePageContainer = styled.div`
+export const PageContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	flex-grow: 1;
@@ -10,7 +10,7 @@ export const WelcomePageContainer = styled.div`
 	align-items: center;
 `;
 
-export const WelcomePageButtonsContainer = styled.div`
+export const PageButtonsContainer = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: row;
