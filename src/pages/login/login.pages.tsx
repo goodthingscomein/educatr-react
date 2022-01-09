@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Import services + validators
 import { LoginUser } from '../../services/auth/requests/login.services';
@@ -27,8 +28,12 @@ import SubmitButton from '../../components/submit-button/submit-button.component
 
 // Render Component
 const LoginPage: React.FC = () => {
+	// Local state
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
+
+	// Setup router
+	const navigate = useNavigate();
 
 	// Register user when button pressed
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
@@ -43,6 +48,9 @@ const LoginPage: React.FC = () => {
 		// Reset state
 		setEmailInput('');
 		setPasswordInput('');
+
+		// Route to welcome page
+		navigate('/app');
 	};
 
 	// Render Login Page

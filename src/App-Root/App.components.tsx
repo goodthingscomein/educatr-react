@@ -11,7 +11,7 @@ import { AppContainer } from './App.styles';
 import Homepage from '../pages/homepage/homepage.pages';
 import LoginPage from '../pages/login/login.pages';
 import SignUpPage from '../pages/signup/signup.pages';
-import WelcomePage from '../pages/welcome/welcome.pages';
+import ApplicationPage from '../pages/application/application.pages';
 
 const AppWrapper = () => {
 	return (
@@ -21,7 +21,7 @@ const AppWrapper = () => {
 					<Route path='/' element={<Homepage />} />
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/signup' element={<SignUpPage />} />
-					<Route path='/welcome' element={<WelcomePage />} />
+					<Route path='/app' element={<ApplicationPage />} />
 				</Routes>
 			</AppContainer>
 		</ThemeProvider>

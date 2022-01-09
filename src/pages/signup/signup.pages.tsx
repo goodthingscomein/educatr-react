@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Import services + validators
 import { SignUpUser } from '../../services/auth/requests/signup.services';
@@ -27,10 +28,13 @@ import SubmitButton from '../../components/submit-button/submit-button.component
 
 // Render Component
 const SignUpPage: React.FC = () => {
-	// Local Page State
+	// Local state
 	const [emailInput, setEmailInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 	const [confirmPasswordInput, setConfirmPasswordInput] = useState('');
+
+	// Setup router
+	const navigate = useNavigate();
 
 	// SignUp user when button pressed
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
@@ -46,6 +50,9 @@ const SignUpPage: React.FC = () => {
 		setEmailInput('');
 		setPasswordInput('');
 		setConfirmPasswordInput('');
+
+		// Route to welcome page
+		navigate('/app');
 	};
 
 	// Render Sign Up Page
