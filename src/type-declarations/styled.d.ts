@@ -13,7 +13,11 @@ export type ColorTypes =
 	| 'white'
 	| 'lightGrey'
 	| 'black'
-	| 'transparent';
+	| 'transparent'
+	| 'darken'
+	| 'lighten'
+	| 'borderColor'
+	| 'shadow';
 
 export type SocialColorTypes = 'twitter' | 'facebook' | 'linkedin' | 'youtube' | 'instagram' | 'tiktok' | 'pinterest';
 export type MessageColorTypes =
@@ -26,7 +30,7 @@ export type MessageColorTypes =
 	| 'errorLight'
 	| 'errorDark';
 
-export type FontSizes = 'small' | 'medium' | 'large' | 'x-large';
+export type FontSizes = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
 export type FontWeight = 200 | 300 | 400 | 700;
 
 // and extend them!
@@ -45,6 +49,10 @@ declare module 'styled-components' {
 			lightGrey: string;
 			black: string;
 			transparent: string;
+			darken: string;
+			lighten: string;
+			borderColor: string;
+			shadow: string;
 		};
 		socialColors: {
 			twitter: string;

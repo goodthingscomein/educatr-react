@@ -24,9 +24,6 @@ type Props = {
 	hasPassword?: boolean;
 	value: string | number;
 	onChangeStateDispatch: React.Dispatch<React.SetStateAction<any>>;
-	errorId?: INPUT_FIELD_ERROR_ID;
-	hasError?: boolean;
-	errorMessage?: string;
 };
 
 // Render Component

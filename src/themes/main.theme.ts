@@ -14,6 +14,10 @@ export const MainTheme: DefaultTheme = {
 		lightGrey: '#EFEFEF',
 		black: '#000000',
 		transparent: 'transparent',
+		darken: 'rgba(0, 0, 0, 0.2)',
+		lighten: 'rgba(255, 255, 255, 0.1)',
+		borderColor: 'rgba(0, 0, 0, 0.3)',
+		shadow: 'rgba(0, 0, 0, 0.4)',
 	},
 	socialColors: {
 		twitter: '#1DA1F2',
@@ -60,6 +64,14 @@ export const MainTheme: DefaultTheme = {
 				return '#000000';
 			case 'transparent':
 				return 'transparent';
+			case 'darken':
+				return 'rgba(0, 0, 0, 0.2)';
+			case 'lighten':
+				return 'rgba(255, 255, 255, 0.1)';
+			case 'borderColor':
+				return 'rgba(0, 0, 0, 0.3)';
+			case 'shadow':
+				return 'rgba(0, 0, 0, 0.4)';
 			case 'twitter':
 				return '#1DA1F2';
 			case 'facebook':
@@ -94,6 +106,8 @@ export const MainTheme: DefaultTheme = {
 	},
 	getFontSize: (input) => {
 		switch (input) {
+			case 'x-small':
+				return '60%';
 			case 'small':
 				return '70%';
 			case 'medium':
