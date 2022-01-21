@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
+import { ColorTypes, FontSizes, FontWeight, MessageColorTypes } from '../../type-declarations/styled';
 
 // Import styles
 import { CopyTextStyles } from './copy-text.styles';
@@ -9,7 +9,7 @@ type Props = {
 	children?: React.ReactNode;
 	size: FontSizes;
 	fontWeight?: FontWeight;
-	color: ColorTypes;
+	color: ColorTypes | MessageColorTypes;
 };
 
 // Render Component

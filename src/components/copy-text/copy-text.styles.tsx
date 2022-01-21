@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { ColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
+import { ColorTypes, FontSizes, FontWeight, MessageColorTypes } from '../../type-declarations/styled';
 
 // Heading props
 interface CopyTextProps {
 	size: FontSizes;
 	fontWeight?: FontWeight;
-	color: ColorTypes;
+	color: ColorTypes | MessageColorTypes;
 }
 
 export const CopyTextStyles = styled.p<CopyTextProps>`

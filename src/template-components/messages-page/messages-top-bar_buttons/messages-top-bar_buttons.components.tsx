@@ -5,7 +5,7 @@ import Button from '../../../components/button/button.components';
 import HorizontalDiv from '../../../components/horizontal-div/horizontal-div.components';
 
 // Import component templates
-import MessageOptionsDropdown from '../message-options-dropdown/message-options-dropdown.components';
+import MessageOptionsDropdown from '../messages-options-dropdown/messages-options-dropdown.components';
 
 // Import icons
 import CallIcon from '@mui/icons-material/Call';
@@ -13,7 +13,7 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 // Render Component
-const MessageTopBar_Buttons: React.FC = () => {
+const MessagesTopBar_Buttons: React.FC = () => {
 	// Local state (For dropdowns)
 	const [optionsDropdownToggle, setOptionsDropdownToggle] = useState(false);
 
@@ -62,4 +62,4 @@ const MessageTopBar_Buttons: React.FC = () => {
 	);
 };
 
-export default MessageTopBar_Buttons;
+export default MessagesTopBar_Buttons;
