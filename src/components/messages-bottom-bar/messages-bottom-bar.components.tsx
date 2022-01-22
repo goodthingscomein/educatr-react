@@ -25,8 +25,8 @@ const MessagesBottomBar: React.FC = () => {
 				margin='0 28px 0 0'
 				textColor='textDark'
 				hoverTextColor='primary'
-				size='large'>
-				<EmojiIcon fontSize='large' />
+				size='medium'>
+				<EmojiIcon fontSize='medium' />
 			</Button>
 			{/* INPUT FIELD */}
 			<InputFieldContainer>
@@ -40,11 +40,11 @@ const MessagesBottomBar: React.FC = () => {
 			<Button
 				variant='text'
 				padding='18px'
-				margin='0 0 0 28px'
+				margin='0 0 0 24px'
 				textColor='textDark'
 				hoverTextColor='primary'
-				size='large'>
-				<SendIcon fontSize='large' />
+				size='medium'>
+				<SendIcon fontSize='medium' />
 			</Button>
 		</BottomBarContainer>
 	);
