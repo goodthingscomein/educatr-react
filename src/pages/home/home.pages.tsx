@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../../../../components/button/button.components';
-import HeadingText from '../../../../components/heading/heading.components';
-import Margin from '../../../../components/margin/margin.components';
+import Button from '../../components/button/button.components';
+import HeadingText from '../../components/heading/heading.components';
+import Margin from '../../components/margin/margin.components';
 
 // Import styles
 import { PageContainer, PageButtonsContainer } from './home.styles';

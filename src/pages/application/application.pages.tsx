@@ -40,7 +40,7 @@ import DashboardIcon from '@mui/icons-material/Insights';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // Import sub pages
-import Application_HomePage from './sub-pages/home/home.pages';
+import Application_HomePage from '../home/home.pages';
 import Application_MessagesPage from './sub-pages/messages/messages.pages';
 import Application_FindInfluencersPage from './sub-pages/find-influencers/find-influencers.pages';
 import Application_EngagementPage from './sub-pages/engagement/engagement.pages';
