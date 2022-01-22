@@ -13,7 +13,7 @@ import Card from '../../components/card/card.components';
 import Column from '../../components/column/column.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import HeadingText from '../../components/heading/heading.components';
-import Input from '../../components/input/input.components';
+import FormInput from '../../components/form-input/form-input.components';
 import Link from '../../components/link/link.components';
 import Margin from '../../components/margin/margin.components';
 import Section from '../../components/section/section.components';
@@ -72,14 +72,14 @@ const LoginPage: React.FC = () => {
 						</CopyText>
 						<Margin height={40} />
 						<Form handleSubmit={(e) => handleSubmit(e)}>
-							<Input
+							<FormInput
 								value={emailInput}
 								type='email'
 								label='Email'
 								inputId='email'
 								onChangeStateDispatch={setEmailInput}
 							/>
-							<Input
+							<FormInput
 								value={passwordInput}
 								type='password'
 								label='Password'
@@ -95,7 +95,7 @@ const LoginPage: React.FC = () => {
 						<Margin />
 						<SignUpText>
 							<CopyText size={'small'} fontWeight={300} color={'textLight'}>
-								New to Datafluence?
+								New to Educatr?
 							</CopyText>
 							<Link
 								fontSize='small'
@@ -103,7 +103,7 @@ const LoginPage: React.FC = () => {
 								color='secondaryAccent'
 								hoverColor='tertiaryAccent'
 								underlineEffect='never'
-								href='signup'
+								clickAction={() => navigate('/signup')}
 								margin='0 4px'>
 								Get started
 							</Link>

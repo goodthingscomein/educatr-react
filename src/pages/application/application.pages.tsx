@@ -11,6 +11,7 @@ import Drawer from '../../components/drawer/drawer.components';
 
 // Import sub pages
 import HomePage from '../home/home.pages';
+import MessagesPage from '../messages/messages.pages';
 
 // Render Component
 const ApplicationPage: React.FC = () => (
@@ -22,6 +23,7 @@ const ApplicationPage: React.FC = () => (
 			<ContentContainer>
 				<Routes>
 					<Route path='/' element={<HomePage />} />
+					<Route path='/messages' element={<MessagesPage />} />
 				</Routes>
 			</ContentContainer>
 		</Section>

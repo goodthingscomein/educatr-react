@@ -11,7 +11,7 @@ import { LoginText, SignUpPageContainer } from './signup.styles';
 // Import custom components
 import Column from '../../components/column/column.components';
 import Section from '../../components/section/section.components';
-import Input from '../../components/input/input.components';
+import FormInput from '../../components/form-input/form-input.components';
 import Card from '../../components/card/card.components';
 import Margin from '../../components/margin/margin.components';
 import HeadingText from '../../components/heading/heading.components';
@@ -74,14 +74,14 @@ const SignUpPage: React.FC = () => {
 						</CopyText>
 						<Margin height={28} />
 						<Form handleSubmit={(e) => handleSubmit(e)}>
-							<Input
+							<FormInput
 								value={emailInput}
 								type='email'
 								label='Email'
 								inputId='email'
 								onChangeStateDispatch={setEmailInput}
 							/>
-							<Input
+							<FormInput
 								value={passwordInput}
 								type='password'
 								label='Password'
@@ -89,7 +89,7 @@ const SignUpPage: React.FC = () => {
 								hasPassword
 								onChangeStateDispatch={setPasswordInput}
 							/>
-							<Input
+							<FormInput
 								value={confirmPasswordInput}
 								type='password'
 								label='Confirm Password'
@@ -113,7 +113,7 @@ const SignUpPage: React.FC = () => {
 								color='secondaryAccent'
 								hoverColor='tertiaryAccent'
 								underlineEffect='never'
-								href='login'
+								clickAction={() => navigate('/login')}
 								margin='0 4px'>
 								Log in
 							</Link>

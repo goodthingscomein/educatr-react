@@ -1,43 +1,17 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 
 // Import styles
-import { InputFieldContainer, InputField, InputFieldLabel, PasswordHiddenToggleButton } from './input.styles';
-
-// Used to identify fields for error detection
-export enum INPUT_FIELD_ERROR_ID {
-	EMAIL,
-	PASSWORD,
-	CONFIRM_PASSWORD,
-}
-export type InputErrorMessage = {
-	fieldId: INPUT_FIELD_ERROR_ID;
-	message: string;
-};
+import { InputContainer } from './input.styles';
 
 // Component Props Interface
 type Props = {
-	type: React.HTMLInputTypeAttribute;
-	label: string;
-	inputId: string;
-	hasPassword?: boolean;
+	placeholder: string;
 	value: string | number;
 	onChangeStateDispatch: React.Dispatch<React.SetStateAction<any>>;
 };
 
 // Render Component
-const Input: React.FC<Props> = ({ type, label, inputId, value, onChangeStateDispatch, hasPassword }) => {
-	// Password hidden states
-	const [passwordHidden, setPasswordHidden] = useState(true);
-	const [inputFieldType, setInputFieldType] = useState(type);
-
-	// Toggle password hidden
-	const togglePasswordHidden = () => {
-		setPasswordHidden(!passwordHidden);
-		passwordHidden ? setInputFieldType('text') : setInputFieldType('password');
-	};
-
+const Input: React.FC<Props> = ({ placeholder, value, onChangeStateDispatch }) => {
 	// Handle change of an input field
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
@@ -48,24 +22,12 @@ const Input: React.FC<Props> = ({ type, label, inputId, value, onChangeStateDisp
 	};
 
 	return (
-		<InputFieldContainer>
-			<InputFieldLabel htmlFor={inputId}>{label}</InputFieldLabel>
-			<InputField
-				value={value}
-				type={inputFieldType}
-				name={inputId}
-				id={inputId}
-				onChange={(e) => handleChange(e, onChangeStateDispatch)}
-				autoComplete='off'
-			/>
-			{hasPassword ? (
-				<PasswordHiddenToggleButton onClick={() => togglePasswordHidden()}>
-					{passwordHidden ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
-				</PasswordHiddenToggleButton>
-			) : (
-				''
-			)}
-		</InputFieldContainer>
+		<InputContainer
+			placeholder={placeholder}
+			value={value}
+			onChange={(e) => handleChange(e, onChangeStateDispatch)}
+			autoComplete='off'
+		/>
 	);
 };
 

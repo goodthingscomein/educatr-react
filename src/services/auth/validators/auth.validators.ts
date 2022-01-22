@@ -1,4 +1,4 @@
-import { InputErrorMessage } from '../../../components/input/input.components';
+import { InputErrorMessage } from '../../../components/form-input/form-input.components';
 import isValidEmailInput from './input-fields/email.validators';
 import isValidPasswordInput from './input-fields/password.validators';
 import doPasswordsMatch from './input-fields/confirm-password.validators';

@@ -1,4 +1,4 @@
-import { InputErrorMessage, INPUT_FIELD_ERROR_ID } from '../../../../components/input/input.components';
+import { InputErrorMessage, INPUT_FIELD_ERROR_ID } from '../../../../components/form-input/form-input.components';
 
 // Error messages
 const NonMatchingPasswordsError: InputErrorMessage = {

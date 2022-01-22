@@ -19,7 +19,6 @@ interface ButtonSharedProps {
 	margin?: string;
 
 	// Actions
-	href?: string;
 	clickAction?: () => unknown;
 }
 
@@ -72,7 +71,6 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             On Click Functionality
           */
-					href={otherProps.href}
 					onClick={clickAction ? () => clickAction() : undefined}>
 					{children}
 				</ButtonContainer>
@@ -102,7 +100,6 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             On Click Functionality
           */
-					href={otherProps.href}
 					onClick={clickAction ? () => clickAction() : undefined}>
 					{children}
 				</ButtonContainer>
@@ -132,7 +129,6 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
 					/*
             On Click Functionality
           */
-					href={otherProps.href}
 					onClick={clickAction ? () => clickAction() : undefined}>
 					{children}
 				</ButtonContainer>

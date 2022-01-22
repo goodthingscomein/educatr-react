@@ -19,7 +19,6 @@ type Props = {
 	margin?: string;
 
 	// Function
-	href?: string;
 	clickAction?: () => unknown;
 };
 
@@ -32,7 +31,6 @@ const Link: React.FC<Props> = ({
 	fontSize,
 	fontWeight,
 	margin,
-	href,
 	clickAction,
 }) => (
 	<LinkText
@@ -42,7 +40,6 @@ const Link: React.FC<Props> = ({
 		fontSize={fontSize}
 		fontWeight={fontWeight}
 		margin={margin}
-		href={href}
 		onClick={clickAction ? () => clickAction() : undefined}>
 		{children}
 	</LinkText>

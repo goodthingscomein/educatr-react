@@ -33,7 +33,6 @@ const DrawerButton: React.FC<Props> = ({
 	hoverTextColor,
 	size,
 	fontWeight,
-	href,
 	clickAction,
 	selected,
 	isDrawerOpen,
@@ -43,8 +42,7 @@ const DrawerButton: React.FC<Props> = ({
 		hoverTextColor={hoverTextColor || textColor}
 		size={size}
 		fontWeight={fontWeight}
-		href={href}
-		onClick={clickAction ? () => clickAction() : undefined}
+		onClick={!selected && clickAction ? () => clickAction() : undefined}
 		selected={selected}
 		isDrawerOpen={isDrawerOpen}>
 		{children}
