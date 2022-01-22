@@ -16,6 +16,6 @@ export const CardContainer = styled.div<CardContainerProps>`
 	width: 80%;
 	overflow: hidden;
 	background-color: ${(props) => props.theme.getColor(props.backgroundColor || 'white')};
-	/* border-radius: 12px; */
+	border-radius: 24px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;

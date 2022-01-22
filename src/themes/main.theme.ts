@@ -2,22 +2,22 @@ import { DefaultTheme } from 'styled-components';
 
 export const MainTheme: DefaultTheme = {
 	themeColors: {
-		primary: '#F79F1F',
-		secondary: '#EE5A24',
-		tertiary: '#df4811',
-		primaryAccent: '#0652DD',
-		secondaryAccent: '#04399b',
-		tertiaryAccent: '#032769',
-		textDark: '#1A1A1A',
+		primary: '#9b59b6',
+		secondary: '#8e44ad',
+		tertiary: '#703688',
+		primaryAccent: '#f1c40f',
+		secondaryAccent: '#f39c12',
+		tertiaryAccent: '#d8890b',
+		textDark: '#1F1F1F',
 		textLight: '#6F6F6F',
 		white: '#FFFFFF',
-		lightGrey: '#EFEFEF',
+		lightGrey: '#F6F6F6',
 		black: '#000000',
 		transparent: 'transparent',
-		darken: 'rgba(0, 0, 0, 0.2)',
+		darken: 'rgba(0, 0, 0, 0.15)',
 		lighten: 'rgba(255, 255, 255, 0.1)',
-		borderColor: 'rgba(0, 0, 0, 0.3)',
-		shadow: 'rgba(0, 0, 0, 0.4)',
+		borderColor: 'rgba(0, 0, 0, 0.2)',
+		shadow: 'rgba(0, 0, 0, 0.3)',
 	},
 	socialColors: {
 		twitter: '#1DA1F2',
@@ -41,17 +41,17 @@ export const MainTheme: DefaultTheme = {
 	getColor: (input) => {
 		switch (input) {
 			case 'primary':
-				return '#F79F1F';
+				return '#9b59b6';
 			case 'secondary':
-				return '#EE5A24';
+				return '#8e44ad';
 			case 'tertiary':
-				return '#df4811';
+				return '#703688';
 			case 'primaryAccent':
-				return '#0652DD';
+				return '#f1c40f';
 			case 'secondaryAccent':
-				return '#04399b';
+				return '#f39c12';
 			case 'tertiaryAccent':
-				return '#032769';
+				return '#d8890b';
 			case 'textDark':
 				return '#1A1A1A';
 			case 'textLight':
@@ -65,13 +65,13 @@ export const MainTheme: DefaultTheme = {
 			case 'transparent':
 				return 'transparent';
 			case 'darken':
-				return 'rgba(0, 0, 0, 0.2)';
+				return 'rgba(0, 0, 0, 0.15)';
 			case 'lighten':
 				return 'rgba(255, 255, 255, 0.1)';
 			case 'borderColor':
-				return 'rgba(0, 0, 0, 0.3)';
+				return 'rgba(0, 0, 0, 0.2)';
 			case 'shadow':
-				return 'rgba(0, 0, 0, 0.4)';
+				return 'rgba(0, 0, 0, 0.3)';
 			case 'twitter':
 				return '#1DA1F2';
 			case 'facebook':

@@ -9,10 +9,10 @@ import { PageContainer, PageButtonsContainer } from './home.styles';
 // Render Component
 const Application_HomePage: React.FC = () => (
 	<PageContainer>
-		<HeadingText variant='h1' color='white'>
+		<HeadingText variant='h1' color='textDark'>
 			Welcome to the platform
 		</HeadingText>
-		<HeadingText variant='h5' color='white'>
+		<HeadingText variant='h5' color='textDark'>
 			You have successfully logged in to reach this page.
 		</HeadingText>
 		<Margin height={40} />
