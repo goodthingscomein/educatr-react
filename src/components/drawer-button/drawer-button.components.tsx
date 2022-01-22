@@ -22,6 +22,7 @@ type Props = {
 	href?: string;
 	clickAction?: () => unknown;
 
+	selected?: boolean;
 	isDrawerOpen: boolean;
 };
 
@@ -34,6 +35,7 @@ const DrawerButton: React.FC<Props> = ({
 	fontWeight,
 	href,
 	clickAction,
+	selected,
 	isDrawerOpen,
 }) => (
 	<DrawerButtonContainer
@@ -43,6 +45,7 @@ const DrawerButton: React.FC<Props> = ({
 		fontWeight={fontWeight}
 		href={href}
 		onClick={clickAction ? () => clickAction() : undefined}
+		selected={selected}
 		isDrawerOpen={isDrawerOpen}>
 		{children}
 	</DrawerButtonContainer>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
 
 // Drawer Button Container Props
@@ -7,8 +7,21 @@ type DrawerButtonContainerProps = {
 	hoverTextColor: ColorTypes;
 	size?: FontSizes;
 	fontWeight?: FontWeight;
+	selected?: boolean;
 	isDrawerOpen: boolean;
 };
+
+const SelectedStyles = css<DrawerButtonContainerProps>`
+	color: ${(props) => props.theme.getColor(props.hoverTextColor)};
+	background-color: ${(props) => props.theme.themeColors.darken};
+`;
+
+const HoverStyles = css<DrawerButtonContainerProps>`
+	:hover {
+		color: ${(props) => props.theme.getColor(props.hoverTextColor)};
+		background-color: ${(props) => props.theme.themeColors.lighten};
+	}
+`;
 
 export const DrawerButtonContainer = styled.a<DrawerButtonContainerProps>`
 	width: 100%;
@@ -24,8 +37,5 @@ export const DrawerButtonContainer = styled.a<DrawerButtonContainerProps>`
 	align-items: center;
 	transition: 0.2s;
 
-	:hover {
-		color: ${(props) => props.theme.getColor(props.hoverTextColor)};
-		background-color: rgba(255, 255, 255, 0.1);
-	}
+	${(props) => (props.selected ? SelectedStyles : HoverStyles)}
 `;
