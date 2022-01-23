@@ -12,45 +12,45 @@ import { DrawerButtonContainer } from './drawer-button.styles';
 
 // Component Props Interface
 type Props = {
-	children?: React.ReactNode;
+  children?: React.ReactNode;
 
-	textColor: ColorTypes;
-	hoverTextColor?: ColorTypes;
-	size?: FontSizes;
-	fontWeight?: FontWeight;
+  textColor: ColorTypes;
+  hoverTextColor?: ColorTypes;
+  size?: FontSizes;
+  fontWeight?: FontWeight;
 
-	href?: string;
-	clickAction?: () => unknown;
+  clickAction?: () => unknown;
 
-	selected?: boolean;
-	isDrawerOpen: boolean;
+  selected?: boolean;
+  isDrawerOpen: boolean;
 };
 
 // Render Component
 const DrawerButton: React.FC<Props> = ({
-	children,
-	textColor,
-	hoverTextColor,
-	size,
-	fontWeight,
-	clickAction,
-	selected,
-	isDrawerOpen,
+  children,
+  textColor,
+  hoverTextColor,
+  size,
+  fontWeight,
+  clickAction,
+  selected,
+  isDrawerOpen,
 }) => (
-	<DrawerButtonContainer
-		textColor={textColor}
-		hoverTextColor={hoverTextColor || textColor}
-		size={size}
-		fontWeight={fontWeight}
-		onClick={!selected && clickAction ? () => clickAction() : undefined}
-		selected={selected}
-		isDrawerOpen={isDrawerOpen}>
-		{children}
-	</DrawerButtonContainer>
+  <DrawerButtonContainer
+    textColor={textColor}
+    hoverTextColor={hoverTextColor || textColor}
+    size={size}
+    fontWeight={fontWeight}
+    onClick={!selected && clickAction ? () => clickAction() : undefined}
+    selected={selected}
+    isDrawerOpen={isDrawerOpen}
+  >
+    {children}
+  </DrawerButtonContainer>
 );
 
 const mapStateToProps = (state: State) => ({
-	isDrawerOpen: state.navigation.isDrawerOpen,
+  isDrawerOpen: state.navigation.isDrawerOpen,
 });
 
 export default connect(mapStateToProps)(DrawerButton);

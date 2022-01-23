@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // Import styles
-import { ApplicationPageContainer, ContentContainer } from './application.styles';
+import { ApplicationPageContainer, ContentContainer } from './platform-layout.styles';
 
 // Import custom components
 import Section from '../../components/section/section.components';
@@ -18,12 +18,12 @@ const ApplicationPage: React.FC = () => (
 	<ApplicationPageContainer>
 		<AppBar />
 		<Drawer />
-		<Section backgroundColor='lightGrey' padding='0' minHeight='100vh'>
+		<Section backgroundColor="lightGrey" padding="0" minHeight="100vh">
 			{/* MAIN CONTENT */}
 			<ContentContainer>
 				<Routes>
-					<Route path='/' element={<HomePage />} />
-					<Route path='/messages' element={<MessagesPage />} />
+					<Route path="/" element={<HomePage />} />
+					<Route path="/messages" element={<MessagesPage />} />
 				</Routes>
 			</ContentContainer>
 		</Section>
