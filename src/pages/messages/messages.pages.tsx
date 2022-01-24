@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
 
 // Import styles
 import {
@@ -23,16 +22,10 @@ import MessagesContact from '../../components/messages-contact/message-contact.c
 
 // Render Component
 const MessagesPage: React.FC = () => {
+  // Local page Sstate
   const [searchValue, setSearchValue] = useState('');
 
-  // Random name generator for development
-  const config: Config = {
-    dictionaries: [names, names],
-    style: 'capital',
-    length: 2,
-    separator: ' ',
-  };
-
+  // Render page
   return (
     <PageContainer>
       <Drawer>

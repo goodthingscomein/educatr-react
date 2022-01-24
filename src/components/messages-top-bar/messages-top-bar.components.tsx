@@ -35,10 +35,10 @@ const MessagesTopBar: React.FC<Props> = () => {
       />
       {/* Right side */}
       <ButtonsContainer>
-        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primary' size='medium'>
+        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
           <CallIcon fontSize='medium' />
         </Button>
-        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primary' size='medium'>
+        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
           <VideoCallIcon fontSize='medium' />
         </Button>
         {isSearching ? (
@@ -51,13 +51,13 @@ const MessagesTopBar: React.FC<Props> = () => {
           variant='text'
           padding='18px'
           textColor='textDark'
-          hoverTextColor='primary'
+          hoverTextColor='primaryAccent'
           size='medium'
           clickAction={() => setIsSearching(!isSearching)}
         >
           <SearchIcon fontSize='medium' />
         </Button>
-        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primary' size='medium'>
+        <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
           <OptionsIcon fontSize='medium' />
         </Button>
       </ButtonsContainer>

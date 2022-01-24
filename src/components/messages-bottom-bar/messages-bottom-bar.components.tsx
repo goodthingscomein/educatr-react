@@ -13,41 +13,43 @@ import SendIcon from '@mui/icons-material/Send';
 
 // Render Component
 const MessagesBottomBar: React.FC = () => {
-	// Value of the input field
-	const [messageInputValue, setMessageInputValue] = useState('');
+  // Value of the input field
+  const [messageInputValue, setMessageInputValue] = useState('');
 
-	return (
-		<BottomBarContainer>
-			{/** ICONS */}
-			<Button
-				variant='text'
-				padding='18px'
-				margin='0 28px 0 0'
-				textColor='textDark'
-				hoverTextColor='primary'
-				size='medium'>
-				<EmojiIcon fontSize='medium' />
-			</Button>
-			{/* INPUT FIELD */}
-			<InputFieldContainer>
-				<TextAreaInput
-					placeholder='Type a message...'
-					value={messageInputValue}
-					onChangeStateDispatch={setMessageInputValue}
-				/>
-			</InputFieldContainer>
-			{/** SEND ICON */}
-			<Button
-				variant='text'
-				padding='18px'
-				margin='0 0 0 24px'
-				textColor='textDark'
-				hoverTextColor='primary'
-				size='medium'>
-				<SendIcon fontSize='medium' />
-			</Button>
-		</BottomBarContainer>
-	);
+  return (
+    <BottomBarContainer>
+      {/** ICONS */}
+      <Button
+        variant='text'
+        padding='18px'
+        margin='0 28px 0 0'
+        textColor='textDark'
+        hoverTextColor='primaryAccent'
+        size='medium'
+      >
+        <EmojiIcon fontSize='medium' />
+      </Button>
+      {/* INPUT FIELD */}
+      <InputFieldContainer>
+        <TextAreaInput
+          placeholder='Type a message...'
+          value={messageInputValue}
+          onChangeStateDispatch={setMessageInputValue}
+        />
+      </InputFieldContainer>
+      {/** SEND ICON */}
+      <Button
+        variant='text'
+        padding='18px'
+        margin='0 0 0 24px'
+        textColor='textDark'
+        hoverTextColor='primaryAccent'
+        size='medium'
+      >
+        <SendIcon fontSize='medium' />
+      </Button>
+    </BottomBarContainer>
+  );
 };
 
 export default MessagesBottomBar;

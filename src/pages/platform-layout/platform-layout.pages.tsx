@@ -12,22 +12,24 @@ import Drawer from '../../components/drawer/drawer.components';
 // Import sub pages
 import HomePage from '../home/home.pages';
 import MessagesPage from '../messages/messages.pages';
+import CalendarPage from '../calendar/calendar.pages';
 
 // Render Component
 const ApplicationPage: React.FC = () => (
-	<ApplicationPageContainer>
-		<AppBar />
-		<Drawer />
-		<Section backgroundColor="lightGrey" padding="0" minHeight="100vh">
-			{/* MAIN CONTENT */}
-			<ContentContainer>
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					<Route path="/messages" element={<MessagesPage />} />
-				</Routes>
-			</ContentContainer>
-		</Section>
-	</ApplicationPageContainer>
+  <ApplicationPageContainer>
+    <AppBar />
+    <Drawer />
+    <Section backgroundColor='lightGrey' padding='0' minHeight='100vh'>
+      {/* MAIN CONTENT */}
+      <ContentContainer>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/calendar' element={<CalendarPage />} />
+          <Route path='/messages' element={<MessagesPage />} />
+        </Routes>
+      </ContentContainer>
+    </Section>
+  </ApplicationPageContainer>
 );
 
 export default ApplicationPage;
