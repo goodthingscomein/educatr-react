@@ -37,7 +37,3 @@ export const ContentContainer = styled.div`
   align-items: stretch;
   background-color: ${(props) => props.theme.themeColors.white};
 `;
-
-export const CalendarContainer = styled.div`
-  flex: 1 0 0;
-`;

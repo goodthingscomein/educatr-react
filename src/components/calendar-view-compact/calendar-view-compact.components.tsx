@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Import development data
+import dates from '../../data/dates.data';
+import days from '../../data/days.data';
+
 // Import styles
 import { GridContainer, GridItem } from './calendar-view-compact.styles';
 
@@ -64,50 +68,7 @@ const CalendarViewCompact: React.FC = () => (
         return <GridItem lightText>{value}</GridItem>;
       })}
       {/* Dates in grid (MUST BE AUTO) */}
-      {[
-        { day: 27, month: 12 },
-        { day: 28, month: 12 },
-        { day: 29, month: 12 },
-        { day: 30, month: 12 },
-        { day: 31, month: 12 },
-        { day: 1, month: 1 },
-        { day: 2, month: 1 },
-        { day: 3, month: 1 },
-        { day: 4, month: 1 },
-        { day: 5, month: 1 },
-        { day: 6, month: 1 },
-        { day: 7, month: 1 },
-        { day: 8, month: 1 },
-        { day: 9, month: 1 },
-        { day: 10, month: 1 },
-        { day: 11, month: 1 },
-        { day: 12, month: 1 },
-        { day: 13, month: 1 },
-        { day: 14, month: 1 },
-        { day: 15, month: 1 },
-        { day: 16, month: 1 },
-        { day: 17, month: 1 },
-        { day: 18, month: 1 },
-        { day: 19, month: 1 },
-        { day: 20, month: 1 },
-        { day: 21, month: 1 },
-        { day: 22, month: 1 },
-        { day: 23, month: 1 },
-        { day: 24, month: 1 },
-        { day: 25, month: 1 },
-        { day: 26, month: 1 },
-        { day: 27, month: 1 },
-        { day: 28, month: 1 },
-        { day: 29, month: 1 },
-        { day: 30, month: 1 },
-        { day: 31, month: 1 },
-        { day: 1, month: 2 },
-        { day: 2, month: 2 },
-        { day: 3, month: 2 },
-        { day: 4, month: 2 },
-        { day: 5, month: 2 },
-        { day: 6, month: 2 },
-      ].map((date) => {
+      {dates.map((date) => {
         return (
           <GridItem canHover lightText={date.month !== 1} selected={date.day === 27 && date.month === 1}>
             {date.day}

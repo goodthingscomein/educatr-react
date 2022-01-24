@@ -43,7 +43,7 @@ const CalendarDrawerHeader: React.FC = () => (
           alignItems='center'
           css={`
             width: fit-content;
-            padding: 0 20px 0 0;
+            padding: 0 24px 0 0;
           `}
         >
           <AddIcon fontSize='large' />
