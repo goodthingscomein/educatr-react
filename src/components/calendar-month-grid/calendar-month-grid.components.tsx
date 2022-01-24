@@ -2,7 +2,6 @@ import React from 'react';
 
 // Import development data
 import dates from '../../data/dates.data';
-import days from '../../data/days.data';
 
 // Import styles
 import { CalendarContainer } from './calendar-month-grid.styles';

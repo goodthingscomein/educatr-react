@@ -6,16 +6,13 @@ type GridItemProps = {
 };
 
 const IsTodayStyles = css`
-  border: 2px solid ${(props) => props.theme.themeColors.secondaryAccent};
-`;
-
-const StandardBorderStyles = css`
-  border: 1px solid ${(props) => props.theme.themeColors.borderColor};
+  background-color: ${(props) => props.theme.themeColors.primaryAccent}40;
 `;
 
 export const CalendarDayItem = styled.div<GridItemProps>`
   padding: 4px;
-  ${(props) => (props.isToday ? IsTodayStyles : StandardBorderStyles)};
+  border: 1px solid ${(props) => props.theme.themeColors.borderColor};
+  ${(props) => (props.isToday ? IsTodayStyles : '')};
   display: flex;
   flex-direction: column;
   min-width: 0;
