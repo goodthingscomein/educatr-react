@@ -1,12 +1,15 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavigateFunction } from 'react-router-dom';
 import { MainTheme } from '../../themes/main.theme';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
+import { setDrawerIsOpen } from '../../redux/navigation/navigation.actions';
 import { State } from '../../redux/root-reducer';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
 
 // Import styles
 import { DrawerContainer } from './drawer.styles';
@@ -27,144 +30,167 @@ import DrawerButton from '../drawer-button/drawer-button.components';
 import Icon from '../icon/icon-components';
 import Divider from '../divider/divider.components';
 import Link from '../link/link.components';
+import { ClickAwayListener } from '@mui/base';
 
 type Props = {
-	isDrawerOpen: boolean;
+  isDrawerOpen: boolean;
+  setDrawerIsOpen: typeof setDrawerIsOpen;
 };
 
-const Drawer: React.FC<Props> = ({ isDrawerOpen }) => {
-	const navigate = useNavigate();
-	return (
-		<DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
-			<DrawerSection backgroundColor='transparent'>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/'}
-					clickAction={() => navigate('/')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<HomeIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Home' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/calendar'}
-					clickAction={() => navigate('/calendar')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<CalendarIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Calendar' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/messages'}
-					clickAction={() => navigate('/messages')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<MessagesIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Messages' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/resources'}
-					clickAction={() => navigate('/resources')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<ResourcesIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Resources' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/classes'}
-					clickAction={() => navigate('/classes')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<ClassesIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Your Classes' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/units'}
-					clickAction={() => navigate('/units')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<UnitsIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Your Units' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/grades'}
-					clickAction={() => navigate('/grades')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<GradesIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Your Grades' : ''}
-				</DrawerButton>
-				<DrawerButton
-					textColor='white'
-					hoverTextColor='primaryAccent'
-					fontWeight={300}
-					selected={useLocation().pathname === '/settings'}
-					clickAction={() => navigate('/settings')}>
-					<Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-						<SettingsIcon fontSize='medium' />
-					</Icon>
-					{isDrawerOpen ? 'Settings' : ''}
-				</DrawerButton>
-			</DrawerSection>
-			<DrawerSection backgroundColor='transparent'>
-				{isDrawerOpen ? (
-					<>
-						<Divider color='light' />
-						<DrawerSection
-							backgroundColor='transparent'
-							flexDirection='column'
-							alignItems='flex-start'
-							padding='0 24px'>
-							{isDrawerOpen ? (
-								<>
-									<Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-										Legal Center
-									</Link>
-									<Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-										Privacy Policy
-									</Link>
-									<Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-										Terms and Conditions
-									</Link>
-									<Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-										Contact Us
-									</Link>
-								</>
-							) : (
-								''
-							)}
-						</DrawerSection>
-					</>
-				) : (
-					''
-				)}
-			</DrawerSection>
-		</DrawerContainer>
-	);
+const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
+  const navigate = useNavigate();
+
+  const drawerButtonClick = (navigateLocation: string) => {
+    navigate(navigateLocation);
+    setDrawerIsOpen(false);
+  };
+
+  return (
+    <ClickAwayListener onClickAway={() => setDrawerIsOpen(false)} mouseEvent='onMouseDown' touchEvent='onTouchStart'>
+      <DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
+        <DrawerSection backgroundColor='transparent'>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/'}
+            clickAction={() => drawerButtonClick('/')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <HomeIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Home' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/calendar'}
+            clickAction={() => drawerButtonClick('/calendar')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <CalendarIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Calendar' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/messages'}
+            clickAction={() => drawerButtonClick('/messages')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <MessagesIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Messages' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/resources'}
+            clickAction={() => drawerButtonClick('/resources')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <ResourcesIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Resources' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/classes'}
+            clickAction={() => drawerButtonClick('/classes')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <ClassesIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Your Classes' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/units'}
+            clickAction={() => drawerButtonClick('/units')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <UnitsIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Your Units' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/grades'}
+            clickAction={() => drawerButtonClick('/grades')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <GradesIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Your Grades' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname === '/settings'}
+            clickAction={() => drawerButtonClick('/settings')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <SettingsIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Settings' : ''}
+          </DrawerButton>
+        </DrawerSection>
+        <DrawerSection backgroundColor='transparent'>
+          {isDrawerOpen ? (
+            <>
+              <Divider color='light' />
+              <DrawerSection
+                backgroundColor='transparent'
+                flexDirection='column'
+                alignItems='flex-start'
+                padding='0 24px'
+              >
+                {isDrawerOpen ? (
+                  <>
+                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                      Legal Center
+                    </Link>
+                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                      Privacy Policy
+                    </Link>
+                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                      Terms and Conditions
+                    </Link>
+                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                      Contact Us
+                    </Link>
+                  </>
+                ) : (
+                  ''
+                )}
+              </DrawerSection>
+            </>
+          ) : (
+            ''
+          )}
+        </DrawerSection>
+      </DrawerContainer>
+    </ClickAwayListener>
+  );
 };
 
 const mapStateToProps = (state: State) => ({
-	isDrawerOpen: state.navigation.isDrawerOpen,
+  isDrawerOpen: state.navigation.isDrawerOpen,
 });
 
-export default connect(mapStateToProps)(Drawer);
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  setDrawerIsOpen: (open: boolean) => dispatch(setDrawerIsOpen(open)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Drawer);
