@@ -8,6 +8,7 @@ import Button from '../button/button.components';
 import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 import CopyText from '../copy-text/copy-text.components';
 import Input from '../input/input.components';
+import CalendarViewButtons from '../calendar-view-buttons/calendar-view-buttons.components';
 
 // Import custom icons
 import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -70,23 +71,21 @@ const CalendarTopBar: React.FC = () => {
         </Button>
       </HorizontalDiv>
       {/* Right side */}
-      <>
-        {/* Search icon button */}
-        {/* Help icon button */}
-        {/* MoreVert icon button */}
-      </>
       <HorizontalDiv
         backgroundColor='transparent'
         css={`
           width: fit-content;
         `}
       >
+        {/* Calendar View Buttons */}
+        <CalendarViewButtons />
+        {/* Search bar */}
         {isSearching ? (
           <Input placeholder='Search calendar...' value={searchValue} onChangeStateDispatch={setSearchValue} />
         ) : (
           ''
         )}
-
+        {/* Search button */}
         <Button
           variant='text'
           padding='18px'

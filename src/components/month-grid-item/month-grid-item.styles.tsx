@@ -9,7 +9,7 @@ const IsTodayStyles = css`
   background-color: ${(props) => props.theme.themeColors.primaryAccent}40;
 `;
 
-export const CalendarDayItem = styled.div<GridItemProps>`
+export const GridItemContainer = styled.div<GridItemProps>`
   padding: 4px;
   border: 1px solid ${(props) => props.theme.themeColors.borderColor};
   ${(props) => (props.isToday ? IsTodayStyles : '')};
@@ -20,8 +20,16 @@ export const CalendarDayItem = styled.div<GridItemProps>`
   overflow-y: hidden;
 `;
 
+export const LabelTextContainer = styled.div`
+  width: 100;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const EventGridContainer = styled.div`
-  margin-top: 8px;
+  margin-top: 4px;
   height: 100%;
   width: 100%;
   display: grid;

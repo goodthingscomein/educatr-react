@@ -5,7 +5,7 @@ import dates from '../../data/dates.data';
 import days from '../../data/days.data';
 
 // Import styles
-import { GridContainer, GridItem } from './calendar-view-compact.styles';
+import { GridContainer, GridItem } from './calendar-compact.styles';
 
 // Import custom components
 import Button from '../button/button.components';
@@ -64,8 +64,8 @@ const CalendarViewCompact: React.FC = () => (
     </HorizontalDiv>
     <GridContainer>
       {/* Days in grid */}
-      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((value) => {
-        return <GridItem lightText>{value}</GridItem>;
+      {days.map((day) => {
+        return <GridItem lightText>{day.charAt(0)}</GridItem>;
       })}
       {/* Dates in grid (MUST BE AUTO) */}
       {dates.map((date) => {

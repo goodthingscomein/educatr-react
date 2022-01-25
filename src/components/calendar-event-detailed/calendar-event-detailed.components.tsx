@@ -1,7 +1,6 @@
 import React from 'react';
 import { FilterColorTypes } from '../../type-declarations/styled';
 import CopyText from '../copy-text/copy-text.components';
-import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 
 // Import styles
 import { CalendarEventContainer } from './calendar-event-detailed.styles';
@@ -11,29 +10,33 @@ import { CalendarEventContainer } from './calendar-event-detailed.styles';
 // Component Props Interface
 type Props = {
   color: FilterColorTypes;
-  startTime: string;
+  startMinute: number;
+  totalMinutes: number;
   title: string;
+  titleVisibleLength?: number;
+  clickAction?: () => unknown;
 };
 
 // Render Component
-const CalendarEvent: React.FC<Props> = ({ color, startTime, title }) => (
-  <CalendarEventContainer color={color}>
-    <HorizontalDiv
-      backgroundColor='transparent'
-      alignItems='center'
-      css={`
-        width: fit-content;
-        margin-right: 8px;
-      `}
-    >
-      <CopyText size='x-small' color='white' fontWeight={300}>
-        {startTime}
-      </CopyText>
-    </HorizontalDiv>
+const CalendarEventDetailed: React.FC<Props> = ({
+  color,
+  startMinute,
+  totalMinutes,
+  title,
+  titleVisibleLength,
+  clickAction,
+}) => (
+  <CalendarEventContainer
+    color={color}
+    startMinute={startMinute}
+    totalMinutes={totalMinutes}
+    onClick={clickAction ? () => clickAction() : undefined}
+  >
     <CopyText size='x-small' color='white' fontWeight={700}>
-      {title}
+      {title.substring(0, titleVisibleLength || 25)}
+      {title.length >= 25 ? '...' : ''}
     </CopyText>
   </CalendarEventContainer>
 );
 
-export default CalendarEvent;
+export default CalendarEventDetailed;

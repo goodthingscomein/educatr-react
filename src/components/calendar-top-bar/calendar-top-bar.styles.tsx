@@ -7,5 +7,4 @@ export const TopBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  border-bottom: 1px solid ${(props) => props.theme.themeColors.borderColor};
 `;

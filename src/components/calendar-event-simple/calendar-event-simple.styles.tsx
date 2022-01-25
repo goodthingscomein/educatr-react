@@ -14,5 +14,6 @@ export const CalendarEventContainer = styled.a<CalendarEventContainerProps>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  z-index: 2;
   cursor: pointer;
 `;

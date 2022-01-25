@@ -1,21 +1,22 @@
 import React from 'react';
 import { FilterColorTypes } from '../../type-declarations/styled';
-import CopyText from '../copy-text/copy-text.components';
 
 // Import styles
 import { CalendarEventContainer } from './calendar-event-simple.styles';
 
 // Import custom components
+import CopyText from '../copy-text/copy-text.components';
 
 // Component Props Interface
 type Props = {
   color: FilterColorTypes;
   time: string;
+  clickAction?: () => unknown;
 };
 
 // Render Component
-const CalendarEvent: React.FC<Props> = ({ color, time }) => (
-  <CalendarEventContainer color={color}>
+const CalendarEvent: React.FC<Props> = ({ color, time, clickAction }) => (
+  <CalendarEventContainer color={color} onClick={clickAction ? () => clickAction() : undefined}>
     <CopyText size='x-small' color='white' fontWeight={400}>
       {time}
     </CopyText>
