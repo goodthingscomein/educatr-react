@@ -20,6 +20,7 @@ import {
 // Import custom components
 import CopyText from '../copy-text/copy-text.components';
 import CalendarEventDetailed from '../calendar-event-detailed/calendar-event-detailed.components';
+import Margin from '../margin/margin.components';
 
 // Render Component
 const CalendarWeekGrid: React.FC = () => {
@@ -36,11 +37,12 @@ const CalendarWeekGrid: React.FC = () => {
         {days.map((day, index) => {
           return (
             <HeaderGridItem>
-              <CopyText size='small' color='textDark'>
-                {dates[index].day}
-              </CopyText>
-              <CopyText size='x-small' color='textDark'>
+              <CopyText size='x-small' color='textLight'>
                 {day}
+              </CopyText>
+              <Margin height={2} />
+              <CopyText size='medium' color='textDark' fontWeight={700}>
+                {dates[index].day}
               </CopyText>
             </HeaderGridItem>
           );
