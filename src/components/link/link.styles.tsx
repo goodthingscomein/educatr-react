@@ -30,11 +30,14 @@ export const LinkText = styled.a<LinkTextProps>`
   cursor: pointer;
   width: fit-content;
   white-space: nowrap;
+  user-select: none;
 
   // Hover effects
   :hover {
     color: ${(props) => props.theme.getColor(props.hoverColor)};
     border-bottom-color: ${(props) =>
-      props.underlineEffect === 'hover' ? props.theme.getColor(props.hoverColor) : props.theme.themeColors.transparent};
+      props.underlineEffect === 'hover' || props.underlineEffect === 'always'
+        ? props.theme.getColor(props.hoverColor)
+        : props.theme.themeColors.transparent};
   }
 `;
