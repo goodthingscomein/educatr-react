@@ -1,15 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const InputContainer = styled.input`
-	width: 100%;
-	padding: 4px 12px;
-	border: 1px solid ${(props) => props.theme.themeColors.borderColor};
-	color: ${(props) => props.theme.themeColors.textDark};
-	box-shadow: 0 2px 4px 0 ${(props) => props.theme.themeColors.shadow};
-	outline: none;
+// Input Container Props
+type InputContainerProps = {
+  hasDropShadow?: boolean;
+};
 
-	::placeholder {
-		color: ${(props) => props.theme.themeColors.textLight};
-		opacity: 1;
-	}
+const DropShadowStyles = css`
+  box-shadow: 0 2px 4px 0 ${(props) => props.theme.themeColors.shadow};
+`;
+
+export const InputContainer = styled.input<InputContainerProps>`
+  width: 100%;
+  padding: 4px 12px;
+  border: 1px solid ${(props) => props.theme.themeColors.borderColor};
+  color: ${(props) => props.theme.themeColors.textDark};
+  outline: none;
+  ${(props) => props.hasDropShadow && DropShadowStyles};
+  ::placeholder {
+    color: ${(props) => props.theme.themeColors.textLight};
+    opacity: 1;
+  }
 `;

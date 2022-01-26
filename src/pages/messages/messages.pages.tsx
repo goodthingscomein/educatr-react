@@ -34,7 +34,7 @@ const MessagesPage: React.FC = () => {
             Messages
           </HeadingText>
           <Margin height='18px' width='100%' />
-          <Input placeholder='Search...' value={searchValue} onChangeStateDispatch={setSearchValue} />
+          <Input placeholder='Search...' value={searchValue} onChangeStateDispatch={setSearchValue} hasDropShadow />
         </DrawerHeader>
         <DrawerContent>
           <DrawerButton selected>

@@ -70,7 +70,7 @@ export const UnitCardImage = styled.div<UnitCardImageProps>`
     url(${(props) => props.src});
   background-position: center;
   background-size: cover;
-  background-color: ${(props) => props.theme.themeColors.primaryAccent};
+  background-color: ${(props) => props.theme.themeColors.textLight};
   display: flex;
   justify-content: center;
   align-items: center;
