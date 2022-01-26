@@ -32,6 +32,7 @@ const MessagesTopBar: React.FC<Props> = () => {
         imageHeight='40px'
         displayName='Jai Carey'
         subText='Active 25 mins ago'
+        timestamp=''
       />
       {/* Right side */}
       <ButtonsContainer>

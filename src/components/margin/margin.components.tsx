@@ -1,14 +1,15 @@
 import React from 'react';
 
 // Import styles
-import {MarginContainer} from './margin.styles';
+import { MarginContainer } from './margin.styles';
 
 // Component Props Interface
 type Props = {
-  height?: number;
+  height?: string;
+  width?: string;
 };
 
 // Render Component
-const Margin: React.FC<Props> = ({height}) => <MarginContainer height={height} />;
+const Margin: React.FC<Props> = ({ height, width }) => <MarginContainer height={height} width={width} />;
 
 export default Margin;

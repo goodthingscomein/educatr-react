@@ -114,7 +114,7 @@ const CalendarFilters: React.FC = () => {
       {/* Show the filters */}
       {isVisible ? (
         <>
-          <Margin height={20} />
+          <Margin height='20px' width='100%' />
           {/* Filter buttons */}
           {colors.map((options: FilterOptions) => {
             return (

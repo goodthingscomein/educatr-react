@@ -33,7 +33,7 @@ const MessagesPage: React.FC = () => {
           <HeadingText variant='h5' color='textDark'>
             Messages
           </HeadingText>
-          <Margin height={18} />
+          <Margin height='18px' width='100%' />
           <Input placeholder='Search...' value={searchValue} onChangeStateDispatch={setSearchValue} />
         </DrawerHeader>
         <DrawerContent>
@@ -42,7 +42,9 @@ const MessagesPage: React.FC = () => {
               imageUrl='https://picsum.photos/80/80?random=1'
               imageHeight='36px'
               displayName='Jai Carey'
-              subText='Haha! Yeah that sounds r... 2:45pm'
+              subText='Haha! Yeah that sounds right, how funny wtf!!!'
+              subTextLength={25}
+              timestamp='2:45pm'
             />
           </DrawerButton>
         </DrawerContent>

@@ -7,4 +7,5 @@ export const MessagesContactContainer = styled.div`
   height: fit-content;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 `;

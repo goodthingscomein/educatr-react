@@ -40,7 +40,7 @@ const CalendarWeekGrid: React.FC = () => {
               <CopyText size='x-small' color='textLight'>
                 {day}
               </CopyText>
-              <Margin height={2} />
+              <Margin height='2px' width='100%' />
               <CopyText size='medium' color='textDark' fontWeight={700}>
                 {dates[index].day}
               </CopyText>

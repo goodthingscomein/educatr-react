@@ -19,7 +19,7 @@ const CalendarDrawerHeader: React.FC = () => (
     <HeadingText variant='h5' color='textDark'>
       Calendar
     </HeadingText>
-    <Margin height={20} />
+    <Margin height='20px' width='100%' />
     <Button
       variant='solid'
       size='large'

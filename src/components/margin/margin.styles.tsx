@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 // Margin props
 interface MarginProps {
-	height?: number;
+  width?: string;
+  height?: string;
 }
 
 export const MarginContainer = styled.div<MarginProps>`
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	height: ${(props) => props.height ?? 24}px;
-	background-color: ${(props) => props.theme.themeColors.transparent};
+  margin: 0;
+  padding: 0;
+  width: ${(props) => props.width || 0};
+  height: ${(props) => props.height || 0};
+  background-color: ${(props) => props.theme.themeColors.transparent};
 `;
