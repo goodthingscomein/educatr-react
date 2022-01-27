@@ -1,57 +1,54 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// Import development data
+import units from '../../data/units.data';
 
 // Import styles
 import {
   PageContainer,
   HeaderContainer,
   ContentContainer,
-  CardGridContainer,
+  SearchUnitsGridContainer,
   UnitCard,
   UnitCardImage,
   UnitCardTextContainer,
-} from './units.styles';
+} from './all-units.styles';
 
 // Import custom components
 import HeadingText from '../../components/heading/heading.components';
 import Link from '../../components/link/link.components';
 import HorizontalDiv from '../../components/horizontal-div/horizontal-div.components';
-import { MainTheme } from '../../themes/main.theme';
-import CopyText from '../../components/copy-text/copy-text.components';
 import Button from '../../components/button/button.components';
 import Input from '../../components/input/input.components';
+import CopyText from '../../components/copy-text/copy-text.components';
+import VerticalDiv from '../../components/vertical-div/vertical-div.components';
+import Margin from '../../components/margin/margin.components';
 
 // Import custom icons
 import SearchIcon from '@mui/icons-material/Search';
 import OptionsIcon from '@mui/icons-material/MoreVert';
 
-type UnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
+type AllUnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
 
 // Render Component
-const UnitsPage: React.FC = () => {
+const AllUnitsPage: React.FC = () => {
   // State for the currernt units filtered
-  const [unitsFilter, setUnitsFilter] = useState<UnitsFilterTypes>('current');
+  const [unitsFilter, setUnitsFilter] = useState<AllUnitsFilterTypes>('current');
 
   // State for search bar
   const [isSearching, setIsSearching] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  // Development units data
-  const selectedUnits = [
-    'MATH1000',
-    'MATH1001',
-    'MATH1002',
-    'MATH1003',
-    'MATH1004',
-    'MATH1005',
-    'MATH1006',
-    'MATH1007',
-  ];
+  const navigate = useNavigate();
+
   return (
     <PageContainer>
       <HeaderContainer>
         <HorizontalDiv
           backgroundColor='transparent'
           justifyContent='space-between'
+          alignItems='flex-end'
           css={`
             width: 100%;
             height: fit-content;
@@ -132,31 +129,95 @@ const UnitsPage: React.FC = () => {
             </Button>
           </HorizontalDiv>
         </HorizontalDiv>
-        <HeadingText variant='h2' color='textDark'>
+        <HeadingText variant='h3' color='textDark'>
           Your Units
         </HeadingText>
       </HeaderContainer>
       <ContentContainer>
-        <CardGridContainer numberOfColumns={4} numberOfRows={2} cardHeight='400px'>
-          {selectedUnits.map((value, index) => {
+        <SearchUnitsGridContainer numberOfColumns={4} numberOfRows={4} cardHeight='400px'>
+          {units.map((unit, index) => {
             return (
               <UnitCard>
-                <UnitCardImage
-                  src={`https://picsum.photos/300?random=${index}`}
-                  imageDarken={MainTheme.themeColors.shadow}
-                ></UnitCardImage>
+                <UnitCardImage src={`https://picsum.photos/300?random=${index}`}></UnitCardImage>
                 <UnitCardTextContainer>
-                  <CopyText size='large' color='textDark'>
-                    {value} - Fundamentals to Mathematics {index}
-                  </CopyText>
+                  {/* Title + blurb */}
+                  <VerticalDiv
+                    backgroundColor='transparent'
+                    justifyContent='flex-start'
+                    alignItems='flex-start'
+                    css={`
+                      width: 100%;
+                      flex: 0 0 0;
+                    `}
+                  >
+                    <CopyText size='large' color='textDark'>
+                      {unit.code.toUpperCase()} - {unit.title}
+                    </CopyText>
+                    <Margin width='100%' height='8px' />
+                    <CopyText size='x-small' color='textDark' fontWeight={300}>
+                      {unit.description}
+                    </CopyText>
+                  </VerticalDiv>
+                  {/* List of links */}
+                  <HorizontalDiv
+                    backgroundColor='transparent'
+                    justifyContent='space-around'
+                    alignItems='center'
+                    css={`
+                      width: 100%;
+                      flex: 0 0 0;
+                      flex-wrap: wrap;
+                    `}
+                  >
+                    <Link
+                      fontSize='small'
+                      color='textDark'
+                      hoverColor='secondary'
+                      fontWeight={700}
+                      underlineEffect='hover'
+                      clickAction={() => navigate(`/units/${unit.code}`)}
+                    >
+                      Overview
+                    </Link>
+                    <Link
+                      fontSize='small'
+                      color='textDark'
+                      hoverColor='secondary'
+                      fontWeight={700}
+                      underlineEffect='hover'
+                      clickAction={() => navigate(`/units/${unit.code}/assessments`)}
+                    >
+                      Assessments
+                    </Link>
+                    <Link
+                      fontSize='small'
+                      color='textDark'
+                      hoverColor='secondary'
+                      fontWeight={700}
+                      underlineEffect='hover'
+                      clickAction={() => navigate(`/units/${unit.code}/grades`)}
+                    >
+                      Grades
+                    </Link>
+                    <Link
+                      fontSize='small'
+                      color='textDark'
+                      hoverColor='secondary'
+                      fontWeight={700}
+                      underlineEffect='hover'
+                      clickAction={() => navigate(`/units/${unit.code}/feedback`)}
+                    >
+                      Feedback
+                    </Link>
+                  </HorizontalDiv>
                 </UnitCardTextContainer>
               </UnitCard>
             );
           })}
-        </CardGridContainer>
+        </SearchUnitsGridContainer>
       </ContentContainer>
     </PageContainer>
   );
 };
 
-export default UnitsPage;
+export default AllUnitsPage;

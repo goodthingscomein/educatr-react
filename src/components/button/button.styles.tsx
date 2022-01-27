@@ -37,7 +37,7 @@ export const ButtonContainer = styled.a<ButtonContainerProps>`
   user-select: none;
   cursor: pointer;
   width: ${(props) => (props.entireWidth ? '100%' : 'fit-content')};
-  min-width: ${(props) => props.minWidth ?? 0};
+  min-width: ${(props) => props.minWidth || 0};
 
   // Font size based on button size
   font-size: ${(props) => props.theme.getFontSize(props.size)};

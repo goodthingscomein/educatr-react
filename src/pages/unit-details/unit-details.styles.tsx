@@ -10,9 +10,21 @@ export const PageContainer = styled.div`
   overflow-y: auto;
 `;
 
+export const ScrollContainer = styled.div`
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+`;
+
 export const HeaderContainer = styled.div`
-  flex: 0 0 180px;
-  padding: 0 15%;
+  position: sticky;
+  top: -120px;
+  flex: 0 0 160px;
+  padding: 0 10%;
   background-color: ${(props) => props.theme.themeColors.white};
   display: flex;
   flex-direction: column-reverse;
@@ -22,7 +34,7 @@ export const HeaderContainer = styled.div`
 
 export const ContentContainer = styled.div`
   flex: 1 0 0;
-  overflow-y: scroll;
+  padding: 80px 10% 40px;
 `;
 
 // Card Grid Container Props
@@ -32,10 +44,9 @@ type CardGridContainerProps = {
   cardHeight: string;
 };
 
-export const CardGridContainer = styled.div<CardGridContainerProps>`
+export const SearchUnitsGridContainer = styled.div<CardGridContainerProps>`
   margin-top: 80px;
   margin-bottom: 40px;
-  padding: 0 15%;
   display: grid;
   grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
   grid-template-rows: repeat(${(props) => props.numberOfRows}, ${(props) => props.cardHeight});
@@ -44,29 +55,31 @@ export const CardGridContainer = styled.div<CardGridContainerProps>`
 
 export const UnitCard = styled.div`
   background-color: ${(props) => props.theme.themeColors.white};
-  border-radius: 20px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
-  transition: 0.2s;
+  transition: 0.1s;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
+
   :hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
   }
 `;
 
 // Unit Card Image Props
 type UnitCardImageProps = {
   src: string;
-  imageDarken: string;
 };
 
 export const UnitCardImage = styled.div<UnitCardImageProps>`
-  flex: 0 0 45%;
+  flex: 0 0 180px;
   width: 100%;
-  background: linear-gradient(${(props) => props.imageDarken}, ${(props) => props.imageDarken}),
+  background: linear-gradient(
+      ${(props) => props.theme.themeColors.shadow},
+      ${(props) => props.theme.themeColors.shadow}
+    ),
     url(${(props) => props.src});
   background-position: center;
   background-size: cover;
@@ -80,5 +93,7 @@ export const UnitCardTextContainer = styled.div`
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  justify-content: space-between;
+  padding: 32px 12px 20px;
+  background-color: ${(props) => props.theme.themeColors.white};
 `;

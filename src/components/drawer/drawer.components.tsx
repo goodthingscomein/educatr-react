@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation, NavigateFunction } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { MainTheme } from '../../themes/main.theme';
 
 // Import Connect Redux
@@ -53,7 +53,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/'}
+            selected={useLocation().pathname.match(/^\/$/g) ? true : false}
             clickAction={() => drawerButtonClick('/')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -65,7 +65,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/calendar'}
+            selected={useLocation().pathname.match(/^\/calendar/g) ? true : false}
             clickAction={() => drawerButtonClick('/calendar')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -77,7 +77,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/messages'}
+            selected={useLocation().pathname.match(/^\/messages/g) ? true : false}
             clickAction={() => drawerButtonClick('/messages')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -89,7 +89,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/resources'}
+            selected={useLocation().pathname.match(/^\/resources/g) ? true : false}
             clickAction={() => drawerButtonClick('/resources')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -101,7 +101,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/classes'}
+            selected={useLocation().pathname.match(/^\/classes/g) ? true : false}
             clickAction={() => drawerButtonClick('/classes')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -113,7 +113,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/units'}
+            selected={useLocation().pathname.match(/^\/units/g) ? true : false}
             clickAction={() => drawerButtonClick('/units')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -125,7 +125,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/grades'}
+            selected={useLocation().pathname.match(/^\/grades/g) ? true : false}
             clickAction={() => drawerButtonClick('/grades')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
@@ -137,7 +137,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname === '/settings'}
+            selected={useLocation().pathname.match(/^\/settings/g) ? true : false}
             clickAction={() => drawerButtonClick('/settings')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>

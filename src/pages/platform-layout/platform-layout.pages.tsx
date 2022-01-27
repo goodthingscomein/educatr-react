@@ -20,7 +20,8 @@ import DarkenScreen from '../../components/darken-screen/darken-screen.component
 import HomePage from '../home/home.pages';
 import MessagesPage from '../messages/messages.pages';
 import CalendarPage from '../calendar/calendar.pages';
-import UnitsPage from '../units/units.pages';
+import AllUnitsPage from '../all-units/all-units.pages';
+import UnitDetailsPage from '../unit-details/unit-details.pages';
 
 type Props = {
   isDrawerOpen: boolean;
@@ -40,7 +41,8 @@ const ApplicationPage: React.FC<Props> = ({ isDrawerOpen }) => (
             <Route path='/' element={<HomePage />} />
             <Route path='/calendar' element={<CalendarPage />} />
             <Route path='/messages' element={<MessagesPage />} />
-            <Route path='/units' element={<UnitsPage />} />
+            <Route path='/units' element={<AllUnitsPage />} />
+            <Route path='/units/:unitId/*' element={<UnitDetailsPage />} />
           </Routes>
         </ContentContainer>
       </ContentPaddingContainer>
