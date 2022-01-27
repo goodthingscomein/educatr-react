@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import { Route, Routes, useNavigate, useLocation, useParams } from 'react-router-dom';
 
+// Import Connect Redux
+import { connect } from 'react-redux';
+
+// Import Required Redux Actions
+import { setYourUnitsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
+
 // Import styles
-import { PageContainer, ScrollContainer, HeaderContainer, ContentContainer } from './unit-details.styles';
+import {
+  PageContainer,
+  ScrollContainer,
+  HeaderContainer,
+  ContentContainer,
+  BackButtonContainer,
+} from './unit-details.styles';
 
 // Import custom components
 import HeadingText from '../../components/heading/heading.components';
@@ -19,8 +33,13 @@ import OptionsIcon from '@mui/icons-material/MoreVert';
 import OverviewSubPage from './sub-pages/overview/overview.components';
 import RecordingsSubPage from './sub-pages/recordings/recordings.components';
 
+type Props = {
+  // Drawer button nav url management
+  setYourUnitsNavigationUrl: typeof setYourUnitsNavigationUrl;
+};
+
 // Render Component
-const UnitDetailsPage: React.FC = () => {
+const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
   // State for search bar
   const [isSearching, setIsSearching] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -28,10 +47,26 @@ const UnitDetailsPage: React.FC = () => {
   const navigate = useNavigate();
   const { unitId } = useParams();
 
+  const handleNavigateClick = (url: string) => {
+    navigate(url);
+    setYourUnitsNavigationUrl(url);
+  };
+
   return (
     <PageContainer>
       <ScrollContainer>
         <HeaderContainer>
+          <BackButtonContainer>
+            <Link
+              color='textDark'
+              underlineEffect='hover'
+              fontSize='small'
+              fontWeight={300}
+              clickAction={() => handleNavigateClick(`/units`)}
+            >
+              All Units
+            </Link>
+          </BackButtonContainer>
           <HorizontalDiv
             backgroundColor='transparent'
             justifyContent='space-between'
@@ -50,73 +85,65 @@ const UnitDetailsPage: React.FC = () => {
             >
               {/* LINKS TO CHANGE UNIT FITLERS */}
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*$/g) ? 'primaryAccent' : 'textDark'}
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}`)}
               >
                 Overview
               </Link>
               <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/recordings$/g) ? 'primaryAccent' : 'textDark'
-                }
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/recordings$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/recordings`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/recordings`)}
               >
                 Recordings
               </Link>
               <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/resources$/g) ? 'primaryAccent' : 'textDark'
-                }
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/resources$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/resources`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/resources`)}
               >
                 Resources
               </Link>
               <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/assessments$/g) ? 'primaryAccent' : 'textDark'
-                }
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/assessments$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/assessments`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/assessments`)}
               >
                 Assessments
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/grades$/g) ? 'primaryAccent' : 'textDark'}
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/grades$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/grades`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/grades`)}
               >
                 Grades
               </Link>
               <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/feedback$/g) ? 'primaryAccent' : 'textDark'
-                }
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/feedback$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/feedback`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/feedback`)}
               >
                 Feedback
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/help$/g) ? 'primaryAccent' : 'textDark'}
-                hoverColor='primaryAccent'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/help$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => navigate(`/units/${unitId}/help`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/help`)}
               >
                 Help
               </Link>
@@ -131,7 +158,11 @@ const UnitDetailsPage: React.FC = () => {
               {/* OPTIONS AND SEARCH */}
               {/* Search bar */}
               {isSearching ? (
-                <Input placeholder='Search units...' value={searchValue} onChangeStateDispatch={setSearchValue} />
+                <Input
+                  placeholder={`Search in ${unitId?.toUpperCase()}...`}
+                  value={searchValue}
+                  onChangeStateDispatch={setSearchValue}
+                />
               ) : (
                 ''
               )}
@@ -152,7 +183,7 @@ const UnitDetailsPage: React.FC = () => {
             </HorizontalDiv>
           </HorizontalDiv>
           <HeadingText variant='h3' color='textDark'>
-            Math[1004] - Fundamentals of Discrete Mathematics
+            {unitId?.toUpperCase()} - Fundamentals of Discrete Mathematics
           </HeadingText>
         </HeaderContainer>
         <ContentContainer>
@@ -166,4 +197,8 @@ const UnitDetailsPage: React.FC = () => {
   );
 };
 
-export default UnitDetailsPage;
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  setYourUnitsNavigationUrl: (newUrl: string) => dispatch(setYourUnitsNavigationUrl(newUrl)),
+});
+
+export default connect(null, mapDispatchToProps)(UnitDetailsPage);

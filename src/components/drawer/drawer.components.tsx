@@ -33,11 +33,15 @@ import Link from '../link/link.components';
 import { ClickAwayListener } from '@mui/base';
 
 type Props = {
+  // Drawer open close management
   isDrawerOpen: boolean;
   setDrawerIsOpen: typeof setDrawerIsOpen;
+
+  // Drawer button nav url management
+  yourUnitsNavigationUrl: string;
 };
 
-const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
+const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavigationUrl }) => {
   const navigate = useNavigate();
 
   const drawerButtonClick = (navigateLocation: string) => {
@@ -46,7 +50,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
   };
 
   return (
-    <ClickAwayListener onClickAway={() => setDrawerIsOpen(false)} mouseEvent='onMouseDown' touchEvent='onTouchStart'>
+    <ClickAwayListener
+      onClickAway={() => (isDrawerOpen ? setDrawerIsOpen(false) : null)}
+      mouseEvent='onMouseDown'
+      touchEvent='onTouchStart'
+    >
       <DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
         <DrawerSection backgroundColor='transparent'>
           <DrawerButton
@@ -114,7 +122,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
             hoverTextColor='primaryAccent'
             fontWeight={300}
             selected={useLocation().pathname.match(/^\/units/g) ? true : false}
-            clickAction={() => drawerButtonClick('/units')}
+            clickAction={() => drawerButtonClick(yourUnitsNavigationUrl)}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               <UnitsIcon fontSize='medium' />
@@ -187,6 +195,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
 
 const mapStateToProps = (state: State) => ({
   isDrawerOpen: state.navigation.isDrawerOpen,
+  yourUnitsNavigationUrl: state.navigation.yourUnitsNavigationUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Import Connect Redux
+import { connect } from 'react-redux';
+
+// Import Required Redux Actions
+import { setYourUnitsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
+
 // Import development data
 import units from '../../data/units.data';
 
@@ -31,8 +39,13 @@ import OptionsIcon from '@mui/icons-material/MoreVert';
 
 type AllUnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
 
+type Props = {
+  // Drawer button nav url management
+  setYourUnitsNavigationUrl: typeof setYourUnitsNavigationUrl;
+};
+
 // Render Component
-const AllUnitsPage: React.FC = () => {
+const AllUnitsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
   // State for the currernt units filtered
   const [unitsFilter, setUnitsFilter] = useState<AllUnitsFilterTypes>('current');
 
@@ -41,6 +54,11 @@ const AllUnitsPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const navigate = useNavigate();
+
+  const handleNavigateClick = (url: string) => {
+    navigate(url);
+    setYourUnitsNavigationUrl(url);
+  };
 
   return (
     <PageContainer>
@@ -63,8 +81,8 @@ const AllUnitsPage: React.FC = () => {
           >
             {/* LINKS TO CHANGE UNIT FITLERS */}
             <Link
-              color={unitsFilter === 'current' ? 'primaryAccent' : 'textDark'}
-              hoverColor='primaryAccent'
+              color={unitsFilter === 'current' ? 'primary' : 'textDark'}
+              hoverColor='primary'
               underlineEffect='always'
               margin='0 16px 0 0'
               clickAction={() => setUnitsFilter('current')}
@@ -72,8 +90,8 @@ const AllUnitsPage: React.FC = () => {
               Current Units
             </Link>
             <Link
-              color={unitsFilter === 'completed' ? 'primaryAccent' : 'textDark'}
-              hoverColor='primaryAccent'
+              color={unitsFilter === 'completed' ? 'primary' : 'textDark'}
+              hoverColor='primary'
               underlineEffect='always'
               margin='0 16px 0 0'
               clickAction={() => setUnitsFilter('completed')}
@@ -81,8 +99,8 @@ const AllUnitsPage: React.FC = () => {
               Completed Units
             </Link>
             <Link
-              color={unitsFilter === 'upcoming' ? 'primaryAccent' : 'textDark'}
-              hoverColor='primaryAccent'
+              color={unitsFilter === 'upcoming' ? 'primary' : 'textDark'}
+              hoverColor='primary'
               underlineEffect='always'
               margin='0 16px 0 0'
               clickAction={() => setUnitsFilter('upcoming')}
@@ -90,8 +108,8 @@ const AllUnitsPage: React.FC = () => {
               Upcoming Units
             </Link>
             <Link
-              color={unitsFilter === 'all' ? 'primaryAccent' : 'textDark'}
-              hoverColor='primaryAccent'
+              color={unitsFilter === 'all' ? 'primary' : 'textDark'}
+              hoverColor='primary'
               underlineEffect='always'
               margin='0 16px 0 0'
               clickAction={() => setUnitsFilter('all')}
@@ -175,7 +193,7 @@ const AllUnitsPage: React.FC = () => {
                       hoverColor='secondary'
                       fontWeight={700}
                       underlineEffect='hover'
-                      clickAction={() => navigate(`/units/${unit.code}`)}
+                      clickAction={() => handleNavigateClick(`/units/${unit.code}`)}
                     >
                       Overview
                     </Link>
@@ -185,7 +203,7 @@ const AllUnitsPage: React.FC = () => {
                       hoverColor='secondary'
                       fontWeight={700}
                       underlineEffect='hover'
-                      clickAction={() => navigate(`/units/${unit.code}/assessments`)}
+                      clickAction={() => handleNavigateClick(`/units/${unit.code}/assessments`)}
                     >
                       Assessments
                     </Link>
@@ -195,19 +213,9 @@ const AllUnitsPage: React.FC = () => {
                       hoverColor='secondary'
                       fontWeight={700}
                       underlineEffect='hover'
-                      clickAction={() => navigate(`/units/${unit.code}/grades`)}
+                      clickAction={() => handleNavigateClick(`/units/${unit.code}/grades`)}
                     >
                       Grades
-                    </Link>
-                    <Link
-                      fontSize='small'
-                      color='textDark'
-                      hoverColor='secondary'
-                      fontWeight={700}
-                      underlineEffect='hover'
-                      clickAction={() => navigate(`/units/${unit.code}/feedback`)}
-                    >
-                      Feedback
                     </Link>
                   </HorizontalDiv>
                 </UnitCardTextContainer>
@@ -220,4 +228,8 @@ const AllUnitsPage: React.FC = () => {
   );
 };
 
-export default AllUnitsPage;
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  setYourUnitsNavigationUrl: (newUrl: string) => dispatch(setYourUnitsNavigationUrl(newUrl)),
+});
+
+export default connect(null, mapDispatchToProps)(AllUnitsPage);

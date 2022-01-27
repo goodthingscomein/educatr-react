@@ -44,7 +44,6 @@ export const SearchUnitsGridContainer = styled.div<CardGridContainerProps>`
 
 export const UnitCard = styled.div`
   background-color: ${(props) => props.theme.themeColors.white};
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
   transition: 0.1s;
   display: flex;
   flex-direction: column;
@@ -53,7 +52,8 @@ export const UnitCard = styled.div`
   overflow: hidden;
 
   :hover {
-    transform: scale(1.02);
+    box-shadow: 0 4px 10px ${(props) => props.theme.themeColors.shadow};
+    transform: translateY(-2px);
   }
 `;
 

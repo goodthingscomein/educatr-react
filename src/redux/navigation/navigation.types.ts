@@ -5,4 +5,9 @@ interface SetIsDrawerOpenAction {
   payload: boolean;
 }
 
-export type NavigationAction = SetIsDrawerOpenAction;
+interface SetYourUnitsNavigationUrlAction {
+  type: NAVIGATION_TYPES.SET_YOUR_UNITS_NAVIGATION_URL;
+  payload: string;
+}
+
+export type NavigationAction = SetIsDrawerOpenAction | SetYourUnitsNavigationUrlAction;

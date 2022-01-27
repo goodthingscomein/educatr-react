@@ -32,6 +32,14 @@ export const HeaderContainer = styled.div`
   z-index: 1;
 `;
 
+export const BackButtonContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  height: fit-content;
+  width: fit-content;
+`;
+
 export const ContentContainer = styled.div`
   flex: 1 0 0;
   padding: 80px 10% 40px;
