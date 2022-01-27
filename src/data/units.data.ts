@@ -1,4 +1,4 @@
-type UnitDataType = {
+export type UnitDataType = {
   code: string;
   title: string;
   description: string;

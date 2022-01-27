@@ -10,16 +10,6 @@ export const PageContainer = styled.div`
   overflow-y: auto;
 `;
 
-export const HeaderContainer = styled.div`
-  flex: 0 0 160px;
-  padding: 0 10%;
-  background-color: ${(props) => props.theme.themeColors.white};
-  display: flex;
-  flex-direction: column-reverse;
-  box-shadow: 0 4px 6px ${(props) => props.theme.themeColors.shadow};
-  z-index: 1;
-`;
-
 export const ContentContainer = styled.div`
   flex: 1 0 0;
   padding: 0 10%;
@@ -33,56 +23,11 @@ type CardGridContainerProps = {
   cardHeight: string;
 };
 
-export const SearchUnitsGridContainer = styled.div<CardGridContainerProps>`
+export const AllUnitsGridContainer = styled.div<CardGridContainerProps>`
   margin-top: 80px;
   margin-bottom: 40px;
   display: grid;
   grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
   grid-template-rows: repeat(${(props) => props.numberOfRows}, ${(props) => props.cardHeight});
   gap: 36px;
-`;
-
-export const UnitCard = styled.div`
-  background-color: ${(props) => props.theme.themeColors.white};
-  transition: 0.1s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: hidden;
-
-  :hover {
-    box-shadow: 0 4px 10px ${(props) => props.theme.themeColors.shadow};
-    transform: translateY(-2px);
-  }
-`;
-
-// Unit Card Image Props
-type UnitCardImageProps = {
-  src: string;
-};
-
-export const UnitCardImage = styled.div<UnitCardImageProps>`
-  flex: 0 0 180px;
-  width: 100%;
-  background: linear-gradient(
-      ${(props) => props.theme.themeColors.shadow},
-      ${(props) => props.theme.themeColors.shadow}
-    ),
-    url(${(props) => props.src});
-  background-position: center;
-  background-size: cover;
-  background-color: ${(props) => props.theme.themeColors.textLight};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const UnitCardTextContainer = styled.div`
-  flex: 1 0 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 32px 12px 20px;
-  background-color: ${(props) => props.theme.themeColors.white};
 `;
