@@ -27,6 +27,7 @@ import Input from '../../components/input/input.components';
 
 // Import custom icons
 import SearchIcon from '@mui/icons-material/Search';
+import HelpIcon from '@mui/icons-material/HelpOutline';
 import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Import sub pages
@@ -130,24 +131,6 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
               >
                 Grades
               </Link>
-              <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/feedback$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/feedback`)}
-              >
-                Feedback
-              </Link>
-              <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/help$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/help`)}
-              >
-                Help
-              </Link>
             </HorizontalDiv>
             <HorizontalDiv
               backgroundColor='transparent'
@@ -177,6 +160,9 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 clickAction={() => setIsSearching(!isSearching)}
               >
                 <SearchIcon fontSize='medium' />
+              </Button>
+              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+                <HelpIcon fontSize='medium' />
               </Button>
               <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
                 <OptionsIcon fontSize='medium' />

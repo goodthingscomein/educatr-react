@@ -32,7 +32,7 @@ const AllUnitsPage: React.FC = () => {
         setSearchValue={setSearchValue}
       />
       <ContentContainer>
-        <AllUnitsGridContainer numberOfColumns={4} numberOfRows={4} cardHeight='400px'>
+        <AllUnitsGridContainer numberOfColumns={4} numberOfRows={4} cardHeight='375px'>
           {units.map((unit, index) => {
             return <UnitCard unit={unit} index={index} key={unit.code} />;
           })}

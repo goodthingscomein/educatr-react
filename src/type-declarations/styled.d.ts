@@ -17,7 +17,8 @@ export type ColorTypes =
   | 'darken'
   | 'lighten'
   | 'borderColor'
-  | 'shadow';
+  | 'shadow'
+  | 'darkShadow';
 
 export type SocialColorTypes = 'twitter' | 'facebook' | 'linkedin' | 'youtube' | 'instagram' | 'tiktok' | 'pinterest';
 export type MessageColorTypes =
@@ -61,6 +62,7 @@ declare module 'styled-components' {
       lighten: string;
       borderColor: string;
       shadow: string;
+      darkShadow: string;
     };
     socialColors: {
       twitter: string;
@@ -99,5 +101,6 @@ declare module 'styled-components' {
       sideDrawerWidth: string;
       sideDrawerMaxWidth: string;
     };
+    borderRadius: string;
   }
 }

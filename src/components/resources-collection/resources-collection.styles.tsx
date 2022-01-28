@@ -9,6 +9,6 @@ type CardGridContainerProps = {
 export const ResourceCardGridContainer = styled.div<CardGridContainerProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
-  grid-template-rows: repeat(${(props) => props.numberOfRows}, 300px);
+  grid-template-rows: repeat(${(props) => props.numberOfRows}, 310px);
   gap: 36px;
 `;

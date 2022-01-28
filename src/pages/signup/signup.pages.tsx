@@ -9,7 +9,6 @@ import { validateSignUpUserInputs } from '../../services/auth/validators/auth.va
 import { LoginText, SignUpPageContainer } from './signup.styles';
 
 // Import custom components
-import Column from '../../components/column/column.components';
 import Section from '../../components/section/section.components';
 import FormInput from '../../components/form-input/form-input.components';
 import Card from '../../components/card/card.components';
@@ -64,65 +63,62 @@ const SignUpPage: React.FC = () => {
         gradientColor2='secondary'
         gradientColor3='tertiary'
       >
-        <Column>
-          <Card>
-            <HeadingText variant='h4' color='textDark'>
+        <Card>
+          <HeadingText variant='h4' color='textDark'>
+            Sign up
+          </HeadingText>
+          <Margin height='4px' width='100%' />
+          <CopyText color='textLight' size={'medium'} fontWeight={200}>
+            Continue to Educatr
+          </CopyText>
+          <Margin height='28px' width='100%' />
+          <Form handleSubmit={(e) => handleSubmit(e)}>
+            <FormInput
+              value={emailInput}
+              type='email'
+              label='Email'
+              inputId='email'
+              onChangeStateDispatch={setEmailInput}
+            />
+            <FormInput
+              value={passwordInput}
+              type='password'
+              label='Password'
+              inputId='password'
+              hasPassword
+              onChangeStateDispatch={setPasswordInput}
+            />
+            <FormInput
+              value={confirmPasswordInput}
+              type='password'
+              label='Confirm Password'
+              inputId='confirmPassword'
+              hasPassword
+              onChangeStateDispatch={setConfirmPasswordInput}
+            />
+            <Margin height='12px' width='100%' />
+            <SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
               Sign up
-            </HeadingText>
-            <Margin height='4px' width='100%' />
-            <CopyText color='textLight' size={'medium'} fontWeight={200}>
-              Continue to Educatr
+            </SubmitButton>
+          </Form>
+          <Margin />
+          <LoginText>
+            <CopyText size={'small'} fontWeight={300} color={'textLight'}>
+              Already have an account?
             </CopyText>
-            <Margin height='28px' width='100%' />
-            <Form handleSubmit={(e) => handleSubmit(e)}>
-              <FormInput
-                value={emailInput}
-                type='email'
-                label='Email'
-                inputId='email'
-                onChangeStateDispatch={setEmailInput}
-              />
-              <FormInput
-                value={passwordInput}
-                type='password'
-                label='Password'
-                inputId='password'
-                hasPassword
-                onChangeStateDispatch={setPasswordInput}
-              />
-              <FormInput
-                value={confirmPasswordInput}
-                type='password'
-                label='Confirm Password'
-                inputId='confirmPassword'
-                hasPassword
-                onChangeStateDispatch={setConfirmPasswordInput}
-              />
-              <Margin height='12px' width='100%' />
-              <SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
-                Sign up
-              </SubmitButton>
-            </Form>
-            <Margin />
-            <LoginText>
-              <CopyText size={'small'} fontWeight={300} color={'textLight'}>
-                Already have an account?
-              </CopyText>
-              <Link
-                fontSize='small'
-                fontWeight={400}
-                color='secondaryAccent'
-                hoverColor='tertiaryAccent'
-                underlineEffect='never'
-                clickAction={() => navigate('/login')}
-                margin='0 4px'
-              >
-                Log in
-              </Link>
-            </LoginText>
-          </Card>
-        </Column>
-        <Column />
+            <Link
+              fontSize='small'
+              fontWeight={400}
+              color='secondaryAccent'
+              hoverColor='tertiaryAccent'
+              underlineEffect='never'
+              clickAction={() => navigate('/login')}
+              margin='0 4px'
+            >
+              Log in
+            </Link>
+          </LoginText>
+        </Card>
       </Section>
     </SignUpPageContainer>
   );

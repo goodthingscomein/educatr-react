@@ -65,13 +65,27 @@ const CalendarViewCompact: React.FC = () => (
     <GridContainer>
       {/* Days in grid */}
       {days.map((day) => {
-        return <GridItem lightText>{day.charAt(0)}</GridItem>;
+        return (
+          <GridItem>
+            <CopyText size='small' color='textLight'>
+              {day.charAt(0)}
+            </CopyText>
+          </GridItem>
+        );
       })}
       {/* Dates in grid (MUST BE AUTO) */}
       {dates.map((date) => {
         return (
-          <GridItem canHover lightText={date.month !== 1} selected={date.day === 27 && date.month === 1}>
-            {date.day}
+          <GridItem canHover selected={date.day === 27 && date.month === 1}>
+            {date.day === 27 && date.month === 1 ? (
+              <CopyText size='small' color='white' fontWeight={700}>
+                {date.day}
+              </CopyText>
+            ) : (
+              <CopyText size='small' color={date.month !== 1 ? 'textLight' : 'textDark'}>
+                {date.day}
+              </CopyText>
+            )}
           </GridItem>
         );
       })}

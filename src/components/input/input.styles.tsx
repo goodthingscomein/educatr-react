@@ -13,6 +13,7 @@ export const InputContainer = styled.input<InputContainerProps>`
   width: 100%;
   padding: 4px 12px;
   border: 1px solid ${(props) => props.theme.themeColors.borderColor};
+  border-radius: ${(props) => props.theme.borderRadius};
   color: ${(props) => props.theme.themeColors.textDark};
   outline: none;
   ${(props) => props.hasDropShadow && DropShadowStyles};

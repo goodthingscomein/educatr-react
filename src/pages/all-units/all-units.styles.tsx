@@ -28,6 +28,6 @@ export const AllUnitsGridContainer = styled.div<CardGridContainerProps>`
   margin-bottom: 40px;
   display: grid;
   grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
-  grid-template-rows: repeat(${(props) => props.numberOfRows}, ${(props) => props.cardHeight});
+  grid-template-rows: repeat(${(props) => props.numberOfRows}, minmax(0, 1fr));
   gap: 36px;
 `;

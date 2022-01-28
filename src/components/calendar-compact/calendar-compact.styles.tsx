@@ -14,7 +14,6 @@ export const GridContainer = styled.div`
 
 // Grid Item Props
 type GridItemProps = {
-  lightText?: boolean;
   selected?: boolean;
   canHover?: boolean;
 };
@@ -37,8 +36,7 @@ export const GridItem = styled.a<GridItemProps>`
   padding: 0;
   margin: 0;
   background-color: ${(props) => props.theme.themeColors.transparent};
-  color: ${(props) => (props.lightText ? props.theme.themeColors.textLight : props.theme.themeColors.textDark)};
-  font-size: ${(props) => props.theme.getFontSize('small')};
+  border-radius: ${(props) => props.theme.borderRadius};
   cursor: pointer;
   ${(props) => (props.canHover && !props.selected ? HoverStyles : '')};
   ${(props) => (props.selected ? SelectedStyles : '')};

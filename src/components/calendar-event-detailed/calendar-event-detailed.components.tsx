@@ -30,7 +30,14 @@ const CalendarEventDetailed: React.FC<Props> = ({
     color={color}
     startMinute={startMinute}
     totalMinutes={totalMinutes}
-    onClick={clickAction ? () => clickAction() : undefined}
+    onClick={
+      clickAction
+        ? (event) => {
+            event.stopPropagation();
+            clickAction();
+          }
+        : undefined
+    }
   >
     <CopyText size='x-small' color='white' fontWeight={700}>
       {title.substring(0, titleVisibleLength || 25)}

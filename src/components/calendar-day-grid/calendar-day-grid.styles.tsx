@@ -70,7 +70,7 @@ export const CalendarGridContainer = styled.div`
   min-width: 0;
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled.a`
   position: relative;
   margin: 0;
   padding: 4px;

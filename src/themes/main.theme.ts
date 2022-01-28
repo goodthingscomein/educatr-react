@@ -18,6 +18,7 @@ export const MainTheme: DefaultTheme = {
     lighten: 'rgba(255, 255, 255, 0.1)',
     borderColor: 'rgba(0, 0, 0, 0.2)',
     shadow: 'rgba(0, 0, 0, 0.3)',
+    darkShadow: 'rgba(0, 0, 0, 0.6)',
   },
   socialColors: {
     twitter: '#1DA1F2',
@@ -81,6 +82,8 @@ export const MainTheme: DefaultTheme = {
         return 'rgba(0, 0, 0, 0.2)';
       case 'shadow':
         return 'rgba(0, 0, 0, 0.3)';
+      case 'darkShadow':
+        return 'rgba(0, 0, 0, 0.6)';
       case 'twitter':
         return '#1DA1F2';
       case 'facebook':
@@ -134,7 +137,7 @@ export const MainTheme: DefaultTheme = {
       case 'small':
         return '70%';
       case 'medium':
-        return '85%';
+        return '80%';
       case 'large':
         return '100%';
       case 'x-large':
@@ -148,4 +151,5 @@ export const MainTheme: DefaultTheme = {
     sideDrawerWidth: '20%',
     sideDrawerMaxWidth: '300px',
   },
+  borderRadius: '4px',
 };

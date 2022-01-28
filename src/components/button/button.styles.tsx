@@ -38,6 +38,7 @@ export const ButtonContainer = styled.a<ButtonContainerProps>`
   cursor: pointer;
   width: ${(props) => (props.entireWidth ? '100%' : 'fit-content')};
   min-width: ${(props) => props.minWidth || 0};
+  border-radius: ${(props) => props.theme.borderRadius};
 
   // Font size based on button size
   font-size: ${(props) => props.theme.getFontSize(props.size)};

@@ -6,6 +6,7 @@ export const ResourceCardContainer = styled.a`
   justify-content: flex-start;
   align-items: flex-start;
   background-color: ${(props) => props.theme.themeColors.white};
+  border-radius: ${(props) => props.theme.borderRadius};
   overflow: hidden;
   cursor: pointer;
   transition: 0.1s;
@@ -22,7 +23,7 @@ type ResourceCardThumbnailProps = {
 };
 
 export const Thumbnail = styled.a<ResourceCardThumbnailProps>`
-  flex: 0 0 75%;
+  flex: 0 0 240px;
   width: 100%;
   background: url(${(props) => props.src});
   background-position: center;

@@ -73,8 +73,9 @@ export const ContentContainer = styled.div`
 export const MessagesContainer = styled.div`
   flex: 1 1 0;
   width: 100%;
-  overflow-y: auto;
-  padding: 12px 24px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  padding: 12px 80px 12px 24px;
   display: flex;
   flex-direction: column-reverse;
   background-color: ${(props) => props.theme.themeColors.white};

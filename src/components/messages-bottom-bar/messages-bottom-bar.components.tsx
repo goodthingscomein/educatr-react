@@ -9,6 +9,8 @@ import TextAreaInput from '../text-area-input/text-area-input.components';
 
 // Import custom icons
 import EmojiIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import AttachmentIcon from '@mui/icons-material/AttachFile';
+import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 
 // Render Component
@@ -19,15 +21,21 @@ const MessagesBottomBar: React.FC = () => {
   return (
     <BottomBarContainer>
       {/** ICONS */}
+      <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+        <EmojiIcon fontSize='medium' />
+      </Button>
+      <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+        <AttachmentIcon fontSize='medium' />
+      </Button>
       <Button
         variant='text'
         padding='18px'
-        margin='0 28px 0 0'
+        margin='0 16px 0 0'
         textColor='textDark'
         hoverTextColor='primaryAccent'
         size='medium'
       >
-        <EmojiIcon fontSize='medium' />
+        <AddIcon fontSize='medium' />
       </Button>
       {/* INPUT FIELD */}
       <InputFieldContainer>

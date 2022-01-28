@@ -33,6 +33,7 @@ export const CheckBox = styled.a<CheckBoxProps>`
   background-color: ${(props) => props.theme.themeColors.transparent};
   ${(props) => (props.selected ? SelectedStyles : '')};
   border: 2px solid ${(props) => props.theme.getColor(props.color)};
+  border-radius: ${(props) => props.theme.borderRadius};
   display: flex;
   justify-content: center;
   align-items: center;

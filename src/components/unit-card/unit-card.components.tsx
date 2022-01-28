@@ -10,7 +10,7 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { UnitCardContainer, UnitCardImage, UnitCardTextContainer } from './unit-card.styles';
+import { UnitCardContainer, UnitCardImage, UnitCardTextContainer, UnitCardLinkContainer } from './unit-card.styles';
 
 // Import custom components
 import CopyText from '../copy-text/copy-text.components';
@@ -21,6 +21,7 @@ import VerticalDiv from '../vertical-div/vertical-div.components';
 
 // Import data types
 import { UnitDataType } from '../../data/units.data';
+import Divider from '../divider/divider.components';
 
 // Component Props Interface
 type Props = {
@@ -40,8 +41,8 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
   };
 
   return (
-    <UnitCardContainer>
-      <UnitCardImage src={`https://picsum.photos/300?random=${index}`}></UnitCardImage>
+    <UnitCardContainer onClick={() => handleNavigateClick(`/units/${unit.code}`)}>
+      <UnitCardImage src={`https://picsum.photos/640/360?random=${index}`} />
       <UnitCardTextContainer>
         {/* Title + blurb */}
         <VerticalDiv
@@ -61,26 +62,28 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
             {unit.description}
           </CopyText>
         </VerticalDiv>
+        <Divider color='dark' margin='32px 0 8px 0' />
         {/* List of links */}
-        <HorizontalDiv
-          backgroundColor='transparent'
-          justifyContent='space-around'
-          alignItems='center'
-          css={`
-            width: 100%;
-            flex: 0 0 0;
-            flex-wrap: wrap;
-          `}
-        >
+        <UnitCardLinkContainer>
           <Link
             fontSize='small'
             color='textDark'
             hoverColor='secondary'
             fontWeight={700}
             underlineEffect='hover'
-            clickAction={() => handleNavigateClick(`/units/${unit.code}`)}
+            clickAction={() => handleNavigateClick(`/units/${unit.code}/recordings`)}
           >
-            Overview
+            Recordings
+          </Link>
+          <Link
+            fontSize='small'
+            color='textDark'
+            hoverColor='secondary'
+            fontWeight={700}
+            underlineEffect='hover'
+            clickAction={() => handleNavigateClick(`/units/${unit.code}/resources`)}
+          >
+            Resources
           </Link>
           <Link
             fontSize='small'
@@ -102,7 +105,7 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
           >
             Grades
           </Link>
-        </HorizontalDiv>
+        </UnitCardLinkContainer>
       </UnitCardTextContainer>
     </UnitCardContainer>
   );

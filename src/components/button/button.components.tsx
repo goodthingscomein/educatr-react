@@ -71,7 +71,14 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
           /*
             On Click Functionality
           */
-          onClick={clickAction ? () => clickAction() : undefined}
+          onClick={
+            clickAction
+              ? (event) => {
+                  event.stopPropagation();
+                  clickAction();
+                }
+              : undefined
+          }
         >
           {children}
         </ButtonContainer>
@@ -103,7 +110,14 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
           /*
             On Click Functionality
           */
-          onClick={clickAction ? () => clickAction() : undefined}
+          onClick={
+            clickAction
+              ? (event) => {
+                  event.stopPropagation();
+                  clickAction();
+                }
+              : undefined
+          }
         >
           {children}
         </ButtonContainer>
@@ -135,7 +149,14 @@ const Button: React.FC<Props> = ({ children, clickAction, ...otherProps }) => {
           /*
             On Click Functionality
           */
-          onClick={clickAction ? () => clickAction() : undefined}
+          onClick={
+            clickAction
+              ? (event) => {
+                  event.stopPropagation();
+                  clickAction();
+                }
+              : undefined
+          }
         >
           {children}
         </ButtonContainer>

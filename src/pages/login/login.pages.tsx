@@ -10,7 +10,6 @@ import { LoginPageContainer, SignUpText } from './login.styles';
 
 // Import custom components
 import Card from '../../components/card/card.components';
-import Column from '../../components/column/column.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import HeadingText from '../../components/heading/heading.components';
 import FormInput from '../../components/form-input/form-input.components';
@@ -62,57 +61,54 @@ const LoginPage: React.FC = () => {
         gradientColor2='secondary'
         gradientColor3='tertiary'
       >
-        <Column>
-          <Card>
-            <HeadingText variant='h4' color='textDark'>
+        <Card>
+          <HeadingText variant='h4' color='textDark'>
+            Log in
+          </HeadingText>
+          <Margin height='4px' width='100%' />
+          <CopyText color='textLight' size={'medium'} fontWeight={200}>
+            Continue to Educatr
+          </CopyText>
+          <Margin height='40px' />
+          <Form handleSubmit={(e) => handleSubmit(e)}>
+            <FormInput
+              value={emailInput}
+              type='email'
+              label='Email'
+              inputId='email'
+              onChangeStateDispatch={setEmailInput}
+            />
+            <FormInput
+              value={passwordInput}
+              type='password'
+              label='Password'
+              inputId='password'
+              hasPassword
+              onChangeStateDispatch={setPasswordInput}
+            />
+            <Margin height='12px' width='100%' />
+            <SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
               Log in
-            </HeadingText>
-            <Margin height='4px' width='100%' />
-            <CopyText color='textLight' size={'medium'} fontWeight={200}>
-              Continue to Educatr
+            </SubmitButton>
+          </Form>
+          <Margin />
+          <SignUpText>
+            <CopyText size={'small'} fontWeight={300} color={'textLight'}>
+              New to Educatr?
             </CopyText>
-            <Margin height='40px' />
-            <Form handleSubmit={(e) => handleSubmit(e)}>
-              <FormInput
-                value={emailInput}
-                type='email'
-                label='Email'
-                inputId='email'
-                onChangeStateDispatch={setEmailInput}
-              />
-              <FormInput
-                value={passwordInput}
-                type='password'
-                label='Password'
-                inputId='password'
-                hasPassword
-                onChangeStateDispatch={setPasswordInput}
-              />
-              <Margin height='12px' width='100%' />
-              <SubmitButton size='x-large' backgroundColor='primary' hoverBackgroundColor='secondary' textColor='white'>
-                Log in
-              </SubmitButton>
-            </Form>
-            <Margin />
-            <SignUpText>
-              <CopyText size={'small'} fontWeight={300} color={'textLight'}>
-                New to Educatr?
-              </CopyText>
-              <Link
-                fontSize='small'
-                fontWeight={400}
-                color='secondaryAccent'
-                hoverColor='tertiaryAccent'
-                underlineEffect='never'
-                clickAction={() => navigate('/signup')}
-                margin='0 4px'
-              >
-                Get started
-              </Link>
-            </SignUpText>
-          </Card>
-        </Column>
-        <Column />
+            <Link
+              fontSize='small'
+              fontWeight={400}
+              color='secondaryAccent'
+              hoverColor='tertiaryAccent'
+              underlineEffect='never'
+              clickAction={() => navigate('/signup')}
+              margin='0 4px'
+            >
+              Get started
+            </Link>
+          </SignUpText>
+        </Card>
       </Section>
     </LoginPageContainer>
   );

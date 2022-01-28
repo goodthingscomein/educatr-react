@@ -27,6 +27,7 @@ export const DrawerContent = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
+  scrollbar-width: thin;
 `;
 
 export const ContentContainer = styled.div`

@@ -16,7 +16,17 @@ type Props = {
 
 // Render Component
 const CalendarEvent: React.FC<Props> = ({ color, time, clickAction }) => (
-  <CalendarEventContainer color={color} onClick={clickAction ? () => clickAction() : undefined}>
+  <CalendarEventContainer
+    color={color}
+    onClick={
+      clickAction
+        ? (event) => {
+            event.stopPropagation();
+            clickAction();
+          }
+        : undefined
+    }
+  >
     <CopyText size='x-small' color='white' fontWeight={400}>
       {time}
     </CopyText>

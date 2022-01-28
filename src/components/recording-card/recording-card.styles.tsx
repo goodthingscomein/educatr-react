@@ -46,6 +46,7 @@ export const Thumbnail = styled.a<CardThumbnailProps>`
   background-position: center;
   background-size: cover;
   background-color: ${(props) => props.theme.themeColors.textLight};
+  border-radius: ${(props) => props.theme.borderRadius};
   position: relative;
   display: flex;
   justify-content: center;

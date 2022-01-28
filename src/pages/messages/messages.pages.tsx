@@ -52,9 +52,56 @@ const MessagesPage: React.FC = () => {
       <ContentContainer>
         <MessagesTopBar />
         <MessagesContainer>
-          <Message ourMessage hasMessageBelow hasMessageAbove>
-            test message!
+          <Message>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
           </Message>
+          <Message>test message! test message!</Message>
+          <Message ourMessage>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message ourMessage>test message!</Message>
+          <Message>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message>test message! test message!</Message>
+          <Message ourMessage>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message ourMessage>test message!</Message>
+          <Message>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message>test message! test message!</Message>
+          <Message ourMessage>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message ourMessage>test message!</Message>
+          <Message>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message>test message! test message!</Message>
+          <Message ourMessage>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message ourMessage>test message!</Message>
+          <Message>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message>test message! test message!</Message>
+          <Message ourMessage>
+            test message! This is a really long test messagetest message! This is a really long test messagetest
+            message! This is a really long test messagetest message! This is a really long test message
+          </Message>
+          <Message ourMessage>test message!</Message>
         </MessagesContainer>
         <MessagesBottomBar />
       </ContentContainer>

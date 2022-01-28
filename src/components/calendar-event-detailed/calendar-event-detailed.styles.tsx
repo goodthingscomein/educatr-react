@@ -18,10 +18,11 @@ export const CalendarEventContainer = styled.a<CalendarEventContainerProps>`
   flex-shrink: 0;
   margin: 0 2px;
   width: calc(100% - 4px);
-  border-radius: 4px;
+  border-radius: ${(props) => props.theme.borderRadius};
   padding: 4px 12px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  user-select: none;
   cursor: pointer;
 `;

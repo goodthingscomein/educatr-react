@@ -10,10 +10,9 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { AppBarContainer } from './app-bar.styles';
+import { AppBarContainer, AppBarItemsContainer } from './app-bar.styles';
 
 // Import custom components
-import AppBarItemsContainer from '../app-bar-items-container/app-bar-items-container.components';
 import Button from '../button/button.components';
 import HeadingText from '../heading/heading.components';
 import VerticalDiv from '../vertical-div/vertical-div.components';
@@ -23,7 +22,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import AccountIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import HelpIcon from '@mui/icons-material/HelpCenter';
 import CopyText from '../copy-text/copy-text.components';
 
 type Props = {
@@ -63,16 +61,6 @@ const AppBar: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen }) => {
       </CopyText>
       {/* RIGHT SIDE*/}
       <AppBarItemsContainer>
-        <Button
-          variant='text'
-          padding='18px'
-          margin='0 12px 0 0'
-          textColor='white'
-          hoverTextColor='primary'
-          size='medium'
-        >
-          <HelpIcon fontSize='medium' />
-        </Button>
         <Button
           variant='text'
           padding='18px'

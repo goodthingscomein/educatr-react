@@ -9,7 +9,7 @@ const IsTodayStyles = css`
   background-color: ${(props) => props.theme.themeColors.primaryAccent}40;
 `;
 
-export const GridItemContainer = styled.div<GridItemProps>`
+export const GridItemContainer = styled.a<GridItemProps>`
   padding: 4px;
   border: 1px solid ${(props) => props.theme.themeColors.borderColor};
   ${(props) => (props.isToday ? IsTodayStyles : '')};
