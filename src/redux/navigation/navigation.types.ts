@@ -10,4 +10,12 @@ interface SetYourUnitsNavigationUrlAction {
   payload: string;
 }
 
-export type NavigationAction = SetIsDrawerOpenAction | SetYourUnitsNavigationUrlAction;
+interface SetRecordingsNavigationUrlAction {
+  type: NAVIGATION_TYPES.SET_RECORDINGS_NAVIGATION_URL;
+  payload: string;
+}
+
+export type NavigationAction =
+  | SetIsDrawerOpenAction
+  | SetYourUnitsNavigationUrlAction
+  | SetRecordingsNavigationUrlAction;

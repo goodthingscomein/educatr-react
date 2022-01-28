@@ -3,11 +3,13 @@ import { NavigationAction } from './navigation.types';
 
 interface NavigationState {
   isDrawerOpen: boolean;
+  recordingsNavigationUrl: string;
   yourUnitsNavigationUrl: string;
 }
 
 const INITIAL_STATE = {
   isDrawerOpen: false,
+  recordingsNavigationUrl: '/recordings',
   yourUnitsNavigationUrl: '/units',
 } as NavigationState;
 
@@ -17,6 +19,11 @@ const navigationReducer = (state: NavigationState = INITIAL_STATE, action: Navig
       return {
         ...state,
         isDrawerOpen: action.payload,
+      };
+    case NAVIGATION_TYPES.SET_RECORDINGS_NAVIGATION_URL:
+      return {
+        ...state,
+        recordingsNavigationUrl: action.payload,
       };
     case NAVIGATION_TYPES.SET_YOUR_UNITS_NAVIGATION_URL:
       return {
