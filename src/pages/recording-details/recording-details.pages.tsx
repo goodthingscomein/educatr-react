@@ -23,9 +23,7 @@ const RecordingsPage: React.FC = () => {
     <PageContainer>
       <MainContainer>
         <VideoContainer>
-          <Video controls>
-            <source src='/media/videos/test_video.mp4' type='video/mp4' />
-          </Video>
+          <Video controls src='https://s3.eu-central-1.amazonaws.com/pipe.public.content/short.mp4' />
         </VideoContainer>
         <AllContentContainer>
           <ContentSelectionBar>
