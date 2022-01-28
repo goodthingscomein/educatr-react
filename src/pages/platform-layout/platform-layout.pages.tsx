@@ -22,6 +22,9 @@ import MessagesPage from '../messages/messages.pages';
 import CalendarPage from '../calendar/calendar.pages';
 import AllUnitsPage from '../all-units/all-units.pages';
 import UnitDetailsPage from '../unit-details/unit-details.pages';
+import AllRecordingsPage from '../all-recordings/all-recordings.pages';
+import RecordingDetailsPage from '../recording-details/recording-details.pages';
+// 404 Page
 import NotFoundPage from '../not-found/not-found.pages';
 
 type Props = {
@@ -44,6 +47,8 @@ const ApplicationPage: React.FC<Props> = ({ isDrawerOpen }) => (
             <Route path='/messages' element={<MessagesPage />} />
             <Route path='/units' element={<AllUnitsPage />} />
             <Route path='/units/:unitId/*' element={<UnitDetailsPage />} />
+            <Route path='/recordings' element={<AllRecordingsPage />} />
+            <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
             <Route path='/*' element={<NotFoundPage />} />
           </Routes>
         </ContentContainer>

@@ -12,8 +12,9 @@ export const PageContainer = styled.div`
 
 export const ContentContainer = styled.div`
   flex: 1 0 0;
-  padding: 0 10%;
+  padding: 80px 10% 40px;
   overflow-y: scroll;
+  scrollbar-width: thin;
 `;
 
 // Card Grid Container Props
@@ -24,8 +25,6 @@ type CardGridContainerProps = {
 };
 
 export const AllUnitsGridContainer = styled.div<CardGridContainerProps>`
-  margin-top: 80px;
-  margin-bottom: 40px;
   display: grid;
   grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
   grid-template-rows: repeat(${(props) => props.numberOfRows}, minmax(0, 1fr));

@@ -20,6 +20,7 @@ const HoverStyles = css<DrawerButtonContainerProps>`
   :hover {
     color: ${(props) => props.theme.getColor(props.hoverTextColor)};
     background-color: ${(props) => props.theme.themeColors.lighten};
+    cursor: pointer;
   }
 `;
 

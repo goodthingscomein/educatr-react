@@ -15,13 +15,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Import types for state management
-import { AllUnitsFilterTypes } from '../../pages/all-units/all-units.pages';
+import { UnitsFilterTypes } from '../../pages/all-units/all-units.pages';
 
 // Component props
 type Props = {
   // Filtering of units
-  unitsFilter: AllUnitsFilterTypes;
-  setUnitsFilter: React.Dispatch<React.SetStateAction<AllUnitsFilterTypes>>;
+  unitsFilter: UnitsFilterTypes;
+  setUnitsFilter: React.Dispatch<React.SetStateAction<UnitsFilterTypes>>;
 
   // Search bar to filter units
   isSearching: boolean;

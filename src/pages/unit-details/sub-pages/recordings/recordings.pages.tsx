@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Import development data
-import recordingsCollections from '../../../../data/recordings.data';
+import recordingsCollections from '../../../../data/recordings-grouped.data';
 
 // Import custom components
-import RecordingCollection from '../../../../components/recordings-collection/recording-collection.components';
+import RecordingsCollectionGrouped from '../../../../components/recordings-collection-grouped/recording-collection-grouped.components';
 import Divider from '../../../../components/divider/divider.components';
 
 // Render Component
@@ -13,7 +13,7 @@ const RecordingsSubPage: React.FC = () => (
     {recordingsCollections.map((collection, index) => {
       return (
         <>
-          <RecordingCollection
+          <RecordingsCollectionGrouped
             title={collection.collectionTitle}
             recordings={collection.recordings}
             numberOfColumns={3}

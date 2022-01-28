@@ -10,12 +10,12 @@ import { PageContainer, ContentContainer, AllUnitsGridContainer } from './all-un
 import AllUnitsHeader from '../../components/all-units-header/all-units-header.components';
 import UnitCard from '../../components/unit-card/unit-card.components';
 
-export type AllUnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
+export type UnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
 
 // Render Component
 const AllUnitsPage: React.FC = () => {
   // State for the filtering of the units
-  const [unitsFilter, setUnitsFilter] = useState<AllUnitsFilterTypes>('current');
+  const [unitsFilter, setUnitsFilter] = useState<UnitsFilterTypes>('current');
 
   // State for search bar
   const [isSearching, setIsSearching] = useState(false);
