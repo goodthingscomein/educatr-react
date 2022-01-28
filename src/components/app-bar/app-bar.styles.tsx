@@ -20,7 +20,7 @@ export const AppBarContainer = styled.div<AppBarContainerProps>`
   flex-direction: row;
   align-items: center;
   justify-content: ${(props) => props.justifyContent || 'space-between'};
-  padding: ${(props) => props.padding || '0 40px'};
+  padding: 0 40px 0 10px;
 `;
 
 export const AppBarItemsContainer = styled.div`

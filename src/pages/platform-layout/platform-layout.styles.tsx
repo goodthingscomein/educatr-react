@@ -13,7 +13,7 @@ export const ContentPaddingContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: ${(props) => props.theme.appBar.appBarHeight};
-  padding-left: 80px;
+  padding-left: 60px;
 `;
 
 export const ContentContainer = styled.div`

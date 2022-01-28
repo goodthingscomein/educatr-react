@@ -12,7 +12,7 @@ export const DrawerContainer = styled.div<DrawerContainerProps>`
   z-index: 4;
   padding: ${(props) => props.padding || 0};
   height: 100vh;
-  width: ${(props) => (props.isDrawerOpen ? '300px' : '80px')};
+  width: ${(props) => (props.isDrawerOpen ? props.theme.drawer.drawerOpenWidth : props.theme.drawer.drawerClosedWidth)};
   background-color: ${(props) => props.theme.themeColors.primary};
   display: flex;
   flex-direction: column;

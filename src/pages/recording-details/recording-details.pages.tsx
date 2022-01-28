@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import CopyText from '../../components/copy-text/copy-text.components';
-import HeadingText from '../../components/heading/heading.components';
-import Link from '../../components/link/link.components';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Import styles
 import {
@@ -15,15 +13,30 @@ import {
   ContentContainer,
 } from './recording-details.styles';
 
+// Import custom components
+import CopyText from '../../components/copy-text/copy-text.components';
+import HeadingText from '../../components/heading/heading.components';
+import Link from '../../components/link/link.components';
+
 // Render Component
 const RecordingsPage: React.FC = () => {
-  // State for content container
+  // Url Params
+  const { recordingId } = useParams();
+
+  // Navigation
+  const navigate = useNavigate();
 
   return (
     <PageContainer>
+      {/* Left side of page */}
       <MainContainer>
         <VideoContainer>
-          <Video controls src='https://s3.eu-central-1.amazonaws.com/pipe.public.content/short.mp4' />
+          <Video
+            controls
+            preload='auto'
+            src='https://s3.eu-central-1.amazonaws.com/pipe.public.content/short.mp4'
+            poster='https://s3.eu-central-1.amazonaws.com/pipe.public.content/poster.png'
+          />
         </VideoContainer>
         <AllContentContainer>
           <ContentSelectionBar>

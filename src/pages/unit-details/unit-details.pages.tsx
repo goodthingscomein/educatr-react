@@ -132,6 +132,24 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
               >
                 Grades
               </Link>
+              <Link
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/faq$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
+                underlineEffect='always'
+                margin='0 16px 0 0'
+                clickAction={() => handleNavigateClick(`/units/${unitId}/faq`)}
+              >
+                FAQ
+              </Link>
+              <Link
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/discussions$/g) ? 'primary' : 'textDark'}
+                hoverColor='primary'
+                underlineEffect='always'
+                margin='0 16px 0 0'
+                clickAction={() => handleNavigateClick(`/units/${unitId}/discussions`)}
+              >
+                Discussions
+              </Link>
             </HorizontalDiv>
             <HorizontalDiv
               backgroundColor='transparent'

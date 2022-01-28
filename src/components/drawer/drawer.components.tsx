@@ -15,15 +15,28 @@ import { Action } from '../../redux/all-actions.types';
 import { DrawerContainer } from './drawer.styles';
 
 // Import custom icons
-import HomeIcon from '@mui/icons-material/Home';
+// Unselected (outlined)
+import HomeIcon from '@mui/icons-material/HomeOutlined';
 import CalendarIcon from '@mui/icons-material/TodayOutlined';
-import MessagesIcon from '@mui/icons-material/Chat';
-import ResourcesIcon from '@mui/icons-material/AutoStories';
+import MessagesIcon from '@mui/icons-material/ChatOutlined';
+import ResourcesIcon from '@mui/icons-material/AutoStoriesOutlined';
 import RecordingsIcon from '@mui/icons-material/OndemandVideo';
 import UnitsIcon from '@mui/icons-material/SchoolOutlined';
+import NotesIcon from '@mui/icons-material/DescriptionOutlined';
 import ClassesIcon from '@mui/icons-material/FeaturedVideoOutlined';
 import GradesIcon from '@mui/icons-material/BarChartOutlined';
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from '@mui/icons-material/SettingsOutlined';
+// Selected (filled)
+import HomeSelectedIcon from '@mui/icons-material/Home';
+import CalendarSelectedIcon from '@mui/icons-material/Today';
+import MessagesSelectedIcon from '@mui/icons-material/Chat';
+import ResourcesSelectedIcon from '@mui/icons-material/AutoStories';
+import RecordingsSelectedIcon from '@mui/icons-material/OndemandVideo';
+import UnitsSelectedIcon from '@mui/icons-material/School';
+import NotesSelectedIcon from '@mui/icons-material/Description';
+import ClassesSelectedIcon from '@mui/icons-material/FeaturedVideo';
+import GradesSelectedIcon from '@mui/icons-material/BarChart';
+import SettingsSelectedIcon from '@mui/icons-material/Settings';
 
 // Import custom components
 import DrawerSection from '../drawer-section/drawer-section.components';
@@ -66,7 +79,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <HomeIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/$/g) ? (
+                <HomeSelectedIcon fontSize='medium' />
+              ) : (
+                <HomeIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Home' : ''}
           </DrawerButton>
@@ -78,7 +95,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/calendar')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <CalendarIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/calendar/g) ? (
+                <CalendarSelectedIcon fontSize='medium' />
+              ) : (
+                <CalendarIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Calendar' : ''}
           </DrawerButton>
@@ -90,10 +111,15 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/messages')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <MessagesIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/messages/g) ? (
+                <MessagesSelectedIcon fontSize='medium' />
+              ) : (
+                <MessagesIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Messages' : ''}
           </DrawerButton>
+          <Divider color='light' margin='0' />
           <DrawerButton
             textColor='white'
             hoverTextColor='primaryAccent'
@@ -102,7 +128,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/resources')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <ResourcesIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/resources/g) ? (
+                <ResourcesSelectedIcon fontSize='medium' />
+              ) : (
+                <ResourcesIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Resources' : ''}
           </DrawerButton>
@@ -114,10 +144,15 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/recordings')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <RecordingsIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/recordings/g) ? (
+                <RecordingsSelectedIcon fontSize='medium' />
+              ) : (
+                <RecordingsIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Recordings' : ''}
           </DrawerButton>
+          <Divider color='light' margin='0' />
           <DrawerButton
             textColor='white'
             hoverTextColor='primaryAccent'
@@ -126,9 +161,29 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick(yourUnitsNavigationUrl)}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <UnitsIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/units/g) ? (
+                <UnitsSelectedIcon fontSize='medium' />
+              ) : (
+                <UnitsIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Your Units' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname.match(/^\/notes/g) ? true : false}
+            clickAction={() => drawerButtonClick('/notes')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              {useLocation().pathname.match(/^\/notes/g) ? (
+                <NotesSelectedIcon fontSize='medium' />
+              ) : (
+                <NotesIcon fontSize='medium' />
+              )}
+            </Icon>
+            {isDrawerOpen ? 'Your Notes' : ''}
           </DrawerButton>
           <DrawerButton
             textColor='white'
@@ -138,7 +193,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/classes')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <ClassesIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/classes/g) ? (
+                <ClassesSelectedIcon fontSize='medium' />
+              ) : (
+                <ClassesIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Your Classes' : ''}
           </DrawerButton>
@@ -150,10 +209,15 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/grades')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <GradesIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/grades/g) ? (
+                <GradesSelectedIcon fontSize='medium' />
+              ) : (
+                <GradesIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Your Grades' : ''}
           </DrawerButton>
+          <Divider color='light' margin='0' />
           <DrawerButton
             textColor='white'
             hoverTextColor='primaryAccent'
@@ -162,7 +226,11 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             clickAction={() => drawerButtonClick('/settings')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <SettingsIcon fontSize='medium' />
+              {useLocation().pathname.match(/^\/settings/g) ? (
+                <SettingsSelectedIcon fontSize='medium' />
+              ) : (
+                <SettingsIcon fontSize='medium' />
+              )}
             </Icon>
             {isDrawerOpen ? 'Settings' : ''}
           </DrawerButton>

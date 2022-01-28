@@ -145,11 +145,11 @@ export const MainTheme: DefaultTheme = {
     }
   },
   appBar: {
-    appBarHeight: '70px',
+    appBarHeight: '60px',
   },
-  sideDrawer: {
-    sideDrawerWidth: '20%',
-    sideDrawerMaxWidth: '300px',
+  drawer: {
+    drawerClosedWidth: '60px',
+    drawerOpenWidth: '300px',
   },
   borderRadius: '4px',
 };

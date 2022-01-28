@@ -26,7 +26,7 @@ const HoverStyles = css<DrawerButtonContainerProps>`
 
 export const DrawerButtonContainer = styled.a<DrawerButtonContainerProps>`
   width: 100%;
-  padding: 12px 30px;
+  padding: 6px 20px;
   color: ${(props) => props.theme.getColor(props.textColor)};
   font-size: ${(props) => props.theme.getFontSize(props.size || 'medium')};
   font-weight: ${(props) => props.fontWeight || 400};

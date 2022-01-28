@@ -97,9 +97,9 @@ declare module 'styled-components' {
     appBar: {
       appBarHeight: string;
     };
-    sideDrawer: {
-      sideDrawerWidth: string;
-      sideDrawerMaxWidth: string;
+    drawer: {
+      drawerClosedWidth: string;
+      drawerOpenWidth: string;
     };
     borderRadius: string;
   }
