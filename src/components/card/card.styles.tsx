@@ -3,19 +3,19 @@ import { ColorTypes } from '../../type-declarations/styled';
 
 // Colored background
 interface CardContainerProps {
-	backgroundColor?: ColorTypes;
+  backgroundColor?: ColorTypes;
 }
 
 export const CardContainer = styled.div<CardContainerProps>`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	align-self: center;
-	padding: 48px 36px;
-	min-height: fit-content;
-	width: 80%;
-	overflow: hidden;
-	background-color: ${(props) => props.theme.getColor(props.backgroundColor || 'white')};
-	border-radius: 24px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 48px 36px;
+  min-height: fit-content;
+  width: 100%;
+  background-color: ${(props) => props.theme.getColor(props.backgroundColor || 'white')};
+  border-radius: ${(props) => props.theme.borderRadius};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;
+  overflow: hidden;
 `;

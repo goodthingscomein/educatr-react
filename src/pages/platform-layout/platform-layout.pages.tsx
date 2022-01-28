@@ -22,6 +22,7 @@ import MessagesPage from '../messages/messages.pages';
 import CalendarPage from '../calendar/calendar.pages';
 import AllUnitsPage from '../all-units/all-units.pages';
 import UnitDetailsPage from '../unit-details/unit-details.pages';
+import NotFoundPage from '../not-found/not-found.pages';
 
 type Props = {
   isDrawerOpen: boolean;
@@ -43,6 +44,7 @@ const ApplicationPage: React.FC<Props> = ({ isDrawerOpen }) => (
             <Route path='/messages' element={<MessagesPage />} />
             <Route path='/units' element={<AllUnitsPage />} />
             <Route path='/units/:unitId/*' element={<UnitDetailsPage />} />
+            <Route path='/*' element={<NotFoundPage />} />
           </Routes>
         </ContentContainer>
       </ContentPaddingContainer>

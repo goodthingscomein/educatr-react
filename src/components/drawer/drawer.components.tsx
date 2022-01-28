@@ -18,9 +18,10 @@ import { DrawerContainer } from './drawer.styles';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarIcon from '@mui/icons-material/TodayOutlined';
 import MessagesIcon from '@mui/icons-material/Chat';
-import ResourcesIcon from '@mui/icons-material/MenuBookOutlined';
-import ClassesIcon from '@mui/icons-material/FeaturedVideoOutlined';
+import ResourcesIcon from '@mui/icons-material/AutoStories';
+import RecordingsIcon from '@mui/icons-material/OndemandVideo';
 import UnitsIcon from '@mui/icons-material/SchoolOutlined';
+import ClassesIcon from '@mui/icons-material/FeaturedVideoOutlined';
 import GradesIcon from '@mui/icons-material/BarChartOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -109,13 +110,13 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             textColor='white'
             hoverTextColor='primaryAccent'
             fontWeight={300}
-            selected={useLocation().pathname.match(/^\/classes/g) ? true : false}
-            clickAction={() => drawerButtonClick('/classes')}
+            selected={useLocation().pathname.match(/^\/recordings/g) ? true : false}
+            clickAction={() => drawerButtonClick('/recordings')}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              <ClassesIcon fontSize='medium' />
+              <RecordingsIcon fontSize='medium' />
             </Icon>
-            {isDrawerOpen ? 'Your Classes' : ''}
+            {isDrawerOpen ? 'Recordings' : ''}
           </DrawerButton>
           <DrawerButton
             textColor='white'
@@ -128,6 +129,18 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
               <UnitsIcon fontSize='medium' />
             </Icon>
             {isDrawerOpen ? 'Your Units' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname.match(/^\/classes/g) ? true : false}
+            clickAction={() => drawerButtonClick('/classes')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              <ClassesIcon fontSize='medium' />
+            </Icon>
+            {isDrawerOpen ? 'Your Classes' : ''}
           </DrawerButton>
           <DrawerButton
             textColor='white'

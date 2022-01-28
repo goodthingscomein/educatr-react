@@ -2,55 +2,59 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Import styles
-import { PageContainer, PageButtonsContainer } from './home.styles';
+import { PageContainer, ButtonsContainer } from './not-found.styles';
 
 // Import custom components
 import Button from '../../components/button/button.components';
 import HeadingText from '../../components/heading/heading.components';
 import Margin from '../../components/margin/margin.components';
+import CopyText from '../../components/copy-text/copy-text.components';
 
 // Render Component
-const HomePage: React.FC = () => {
+const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
   return (
     <PageContainer>
       <HeadingText variant='h1' color='textDark'>
-        Welcome to the platform
+        404 Page not found...
       </HeadingText>
-      <HeadingText variant='h5' color='textDark'>
-        You have successfully logged in to reach this page.
-      </HeadingText>
-      <Margin height='40px' width='100%' />
-      <PageButtonsContainer>
+      <Margin height='24px' width='100%' />
+      <CopyText size='medium' color='textDark'>
+        Ahhh yes... A classic 404 error! You have 2 options, choose wisely...
+      </CopyText>
+      <Margin height='28px' width='100%' />
+      <ButtonsContainer>
         <Button
           variant='solid'
           size='large'
-          backgroundColor='primary'
-          hoverBackgroundColor='secondary'
           textColor='white'
-          fontWeight={700}
+          backgroundColor='primary'
+          hoverBackgroundColor='errorDark'
+          fontWeight={400}
+          padding='6px 0'
           margin='0 20px'
-          minWidth='10%'
+          minWidth='140px'
           clickAction={() => navigate('/login')}
         >
-          Login
+          Go Back
         </Button>
         <Button
           variant='solid'
           size='large'
           backgroundColor='primary'
-          hoverBackgroundColor='secondary'
+          hoverBackgroundColor='infoDark'
           textColor='white'
-          fontWeight={700}
+          fontWeight={400}
+          padding='6px 0'
           margin='0 20px'
-          minWidth='10%'
+          minWidth='140px'
           clickAction={() => navigate('/signup')}
         >
-          Sign Up
+          Go Home
         </Button>
-      </PageButtonsContainer>
+      </ButtonsContainer>
     </PageContainer>
   );
 };
 
-export default HomePage;
+export default NotFoundPage;

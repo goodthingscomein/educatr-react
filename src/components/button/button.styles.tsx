@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { ColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
+import { ColorTypes, MessageColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
 
 // Button Props
 type ButtonContainerProps = {
   size: FontSizes;
   fontWeight?: FontWeight;
 
-  backgroundColor: ColorTypes;
-  hoverBackgroundColor: ColorTypes;
+  backgroundColor: ColorTypes | MessageColorTypes;
+  hoverBackgroundColor: ColorTypes | MessageColorTypes;
 
   outlineColor: ColorTypes;
   hoverOutlineColor: ColorTypes;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
+import { ColorTypes, MessageColorTypes, FontSizes, FontWeight } from '../../type-declarations/styled';
 
 // Import styles
 import { ButtonContainer } from './button.styles';
@@ -24,8 +24,8 @@ interface ButtonSharedProps {
 
 interface SolidButtonProps extends ButtonSharedProps {
   variant: 'solid';
-  backgroundColor: ColorTypes;
-  hoverBackgroundColor?: ColorTypes;
+  backgroundColor: ColorTypes | MessageColorTypes;
+  hoverBackgroundColor?: ColorTypes | MessageColorTypes;
   outlineColor?: ColorTypes;
   hoverOutlineColor?: ColorTypes;
 }
