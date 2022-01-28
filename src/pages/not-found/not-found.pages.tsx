@@ -34,7 +34,7 @@ const NotFoundPage: React.FC = () => {
           padding='6px 0'
           margin='0 20px'
           minWidth='140px'
-          clickAction={() => navigate('/login')}
+          clickAction={() => navigate(-1)}
         >
           Go Back
         </Button>
@@ -48,7 +48,7 @@ const NotFoundPage: React.FC = () => {
           padding='6px 0'
           margin='0 20px'
           minWidth='140px'
-          clickAction={() => navigate('/signup')}
+          clickAction={() => navigate('/')}
         >
           Go Home
         </Button>
