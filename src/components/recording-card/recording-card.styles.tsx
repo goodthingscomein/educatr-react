@@ -1,20 +1,6 @@
 import styled from 'styled-components';
 
-// Card Grid Container Props
-type CardGridContainerProps = {
-  numberOfColumns: number;
-  numberOfRows: number;
-  cardHeight: string;
-};
-
-export const SearchUnitsGridContainer = styled.div<CardGridContainerProps>`
-  display: grid;
-  grid-template-columns: repeat(${(props) => props.numberOfColumns}, minmax(0, 1fr));
-  grid-template-rows: repeat(${(props) => props.numberOfRows}, ${(props) => props.cardHeight});
-  gap: 36px;
-`;
-
-export const VideoCard = styled.div`
+export const RecordingCardContainer = styled.div`
   transition: 0.1s;
   display: flex;
   flex-direction: column;
@@ -24,7 +10,7 @@ export const VideoCard = styled.div`
 `;
 
 // Unit Card Image Props
-type VideoCardThumbnailProps = {
+type CardThumbnailProps = {
   src: string;
 };
 
@@ -53,8 +39,8 @@ export const ThumbnailTimestamp = styled.div`
   align-items: center;
 `;
 
-export const Thumbnail = styled.a<VideoCardThumbnailProps>`
-  flex: 0 0 75%;
+export const Thumbnail = styled.a<CardThumbnailProps>`
+  flex: 0 0 240px;
   width: 100%;
   background: url(${(props) => props.src});
   background-position: center;
@@ -77,7 +63,7 @@ export const Thumbnail = styled.a<VideoCardThumbnailProps>`
   }
 `;
 
-export const VideoCardTextContainer = styled.div`
+export const CardTextContainer = styled.div`
   flex: 0 0 0;
   width: 100%;
   display: flex;

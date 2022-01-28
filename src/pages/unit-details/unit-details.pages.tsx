@@ -30,8 +30,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Import sub pages
-import OverviewSubPage from './sub-pages/overview/overview.components';
-import RecordingsSubPage from './sub-pages/recordings/recordings.components';
+import OverviewSubPage from './sub-pages/overview/overview.pages';
+import RecordingsSubPage from './sub-pages/recordings/recordings.pages';
+import ResourcesSubPage from './sub-pages/resources/resources.pages';
 
 type Props = {
   // Drawer button nav url management
@@ -190,6 +191,7 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
           <Routes>
             <Route path='/' element={<OverviewSubPage />} />
             <Route path='/recordings' element={<RecordingsSubPage />} />
+            <Route path='/resources' element={<ResourcesSubPage />} />
           </Routes>
         </ContentContainer>
       </ScrollContainer>
