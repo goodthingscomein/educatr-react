@@ -8,7 +8,7 @@ export const MainTheme: DefaultTheme = {
     primaryAccent: '#f1c40f',
     secondaryAccent: '#f39c12',
     tertiaryAccent: '#d8890b',
-    textDark: '#1F1F1F',
+    textDark: '#1A1A1A',
     textLight: '#6F6F6F',
     white: '#FFFFFF',
     lightGrey: '#F6F6F6',

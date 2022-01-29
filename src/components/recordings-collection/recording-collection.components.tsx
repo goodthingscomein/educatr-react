@@ -25,7 +25,7 @@ const RecordingsCollection: React.FC<Props> = ({ recordings, numberOfColumns }) 
       return (
         <RecordingCard
           key={index}
-          recordingUrl={recording.recordingUrl}
+          recordingId={recording.recordingId}
           thumbnailImgSrc={recording.thumbnailImgSrc}
           recordingLength={recording.recordingLength}
           title={recording.title}

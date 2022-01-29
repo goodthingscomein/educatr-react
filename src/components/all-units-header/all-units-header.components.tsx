@@ -60,8 +60,8 @@ const AllUnitsHeader: React.FC<Props> = ({
         >
           {/* LINKS TO CHANGE UNIT FITLERS */}
           <Link
-            color={unitsFilter === 'current' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={unitsFilter === 'current' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setUnitsFilter('current')}
@@ -69,8 +69,8 @@ const AllUnitsHeader: React.FC<Props> = ({
             Current Units
           </Link>
           <Link
-            color={unitsFilter === 'completed' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={unitsFilter === 'completed' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setUnitsFilter('completed')}
@@ -78,8 +78,8 @@ const AllUnitsHeader: React.FC<Props> = ({
             Completed Units
           </Link>
           <Link
-            color={unitsFilter === 'upcoming' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={unitsFilter === 'upcoming' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setUnitsFilter('upcoming')}
@@ -87,8 +87,8 @@ const AllUnitsHeader: React.FC<Props> = ({
             Upcoming Units
           </Link>
           <Link
-            color={unitsFilter === 'all' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={unitsFilter === 'all' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setUnitsFilter('all')}
@@ -115,13 +115,13 @@ const AllUnitsHeader: React.FC<Props> = ({
             variant='text'
             padding='18px'
             textColor='textDark'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='tertiaryAccent'
             size='medium'
             clickAction={() => setIsSearching(!isSearching)}
           >
             <SearchIcon fontSize='medium' />
           </Button>
-          <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+          <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
             <OptionsIcon fontSize='medium' />
           </Button>
         </HorizontalDiv>

@@ -29,12 +29,14 @@ import Input from '../../components/input/input.components';
 import SearchIcon from '@mui/icons-material/Search';
 import HelpIcon from '@mui/icons-material/HelpOutline';
 import OptionsIcon from '@mui/icons-material/MoreVert';
+import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
 
 // Import sub pages
 import OverviewSubPage from './sub-pages/overview/overview.pages';
 import RecordingsSubPage from './sub-pages/recordings/recordings.pages';
 import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotFoundPage from '../not-found/not-found.pages';
+import Icon from '../../components/icon/icon-components';
 
 type Props = {
   // Drawer button nav url management
@@ -60,15 +62,19 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
       <ScrollContainer>
         <HeaderContainer>
           <BackButtonContainer>
-            <Link
-              color='textDark'
-              underlineEffect='hover'
-              fontSize='small'
-              fontWeight={300}
+            <Button
+              variant='text'
+              size='small'
+              textColor='textDark'
+              hoverTextColor='tertiaryAccent'
+              padding='4px'
               clickAction={() => handleNavigateClick(`/units`)}
             >
-              All Units
-            </Link>
+              <Icon padding='10px' margin='0 8px 0 0 '>
+                <LeftArrowIcon fontSize='small' />
+              </Icon>
+              Back
+            </Button>
           </BackButtonContainer>
           <HorizontalDiv
             backgroundColor='transparent'
@@ -88,8 +94,8 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
             >
               {/* LINKS TO CHANGE UNIT FITLERS */}
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*$/g) ? 'tertiaryAccent' : 'textDark'}
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}`)}
@@ -97,8 +103,10 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 Overview
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/recordings$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={
+                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/recordings$/g) ? 'tertiaryAccent' : 'textDark'
+                }
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/recordings`)}
@@ -106,8 +114,10 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 Recordings
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/resources$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={
+                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/resources$/g) ? 'tertiaryAccent' : 'textDark'
+                }
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/resources`)}
@@ -115,8 +125,10 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 Resources
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/assessments$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={
+                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/assessments$/g) ? 'tertiaryAccent' : 'textDark'
+                }
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/assessments`)}
@@ -124,8 +136,8 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 Assessments
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/grades$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/grades$/g) ? 'tertiaryAccent' : 'textDark'}
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/grades`)}
@@ -133,8 +145,8 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 Grades
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/faq$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/faq$/g) ? 'tertiaryAccent' : 'textDark'}
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/faq`)}
@@ -142,8 +154,10 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 FAQ
               </Link>
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/discussions$/g) ? 'primary' : 'textDark'}
-                hoverColor='primary'
+                color={
+                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/discussions$/g) ? 'tertiaryAccent' : 'textDark'
+                }
+                hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
                 clickAction={() => handleNavigateClick(`/units/${unitId}/discussions`)}
@@ -174,16 +188,16 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
                 variant='text'
                 padding='18px'
                 textColor='textDark'
-                hoverTextColor='primaryAccent'
+                hoverTextColor='tertiaryAccent'
                 size='medium'
                 clickAction={() => setIsSearching(!isSearching)}
               >
                 <SearchIcon fontSize='medium' />
               </Button>
-              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
                 <HelpIcon fontSize='medium' />
               </Button>
-              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
                 <OptionsIcon fontSize='medium' />
               </Button>
             </HorizontalDiv>

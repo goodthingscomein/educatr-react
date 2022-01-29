@@ -35,7 +35,7 @@ export const HeaderContainer = styled.div`
 export const BackButtonContainer = styled.div`
   position: absolute;
   bottom: 0;
-  left: 24px;
+  left: 16px;
   height: fit-content;
   width: fit-content;
 `;

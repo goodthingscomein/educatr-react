@@ -34,7 +34,7 @@ const RecordingsCollectionGrouped: React.FC<Props> = ({ title, recordings, numbe
         return (
           <RecordingCard
             key={index}
-            recordingUrl={recording.recordingUrl}
+            recordingId={recording.recordingId}
             thumbnailImgSrc={recording.thumbnailImgSrc}
             recordingLength={recording.recordingLength}
             title={recording.title}

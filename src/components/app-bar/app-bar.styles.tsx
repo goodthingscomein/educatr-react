@@ -16,6 +16,7 @@ export const AppBarContainer = styled.div<AppBarContainerProps>`
   width: 100%;
   height: ${(props) => props.theme.appBar.appBarHeight};
   background-color: ${(props) => props.theme.getColor(props.color)};
+  border-bottom: 1px solid ${(props) => props.theme.themeColors.lighten};
   display: flex;
   flex-direction: row;
   align-items: center;

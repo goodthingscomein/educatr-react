@@ -10,7 +10,7 @@ import { PageContainer, ContentContainer } from './all-recordings.styles';
 import AllRecordingsHeader from '../../components/all-recordings-header/all-recordings-header.components';
 import RecordingsCollection from '../../components/recordings-collection/recording-collection.components';
 
-export type RecordingsFilterTypes = 'new' | 'watched' | 'all';
+export type RecordingsFilterTypes = 'new' | 'watched' | 'favourite' | 'all';
 
 // Render Component
 const AllRecordingsPage: React.FC = () => {

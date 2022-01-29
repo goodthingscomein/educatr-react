@@ -60,17 +60,17 @@ const AllRecordingsHeader: React.FC<Props> = ({
         >
           {/* LINKS TO CHANGE UNIT FITLERS */}
           <Link
-            color={recordingsFilter === 'new' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={recordingsFilter === 'new' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setRecordingsFilter('new')}
           >
-            New Recordings
+            Recent
           </Link>
           <Link
-            color={recordingsFilter === 'watched' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={recordingsFilter === 'watched' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setRecordingsFilter('watched')}
@@ -78,8 +78,17 @@ const AllRecordingsHeader: React.FC<Props> = ({
             Already Watched
           </Link>
           <Link
-            color={recordingsFilter === 'all' ? 'primary' : 'textDark'}
-            hoverColor='primary'
+            color={recordingsFilter === 'favourite' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
+            underlineEffect='always'
+            margin='0 16px 0 0'
+            clickAction={() => setRecordingsFilter('favourite')}
+          >
+            Favourites
+          </Link>
+          <Link
+            color={recordingsFilter === 'all' ? 'tertiaryAccent' : 'textDark'}
+            hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
             clickAction={() => setRecordingsFilter('all')}
@@ -106,13 +115,13 @@ const AllRecordingsHeader: React.FC<Props> = ({
             variant='text'
             padding='18px'
             textColor='textDark'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='tertiaryAccent'
             size='medium'
             clickAction={() => setIsSearching(!isSearching)}
           >
             <SearchIcon fontSize='medium' />
           </Button>
-          <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='primaryAccent' size='medium'>
+          <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
             <OptionsIcon fontSize='medium' />
           </Button>
         </HorizontalDiv>

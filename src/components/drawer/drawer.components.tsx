@@ -53,9 +53,15 @@ type Props = {
 
   // Drawer button nav url management
   yourUnitsNavigationUrl: string;
+  recordingsNavigationUrl: string;
 };
 
-const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavigationUrl }) => {
+const Drawer: React.FC<Props> = ({
+  isDrawerOpen,
+  setDrawerIsOpen,
+  yourUnitsNavigationUrl,
+  recordingsNavigationUrl,
+}) => {
   const navigate = useNavigate();
 
   const drawerButtonClick = (navigateLocation: string) => {
@@ -141,7 +147,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
             hoverTextColor='primaryAccent'
             fontWeight={300}
             selected={useLocation().pathname.match(/^\/recordings/g) ? true : false}
-            clickAction={() => drawerButtonClick('/recordings')}
+            clickAction={() => drawerButtonClick(recordingsNavigationUrl)}
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/recordings/g) ? (
@@ -277,6 +283,7 @@ const Drawer: React.FC<Props> = ({ isDrawerOpen, setDrawerIsOpen, yourUnitsNavig
 const mapStateToProps = (state: State) => ({
   isDrawerOpen: state.navigation.isDrawerOpen,
   yourUnitsNavigationUrl: state.navigation.yourUnitsNavigationUrl,
+  recordingsNavigationUrl: state.navigation.recordingsNavigationUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
