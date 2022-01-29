@@ -61,14 +61,14 @@ export const AllContentContainer = styled.div`
   width: 100%;
   flex: 1 0 0;
   height: fit-content;
+  background-color: ${(props) => props.theme.themeColors.white};
 `;
 
 export const ContentSelectionBar = styled.div`
   width: 100%;
   flex: 0 0 0;
   padding: 40px 40px 0;
-  background-color: ${(props) => props.theme.themeColors.white};
-  box-shadow: 0 4px 6px ${(props) => props.theme.themeColors.shadow};
+  border-bottom: 1px solid ${(props) => props.theme.themeColors.borderColor};
   display: flex;
 `;
 

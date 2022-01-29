@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {} from './comments.styles';
+import {} from './discussion.styles';
 
 // Component Props Interface
 type Props = {
@@ -10,10 +10,10 @@ type Props = {
 };
 
 // Render Component
-const CommentsSubPage: React.FC<Props> = ({ children }) => (
+const DiscussionSubPage: React.FC<Props> = ({ children }) => (
   <div>
-    <h1>Comments Sub Page!</h1>
+    <h1>Discussion Sub Page!</h1>
   </div>
 );
 
-export default CommentsSubPage;
+export default DiscussionSubPage;

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
@@ -39,7 +40,7 @@ import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Import sub pages
 import OverviewSubPage from './sub-pages/overview/overview.pages';
-import CommentsSubPage from './sub-pages/comments/comments.pages';
+import DiscussionSubPage from './sub-pages/discussion/discussion.pages';
 import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotesSubPage from './sub-pages/notes/notes.pages';
 import PracticeSubPage from './sub-pages/practice/practice.pages';
@@ -48,10 +49,24 @@ import NotFoundPage from '../not-found/not-found.pages';
 type Props = {
   // Drawer button nav url management
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
+
+  // Recording details from redux state
+  recordingSrc: string;
+  thumbnailSrc: string;
+  title: string;
+  description: string;
+  hashtags?: string[];
 };
 
 // Render Component
-const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
+const RecordingsPage: React.FC<Props> = ({
+  setRecordingsNavigationUrl,
+  recordingSrc,
+  thumbnailSrc,
+  title,
+  description,
+  hashtags,
+}) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
   const navigate = useNavigate();
@@ -86,7 +101,7 @@ const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
               </Button>
             </BackButtonContainer>
             <CopyText size='medium' color='white' fontWeight={300}>
-              <i>Discrete Mathematics Series 1</i>
+              <i>{title}</i>
             </CopyText>
           </AppBarSectionContainer>
           <AppBarSectionContainer>
@@ -124,12 +139,7 @@ const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
           </AppBarSectionContainer>
         </AppBarContainer>
         <VideoContainer>
-          <Video
-            controls
-            preload='auto'
-            src='https://s3.eu-central-1.amazonaws.com/pipe.public.content/short.mp4'
-            poster='https://s3.eu-central-1.amazonaws.com/pipe.public.content/poster.png'
-          />
+          <Video controls preload='auto' src={recordingSrc} poster={thumbnailSrc} />
         </VideoContainer>
         <AllContentContainer>
           <ContentSelectionBar>
@@ -148,14 +158,16 @@ const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
               fontSize='large'
               fontWeight={400}
               color={
-                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/comments$/g) ? 'tertiaryAccent' : 'textDark'
+                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/discussion$/g)
+                  ? 'tertiaryAccent'
+                  : 'textDark'
               }
               hoverColor='tertiaryAccent'
               underlineEffect='always'
               margin='0 16px 0 0'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/comments`)}
+              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/discussion`)}
             >
-              Comments
+              Discussion
             </Link>
             <Link
               fontSize='large'
@@ -198,8 +210,11 @@ const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
           </ContentSelectionBar>
           <SubContentContainer>
             <Routes>
-              <Route path='/' element={<OverviewSubPage />} />
-              <Route path='/comments' element={<CommentsSubPage />} />
+              <Route
+                path='/'
+                element={<OverviewSubPage title={title} description={description} hashtags={hashtags} />}
+              />
+              <Route path='/discussion' element={<DiscussionSubPage />} />
               <Route path='/resources' element={<ResourcesSubPage />} />
               <Route path='/notes' element={<NotesSubPage />} />
               <Route path='/practice' element={<PracticeSubPage />} />
@@ -213,8 +228,16 @@ const RecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
   );
 };
 
+const mapStateToProps = (state: State) => ({
+  recordingSrc: state.recording.recordingSrc,
+  thumbnailSrc: state.recording.thumbnailSrc,
+  title: state.recording.title,
+  description: state.recording.description,
+  hashtags: state.recording.hashtags,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
 });
 
-export default connect(null, mapDispatchToProps)(RecordingsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecordingsPage);
