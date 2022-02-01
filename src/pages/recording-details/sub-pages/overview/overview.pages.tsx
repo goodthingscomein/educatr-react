@@ -6,7 +6,6 @@ import { HashtagsContainer } from './overview.styles';
 // Import custom components
 import CopyText from '../../../../components/copy-text/copy-text.components';
 import HeadingText from '../../../../components/heading/heading.components';
-import Link from '../../../../components/link/link.components';
 import Margin from '../../../../components/margin/margin.components';
 
 // Component Props Interface
@@ -20,18 +19,24 @@ type Props = {
 const OverviewSubPage: React.FC<Props> = ({ hashtags, title, description }) => (
   <>
     {hashtags && (
-      <HashtagsContainer>
-        {hashtags.map((hashtag) => {
-          return (
-            <Link key={hashtag} fontSize='x-small' color='primaryAccent' hoverColor='secondaryAccent'>
-              #{hashtag}
-            </Link>
-          );
-        })}
-      </HashtagsContainer>
+      <>
+        <HashtagsContainer>
+          {hashtags.map((hashtag) => {
+            return (
+              <>
+                <CopyText key={hashtag} size='x-small' color='secondary'>
+                  #{hashtag}
+                </CopyText>
+                <Margin width='4px' />
+              </>
+            );
+          })}
+        </HashtagsContainer>
+        <Margin height='8px' />
+      </>
     )}
 
-    <HeadingText variant='h5' color='textDark'>
+    <HeadingText variant='h6' color='textDark'>
       {title}
     </HeadingText>
     <Margin height='6px' />

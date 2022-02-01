@@ -9,12 +9,12 @@ import Margin from '../margin/margin.components';
 import RecordingCard from '../recording-card/recording-card.components';
 
 // Import typing
-import { RecordingDataType } from '../../data/recordings-grouped.data';
+import { RecordingMetadataType } from '../../redux/recording/recording.types';
 
 // Component Props Interface
 type Props = {
   title: string;
-  recordings: RecordingDataType[];
+  recordings: RecordingMetadataType[];
   numberOfColumns: number;
 };
 
@@ -31,17 +31,7 @@ const RecordingsCollectionGrouped: React.FC<Props> = ({ title, recordings, numbe
       numberOfRows={Math.ceil(recordings.length / numberOfColumns)}
     >
       {recordings.map((recording, index) => {
-        return (
-          <RecordingCard
-            key={index}
-            recordingId={recording.recordingId}
-            thumbnailImgSrc={recording.thumbnailImgSrc}
-            recordingLength={recording.recordingLength}
-            title={recording.title}
-            date={recording.date}
-            alreadyWatched={recording.alreadyWatched}
-          />
-        );
+        return <RecordingCard key={index} recording={recording} />;
       })}
     </RecordingsCardGridContainer>
   </>

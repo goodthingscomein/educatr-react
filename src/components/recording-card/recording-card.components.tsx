@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { setCurrentRecordingMetadata } from '../../redux/recording/recording.actions';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
@@ -27,47 +28,43 @@ import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 // Import custom icons
 import PlayIcon from '@mui/icons-material/PlayArrow';
 
+// Import types
+import { RecordingMetadataType } from '../../redux/recording/recording.types';
+
 // Component Props Interface
 type Props = {
-  recordingId: string;
-  thumbnailImgSrc: string;
-  recordingLength: number;
-  title: string;
-  date: string;
-  alreadyWatched?: boolean;
+  recording: RecordingMetadataType;
 
   // Recordings drawer button url
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
+
+  // Set the current recording metadata
+  setCurrentRecordingMetadata: typeof setCurrentRecordingMetadata;
 };
 
 // Render Component
 const RecordingCard: React.FC<Props> = ({
-  recordingId,
-  thumbnailImgSrc,
-  recordingLength,
-  title,
-  date,
-  alreadyWatched,
-
-  // Recordings drawer button url
+  recording, // Associated recording metadata
   setRecordingsNavigationUrl,
+  setCurrentRecordingMetadata,
 }) => {
   // Navigate url
   const navigate = useNavigate();
 
   const recordingsNavigation = (url: string) => {
     navigate(url);
-    setRecordingsNavigationUrl(url);
+    setCurrentRecordingMetadata(recording); // set the current recording to play metadata
+    setRecordingsNavigationUrl(url); // set the nav url
   };
 
   // Calculate the timestamp
-  const hrs = Math.floor(recordingLength / 3600);
-  const mins = Math.floor(recordingLength / 60) - hrs * 60;
-  const secs = Math.floor(recordingLength % 60);
+  const hrs = Math.floor(recording.length / 3600);
+  const mins = Math.floor(recording.length / 60) - hrs * 60;
+  const secs = Math.floor(recording.length % 60);
 
   return (
     <RecordingCardContainer>
-      <Thumbnail src={thumbnailImgSrc} onClick={() => recordingsNavigation(`/recordings/${recordingId}`)}>
+      <Thumbnail src={recording.thumbnailSrc} onClick={() => recordingsNavigation(`/recordings/${recording.id}`)}>
         <ThumbnailTimestamp>
           {hrs > 0 && `${hrs}:`}
           {mins < 10 && hrs > 0 ? `0${mins}:` : `${mins}:`}
@@ -89,8 +86,8 @@ const RecordingCard: React.FC<Props> = ({
           `}
         >
           <CopyText size='medium' color='textDark' fontWeight={700}>
-            {title.substring(0, 115)}
-            {title.length >= 115 && '...'}
+            {recording.title.substring(0, 115)}
+            {recording.title.length >= 115 && '...'}
           </CopyText>
           <Margin width='100%' height='' />
           <HorizontalDiv
@@ -103,9 +100,9 @@ const RecordingCard: React.FC<Props> = ({
             `}
           >
             <CopyText size='small' color='textDark' fontWeight={300}>
-              {date}
+              {recording.date}
             </CopyText>
-            {alreadyWatched && (
+            {recording.alreadyWatched && (
               <CopyText size='small' color='textDark' fontWeight={300}>
                 Already watched
               </CopyText>
@@ -119,6 +116,7 @@ const RecordingCard: React.FC<Props> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
+  setCurrentRecordingMetadata: (recording: RecordingMetadataType) => dispatch(setCurrentRecordingMetadata(recording)),
 });
 
 export default connect(null, mapDispatchToProps)(RecordingCard);

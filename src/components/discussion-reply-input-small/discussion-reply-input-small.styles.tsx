@@ -18,7 +18,7 @@ export const DiscussionSubPageContainer = styled.div`
   flex-direction: column;
 `;
 
-export const AddNewDiscussionContainer = styled.div`
+export const InputDiscussionContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -47,10 +47,15 @@ export const ButtonsContainer = styled.div`
 export const AllExistingDiscussionsContainer = styled.div`
   width: 100%;
   padding: 0 60px;
-  margin-top: 12px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+`;
+
+export const ExistingDiscussionContainer = styled.div`
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const HeadDiscussionContainer = styled.div`

@@ -2,11 +2,13 @@ import { RECORDING_TYPES } from './recording.enum';
 
 // Recording Type
 export type RecordingMetadataType = {
-  recordingSrc: string;
+  id: string;
   thumbnailSrc: string;
   title: string;
   description: string;
   length: number;
+  date: string;
+  alreadyWatched?: boolean;
   hashtags?: string[];
 };
 

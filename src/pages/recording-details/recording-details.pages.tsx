@@ -51,7 +51,7 @@ type Props = {
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
 
   // Recording details from redux state
-  recordingSrc: string;
+  recordingType: string;
   thumbnailSrc: string;
   title: string;
   description: string;
@@ -61,7 +61,7 @@ type Props = {
 // Render Component
 const RecordingsPage: React.FC<Props> = ({
   setRecordingsNavigationUrl,
-  recordingSrc,
+  recordingType,
   thumbnailSrc,
   title,
   description,
@@ -139,7 +139,9 @@ const RecordingsPage: React.FC<Props> = ({
           </AppBarSectionContainer>
         </AppBarContainer>
         <VideoContainer>
-          <Video controls preload='auto' src={recordingSrc} poster={thumbnailSrc} />
+          <Video controls preload='auto' poster={thumbnailSrc}>
+            <source src={`http://localhost:4001/api/v1/vods/recordings/${recordingId}`} type={recordingType}></source>
+          </Video>
         </VideoContainer>
         <AllContentContainer>
           <ContentSelectionBar>
@@ -229,7 +231,7 @@ const RecordingsPage: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  recordingSrc: state.recording.recordingSrc,
+  recordingType: state.recording.recordingType,
   thumbnailSrc: state.recording.thumbnailSrc,
   title: state.recording.title,
   description: state.recording.description,

@@ -3,7 +3,8 @@ import { RecordingAction } from './recording.types';
 
 interface RecordingState {
   // Video meta data
-  recordingSrc: string;
+  id: string;
+  recordingType: string;
   thumbnailSrc: string;
   title: string;
   description: string;
@@ -17,7 +18,8 @@ interface RecordingState {
 
 const INITIAL_STATE = {
   // Video meta data
-  recordingSrc: '',
+  id: '',
+  recordingType: 'video/mp4',
   title: '',
   description: '',
 
@@ -30,12 +32,7 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
     case RECORDING_TYPES.SET_CURRENT_RECORDING_METADATA:
       return {
         ...state,
-        recordingSrc: action.payload.recordingSrc,
-        thumbnailSrc: action.payload.thumbnailSrc,
-        title: action.payload.title,
-        description: action.payload.description,
-        length: action.payload.length,
-        hashtags: action.payload.hashtags,
+        ...action.payload,
       };
     default:
       return state;

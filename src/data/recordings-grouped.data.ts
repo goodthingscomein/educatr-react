@@ -1,15 +1,8 @@
+import { RecordingMetadataType } from '../redux/recording/recording.types';
+
 export type RecordingsCollectionDataType = {
   collectionTitle: string;
-  recordings: RecordingDataType[];
-};
-
-export type RecordingDataType = {
-  recordingId: string;
-  thumbnailImgSrc: string;
-  recordingLength: number;
-  title: string;
-  date: string;
-  alreadyWatched?: boolean;
+  recordings: RecordingMetadataType[];
 };
 
 export default [
@@ -17,41 +10,64 @@ export default [
     collectionTitle: 'Week 1 Recordings',
     recordings: [
       {
-        recordingId: '1',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=1',
-        recordingLength: 2456,
+        id: '00000001',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
         alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '2',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=2',
-        recordingLength: 1450,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000002',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '3',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=3',
-        recordingLength: 3746,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000003',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '4',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=4',
-        recordingLength: 198,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000004',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '5',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=5',
-        recordingLength: 1899,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000005',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
     ],
   },
@@ -59,18 +75,28 @@ export default [
     collectionTitle: 'Week 2 Recordings',
     recordings: [
       {
-        recordingId: '6',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=6',
-        recordingLength: 333,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000006',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '7',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=7',
-        recordingLength: 389,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000007',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
     ],
   },
@@ -78,53 +104,88 @@ export default [
     collectionTitle: 'Week 3 Recordings',
     recordings: [
       {
-        recordingId: '8',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=8',
-        recordingLength: 3687,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000008',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '9',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=9',
-        recordingLength: 789,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000009',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '10',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=10',
-        recordingLength: 999,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000010',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '11',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=11',
-        recordingLength: 1009,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000011',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '12',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=12',
-        recordingLength: 1544,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000012',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '13',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=13',
-        recordingLength: 454,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000013',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
       {
-        recordingId: '14',
-        thumbnailImgSrc: 'https://picsum.photos/640/360?random=14',
-        recordingLength: 4498,
-        title: 'Discrete Math - Principles of Discrete (Graph Theory)',
+        id: '00000014',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        length: 2456,
+        title:
+          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        description:
+          'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         date: '27/01/2022',
+        alreadyWatched: true,
+        hashtags: ['Test', 'Cool', 'Math'],
       },
     ],
   },
