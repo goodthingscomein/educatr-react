@@ -1,14 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTwitter,
-  faFacebook,
-  faLinkedin,
-  faYoutube,
-  faInstagram,
-  faTiktok,
-  faPinterest,
-} from '@fortawesome/free-brands-svg-icons';
 
 // Import badges
 import { ReactComponent as AppStoreBadge } from '../../assets/images/branded-badges/app-store-badge.svg';
@@ -52,7 +42,7 @@ const FooterSection: React.FC = () => (
         </Link>
       </FooterLinkContainer>
       <FooterButtonsContainer>
-        <Link color='white' hoverColor='twitter' fontSize='x-large' underlineEffect='never' margin='0 20px'>
+        {/* <Link color='white' hoverColor='twitter' fontSize='x-large' underlineEffect='never' margin='0 20px'>
           <FontAwesomeIcon icon={faTwitter} />
         </Link>
         <Link color='white' hoverColor='facebook' fontSize='x-large' underlineEffect='never' margin='0 20px'>
@@ -72,7 +62,7 @@ const FooterSection: React.FC = () => (
         </Link>
         <Link color='white' hoverColor='linkedin' fontSize='x-large' underlineEffect='never' margin='0 0.5rem 0 20px'>
           <FontAwesomeIcon icon={faLinkedin} />
-        </Link>
+        </Link> */}
       </FooterButtonsContainer>
     </FooterContentContainer>
     <Margin height='24px' width='100%' />
