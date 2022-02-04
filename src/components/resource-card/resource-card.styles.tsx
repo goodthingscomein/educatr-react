@@ -7,12 +7,14 @@ export const ResourceCardContainer = styled.a`
   align-items: flex-start;
   background-color: ${(props) => props.theme.themeColors.white};
   border-radius: ${(props) => props.theme.borderRadius};
+  box-shadow: 0 2px 8px ${(props) => props.theme.themeColors.darken};
+
   overflow: hidden;
   cursor: pointer;
   transition: 0.1s;
 
   :hover {
-    box-shadow: 0 4px 10px ${(props) => props.theme.themeColors.shadow};
+    box-shadow: 0 4px 8px ${(props) => props.theme.themeColors.shadow};
     transform: translateY(-2px);
   }
 `;

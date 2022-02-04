@@ -1,19 +1,30 @@
 import React from 'react';
 
-import {} from './resources.styles';
+// Import development data
+import resourcesData from '../../../../data/resources.data';
 
-// Component Props Interface
-type Props = {
-  children?: React.ReactNode;
-  // var-name: type
-  // var-function: () => any
-};
+// Import styles
+import { SubPageContainer } from './resources.styles';
+
+// Import custom components
+import Margin from '../../../../components/margin/margin.components';
+import CopyText from '../../../../components/copy-text/copy-text.components';
+
+// Import custom icons
+import Divider from '../../../../components/divider/divider.components';
+import ResourcesCollection from '../../../../components/resources-collection/resources-collection.components';
 
 // Render Component
-const ResourcesSubPage: React.FC<Props> = ({ children }) => (
-  <div>
-    <h1>Resources Sub Page!</h1>
-  </div>
-);
+const ResourcesSubPage: React.FC = () => {
+  return (
+    <SubPageContainer>
+      <CopyText size='large' color='textDark' fontWeight={400}>
+        All Related Resources
+      </CopyText>
+      <Margin height='24px' />
+      <ResourcesCollection resources={resourcesData.filter((val, i) => i < 8)} numberOfColumns={4} />
+    </SubPageContainer>
+  );
+};
 
 export default ResourcesSubPage;

@@ -68,7 +68,7 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
               textColor='textDark'
               hoverTextColor='tertiaryAccent'
               padding='4px'
-              clickAction={() => handleNavigateClick(`/units`)}
+              clickAction={() => handleNavigateClick('/units')}
             >
               <Icon padding='10px' margin='0 8px 0 0 '>
                 <LeftArrowIcon fontSize='small' />

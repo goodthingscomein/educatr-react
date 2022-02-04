@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Import development data
-import resourceCollections from '../../../../data/resources.data';
+import resourceCollections from '../../../../data/resources-grouped.data';
 
 // Import custom components
-import ResourcesCollection from '../../../../components/resources-collection/resources-collection.components';
+import ResourcesCollectionGrouped from '../../../../components/resources-collection-grouped/resources-collection-grouped.components';
 import Divider from '../../../../components/divider/divider.components';
 
 // Render Component
@@ -13,7 +13,7 @@ const ResourcesSubPage: React.FC = () => (
     {resourceCollections.map((collection, index) => {
       return (
         <>
-          <ResourcesCollection
+          <ResourcesCollectionGrouped
             title={collection.collectionTitle}
             resources={collection.resources}
             numberOfColumns={5}
