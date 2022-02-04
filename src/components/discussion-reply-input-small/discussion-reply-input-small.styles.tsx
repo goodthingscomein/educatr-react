@@ -8,6 +8,7 @@ export const HorizontalContainer = styled.div`
 export const VerticalContainer = styled.div`
   width: 100%;
   display: flex;
+  margin-bottom: 8px;
   flex-direction: column;
 `;
 
@@ -21,7 +22,7 @@ export const DiscussionSubPageContainer = styled.div`
 export const InputDiscussionContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const DisplayPhotoContainer = styled.div`
@@ -34,7 +35,6 @@ export const DisplayPhotoContainer = styled.div`
 
 export const InputContainer = styled.div`
   flex: 1 0 0;
-  margin-top: 6px;
   height: 100%;
 `;
 
@@ -42,6 +42,21 @@ export const ButtonsContainer = styled.div`
   margin-top: 8px;
   display: flex;
   align-self: flex-end;
+`;
+
+export const InputButtonsContainer = styled.div`
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: flex-end;
+`;
+
+export const CancelCommentButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const AllExistingDiscussionsContainer = styled.div`
@@ -87,7 +102,7 @@ export const CommentUserDetailsContainer = styled.div`
 `;
 
 export const SmallerDisplayPhotoContainer = styled.div`
-  flex: 0 0 30px;
+  flex: 0 0 32px;
   height: fit-content;
   margin-right: 16px;
   display: flex;

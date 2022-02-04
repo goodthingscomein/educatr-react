@@ -3,15 +3,22 @@ import React, { useState } from 'react';
 // Import styles
 import {
   ButtonsContainer,
+  InputButtonsContainer,
+  CancelCommentButtonsContainer,
   HorizontalContainer,
   InputDiscussionContainer,
   SmallerDisplayPhotoContainer,
+  VerticalContainer,
+  InputContainer,
 } from './discussion-reply-input-small.styles';
 
 // Import custom components
 import Button from '../button/button.components';
 import CircleImage from '../circle-img/circle-image.components';
 import TextAreaInput from '../text-area-input/text-area-input.components';
+
+// Import custom icons
+import EmojiIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 
 // Component Props Interface
 type Props = {
@@ -32,45 +39,58 @@ const DiscussionReplyInput: React.FC<Props> = ({
 
   return (
     <InputDiscussionContainer>
-      <HorizontalContainer>
-        <SmallerDisplayPhotoContainer>
-          <CircleImage src={displayPhotoSrc} altText='Your Display Photo' />
-        </SmallerDisplayPhotoContainer>
-        <TextAreaInput placeholder='Add a reply...' value={replyInput} onChangeStateDispatch={setReplyInput} />
-      </HorizontalContainer>
-      <ButtonsContainer>
-        <Button
-          variant='text'
-          size='small'
-          textColor='textDark'
-          hoverTextColor='textLight'
-          fontWeight={700}
-          padding='2px'
-          margin='0 8px'
-          clickAction={() => cancelButtonClickAction()}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant='solid'
-          size='small'
-          backgroundColor={replyInput.length > 0 ? 'secondaryAccent' : 'textLight'}
-          hoverBackgroundColor={replyInput.length > 0 ? 'tertiaryAccent' : 'textLight'}
-          textColor='white'
-          fontWeight={700}
-          padding='2px 12px'
-          clickAction={
-            replyInput.length > 0
-              ? () => {
-                  submitButtonListener(replyInput);
-                  setReplyInput('');
-                }
-              : undefined
-          }
-        >
-          {submitButtonName}
-        </Button>
-      </ButtonsContainer>
+      <SmallerDisplayPhotoContainer>
+        <CircleImage src={displayPhotoSrc} altText='Your Display Photo' />
+      </SmallerDisplayPhotoContainer>
+      <VerticalContainer>
+        <InputContainer>
+          <TextAreaInput
+            placeholder='Start a new discussion...'
+            value={replyInput}
+            onChangeStateDispatch={setReplyInput}
+          />
+        </InputContainer>
+        <InputButtonsContainer>
+          {/* Emoji Button */}
+          <Button
+            variant='text'
+            size='medium'
+            textColor='textDark'
+            hoverTextColor='secondaryAccent'
+            padding='8px'
+            fontWeight={700}
+          >
+            <EmojiIcon fontSize='medium' />
+          </Button>
+          {/* Cancel + Comment Buttons */}
+          <CancelCommentButtonsContainer>
+            <Button
+              variant='text'
+              size='medium'
+              textColor='textDark'
+              hoverTextColor='textLight'
+              padding='2px'
+              margin='0 8px'
+              fontWeight={700}
+              clickAction={() => cancelButtonClickAction()}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant='solid'
+              size='medium'
+              backgroundColor={replyInput.length > 0 ? 'secondaryAccent' : 'textLight'}
+              hoverBackgroundColor={replyInput.length > 0 ? 'tertiaryAccent' : 'textLight'}
+              textColor='white'
+              padding='2px 12px'
+              fontWeight={700}
+              clickAction={() => submitButtonListener(replyInput)}
+            >
+              {submitButtonName}
+            </Button>
+          </CancelCommentButtonsContainer>
+        </InputButtonsContainer>
+      </VerticalContainer>
     </InputDiscussionContainer>
   );
 };

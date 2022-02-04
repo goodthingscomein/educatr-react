@@ -37,6 +37,7 @@ export const InputButtonsContainer = styled.div`
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   align-self: flex-end;
 `;
 
