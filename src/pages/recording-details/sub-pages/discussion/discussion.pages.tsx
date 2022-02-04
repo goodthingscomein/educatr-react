@@ -5,13 +5,13 @@ import allDiscussionMessages from '../../../../data/discussion.data';
 
 // Import styles
 import {
-  HorizontalContainer,
   VerticalContainer,
   DiscussionSubPageContainer,
   AddNewDiscussionContainer,
   DisplayPhotoContainer,
   InputContainer,
-  ButtonsContainer,
+  InputButtonsContainer,
+  CancelCommentButtonsContainer,
   AllExistingDiscussionsContainer,
 } from './discussion.styles';
 
@@ -22,6 +22,9 @@ import Button from '../../../../components/button/button.components';
 import Divider from '../../../../components/divider/divider.components';
 import DiscussionThread from '../../../../components/discussion-thread/discussion-thread.components';
 
+// Import custom icons
+import EmojiIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+
 // Render Component
 const DiscussionSubPage: React.FC = () => {
   // New discussion text area
@@ -30,10 +33,10 @@ const DiscussionSubPage: React.FC = () => {
   return (
     <DiscussionSubPageContainer>
       <AddNewDiscussionContainer>
-        <HorizontalContainer>
-          <DisplayPhotoContainer>
-            <CircleImage src='https://picsum.photos/80/80?random=1' altText='Your Display Photo' />
-          </DisplayPhotoContainer>
+        <DisplayPhotoContainer>
+          <CircleImage src='https://picsum.photos/80/80?random=1' altText='Your Display Photo' />
+        </DisplayPhotoContainer>
+        <VerticalContainer>
           <InputContainer>
             <TextAreaInput
               placeholder='Start a new discussion...'
@@ -41,32 +44,46 @@ const DiscussionSubPage: React.FC = () => {
               onChangeStateDispatch={setNewDiscussionInput}
             />
           </InputContainer>
-        </HorizontalContainer>
-        <ButtonsContainer>
-          <Button
-            variant='text'
-            size='medium'
-            textColor='textDark'
-            hoverTextColor='textLight'
-            padding='2px'
-            margin='0 12px'
-            fontWeight={700}
-            clickAction={() => setNewDiscussionInput('')}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='solid'
-            size='medium'
-            backgroundColor={newDiscussionInput.length > 0 ? 'secondaryAccent' : 'textLight'}
-            hoverBackgroundColor={newDiscussionInput.length > 0 ? 'tertiaryAccent' : 'textLight'}
-            textColor='white'
-            padding='4px 12px'
-            fontWeight={700}
-          >
-            Comment
-          </Button>
-        </ButtonsContainer>
+          <InputButtonsContainer>
+            {/* Emoji Button */}
+            <Button
+              variant='text'
+              size='medium'
+              textColor='textDark'
+              hoverTextColor='secondaryAccent'
+              padding='8px'
+              fontWeight={700}
+            >
+              <EmojiIcon fontSize='medium' />
+            </Button>
+            {/* Cancel + Comment Buttons */}
+            <CancelCommentButtonsContainer>
+              <Button
+                variant='text'
+                size='medium'
+                textColor='textDark'
+                hoverTextColor='textLight'
+                padding='2px'
+                margin='0 12px'
+                fontWeight={700}
+                clickAction={() => setNewDiscussionInput('')}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant='solid'
+                size='medium'
+                backgroundColor={newDiscussionInput.length > 0 ? 'secondaryAccent' : 'textLight'}
+                hoverBackgroundColor={newDiscussionInput.length > 0 ? 'tertiaryAccent' : 'textLight'}
+                textColor='white'
+                padding='4px 12px'
+                fontWeight={700}
+              >
+                Comment
+              </Button>
+            </CancelCommentButtonsContainer>
+          </InputButtonsContainer>
+        </VerticalContainer>
       </AddNewDiscussionContainer>
       <Divider color='dark' margin='20px 0 12px 0' />
       <AllExistingDiscussionsContainer>

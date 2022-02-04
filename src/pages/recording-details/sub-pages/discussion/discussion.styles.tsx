@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const HorizontalContainer = styled.div`
-  width: 100%;
-  display: flex;
-`;
-
 export const VerticalContainer = styled.div`
   width: 100%;
   display: flex;
@@ -21,7 +16,6 @@ export const DiscussionSubPageContainer = styled.div`
 export const AddNewDiscussionContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
 `;
 
 export const DisplayPhotoContainer = styled.div`
@@ -38,10 +32,18 @@ export const InputContainer = styled.div`
   height: 100%;
 `;
 
-export const ButtonsContainer = styled.div`
+export const InputButtonsContainer = styled.div`
+  width: 100%;
   margin-top: 8px;
   display: flex;
+  justify-content: space-between;
   align-self: flex-end;
+`;
+
+export const CancelCommentButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const AllExistingDiscussionsContainer = styled.div`
@@ -51,40 +53,4 @@ export const AllExistingDiscussionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-`;
-
-export const HeadDiscussionContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-
-export const SmallDisplayPhotoContainer = styled.div`
-  flex: 0 0 38px;
-  height: fit-content;
-  margin-right: 24px;
-  display: flex;
-  align-items: center;
-`;
-
-export const AllRepliesContainer = styled.div`
-  width: 100%;
-  margin-top: 12px;
-  padding: 0 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-export const CommentUserDetailsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-`;
-
-export const SmallerDisplayPhotoContainer = styled.div`
-  flex: 0 0 30px;
-  height: fit-content;
-  margin-right: 16px;
-  display: flex;
-  align-items: center;
 `;
