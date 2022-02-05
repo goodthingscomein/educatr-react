@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorTypes, FontSizes, SocialColorTypes } from '../../type-declarations/styled';
+import { ColorTypes, FontSizes, SocialColorTypes, FontWeight } from '../../type-declarations/styled';
 
 // Import styles
 import { LinkText } from './link.styles';
@@ -13,7 +13,7 @@ type Props = {
   hoverColor?: ColorTypes | SocialColorTypes;
   underlineEffect?: 'never' | 'hover' | 'always';
   fontSize?: FontSizes;
-  fontWeight?: 300 | 400 | 700;
+  fontWeight?: FontWeight;
 
   // Margin
   margin?: string;

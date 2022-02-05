@@ -18,10 +18,6 @@ import ResourcesCollection from '../../../../components/resources-collection/res
 const ResourcesSubPage: React.FC = () => {
   return (
     <SubPageContainer>
-      <CopyText size='large' color='textDark' fontWeight={400}>
-        All Related Resources
-      </CopyText>
-      <Margin height='24px' />
       <ResourcesCollection resources={resourcesData.filter((val, i) => i < 8)} numberOfColumns={4} />
     </SubPageContainer>
   );

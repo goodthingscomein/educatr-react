@@ -25,7 +25,8 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "set PORT=3006 && react-scripts start",
+    "start": "react-scripts start",
+    "ToRememberForLater": "set PORT=3006 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -51,8 +52,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.14",
@@ -61,6 +60,8 @@
     "@types/redux-logger": "^3.0.9",
     "@types/socket.io": "^3.0.2",
     "@types/styled-components": "^5.1.19",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
     "eslint": "^8.5.0",
     "nodemon": "^2.0.15",
     "react-test-renderer": "^17.0.2"

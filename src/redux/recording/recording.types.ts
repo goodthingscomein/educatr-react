@@ -18,4 +18,14 @@ interface SetRecordingMetadataAction {
   payload: RecordingMetadataType;
 }
 
-export type RecordingAction = SetRecordingMetadataAction;
+interface SetDownloadUrlAction {
+  type: RECORDING_TYPES.SET_DOWNLOAD_URL;
+  payload: string;
+}
+
+interface SetBlobUrlAction {
+  type: RECORDING_TYPES.SET_BLOB_URL;
+  payload: string;
+}
+
+export type RecordingAction = SetRecordingMetadataAction | SetDownloadUrlAction | SetBlobUrlAction;

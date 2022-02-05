@@ -14,7 +14,7 @@ import { AppBarContainer, AppBarItemsContainer } from './app-bar.styles';
 
 // Import custom components
 import Button from '../button/button.components';
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import VerticalDiv from '../vertical-div/vertical-div.components';
 
 // Import custom icons

@@ -13,6 +13,10 @@ export const DiscussionSubPageContainer = styled.div`
   flex-direction: column;
 `;
 
+export const TopButtonsContainer = styled.div`
+  display: flex;
+`;
+
 export const AddNewDiscussionContainer = styled.div`
   width: 100%;
   display: flex;

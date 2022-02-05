@@ -13,7 +13,7 @@ import Section from '../../components/section/section.components';
 import FormInput from '../../components/form-input/form-input.components';
 import Card from '../../components/card/card.components';
 import Margin from '../../components/margin/margin.components';
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import Link from '../../components/link/link.components';
 

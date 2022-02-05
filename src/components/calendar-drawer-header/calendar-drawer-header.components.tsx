@@ -5,7 +5,7 @@ import { DrawerHeader } from './calendar-drawer-header.styles';
 
 // Import custom components
 import Button from '../button/button.components';
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import Margin from '../margin/margin.components';
 import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 import CopyText from '../copy-text/copy-text.components';

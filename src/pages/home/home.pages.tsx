@@ -6,7 +6,7 @@ import { PageContainer, PageButtonsContainer } from './home.styles';
 
 // Import custom components
 import Button from '../../components/button/button.components';
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import Margin from '../../components/margin/margin.components';
 
 // Render Component

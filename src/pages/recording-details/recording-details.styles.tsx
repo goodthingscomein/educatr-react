@@ -67,8 +67,25 @@ export const AllContentContainer = styled.div`
 export const ContentSelectionBar = styled.div`
   width: 100%;
   flex: 0 0 0;
-  padding: 40px 40px 0;
+  padding: 0 40px;
   border-bottom: 1px solid ${(props) => props.theme.themeColors.borderColor};
+  display: flex;
+`;
+
+export const OverviewContentContainer = styled.div`
+  width: 100%;
+  flex: 0 0 0;
+  height: fit-content;
+  padding: 20px 40px 40px;
+`;
+
+export const OverviewUnderHeadingContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const RatingButtonsContainer = styled.div`
   display: flex;
 `;
 
@@ -76,5 +93,10 @@ export const SubContentContainer = styled.div`
   width: 100%;
   flex: 0 0 0;
   height: fit-content;
-  padding: 40px;
+  padding: 20px 40px 40px;
+`;
+
+export const HashtagsContainer = styled.div`
+  display: flex;
+  user-select: none;
 `;

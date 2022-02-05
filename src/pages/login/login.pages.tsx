@@ -11,7 +11,7 @@ import { LoginPageContainer, SignUpText, ContentContainer } from './login.styles
 // Import custom components
 import Card from '../../components/card/card.components';
 import CopyText from '../../components/copy-text/copy-text.components';
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import FormInput from '../../components/form-input/form-input.components';
 import Link from '../../components/link/link.components';
 import Margin from '../../components/margin/margin.components';

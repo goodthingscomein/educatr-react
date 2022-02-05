@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Route, Routes, useNavigate, useLocation, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { setDownloadUrl } from '../../redux/recording/recording.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -23,6 +24,10 @@ import {
   AllContentContainer,
   ContentSelectionBar,
   SubContentContainer,
+  HashtagsContainer,
+  OverviewContentContainer,
+  OverviewUnderHeadingContainer,
+  RatingButtonsContainer,
 } from './recording-details.styles';
 
 // Import custom components
@@ -33,49 +38,79 @@ import Icon from '../../components/icon/icon-components';
 
 // Import custom icons
 import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
-import FavouriteIcon from '@mui/icons-material/Star';
+import FavouriteSolidIcon from '@mui/icons-material/Star';
 import FavouriteOutlineIcon from '@mui/icons-material/StarBorder';
 import HelpIcon from '@mui/icons-material/HelpOutline';
-import OptionsIcon from '@mui/icons-material/MoreVert';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ThumbUpOutlineIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbUpSolidIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownOutlineIcon from '@mui/icons-material/ThumbDownOutlined';
+import ThumbDownSolidIcon from '@mui/icons-material/ThumbDown';
+import TimestampIcon from '@mui/icons-material/MoreTime';
+import ShareIcon from '@mui/icons-material/Share';
+import MoreHorizontalIcon from '@mui/icons-material/MoreHoriz';
 
 // Import sub pages
-import OverviewSubPage from './sub-pages/overview/overview.pages';
 import DiscussionSubPage from './sub-pages/discussion/discussion.pages';
 import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotesSubPage from './sub-pages/notes/notes.pages';
 import PracticeSubPage from './sub-pages/practice/practice.pages';
 import NotFoundPage from '../not-found/not-found.pages';
+import Margin from '../../components/margin/margin.components';
+import Divider from '../../components/divider/divider.components';
+
+type VideoRatingType = 'likes' | 'dislikes' | undefined;
 
 type Props = {
   // Drawer button nav url management
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
 
   // Recording details from redux state
-  recordingType: string;
   thumbnailSrc: string;
   title: string;
   description: string;
   hashtags?: string[];
+  isFavourited?: boolean;
+  alreadyRated?: VideoRatingType;
+
+  // Recording download redux state
+  blobUrl: string;
+  setDownloadUrl: typeof setDownloadUrl;
 };
 
 // Render Component
-const RecordingsPage: React.FC<Props> = ({
+const RecordingDetailsPage: React.FC<Props> = ({
   setRecordingsNavigationUrl,
-  recordingType,
   thumbnailSrc,
   title,
   description,
   hashtags,
+  isFavourited,
+  alreadyRated,
+  blobUrl,
+  setDownloadUrl,
 }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [showingFullDescription, setShowingFullDescription] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(isFavourited || false);
+  const [videoRating, setVideoRating] = useState<VideoRatingType>(alreadyRated);
+
+  // Adding timestamp functionality + short note input
+  const [isAddingTimestamp, setIsAddingTimestamp] = useState(false);
+  const [timestampNoteInput, setTimestampNoteInput] = useState('');
 
   const navigate = useNavigate();
   const { recordingId } = useParams();
+  const recordingURL = `http://localhost:4001/api/v1/vods/recordings/${recordingId}`;
 
   const recordingsNavigation = (url: string) => {
     navigate(url);
     setRecordingsNavigationUrl(url);
   };
+
+  // Set the download link when we open the page
+  useEffect(() => {
+    setDownloadUrl(recordingURL);
+  }, []);
 
   return (
     <PageContainer>
@@ -114,7 +149,7 @@ const RecordingsPage: React.FC<Props> = ({
               margin='0 22px 0 0'
               clickAction={() => setIsFavourite(!isFavourite)}
             >
-              {isFavourite ? <FavouriteIcon fontSize='small' /> : <FavouriteOutlineIcon fontSize='small' />}
+              {isFavourite ? <FavouriteSolidIcon fontSize='small' /> : <FavouriteOutlineIcon fontSize='small' />}
             </Button>
             <Button
               variant='text'
@@ -134,28 +169,124 @@ const RecordingsPage: React.FC<Props> = ({
               padding='8px'
               margin='0 20px 0 0'
             >
-              <OptionsIcon fontSize='small' />
+              <MoreVertIcon fontSize='small' />
             </Button>
           </AppBarSectionContainer>
         </AppBarContainer>
         <VideoContainer>
-          <Video controls preload='auto' poster={thumbnailSrc}>
-            <source src={`http://localhost:4001/api/v1/vods/recordings/${recordingId}`} type={recordingType}></source>
-          </Video>
+          {blobUrl && (
+            <Video controls preload='auto' poster={thumbnailSrc}>
+              <source src={blobUrl} type='video/mp4' />
+              HTML5 videos not supported with this browser.
+            </Video>
+          )}
         </VideoContainer>
         <AllContentContainer>
+          <OverviewContentContainer>
+            {/* Overview of video */}
+            {hashtags && (
+              <HashtagsContainer>
+                {hashtags.map((hashtag) => {
+                  return (
+                    <Link key={hashtag} color='primary' fontSize='small' margin='0 4px 0 0'>
+                      #{hashtag}
+                    </Link>
+                  );
+                })}
+              </HashtagsContainer>
+            )}
+            <CopyText size='large' color='textDark' fontWeight={600}>
+              {title}
+            </CopyText>
+            <Margin height='12px' />
+            <OverviewUnderHeadingContainer>
+              <CopyText size='medium' color='textLight' fontWeight={300}>
+                27/01/2022
+              </CopyText>
+              <RatingButtonsContainer>
+                <Button
+                  variant='text'
+                  size='small'
+                  textColor='textDark'
+                  padding='8px'
+                  margin='0 28px 0 0'
+                  clickAction={() => (videoRating === 'likes' ? setVideoRating(undefined) : setVideoRating('likes'))}
+                >
+                  {videoRating === 'likes' ? (
+                    <ThumbUpSolidIcon fontSize='medium' />
+                  ) : (
+                    <ThumbUpOutlineIcon fontSize='medium' />
+                  )}
+                </Button>
+                <Button
+                  variant='text'
+                  size='small'
+                  textColor='textDark'
+                  padding='8px'
+                  margin='0 28px 0 0'
+                  clickAction={() =>
+                    videoRating === 'dislikes' ? setVideoRating(undefined) : setVideoRating('dislikes')
+                  }
+                >
+                  {videoRating === 'dislikes' ? (
+                    <ThumbDownSolidIcon fontSize='medium' />
+                  ) : (
+                    <ThumbDownOutlineIcon fontSize='medium' />
+                  )}
+                </Button>
+                <Button
+                  variant='text'
+                  size='small'
+                  textColor='textDark'
+                  hoverTextColor='secondaryAccent'
+                  padding='8px'
+                  margin='0 28px 0 0'
+                >
+                  <ShareIcon fontSize='medium' />
+                </Button>
+                {}
+                <Button
+                  variant='text'
+                  size='small'
+                  textColor='textDark'
+                  hoverTextColor='secondaryAccent'
+                  padding='8px'
+                  margin='0 28px 0 0'
+                >
+                  <TimestampIcon fontSize='medium' />
+                </Button>
+                <Button variant='text' size='small' textColor='textDark' hoverTextColor='secondaryAccent' padding='8px'>
+                  <MoreHorizontalIcon fontSize='medium' />
+                </Button>
+              </RatingButtonsContainer>
+            </OverviewUnderHeadingContainer>
+            <Divider color='dark' margin='16px 0 28px' />
+            <CopyText size='medium' color='textLight' fontWeight={300}>
+              {showingFullDescription ? description : description.substring(0, 200)}
+            </CopyText>
+            {description.length >= 200 && <Margin height='8px' />}
+            {description.length >= 200 && !showingFullDescription && (
+              <Link
+                color='textDark'
+                fontSize='small'
+                fontWeight={600}
+                clickAction={() => setShowingFullDescription(true)}
+              >
+                Show more
+              </Link>
+            )}
+            {description.length >= 200 && showingFullDescription && (
+              <Link
+                color='textDark'
+                fontSize='small'
+                fontWeight={600}
+                clickAction={() => setShowingFullDescription(false)}
+              >
+                Show less
+              </Link>
+            )}
+          </OverviewContentContainer>
           <ContentSelectionBar>
-            <Link
-              fontSize='large'
-              fontWeight={400}
-              color={useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*$/g) ? 'tertiaryAccent' : 'textDark'}
-              hoverColor='tertiaryAccent'
-              underlineEffect='always'
-              margin='0 16px 0 0'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}`)}
-            >
-              Overview
-            </Link>
             <Link
               fontSize='large'
               fontWeight={400}
@@ -210,12 +341,11 @@ const RecordingsPage: React.FC<Props> = ({
               Practice
             </Link>
           </ContentSelectionBar>
+          <Margin height='24px' />
           <SubContentContainer>
+            {/* Sub route for video */}
             <Routes>
-              <Route
-                path='/'
-                element={<OverviewSubPage title={title} description={description} hashtags={hashtags} />}
-              />
+              <Route path='/' element={<Navigate to={`/recordings/${recordingId}/discussion`} />} />
               <Route path='/discussion' element={<DiscussionSubPage />} />
               <Route path='/resources' element={<ResourcesSubPage />} />
               <Route path='/notes' element={<NotesSubPage />} />
@@ -231,15 +361,20 @@ const RecordingsPage: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  recordingType: state.recording.recordingType,
+  // Recording metadata
+  id: state.recording.id,
   thumbnailSrc: state.recording.thumbnailSrc,
   title: state.recording.title,
   description: state.recording.description,
   hashtags: state.recording.hashtags,
+
+  // Recording blob data
+  blobUrl: state.recording.blobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
+  setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecordingsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecordingDetailsPage);

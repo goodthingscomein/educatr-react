@@ -10,11 +10,16 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { UnitCardContainer, UnitCardImage, UnitCardTextContainer, UnitCardLinkContainer } from './unit-card.styles';
+import {
+  UnitCardContainer,
+  CardImageHoverText,
+  CardImage,
+  CardTextMainContainer,
+  CardLinksContainer,
+} from './unit-card.styles';
 
 // Import custom components
 import CopyText from '../copy-text/copy-text.components';
-import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 import Link from '../link/link.components';
 import Margin from '../margin/margin.components';
 import VerticalDiv from '../vertical-div/vertical-div.components';
@@ -41,9 +46,18 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
   };
 
   return (
-    <UnitCardContainer onClick={() => handleNavigateClick(`/units/${unit.code}`)}>
-      <UnitCardImage src={`https://picsum.photos/640/360?random=${index}`} />
-      <UnitCardTextContainer>
+    <UnitCardContainer>
+      <CardImage
+        src={`https://picsum.photos/640/360?random=${index}`}
+        onClick={() => handleNavigateClick(`/units/${unit.code}`)}
+      >
+        <CardImageHoverText>
+          <CopyText size={'small'} color={'white'}>
+            Go To Unit Overview
+          </CopyText>
+        </CardImageHoverText>
+      </CardImage>
+      <CardTextMainContainer>
         {/* Title + blurb */}
         <VerticalDiv
           backgroundColor='transparent'
@@ -64,7 +78,7 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
         </VerticalDiv>
         <Divider color='dark' margin='32px 0 8px 0' />
         {/* List of links */}
-        <UnitCardLinkContainer>
+        <CardLinksContainer>
           <Link
             fontSize='small'
             color='textDark'
@@ -105,8 +119,8 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
           >
             Grades
           </Link>
-        </UnitCardLinkContainer>
-      </UnitCardTextContainer>
+        </CardLinksContainer>
+      </CardTextMainContainer>
     </UnitCardContainer>
   );
 };

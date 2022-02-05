@@ -19,11 +19,11 @@ import {
 import CircleImage from '../../../../components/circle-img/circle-image.components';
 import TextAreaInput from '../../../../components/text-area-input/text-area-input.components';
 import Button from '../../../../components/button/button.components';
-import Divider from '../../../../components/divider/divider.components';
 import DiscussionThread from '../../../../components/discussion-thread/discussion-thread.components';
 
 // Import custom icons
 import EmojiIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import Margin from '../../../../components/margin/margin.components';
 
 // Render Component
 const DiscussionSubPage: React.FC = () => {
@@ -85,13 +85,14 @@ const DiscussionSubPage: React.FC = () => {
           </InputButtonsContainer>
         </VerticalContainer>
       </AddNewDiscussionContainer>
-      <Divider color='dark' margin='20px 0 12px 0' />
+      <Margin height='36px' />
       <AllExistingDiscussionsContainer>
         {allDiscussionMessages
           .filter((headMessages) => !headMessages.replyingToId)
           .map((headMessage) => {
             return (
               <DiscussionThread
+                key={headMessage.id}
                 headMessage={headMessage}
                 allReplies={allDiscussionMessages.filter(
                   (replyMessages) => replyMessages.replyingToId === headMessage.id

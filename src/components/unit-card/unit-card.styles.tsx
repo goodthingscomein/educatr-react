@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UnitCardContainer = styled.a`
+export const UnitCardContainer = styled.div`
   background-color: ${(props) => props.theme.themeColors.white};
   transition: 0.1s;
   display: flex;
@@ -8,7 +8,6 @@ export const UnitCardContainer = styled.a`
   justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
-  cursor: pointer;
   border-radius: 4px;
 
   :hover {
@@ -17,12 +16,20 @@ export const UnitCardContainer = styled.a`
   }
 `;
 
+export const CardImageHoverText = styled.div`
+  width: fit-content;
+  height: fit-content;
+  display: none;
+  justify-content: center;
+  align-items: center;
+`;
+
 // Unit Card Image Props
 type UnitCardImageProps = {
   src: string;
 };
 
-export const UnitCardImage = styled.div<UnitCardImageProps>`
+export const CardImage = styled.a<UnitCardImageProps>`
   flex: 0 0 180px;
   width: 100%;
   background: linear-gradient(
@@ -33,9 +40,29 @@ export const UnitCardImage = styled.div<UnitCardImageProps>`
   background-position: center;
   background-size: cover;
   background-color: ${(props) => props.theme.themeColors.textLight};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  // Hover styles for the image of the card (darken)
+  :hover {
+    background: linear-gradient(
+        ${(props) => props.theme.themeColors.darkShadow},
+        ${(props) => props.theme.themeColors.darkShadow}
+      ),
+      url(${(props) => props.src});
+    background-position: center;
+    background-size: cover;
+  }
+
+  // Hover styles for the image of the card (darken)
+  :hover ${CardImageHoverText} {
+    display: flex;
+  }
 `;
 
-export const UnitCardTextContainer = styled.div`
+export const CardTextMainContainer = styled.div`
   flex: 0 0 0;
   display: flex;
   flex-direction: column;
@@ -44,7 +71,7 @@ export const UnitCardTextContainer = styled.div`
   background-color: ${(props) => props.theme.themeColors.white};
 `;
 
-export const UnitCardLinkContainer = styled.div`
+export const CardLinksContainer = styled.div`
   flex: 0 0 0;
   width: 100%;
   display: flex;

@@ -5,7 +5,7 @@ import { ProfileCardContainer, ButtonsContainer } from './profile-card.styles';
 
 // Import custom components
 import CopyText from '../copy-text/copy-text.components';
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import Margin from '../margin/margin.components';
 import VerticalDiv from '../vertical-div/vertical-div.components';
 import Button from '../button/button.components';

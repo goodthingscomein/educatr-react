@@ -5,7 +5,7 @@ import { HeaderContainer } from './all-recordings-header.styles';
 
 // Import custom components
 import Button from '../button/button.components';
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 import Link from '../link/link.components';
 import Input from '../input/input.components';

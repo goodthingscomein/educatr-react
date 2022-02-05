@@ -4,7 +4,7 @@ import React from 'react';
 import { ResourceCardGridContainer } from './resources-collection-grouped.styles';
 
 // Import custom components
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import Margin from '../margin/margin.components';
 import ResourceCard from '../resource-card/resource-card.components';
 

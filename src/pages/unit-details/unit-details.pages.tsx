@@ -19,7 +19,7 @@ import {
 } from './unit-details.styles';
 
 // Import custom components
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import Link from '../../components/link/link.components';
 import HorizontalDiv from '../../components/horizontal-div/horizontal-div.components';
 import Button from '../../components/button/button.components';

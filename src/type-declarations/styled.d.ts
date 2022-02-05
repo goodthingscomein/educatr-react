@@ -40,7 +40,7 @@ export type FilterColorTypes =
   | 'filterPink';
 
 export type FontSizes = 'x-small' | 'small' | 'medium' | 'large' | 'x-large';
-export type FontWeight = 200 | 300 | 400 | 700;
+export type FontWeight = 200 | 300 | 400 | 600 | 700;
 
 // and extend them!
 declare module 'styled-components' {

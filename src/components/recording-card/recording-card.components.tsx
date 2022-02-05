@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
-import { setCurrentRecordingMetadata } from '../../redux/recording/recording.actions';
+import { setCurrentRecordingMetadata, setDownloadUrl, setBlobUrl } from '../../redux/recording/recording.actions';
+import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
@@ -34,6 +35,7 @@ import { RecordingMetadataType } from '../../redux/recording/recording.types';
 // Component Props Interface
 type Props = {
   recording: RecordingMetadataType;
+  id: string; // Existing ID of video already playing
 
   // Recordings drawer button url
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -45,6 +47,7 @@ type Props = {
 // Render Component
 const RecordingCard: React.FC<Props> = ({
   recording, // Associated recording metadata
+  id,
   setRecordingsNavigationUrl,
   setCurrentRecordingMetadata,
 }) => {
@@ -53,8 +56,16 @@ const RecordingCard: React.FC<Props> = ({
 
   const recordingsNavigation = (url: string) => {
     navigate(url);
-    setCurrentRecordingMetadata(recording); // set the current recording to play metadata
     setRecordingsNavigationUrl(url); // set the nav url
+
+    // If we have clicked on a new video
+    if (recording.id !== id) {
+      // set the current recording to play metadata
+      setCurrentRecordingMetadata(recording);
+      // Reset the current playing video
+      setDownloadUrl('');
+      setBlobUrl('');
+    }
   };
 
   // Calculate the timestamp
@@ -64,7 +75,10 @@ const RecordingCard: React.FC<Props> = ({
 
   return (
     <RecordingCardContainer>
-      <Thumbnail src={recording.thumbnailSrc} onClick={() => recordingsNavigation(`/recordings/${recording.id}`)}>
+      <Thumbnail
+        src={recording.thumbnailSrc}
+        onClick={() => recordingsNavigation(`/recordings/${recording.id}/discussion`)}
+      >
         <ThumbnailTimestamp>
           {hrs > 0 && `${hrs}:`}
           {mins < 10 && hrs > 0 ? `0${mins}:` : `${mins}:`}
@@ -114,9 +128,16 @@ const RecordingCard: React.FC<Props> = ({
   );
 };
 
+const mapStateToProps = (state: State) => ({
+  // Recording metadata
+  id: state.recording.id,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
   setCurrentRecordingMetadata: (recording: RecordingMetadataType) => dispatch(setCurrentRecordingMetadata(recording)),
+  setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
+  setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
 });
 
-export default connect(null, mapDispatchToProps)(RecordingCard);
+export default connect(mapStateToProps, mapDispatchToProps)(RecordingCard);

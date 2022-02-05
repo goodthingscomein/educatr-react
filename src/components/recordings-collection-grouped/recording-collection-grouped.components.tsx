@@ -4,7 +4,7 @@ import React from 'react';
 import { RecordingsCardGridContainer } from './recording-collection-grouped.styles';
 
 // Import custom components
-import HeadingText from '../heading/heading.components';
+import HeadingText from '../heading-text/heading-text.components';
 import Margin from '../margin/margin.components';
 import RecordingCard from '../recording-card/recording-card.components';
 

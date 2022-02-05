@@ -66,7 +66,7 @@ const Drawer: React.FC<Props> = ({
 
   const drawerButtonClick = (navigateLocation: string) => {
     navigate(navigateLocation);
-    setDrawerIsOpen(false);
+    if (isDrawerOpen) setDrawerIsOpen(false);
   };
 
   return (

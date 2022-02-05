@@ -44,11 +44,7 @@ const DiscussionReplyInput: React.FC<Props> = ({
       </SmallerDisplayPhotoContainer>
       <VerticalContainer>
         <InputContainer>
-          <TextAreaInput
-            placeholder='Start a new discussion...'
-            value={replyInput}
-            onChangeStateDispatch={setReplyInput}
-          />
+          <TextAreaInput placeholder='Type your reply...' value={replyInput} onChangeStateDispatch={setReplyInput} />
         </InputContainer>
         <InputButtonsContainer>
           {/* Emoji Button */}

@@ -1,7 +1,7 @@
 import React from 'react';
-import {ColorTypes} from '../../type-declarations/styled';
+import { ColorTypes } from '../../type-declarations/styled';
 
-import {H1, H2, H3, H4, H5, H6} from './heading.styles';
+import { H1, H2, H3, H4, H5, H6 } from './heading-text.styles';
 
 // Component Props Interface
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 // Render Component
-const HeadingText: React.FC<Props> = ({variant, color, children}) => {
+const HeadingText: React.FC<Props> = ({ variant, color, children }) => {
   switch (variant) {
     case 'h1':
       return <H1 color={color}>{children}</H1>;

@@ -6,7 +6,7 @@ import { PageContainer, ButtonsContainer } from './not-found.styles';
 
 // Import custom components
 import Button from '../../components/button/button.components';
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import Margin from '../../components/margin/margin.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 

@@ -12,7 +12,7 @@ import {
 } from './messages.styles';
 
 // Import custom components
-import HeadingText from '../../components/heading/heading.components';
+import HeadingText from '../../components/heading-text/heading-text.components';
 import Input from '../../components/input/input.components';
 import Margin from '../../components/margin/margin.components';
 import Message from '../../components/message/message.components';
