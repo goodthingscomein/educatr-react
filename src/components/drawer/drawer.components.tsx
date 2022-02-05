@@ -27,7 +27,7 @@ import ClassesOutlinedIcon from '@mui/icons-material/FeaturedVideoOutlined';
 import AssessmentsOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import GradesOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-// Selected (filled)
+// Selected (solid)
 import HomeSolidIcon from '@mui/icons-material/Home';
 import CalendarSolidIcon from '@mui/icons-material/Today';
 import MessagesSolidIcon from '@mui/icons-material/Chat';
@@ -46,255 +46,143 @@ import DrawerButton from '../drawer-button/drawer-button.components';
 import Icon from '../icon/icon-components';
 import Divider from '../divider/divider.components';
 import Link from '../link/link.components';
-import { ClickAwayListener } from '@mui/base';
 
 type Props = {
   // Drawer open close management
   isDrawerOpen: boolean;
-  setDrawerIsOpen: typeof setDrawerIsOpen;
 
   // Drawer button nav url management
   yourUnitsNavigationUrl: string;
   recordingsNavigationUrl: string;
 };
 
-const Drawer: React.FC<Props> = ({
-  isDrawerOpen,
-  setDrawerIsOpen,
-  yourUnitsNavigationUrl,
-  recordingsNavigationUrl,
-}) => {
+const Drawer: React.FC<Props> = ({ isDrawerOpen, yourUnitsNavigationUrl, recordingsNavigationUrl }) => {
   const navigate = useNavigate();
 
-  const drawerButtonClick = (navigateLocation: string) => {
-    navigate(navigateLocation);
-    if (isDrawerOpen) setDrawerIsOpen(false);
-  };
+  // const drawerButtonClick = (navigateLocation: string) => {
+  //   navigate(navigateLocation);
+  //   if (isDrawerOpen) setDrawerIsOpen(false);
+  // };
 
   return (
-    <ClickAwayListener
-      onClickAway={() => (isDrawerOpen ? setDrawerIsOpen(false) : null)}
-      mouseEvent='onMouseDown'
-      touchEvent='onTouchStart'
-    >
-      <DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
-        <DrawerSection backgroundColor='transparent'>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/$/g) ? true : false}
-            clickAction={() => drawerButtonClick('/')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/$/g) ? (
-                <HomeSolidIcon fontSize='medium' />
+    <DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
+      <DrawerSection backgroundColor='transparent'>
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/$/g) ? true : false}
+          navigationUrl='/'
+          selectedIcon={<HomeSolidIcon fontSize='medium' />}
+          unselectedIcon={<HomeOutlinedIcon fontSize='medium' />}
+          buttonText='Home'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/calendar/g) ? true : false}
+          navigationUrl='/calendar'
+          selectedIcon={<CalendarSolidIcon fontSize='medium' />}
+          unselectedIcon={<CalendarOutlinedIcon fontSize='medium' />}
+          buttonText='Calendar'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/messages/g) ? true : false}
+          navigationUrl='/messages'
+          selectedIcon={<MessagesSolidIcon fontSize='medium' />}
+          unselectedIcon={<MessagesOutlinedIcon fontSize='medium' />}
+          buttonText='Messages'
+        />
+        <Divider color='light' margin='0' />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/resources/g) ? true : false}
+          navigationUrl='/resources'
+          selectedIcon={<ResourcesSolidIcon fontSize='medium' />}
+          unselectedIcon={<ResourcesOutlinedIcon fontSize='medium' />}
+          buttonText='Resources'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/recordings/g) ? true : false}
+          navigationUrl={recordingsNavigationUrl}
+          selectedIcon={<RecordingsSolidIcon fontSize='medium' />}
+          unselectedIcon={<RecordingsOutlinedIcon fontSize='medium' />}
+          buttonText='Recordings'
+        />
+        <Divider color='light' margin='0' />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/units/g) ? true : false}
+          navigationUrl={yourUnitsNavigationUrl}
+          selectedIcon={<UnitsSolidIcon fontSize='medium' />}
+          unselectedIcon={<UnitsOutlinedIcon fontSize='medium' />}
+          buttonText='Your Units'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/notes/g) ? true : false}
+          navigationUrl='/notes'
+          selectedIcon={<NotesSolidIcon fontSize='medium' />}
+          unselectedIcon={<NotesOutlinedIcon fontSize='medium' />}
+          buttonText='Your Notes'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/classes/g) ? true : false}
+          navigationUrl='/classes'
+          selectedIcon={<ClassesSolidIcon fontSize='medium' />}
+          unselectedIcon={<ClassesOutlinedIcon fontSize='medium' />}
+          buttonText='Your Classes'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/assessments/g) ? true : false}
+          navigationUrl='/assessments'
+          selectedIcon={<AssessmentsSolidIcon fontSize='medium' />}
+          unselectedIcon={<AssessmentsOutlinedIcon fontSize='medium' />}
+          buttonText='Your Assessments'
+        />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/grades/g) ? true : false}
+          navigationUrl='/grades'
+          selectedIcon={<GradesSolidIcon fontSize='medium' />}
+          unselectedIcon={<GradesOutlinedIcon fontSize='medium' />}
+          buttonText='Your Grades'
+        />
+        <Divider color='light' margin='0' />
+        <DrawerButton
+          isSelected={useLocation().pathname.match(/^\/settings/g) ? true : false}
+          navigationUrl='/settings'
+          selectedIcon={<SettingsSolidIcon fontSize='medium' />}
+          unselectedIcon={<SettingsOutlinedIcon fontSize='medium' />}
+          buttonText='Settings'
+        />
+      </DrawerSection>
+      <DrawerSection backgroundColor='transparent'>
+        {isDrawerOpen ? (
+          <>
+            <Divider color='light' />
+            <DrawerSection
+              backgroundColor='transparent'
+              flexDirection='column'
+              alignItems='flex-start'
+              padding='0 24px'
+            >
+              {isDrawerOpen ? (
+                <>
+                  <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                    Legal Center
+                  </Link>
+                  <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                    Privacy Policy
+                  </Link>
+                  <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                    Terms and Conditions
+                  </Link>
+                  <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
+                    Contact Us
+                  </Link>
+                </>
               ) : (
-                <HomeOutlinedIcon fontSize='medium' />
+                ''
               )}
-            </Icon>
-            {isDrawerOpen ? 'Home' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/calendar/g) ? true : false}
-            clickAction={() => drawerButtonClick('/calendar')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/calendar/g) ? (
-                <CalendarSolidIcon fontSize='medium' />
-              ) : (
-                <CalendarOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Calendar' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/messages/g) ? true : false}
-            clickAction={() => drawerButtonClick('/messages')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/messages/g) ? (
-                <MessagesSolidIcon fontSize='medium' />
-              ) : (
-                <MessagesOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Messages' : ''}
-          </DrawerButton>
-          <Divider color='light' margin='0' />
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/resources/g) ? true : false}
-            clickAction={() => drawerButtonClick('/resources')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/resources/g) ? (
-                <ResourcesSolidIcon fontSize='medium' />
-              ) : (
-                <ResourcesOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Resources' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/recordings/g) ? true : false}
-            clickAction={() => drawerButtonClick(recordingsNavigationUrl)}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/recordings/g) ? (
-                <RecordingsSolidIcon fontSize='medium' />
-              ) : (
-                <RecordingsOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Recordings' : ''}
-          </DrawerButton>
-          <Divider color='light' margin='0' />
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/units/g) ? true : false}
-            clickAction={() => drawerButtonClick(yourUnitsNavigationUrl)}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/units/g) ? (
-                <UnitsSolidIcon fontSize='medium' />
-              ) : (
-                <UnitsOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Your Units' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/notes/g) ? true : false}
-            clickAction={() => drawerButtonClick('/notes')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/notes/g) ? (
-                <NotesSolidIcon fontSize='medium' />
-              ) : (
-                <NotesOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Your Notes' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/classes/g) ? true : false}
-            clickAction={() => drawerButtonClick('/classes')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/classes/g) ? (
-                <ClassesSolidIcon fontSize='medium' />
-              ) : (
-                <ClassesOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Your Classes' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/assessments/g) ? true : false}
-            clickAction={() => drawerButtonClick('/assessments')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/assessments/g) ? (
-                <AssessmentsSolidIcon fontSize='medium' />
-              ) : (
-                <AssessmentsOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Your Assessments' : ''}
-          </DrawerButton>
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/grades/g) ? true : false}
-            clickAction={() => drawerButtonClick('/grades')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/grades/g) ? (
-                <GradesSolidIcon fontSize='medium' />
-              ) : (
-                <GradesOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Your Grades' : ''}
-          </DrawerButton>
-          <Divider color='light' margin='0' />
-          <DrawerButton
-            textColor='white'
-            hoverTextColor='primaryAccent'
-            fontWeight={300}
-            selected={useLocation().pathname.match(/^\/settings/g) ? true : false}
-            clickAction={() => drawerButtonClick('/settings')}
-          >
-            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
-              {useLocation().pathname.match(/^\/settings/g) ? (
-                <SettingsSolidIcon fontSize='medium' />
-              ) : (
-                <SettingsOutlinedIcon fontSize='medium' />
-              )}
-            </Icon>
-            {isDrawerOpen ? 'Settings' : ''}
-          </DrawerButton>
-        </DrawerSection>
-        <DrawerSection backgroundColor='transparent'>
-          {isDrawerOpen ? (
-            <>
-              <Divider color='light' />
-              <DrawerSection
-                backgroundColor='transparent'
-                flexDirection='column'
-                alignItems='flex-start'
-                padding='0 24px'
-              >
-                {isDrawerOpen ? (
-                  <>
-                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-                      Legal Center
-                    </Link>
-                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-                      Privacy Policy
-                    </Link>
-                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-                      Terms and Conditions
-                    </Link>
-                    <Link color='white' hoverColor='primaryAccent' fontSize='small' fontWeight={300}>
-                      Contact Us
-                    </Link>
-                  </>
-                ) : (
-                  ''
-                )}
-              </DrawerSection>
-            </>
-          ) : (
-            ''
-          )}
-        </DrawerSection>
-      </DrawerContainer>
-    </ClickAwayListener>
+            </DrawerSection>
+          </>
+        ) : (
+          ''
+        )}
+      </DrawerSection>
+    </DrawerContainer>
   );
 };
 
@@ -304,8 +192,8 @@ const mapStateToProps = (state: State) => ({
   recordingsNavigationUrl: state.navigation.recordingsNavigationUrl,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  setDrawerIsOpen: (open: boolean) => dispatch(setDrawerIsOpen(open)),
-});
+// const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+//   setDrawerIsOpen: (open: boolean) => dispatch(setDrawerIsOpen(open)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Drawer);
+export default connect(mapStateToProps)(Drawer);
