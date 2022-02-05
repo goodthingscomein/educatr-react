@@ -16,27 +16,29 @@ import { DrawerContainer } from './drawer.styles';
 
 // Import custom icons
 // Unselected (outlined)
-import HomeIcon from '@mui/icons-material/HomeOutlined';
-import CalendarIcon from '@mui/icons-material/TodayOutlined';
-import MessagesIcon from '@mui/icons-material/ChatOutlined';
-import ResourcesIcon from '@mui/icons-material/AutoStoriesOutlined';
-import RecordingsIcon from '@mui/icons-material/OndemandVideo';
-import UnitsIcon from '@mui/icons-material/SchoolOutlined';
-import NotesIcon from '@mui/icons-material/DescriptionOutlined';
-import ClassesIcon from '@mui/icons-material/FeaturedVideoOutlined';
-import GradesIcon from '@mui/icons-material/BarChartOutlined';
-import SettingsIcon from '@mui/icons-material/SettingsOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import CalendarOutlinedIcon from '@mui/icons-material/TodayOutlined';
+import MessagesOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import ResourcesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import RecordingsOutlinedIcon from '@mui/icons-material/OndemandVideo';
+import UnitsOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import NotesOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import ClassesOutlinedIcon from '@mui/icons-material/FeaturedVideoOutlined';
+import AssessmentsOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import GradesOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 // Selected (filled)
-import HomeSelectedIcon from '@mui/icons-material/Home';
-import CalendarSelectedIcon from '@mui/icons-material/Today';
-import MessagesSelectedIcon from '@mui/icons-material/Chat';
-import ResourcesSelectedIcon from '@mui/icons-material/AutoStories';
-import RecordingsSelectedIcon from '@mui/icons-material/OndemandVideo';
-import UnitsSelectedIcon from '@mui/icons-material/School';
-import NotesSelectedIcon from '@mui/icons-material/Description';
-import ClassesSelectedIcon from '@mui/icons-material/FeaturedVideo';
-import GradesSelectedIcon from '@mui/icons-material/BarChart';
-import SettingsSelectedIcon from '@mui/icons-material/Settings';
+import HomeSolidIcon from '@mui/icons-material/Home';
+import CalendarSolidIcon from '@mui/icons-material/Today';
+import MessagesSolidIcon from '@mui/icons-material/Chat';
+import ResourcesSolidIcon from '@mui/icons-material/AutoStories';
+import RecordingsSolidIcon from '@mui/icons-material/OndemandVideo';
+import UnitsSolidIcon from '@mui/icons-material/School';
+import NotesSolidIcon from '@mui/icons-material/Description';
+import ClassesSolidIcon from '@mui/icons-material/FeaturedVideo';
+import AssessmentsSolidIcon from '@mui/icons-material/Quiz';
+import GradesSolidIcon from '@mui/icons-material/Analytics';
+import SettingsSolidIcon from '@mui/icons-material/Settings';
 
 // Import custom components
 import DrawerSection from '../drawer-section/drawer-section.components';
@@ -86,9 +88,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/$/g) ? (
-                <HomeSelectedIcon fontSize='medium' />
+                <HomeSolidIcon fontSize='medium' />
               ) : (
-                <HomeIcon fontSize='medium' />
+                <HomeOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Home' : ''}
@@ -102,9 +104,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/calendar/g) ? (
-                <CalendarSelectedIcon fontSize='medium' />
+                <CalendarSolidIcon fontSize='medium' />
               ) : (
-                <CalendarIcon fontSize='medium' />
+                <CalendarOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Calendar' : ''}
@@ -118,9 +120,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/messages/g) ? (
-                <MessagesSelectedIcon fontSize='medium' />
+                <MessagesSolidIcon fontSize='medium' />
               ) : (
-                <MessagesIcon fontSize='medium' />
+                <MessagesOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Messages' : ''}
@@ -135,9 +137,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/resources/g) ? (
-                <ResourcesSelectedIcon fontSize='medium' />
+                <ResourcesSolidIcon fontSize='medium' />
               ) : (
-                <ResourcesIcon fontSize='medium' />
+                <ResourcesOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Resources' : ''}
@@ -151,9 +153,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/recordings/g) ? (
-                <RecordingsSelectedIcon fontSize='medium' />
+                <RecordingsSolidIcon fontSize='medium' />
               ) : (
-                <RecordingsIcon fontSize='medium' />
+                <RecordingsOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Recordings' : ''}
@@ -168,9 +170,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/units/g) ? (
-                <UnitsSelectedIcon fontSize='medium' />
+                <UnitsSolidIcon fontSize='medium' />
               ) : (
-                <UnitsIcon fontSize='medium' />
+                <UnitsOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Your Units' : ''}
@@ -184,9 +186,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/notes/g) ? (
-                <NotesSelectedIcon fontSize='medium' />
+                <NotesSolidIcon fontSize='medium' />
               ) : (
-                <NotesIcon fontSize='medium' />
+                <NotesOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Your Notes' : ''}
@@ -200,12 +202,28 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/classes/g) ? (
-                <ClassesSelectedIcon fontSize='medium' />
+                <ClassesSolidIcon fontSize='medium' />
               ) : (
-                <ClassesIcon fontSize='medium' />
+                <ClassesOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Your Classes' : ''}
+          </DrawerButton>
+          <DrawerButton
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            fontWeight={300}
+            selected={useLocation().pathname.match(/^\/assessments/g) ? true : false}
+            clickAction={() => drawerButtonClick('/assessments')}
+          >
+            <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
+              {useLocation().pathname.match(/^\/assessments/g) ? (
+                <AssessmentsSolidIcon fontSize='medium' />
+              ) : (
+                <AssessmentsOutlinedIcon fontSize='medium' />
+              )}
+            </Icon>
+            {isDrawerOpen ? 'Your Assessments' : ''}
           </DrawerButton>
           <DrawerButton
             textColor='white'
@@ -216,9 +234,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/grades/g) ? (
-                <GradesSelectedIcon fontSize='medium' />
+                <GradesSolidIcon fontSize='medium' />
               ) : (
-                <GradesIcon fontSize='medium' />
+                <GradesOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Your Grades' : ''}
@@ -233,9 +251,9 @@ const Drawer: React.FC<Props> = ({
           >
             <Icon padding='24px 10px' margin={isDrawerOpen ? '0 24px 0 0' : ''}>
               {useLocation().pathname.match(/^\/settings/g) ? (
-                <SettingsSelectedIcon fontSize='medium' />
+                <SettingsSolidIcon fontSize='medium' />
               ) : (
-                <SettingsIcon fontSize='medium' />
+                <SettingsOutlinedIcon fontSize='medium' />
               )}
             </Icon>
             {isDrawerOpen ? 'Settings' : ''}
