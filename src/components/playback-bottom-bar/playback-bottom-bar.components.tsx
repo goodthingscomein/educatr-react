@@ -33,7 +33,7 @@ type Props = {
 
 // Render Component
 const PlaybackBottomBar: React.FC<Props> = ({ blobUrl }) => {
-  const [isShowingBar, setIsShowingBar] = useState(false);
+  const [isShowingBar, setIsShowingBar] = useState(true);
   const [isShowingVideo, setIsShowingVideo] = useState(true);
 
   // Render the playback bar
