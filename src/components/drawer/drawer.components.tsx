@@ -1,15 +1,12 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { MainTheme } from '../../themes/main.theme';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
-import { setDrawerIsOpen } from '../../redux/navigation/navigation.actions';
 import { State } from '../../redux/root-reducer';
-import { Dispatch } from 'redux';
-import { Action } from '../../redux/all-actions.types';
 
 // Import styles
 import { DrawerContainer } from './drawer.styles';
@@ -57,13 +54,6 @@ type Props = {
 };
 
 const Drawer: React.FC<Props> = ({ isDrawerOpen, yourUnitsNavigationUrl, recordingsNavigationUrl }) => {
-  const navigate = useNavigate();
-
-  // const drawerButtonClick = (navigateLocation: string) => {
-  //   navigate(navigateLocation);
-  //   if (isDrawerOpen) setDrawerIsOpen(false);
-  // };
-
   return (
     <DrawerContainer padding={`${MainTheme.appBar.appBarHeight} 0 16px 0`} isDrawerOpen={isDrawerOpen}>
       <DrawerSection backgroundColor='transparent'>

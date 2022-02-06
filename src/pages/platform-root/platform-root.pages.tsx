@@ -18,6 +18,7 @@ import { PlatformRootPageContainer, ContentPaddingContainer, ContentContainer } 
 import Section from '../../components/section/section.components';
 import AppBar from '../../components/app-bar/app-bar.components';
 import Drawer from '../../components/drawer/drawer.components';
+import PlaybackBottomBar from '../../components/playback-bottom-bar/playback-bottom-bar.components';
 import DarkenScreen from '../../components/darken-screen/darken-screen.components';
 
 // Import sub pages
@@ -34,11 +35,12 @@ import NotFoundPage from '../not-found/not-found.pages';
 type Props = {
   isDrawerOpen: boolean;
   downloadUrl: string;
+  blobUrl: string;
   setBlobUrl: typeof setBlobUrl;
 };
 
 // Render Component
-const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, setBlobUrl }) => {
+const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl, setBlobUrl }) => {
   // Listens for changes in the downloadUrl link, streams using link to a blob, creates blob URL and sets the URL in redux
   useEffect(() => {
     // First check if download Url is not null (it will be null when we are not watching a video)
@@ -80,6 +82,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, setBlobU
               <Route path='/*' element={<NotFoundPage />} />
             </Routes>
           </ContentContainer>
+          {downloadUrl && <PlaybackBottomBar />}
         </ContentPaddingContainer>
       </Section>
     </PlatformRootPageContainer>
@@ -89,6 +92,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, setBlobU
 const mapStateToProps = (state: State) => ({
   isDrawerOpen: state.navigation.isDrawerOpen,
   downloadUrl: state.recording.downloadUrl,
+  blobUrl: state.recording.blobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

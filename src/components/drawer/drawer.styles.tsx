@@ -9,7 +9,7 @@ type DrawerContainerProps = {
 export const DrawerContainer = styled.div<DrawerContainerProps>`
   position: fixed;
   margin: 0;
-  z-index: 4;
+  z-index: 11;
   padding: ${(props) => props.padding || 0};
   height: 100vh;
   width: ${(props) => (props.isDrawerOpen ? props.theme.drawer.drawerOpenWidth : props.theme.drawer.drawerClosedWidth)};

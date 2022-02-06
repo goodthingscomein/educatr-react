@@ -12,7 +12,7 @@ export const AppBarContainer = styled.div<AppBarContainerProps>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 12;
   width: 100%;
   height: ${(props) => props.theme.appBar.appBarHeight};
   background-color: ${(props) => props.theme.getColor(props.color)};
