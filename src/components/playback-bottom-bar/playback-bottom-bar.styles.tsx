@@ -80,6 +80,24 @@ export const CloseBarButton = styled.a`
   }
 `;
 
+export const ShowHideMiniplayerBarButton = styled.a`
+  position: absolute;
+  top: 0;
+  right: 50px;
+  height: 100%;
+  width: 50px;
+  font-size: 80%;
+  color: ${(props) => props.theme.themeColors.white};
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    color: ${(props) => props.theme.themeColors.primaryAccent};
+  }
+`;
+
 export const PlaybackButtonsContainer = styled.div`
   display: flex;
   align-items: center;

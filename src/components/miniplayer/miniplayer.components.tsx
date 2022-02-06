@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
+
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -16,15 +17,19 @@ import MiniplayerOverlay from '../miniplayer-overlay/miniplayer-overlay.componen
 
 // Component Props Interface
 type Props = {
-  isDisplaying?: boolean;
-
-  // Redux
+  // Blob url for miniplayer video
   blobUrl: string;
+
+  // Playbar state
+  isShowingPlaybackBar: boolean;
+
+  // Miniplayer state
+  isShowingMiniplayer: boolean;
 };
 
 // Render Component
-const Miniplayer: React.FC<Props> = ({ isDisplaying, blobUrl }) => (
-  <MiniplayerFrame isDisplaying={isDisplaying}>
+const Miniplayer: React.FC<Props> = ({ blobUrl, isShowingPlaybackBar, isShowingMiniplayer }) => (
+  <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
     {/* VIDEO */}
     {blobUrl && (
       <>
@@ -40,10 +45,8 @@ const Miniplayer: React.FC<Props> = ({ isDisplaying, blobUrl }) => (
 
 const mapStateToProps = (state: State) => ({
   blobUrl: state.recording.blobUrl,
+  isShowingPlaybackBar: state.playbackMiniplayer.isShowingPlaybackBar,
+  isShowingMiniplayer: state.playbackMiniplayer.isShowingMiniplayer,
 });
-
-// const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-//   // var-function: (value: type) => dispatch(importedFunction(value)),
-// });
 
 export default connect(mapStateToProps)(Miniplayer);
