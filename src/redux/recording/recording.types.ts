@@ -28,4 +28,31 @@ interface SetBlobUrlAction {
   payload: string;
 }
 
-export type RecordingAction = SetRecordingMetadataAction | SetDownloadUrlAction | SetBlobUrlAction;
+interface SetIsPlaying {
+  type: RECORDING_TYPES.SET_IS_PLAYING;
+  payload: boolean;
+}
+
+interface SetCurrentTimeSeconds {
+  type: RECORDING_TYPES.SET_CURRENT_TIME_SECONDS;
+  payload: number;
+}
+
+interface SetIsInFullscreen {
+  type: RECORDING_TYPES.SET_IS_IN_FULLSCREEN;
+  payload: boolean;
+}
+
+interface SetIsInPip {
+  type: RECORDING_TYPES.SET_IS_IN_PIP;
+  payload: boolean;
+}
+
+export type RecordingAction =
+  | SetRecordingMetadataAction
+  | SetDownloadUrlAction
+  | SetBlobUrlAction
+  | SetIsPlaying
+  | SetCurrentTimeSeconds
+  | SetIsInFullscreen
+  | SetIsInPip;

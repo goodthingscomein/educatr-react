@@ -8,6 +8,8 @@ interface RecordingState {
   title: string;
   description: string;
   length: number;
+  date: string;
+  alreadyWatched?: boolean;
   hashtags?: string[];
 
   // Video stream data
@@ -16,21 +18,29 @@ interface RecordingState {
 
   // Video playback data
   isPlaying: boolean;
-  currentFrame?: number;
+  currentTimeSeconds: number;
+  isInFullScreen: boolean;
+  isInPip: boolean;
 }
 
 const INITIAL_STATE = {
   // Video meta data
   id: '',
+  thumbnailSrc: '',
   title: '',
   description: '',
+  length: 0,
+  date: '',
 
   // Video stream data
   downloadUrl: '',
   blobUrl: '',
 
-  // Video playback data
+  // Video playback
   isPlaying: false,
+  currentTimeSeconds: 0,
+  isInFullScreen: false,
+  isInPip: false,
 } as RecordingState;
 
 const recordingReducer = (state: RecordingState = INITIAL_STATE, action: RecordingAction) => {
@@ -49,6 +59,26 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
       return {
         ...state,
         blobUrl: action.payload,
+      };
+    case RECORDING_TYPES.SET_IS_PLAYING:
+      return {
+        ...state,
+        isPlaying: action.payload,
+      };
+    case RECORDING_TYPES.SET_CURRENT_TIME_SECONDS:
+      return {
+        ...state,
+        currentTimeSeconds: action.payload,
+      };
+    case RECORDING_TYPES.SET_IS_IN_FULLSCREEN:
+      return {
+        ...state,
+        isInFullScreen: action.payload,
+      };
+    case RECORDING_TYPES.SET_IS_IN_PIP:
+      return {
+        ...state,
+        isInPip: action.payload,
       };
     default:
       return state;
