@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
-
+import { setCurrentTimeMilliseconds } from '../../redux/recording/recording.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -17,36 +17,77 @@ import MiniplayerOverlay from '../miniplayer-overlay/miniplayer-overlay.componen
 
 // Component Props Interface
 type Props = {
-  // Blob url for miniplayer video
+  // Playback state
+  isPlaying: boolean;
+  isDraggingTime: boolean;
+  currentTimeMilliseconds: number;
+
+  // Playback actions
+  setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
+
+  // Blob url for the miniplayer video
   blobUrl: string;
 
-  // Playbar state
+  // Playbar / miniplayer state
   isShowingPlaybackBar: boolean;
-
-  // Miniplayer state
   isShowingMiniplayer: boolean;
 };
 
 // Render Component
-const Miniplayer: React.FC<Props> = ({ blobUrl, isShowingPlaybackBar, isShowingMiniplayer }) => (
-  <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
-    {/* VIDEO */}
-    {blobUrl && (
-      <>
-        <MiniplayerVideo>
-          <source src={blobUrl} type='video/mp4' />
-        </MiniplayerVideo>
-        {/* BUTTONS ON MINIPLAYER */}
-        <MiniplayerOverlay />
-      </>
-    )}
-  </MiniplayerFrame>
-);
+const Miniplayer: React.FC<Props> = ({
+  isPlaying,
+  isDraggingTime,
+  currentTimeMilliseconds,
+  setCurrentTimeMilliseconds,
+  blobUrl,
+  isShowingPlaybackBar,
+  isShowingMiniplayer,
+}) => {
+  const video: HTMLVideoElement | null = document.getElementById('miniplayer-video') as HTMLVideoElement;
+
+  // Manage the playback state of the miniplayer video
+  if (video) {
+    // Play video
+    if (isPlaying && !isDraggingTime) {
+      video.play();
+      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
+    }
+    // Pause video
+    else {
+      video.pause();
+      video.currentTime = currentTimeMilliseconds / 1000;
+    }
+  }
+
+  return (
+    <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
+      {/* VIDEO */}
+      {blobUrl && (
+        <>
+          <MiniplayerVideo id='miniplayer-video'>
+            <source src={blobUrl} type='video/mp4' />
+          </MiniplayerVideo>
+          {/* BUTTONS ON MINIPLAYER */}
+          <MiniplayerOverlay />
+        </>
+      )}
+    </MiniplayerFrame>
+  );
+};
 
 const mapStateToProps = (state: State) => ({
+  isPlaying: state.recording.isPlaying,
+  isDraggingTime: state.recording.isDraggingTime,
+  currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
+  // playing url
   blobUrl: state.recording.blobUrl,
   isShowingPlaybackBar: state.playbackMiniplayer.isShowingPlaybackBar,
   isShowingMiniplayer: state.playbackMiniplayer.isShowingMiniplayer,
 });
 
-export default connect(mapStateToProps)(Miniplayer);
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  // Recording playback
+  setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Miniplayer);

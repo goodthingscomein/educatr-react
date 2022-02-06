@@ -26,10 +26,16 @@ export const setIsPlaying = (isPlaying: boolean) =>
     payload: isPlaying,
   } as RecordingAction);
 
-export const setCurrentTimeSeconds = (currentTimeSeconds: number) =>
+export const setIsDraggingTime = (isDraggingTime: boolean) =>
   ({
-    type: RECORDING_TYPES.SET_CURRENT_TIME_SECONDS,
-    payload: currentTimeSeconds,
+    type: RECORDING_TYPES.SET_IS_DRAGGING_TIME,
+    payload: isDraggingTime,
+  } as RecordingAction);
+
+export const setCurrentTimeMilliseconds = (currentTimeMilliseconds: number) =>
+  ({
+    type: RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS,
+    payload: currentTimeMilliseconds,
   } as RecordingAction);
 
 export const setIsInFullscreen = (isInFullscreen: boolean) =>

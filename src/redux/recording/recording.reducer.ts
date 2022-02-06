@@ -18,7 +18,8 @@ interface RecordingState {
 
   // Video playback data
   isPlaying: boolean;
-  currentTimeSeconds: number;
+  isDraggingTime: boolean;
+  currentTimeMilliseconds: number;
   isInFullScreen: boolean;
   isInPip: boolean;
 }
@@ -38,7 +39,8 @@ const INITIAL_STATE = {
 
   // Video playback
   isPlaying: false,
-  currentTimeSeconds: 0,
+  isDraggingTime: false,
+  currentTimeMilliseconds: 0,
   isInFullScreen: false,
   isInPip: false,
 } as RecordingState;
@@ -65,10 +67,15 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
         ...state,
         isPlaying: action.payload,
       };
-    case RECORDING_TYPES.SET_CURRENT_TIME_SECONDS:
+    case RECORDING_TYPES.SET_IS_DRAGGING_TIME:
       return {
         ...state,
-        currentTimeSeconds: action.payload,
+        isDraggingTime: action.payload,
+      };
+    case RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS:
+      return {
+        ...state,
+        currentTimeMilliseconds: action.payload,
       };
     case RECORDING_TYPES.SET_IS_IN_FULLSCREEN:
       return {

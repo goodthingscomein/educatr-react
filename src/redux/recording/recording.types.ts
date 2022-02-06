@@ -33,8 +33,13 @@ interface SetIsPlaying {
   payload: boolean;
 }
 
-interface SetCurrentTimeSeconds {
-  type: RECORDING_TYPES.SET_CURRENT_TIME_SECONDS;
+interface SetIsDraggingTime {
+  type: RECORDING_TYPES.SET_IS_DRAGGING_TIME;
+  payload: boolean;
+}
+
+interface SetCurrentTimeMilliseconds {
+  type: RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS;
   payload: number;
 }
 
@@ -53,6 +58,7 @@ export type RecordingAction =
   | SetDownloadUrlAction
   | SetBlobUrlAction
   | SetIsPlaying
-  | SetCurrentTimeSeconds
+  | SetIsDraggingTime
+  | SetCurrentTimeMilliseconds
   | SetIsInFullscreen
   | SetIsInPip;

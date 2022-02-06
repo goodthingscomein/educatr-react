@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Import utils
+import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
+
 // Import Connect Redux
 import { connect } from 'react-redux';
 
@@ -68,22 +71,13 @@ const RecordingCard: React.FC<Props> = ({
     }
   };
 
-  // Calculate the timestamp
-  const hrs = Math.floor(recording.length / 3600);
-  const mins = Math.floor(recording.length / 60) - hrs * 60;
-  const secs = Math.floor(recording.length % 60);
-
   return (
     <RecordingCardContainer>
       <Thumbnail
         src={recording.thumbnailSrc}
         onClick={() => recordingsNavigation(`/recordings/${recording.id}/discussion`)}
       >
-        <ThumbnailTimestamp>
-          {hrs > 0 && `${hrs}:`}
-          {mins < 10 && hrs > 0 ? `0${mins}:` : `${mins}:`}
-          {secs < 10 ? `0${secs}` : secs}
-        </ThumbnailTimestamp>
+        <ThumbnailTimestamp>{secondsToTimeFormat(recording.length)}</ThumbnailTimestamp>
         <ThumbnailHoverButton>
           <PlayIcon fontSize='inherit' />
         </ThumbnailHoverButton>

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Import utils
+import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
+
 // Import Connect Redux
 import { connect } from 'react-redux';
 
@@ -10,7 +13,15 @@ import {
   setIsShowingMiniplayer,
   setIsShowingPlaybackBar,
 } from '../../redux/playback-miniplayer/playback-miniplayer.actions';
-import { setDownloadUrl, setBlobUrl } from '../../redux/recording/recording.actions';
+import {
+  setDownloadUrl,
+  setBlobUrl,
+  setIsPlaying,
+  setIsDraggingTime,
+  setCurrentTimeMilliseconds,
+  setIsInFullscreen,
+  setIsInPip,
+} from '../../redux/recording/recording.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -44,8 +55,16 @@ import HideMiniplayerIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Component Props Interface
 type Props = {
-  // The ID of the recording video
+  // Recording metadata
   id: string;
+  length: number;
+
+  // Recording playback
+  isPlaying: boolean;
+  isDraggingTime: boolean;
+  currentTimeMilliseconds: number;
+  isInFullScreen: boolean;
+  isInPip: boolean;
 
   // Set the URL of the recording drawer button
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -57,16 +76,45 @@ type Props = {
   // Set download / blob url
   setDownloadUrl: typeof setDownloadUrl;
   setBlobUrl: typeof setBlobUrl;
+
+  // Set recording playback
+  setIsPlaying: typeof setIsPlaying;
+  setIsDraggingTime: typeof setIsDraggingTime;
+  setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
+  setIsInFullscreen: typeof setIsInFullscreen;
+  setIsInPip: typeof setIsInPip;
 };
 
 // Render Component
 const MiniplayerOverlay: React.FC<Props> = ({
+  // Video metadata
   id,
+  length,
+
+  // Playback state
+  isPlaying,
+  isDraggingTime,
+  currentTimeMilliseconds,
+  isInFullScreen,
+  isInPip,
+
+  // Records drawer button url action
   setRecordingsNavigationUrl,
+
+  // Display playback bar / miniplayer actions
   setIsShowingMiniplayer,
   setIsShowingPlaybackBar,
+
+  // Video link actions
   setDownloadUrl,
   setBlobUrl,
+
+  // Playback actions
+  setIsPlaying,
+  setIsDraggingTime,
+  setCurrentTimeMilliseconds,
+  setIsInFullscreen,
+  setIsInPip,
 }) => {
   const navigate = useNavigate();
   const recordingDetailsUrl = `/recordings/${id}/discussion`;
@@ -84,6 +132,12 @@ const MiniplayerOverlay: React.FC<Props> = ({
     // Turn off the
     setDownloadUrl('');
     setBlobUrl('');
+  };
+
+  // Drag time slider
+  const dragTimeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
+    if (!isDraggingTime) setIsDraggingTime(true);
+    setCurrentTimeMilliseconds(parseInt(event.currentTarget.value));
   };
 
   return (
@@ -160,10 +214,16 @@ const MiniplayerOverlay: React.FC<Props> = ({
               <SkipBackIcon fontSize='inherit' />
             </Icon>
           </Button>
-          <Button variant='text' size='x-large' textColor='white' hoverTextColor='primary' padding='0' margin='0 80px'>
-            <Icon>
-              <PlayIcon fontSize='inherit' />
-            </Icon>
+          <Button
+            variant='text'
+            size='x-large'
+            textColor='white'
+            hoverTextColor='primary'
+            padding='0'
+            margin='0 80px'
+            clickAction={() => setIsPlaying(!isPlaying)}
+          >
+            <Icon>{isPlaying ? <PauseIcon fontSize='inherit' /> : <PlayIcon fontSize='inherit' />}</Icon>
           </Button>
           <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
             <Icon>
@@ -175,10 +235,18 @@ const MiniplayerOverlay: React.FC<Props> = ({
       <MiniplayerInteractionItemsRowContainer>
         <MiniplayerSliderContainer>
           <CopyText size='x-small' color='white'>
-            0:00 / 0:07
+            {secondsToTimeFormat(Math.floor(currentTimeMilliseconds / 1000))} /{' '}
+            {secondsToTimeFormat(Math.floor(length))}
           </CopyText>
           <Margin height='4px' />
-          <MiniplayerTimeSlider type='range' min='1' max='4000' />
+          <MiniplayerTimeSlider
+            type='range'
+            min={0}
+            max={Math.floor(length * 1000)}
+            value={currentTimeMilliseconds}
+            onInput={(e) => dragTimeSlide(e)}
+            onClick={() => setIsDraggingTime(false)}
+          />
         </MiniplayerSliderContainer>
       </MiniplayerInteractionItemsRowContainer>
     </MiniplayerInteractionContainer>
@@ -187,6 +255,12 @@ const MiniplayerOverlay: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   id: state.recording.id,
+  length: state.recording.length,
+  isPlaying: state.recording.isPlaying,
+  isDraggingTime: state.recording.isDraggingTime,
+  currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
+  isInFullScreen: state.recording.isInFullScreen,
+  isInPip: state.recording.isInPip,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -198,6 +272,12 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   // Recording urls
   setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
   setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
+  // Recording playback
+  setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
+  setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
+  setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
+  setIsInFullscreen: (isFullscreen: boolean) => dispatch(setIsInFullscreen(isFullscreen)),
+  setIsInPip: (isPip: boolean) => dispatch(setIsInPip(isPip)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniplayerOverlay);

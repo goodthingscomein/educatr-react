@@ -12,7 +12,7 @@ export default [
       {
         id: '00000001',
         thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        length: 5,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -23,8 +23,8 @@ export default [
       },
       {
         id: '00000002',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=2',
+        length: 6,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -35,8 +35,8 @@ export default [
       },
       {
         id: '00000003',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=3',
+        length: 6,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -47,8 +47,8 @@ export default [
       },
       {
         id: '00000004',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=4',
+        length: 5,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -59,8 +59,8 @@ export default [
       },
       {
         id: '00000005',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=5',
+        length: 7,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -76,8 +76,8 @@ export default [
     recordings: [
       {
         id: '00000006',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=6',
+        length: 10,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -88,8 +88,8 @@ export default [
       },
       {
         id: '00000007',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
-        length: 2456,
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=7',
+        length: 11,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
         description:
@@ -105,7 +105,7 @@ export default [
     recordings: [
       {
         id: '00000008',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=8',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -117,7 +117,7 @@ export default [
       },
       {
         id: '00000009',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=9',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -129,7 +129,7 @@ export default [
       },
       {
         id: '00000010',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=10',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -141,7 +141,7 @@ export default [
       },
       {
         id: '00000011',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=11',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -153,7 +153,7 @@ export default [
       },
       {
         id: '00000012',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=12',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -165,7 +165,7 @@ export default [
       },
       {
         id: '00000013',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=13',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
@@ -177,7 +177,7 @@ export default [
       },
       {
         id: '00000014',
-        thumbnailSrc: 'https://picsum.photos/1280/720?random=1',
+        thumbnailSrc: 'https://picsum.photos/1280/720?random=14',
         length: 2456,
         title:
           'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
