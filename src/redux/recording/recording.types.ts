@@ -2,14 +2,14 @@ import { RECORDING_TYPES } from './recording.enum';
 
 // Recording Type
 export type RecordingMetadataType = {
-  id: string;
-  thumbnailSrc: string;
-  title: string;
-  description: string;
-  length: number;
-  date: string;
+  videoId: string;
+  videoThumbnailSrc: string;
+  videoTitle: string;
+  videoDescription: string;
+  videoLengthSeconds: number;
+  videoPostDate: string;
   alreadyWatched?: boolean;
-  hashtags?: string[];
+  videoHashtags?: string[];
 };
 
 // Action types
@@ -38,19 +38,34 @@ interface SetIsDraggingTime {
   payload: boolean;
 }
 
+interface SetIsSkippingTime {
+  type: RECORDING_TYPES.SET_IS_SKIPPING_TIME;
+  payload: boolean;
+}
+
 interface SetCurrentTimeMilliseconds {
   type: RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS;
   payload: number;
 }
 
-interface SetIsInFullscreen {
-  type: RECORDING_TYPES.SET_IS_IN_FULLSCREEN;
+interface SetIsFullscreen {
+  type: RECORDING_TYPES.SET_IS_FULLSCREEN;
   payload: boolean;
 }
 
-interface SetIsInPip {
-  type: RECORDING_TYPES.SET_IS_IN_PIP;
+interface SetIsPip {
+  type: RECORDING_TYPES.SET_IS_PIP;
   payload: boolean;
+}
+
+interface FastforwardTime {
+  type: RECORDING_TYPES.FASTFORWARD_TIME;
+  payload: number;
+}
+
+interface RewindTime {
+  type: RECORDING_TYPES.REWIND_TIME;
+  payload: number;
 }
 
 export type RecordingAction =
@@ -59,6 +74,9 @@ export type RecordingAction =
   | SetBlobUrlAction
   | SetIsPlaying
   | SetIsDraggingTime
+  | SetIsSkippingTime
   | SetCurrentTimeMilliseconds
-  | SetIsInFullscreen
-  | SetIsInPip;
+  | SetIsFullscreen
+  | SetIsPip
+  | FastforwardTime
+  | RewindTime;

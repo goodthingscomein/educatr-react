@@ -38,7 +38,7 @@ import { RecordingMetadataType } from '../../redux/recording/recording.types';
 // Component Props Interface
 type Props = {
   recording: RecordingMetadataType;
-  id: string; // Existing ID of video already playing
+  videoId: string; // Existing ID of video already playing
 
   // Recordings drawer button url
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -50,7 +50,7 @@ type Props = {
 // Render Component
 const RecordingCard: React.FC<Props> = ({
   recording, // Associated recording metadata
-  id,
+  videoId,
   setRecordingsNavigationUrl,
   setCurrentRecordingMetadata,
 }) => {
@@ -62,7 +62,7 @@ const RecordingCard: React.FC<Props> = ({
     setRecordingsNavigationUrl(url); // set the nav url
 
     // If we have clicked on a new video
-    if (recording.id !== id) {
+    if (recording.videoId !== videoId) {
       // set the current recording to play metadata
       setCurrentRecordingMetadata(recording);
       // Reset the current playing video
@@ -74,10 +74,10 @@ const RecordingCard: React.FC<Props> = ({
   return (
     <RecordingCardContainer>
       <Thumbnail
-        src={recording.thumbnailSrc}
-        onClick={() => recordingsNavigation(`/recordings/${recording.id}/discussion`)}
+        src={recording.videoThumbnailSrc}
+        onClick={() => recordingsNavigation(`/recordings/${recording.videoId}/discussion`)}
       >
-        <ThumbnailTimestamp>{secondsToTimeFormat(recording.length)}</ThumbnailTimestamp>
+        <ThumbnailTimestamp>{secondsToTimeFormat(recording.videoLengthSeconds)}</ThumbnailTimestamp>
         <ThumbnailHoverButton>
           <PlayIcon fontSize='inherit' />
         </ThumbnailHoverButton>
@@ -94,8 +94,8 @@ const RecordingCard: React.FC<Props> = ({
           `}
         >
           <CopyText size='medium' color='textDark' fontWeight={700}>
-            {recording.title.substring(0, 115)}
-            {recording.title.length >= 115 && '...'}
+            {recording.videoTitle.substring(0, 115)}
+            {recording.videoTitle.length >= 115 && '...'}
           </CopyText>
           <Margin width='100%' height='' />
           <HorizontalDiv
@@ -108,7 +108,7 @@ const RecordingCard: React.FC<Props> = ({
             `}
           >
             <CopyText size='small' color='textDark' fontWeight={300}>
-              {recording.date}
+              {recording.videoPostDate}
             </CopyText>
             {recording.alreadyWatched && (
               <CopyText size='small' color='textDark' fontWeight={300}>
@@ -124,7 +124,7 @@ const RecordingCard: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   // Recording metadata
-  id: state.recording.id,
+  videoId: state.recording.videoId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

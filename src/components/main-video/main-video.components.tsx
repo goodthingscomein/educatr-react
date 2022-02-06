@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -8,12 +8,6 @@ import { setCurrentTimeMilliseconds, setIsSkippingTime } from '../../redux/recor
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
-
-// Import styles
-import { MiniplayerFrame, MiniplayerVideo } from './miniplayer.styles';
-
-// Import custom components
-import MiniplayerOverlay from '../miniplayer-overlay/miniplayer-overlay.components';
 
 // Component Props Interface
 type Props = {
@@ -36,7 +30,7 @@ type Props = {
 };
 
 // Render Component
-const Miniplayer: React.FC<Props> = ({
+const MainVideo: React.FC<Props> = ({
   isPlaying,
   isDraggingTime,
   isSkippingTime,
@@ -47,6 +41,7 @@ const Miniplayer: React.FC<Props> = ({
   isShowingPlaybackBar,
   isShowingMiniplayer,
 }) => {
+  // Get the video component
   const video: HTMLVideoElement | null = document.getElementById('miniplayer-video') as HTMLVideoElement;
 
   // Manage the playback state of the miniplayer video
@@ -65,19 +60,11 @@ const Miniplayer: React.FC<Props> = ({
     }
   }
 
+  // Render the video component
   return (
-    <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
-      {/* VIDEO */}
-      {videoBlobUrl && (
-        <>
-          <MiniplayerVideo id='miniplayer-video'>
-            <source src={videoBlobUrl} type='video/mp4' />
-          </MiniplayerVideo>
-          {/* BUTTONS ON MINIPLAYER */}
-          <MiniplayerOverlay />
-        </>
-      )}
-    </MiniplayerFrame>
+    <div>
+      <h1>Hello World!</h1>
+    </div>
   );
 };
 
@@ -98,4 +85,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setIsSkippingTime: (isSkipping: boolean) => dispatch(setIsSkippingTime(isSkipping)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Miniplayer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainVideo);

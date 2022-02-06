@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -34,34 +34,33 @@ import NotFoundPage from '../not-found/not-found.pages';
 
 type Props = {
   isDrawerOpen: boolean;
-  downloadUrl: string;
-  blobUrl: string;
+  videoDownloadUrl: string;
+  videoBlobUrl: string;
   setBlobUrl: typeof setBlobUrl;
 };
 
 // Render Component
-const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl, setBlobUrl }) => {
+const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, videoBlobUrl, setBlobUrl }) => {
   // Listens for changes in the downloadUrl link, streams using link to a blob, creates blob URL and sets the URL in redux
   useEffect(() => {
     // First check if download Url is not null (it will be null when we are not watching a video)
-    if (!downloadUrl) return;
+    if (!videoDownloadUrl) return;
     // If we want to download this video, lets do it!
     axios({
       method: 'get',
-      url: downloadUrl,
+      url: videoDownloadUrl,
       responseType: 'blob',
     })
       .then((response) => {
-        console.warn('RUNNING DOWNLOAD OF BLOB');
+        console.warn('DOWNLOADING VIDEO AND CREATING A BLOB');
         const blob = response.data;
         const url = URL.createObjectURL(blob);
         setBlobUrl(url);
-        console.log(url);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(`ERRROR DOWNLOADING VIDEO TO CREATE A BLOB${err}`);
       });
-  }, [downloadUrl]);
+  }, [videoDownloadUrl]);
 
   // Check if we are on the recording details page to determine if we need to render the miniplayer...
   const onRecordingDetailsPage = useLocation().pathname.match(/^\/recordings\/.+/g) != null;
@@ -86,7 +85,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl,
               <Route path='/*' element={<NotFoundPage />} />
             </Routes>
           </ContentContainer>
-          {blobUrl && !onRecordingDetailsPage && <PlaybackBottomBar />}
+          {videoBlobUrl && !onRecordingDetailsPage && <PlaybackBottomBar />}
         </ContentPaddingContainer>
       </Section>
     </PlatformRootPageContainer>
@@ -95,8 +94,8 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl,
 
 const mapStateToProps = (state: State) => ({
   isDrawerOpen: state.navigation.isDrawerOpen,
-  downloadUrl: state.recording.downloadUrl,
-  blobUrl: state.recording.blobUrl,
+  videoDownloadUrl: state.recording.videoDownloadUrl,
+  videoBlobUrl: state.recording.videoBlobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

@@ -1,48 +1,51 @@
 import { RECORDING_TYPES } from './recording.enum';
 import { RecordingAction } from './recording.types';
+import { calculateFastforwardTime, calculateRewindTime } from './recording.utils';
 
 interface RecordingState {
   // Video meta data
-  id: string;
-  thumbnailSrc: string;
-  title: string;
-  description: string;
-  length: number;
-  date: string;
+  videoId: string;
+  videoThumbnailSrc: string;
+  videoTitle: string;
+  videoDescription: string;
+  videoLengthSeconds: number;
+  videoPostDate: string;
   alreadyWatched?: boolean;
-  hashtags?: string[];
+  videoHashtags?: string[];
 
   // Video stream data
-  downloadUrl: string;
-  blobUrl: string;
+  videoDownloadUrl: string;
+  videoBlobUrl: string;
 
   // Video playback data
   isPlaying: boolean;
   isDraggingTime: boolean;
+  isSkippingTime: boolean;
   currentTimeMilliseconds: number;
-  isInFullScreen: boolean;
-  isInPip: boolean;
+  isFullScreen: boolean;
+  isPip: boolean;
 }
 
 const INITIAL_STATE = {
   // Video meta data
-  id: '',
-  thumbnailSrc: '',
-  title: '',
-  description: '',
-  length: 0,
-  date: '',
+  videoId: '',
+  videoThumbnailSrc: '',
+  videoTitle: '',
+  videoDescription: '',
+  videoLengthSeconds: 0,
+  videoPostDate: '',
 
   // Video stream data
-  downloadUrl: '',
-  blobUrl: '',
+  videoDownloadUrl: '',
+  videoBlobUrl: '',
 
   // Video playback
   isPlaying: false,
   isDraggingTime: false,
+  isSkippingTime: false,
   currentTimeMilliseconds: 0,
-  isInFullScreen: false,
-  isInPip: false,
+  isFullScreen: false,
+  isPip: false,
 } as RecordingState;
 
 const recordingReducer = (state: RecordingState = INITIAL_STATE, action: RecordingAction) => {
@@ -55,12 +58,12 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
     case RECORDING_TYPES.SET_DOWNLOAD_URL:
       return {
         ...state,
-        downloadUrl: action.payload,
+        videoDownloadUrl: action.payload,
       };
     case RECORDING_TYPES.SET_BLOB_URL:
       return {
         ...state,
-        blobUrl: action.payload,
+        videoBlobUrl: action.payload,
       };
     case RECORDING_TYPES.SET_IS_PLAYING:
       return {
@@ -72,20 +75,41 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
         ...state,
         isDraggingTime: action.payload,
       };
+    case RECORDING_TYPES.SET_IS_SKIPPING_TIME:
+      return {
+        ...state,
+        isSkippingTime: action.payload,
+      };
     case RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS:
       return {
         ...state,
         currentTimeMilliseconds: action.payload,
       };
-    case RECORDING_TYPES.SET_IS_IN_FULLSCREEN:
+    case RECORDING_TYPES.SET_IS_FULLSCREEN:
       return {
         ...state,
-        isInFullScreen: action.payload,
+        isFullScreen: action.payload,
       };
-    case RECORDING_TYPES.SET_IS_IN_PIP:
+    case RECORDING_TYPES.SET_IS_PIP:
       return {
         ...state,
-        isInPip: action.payload,
+        isPip: action.payload,
+      };
+    case RECORDING_TYPES.FASTFORWARD_TIME:
+      return {
+        ...state,
+        isSkippingTime: true,
+        currentTimeMilliseconds: calculateFastforwardTime(
+          state.currentTimeMilliseconds,
+          state.videoLengthSeconds,
+          action.payload
+        ),
+      };
+    case RECORDING_TYPES.REWIND_TIME:
+      return {
+        ...state,
+        isSkippingTime: true,
+        currentTimeMilliseconds: calculateRewindTime(state.currentTimeMilliseconds, action.payload),
       };
     default:
       return state;

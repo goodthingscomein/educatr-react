@@ -19,8 +19,10 @@ import {
   setIsPlaying,
   setIsDraggingTime,
   setCurrentTimeMilliseconds,
-  setIsInFullscreen,
-  setIsInPip,
+  setIsFullscreen,
+  setIsPip,
+  fastforwardTime,
+  rewindTime,
 } from '../../redux/recording/recording.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
@@ -56,15 +58,15 @@ import HideMiniplayerIcon from '@mui/icons-material/KeyboardArrowDown';
 // Component Props Interface
 type Props = {
   // Recording metadata
-  id: string;
-  length: number;
+  videoId: string;
+  videoLengthSeconds: number;
 
   // Recording playback
   isPlaying: boolean;
   isDraggingTime: boolean;
   currentTimeMilliseconds: number;
-  isInFullScreen: boolean;
-  isInPip: boolean;
+  isFullScreen: boolean;
+  isPip: boolean;
 
   // Set the URL of the recording drawer button
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -81,22 +83,24 @@ type Props = {
   setIsPlaying: typeof setIsPlaying;
   setIsDraggingTime: typeof setIsDraggingTime;
   setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  setIsInFullscreen: typeof setIsInFullscreen;
-  setIsInPip: typeof setIsInPip;
+  setIsFullscreen: typeof setIsFullscreen;
+  setIsPip: typeof setIsPip;
+  fastforwardTime: typeof fastforwardTime;
+  rewindTime: typeof rewindTime;
 };
 
 // Render Component
 const MiniplayerOverlay: React.FC<Props> = ({
   // Video metadata
-  id,
-  length,
+  videoId,
+  videoLengthSeconds,
 
   // Playback state
   isPlaying,
   isDraggingTime,
   currentTimeMilliseconds,
-  isInFullScreen,
-  isInPip,
+  isFullScreen,
+  isPip,
 
   // Records drawer button url action
   setRecordingsNavigationUrl,
@@ -113,11 +117,14 @@ const MiniplayerOverlay: React.FC<Props> = ({
   setIsPlaying,
   setIsDraggingTime,
   setCurrentTimeMilliseconds,
-  setIsInFullscreen,
-  setIsInPip,
+  setIsFullscreen,
+  setIsPip,
+  // Fastforward / rewind time
+  fastforwardTime,
+  rewindTime,
 }) => {
   const navigate = useNavigate();
-  const recordingDetailsUrl = `/recordings/${id}/discussion`;
+  const recordingDetailsUrl = `/recordings/${videoId}/discussion`;
 
   const navigateToVideoUrl = () => {
     setRecordingsNavigationUrl(recordingDetailsUrl);
@@ -209,7 +216,14 @@ const MiniplayerOverlay: React.FC<Props> = ({
       {/* MIDDLE BUTTONS */}
       <MiniplayerInteractionItemsRowContainer>
         <MiniplayerMiddleButtonsContainer>
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='primary'
+            padding='0'
+            clickAction={() => rewindTime(15)}
+          >
             <Icon>
               <SkipBackIcon fontSize='inherit' />
             </Icon>
@@ -225,7 +239,14 @@ const MiniplayerOverlay: React.FC<Props> = ({
           >
             <Icon>{isPlaying ? <PauseIcon fontSize='inherit' /> : <PlayIcon fontSize='inherit' />}</Icon>
           </Button>
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='primary'
+            padding='0'
+            clickAction={() => fastforwardTime(15)}
+          >
             <Icon>
               <SkipForwardIcon fontSize='inherit' />
             </Icon>
@@ -236,13 +257,13 @@ const MiniplayerOverlay: React.FC<Props> = ({
         <MiniplayerSliderContainer>
           <CopyText size='x-small' color='white'>
             {secondsToTimeFormat(Math.floor(currentTimeMilliseconds / 1000))} /{' '}
-            {secondsToTimeFormat(Math.floor(length))}
+            {secondsToTimeFormat(Math.floor(videoLengthSeconds))}
           </CopyText>
           <Margin height='4px' />
           <MiniplayerTimeSlider
             type='range'
             min={0}
-            max={Math.floor(length * 1000)}
+            max={Math.floor(videoLengthSeconds * 1000)}
             value={currentTimeMilliseconds}
             onInput={(e) => dragTimeSlide(e)}
             onClick={() => setIsDraggingTime(false)}
@@ -254,13 +275,13 @@ const MiniplayerOverlay: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  id: state.recording.id,
-  length: state.recording.length,
+  videoId: state.recording.videoId,
+  videoLengthSeconds: state.recording.videoLengthSeconds,
   isPlaying: state.recording.isPlaying,
   isDraggingTime: state.recording.isDraggingTime,
   currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  isInFullScreen: state.recording.isInFullScreen,
-  isInPip: state.recording.isInPip,
+  isFullScreen: state.recording.isFullScreen,
+  isPip: state.recording.isPip,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -276,8 +297,10 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
   setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
   setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  setIsInFullscreen: (isFullscreen: boolean) => dispatch(setIsInFullscreen(isFullscreen)),
-  setIsInPip: (isPip: boolean) => dispatch(setIsInPip(isPip)),
+  setIsFullscreen: (isFullscreen: boolean) => dispatch(setIsFullscreen(isFullscreen)),
+  setIsPip: (isPip: boolean) => dispatch(setIsPip(isPip)),
+  fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
+  rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniplayerOverlay);

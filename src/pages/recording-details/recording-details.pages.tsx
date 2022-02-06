@@ -66,28 +66,30 @@ type Props = {
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
 
   // Recording details from redux state
-  thumbnailSrc: string;
-  title: string;
-  description: string;
-  hashtags?: string[];
+  videoId: string;
+  videoThumbnailSrc: string;
+  videoTitle: string;
+  videoDescription: string;
+  videoHashtags?: string[];
   isFavourited?: boolean;
   alreadyRated?: VideoRatingType;
 
   // Recording download redux state
-  blobUrl: string;
+  videoBlobUrl: string;
   setDownloadUrl: typeof setDownloadUrl;
 };
 
 // Render Component
 const RecordingDetailsPage: React.FC<Props> = ({
   setRecordingsNavigationUrl,
-  thumbnailSrc,
-  title,
-  description,
-  hashtags,
+  videoId,
+  videoThumbnailSrc,
+  videoTitle,
+  videoDescription,
+  videoHashtags,
   isFavourited,
   alreadyRated,
-  blobUrl,
+  videoBlobUrl,
   setDownloadUrl,
 }) => {
   const [showingFullDescription, setShowingFullDescription] = useState(false);
@@ -136,7 +138,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
               </Button>
             </BackButtonContainer>
             <CopyText size='medium' color='white' fontWeight={300}>
-              <i>{title}</i>
+              <i>{videoTitle}</i>
             </CopyText>
           </AppBarSectionContainer>
           <AppBarSectionContainer>
@@ -174,9 +176,9 @@ const RecordingDetailsPage: React.FC<Props> = ({
           </AppBarSectionContainer>
         </AppBarContainer>
         <VideoContainer>
-          {blobUrl && (
-            <Video controls preload='auto' poster={thumbnailSrc}>
-              <source src={blobUrl} type='video/mp4' />
+          {videoBlobUrl && (
+            <Video controls preload='auto' poster={videoThumbnailSrc}>
+              <source src={videoBlobUrl} type='video/mp4' />
               HTML5 videos not supported with this browser.
             </Video>
           )}
@@ -184,9 +186,9 @@ const RecordingDetailsPage: React.FC<Props> = ({
         <AllContentContainer>
           <OverviewContentContainer>
             {/* Overview of video */}
-            {hashtags && (
+            {videoHashtags && (
               <HashtagsContainer>
-                {hashtags.map((hashtag) => {
+                {videoHashtags.map((hashtag) => {
                   return (
                     <Link key={hashtag} color='primary' fontSize='small' margin='0 4px 0 0'>
                       #{hashtag}
@@ -196,7 +198,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
               </HashtagsContainer>
             )}
             <CopyText size='large' color='textDark' fontWeight={600}>
-              {title}
+              {videoTitle}
             </CopyText>
             <Margin height='12px' />
             <OverviewUnderHeadingContainer>
@@ -262,10 +264,10 @@ const RecordingDetailsPage: React.FC<Props> = ({
             </OverviewUnderHeadingContainer>
             <Divider color='dark' margin='16px 0 28px' />
             <CopyText size='medium' color='textLight' fontWeight={300}>
-              {showingFullDescription ? description : description.substring(0, 200)}
+              {showingFullDescription ? videoDescription : videoDescription.substring(0, 200)}
             </CopyText>
-            {description.length >= 200 && <Margin height='8px' />}
-            {description.length >= 200 && !showingFullDescription && (
+            {videoDescription.length >= 200 && <Margin height='8px' />}
+            {videoDescription.length >= 200 && !showingFullDescription && (
               <Link
                 color='textDark'
                 fontSize='small'
@@ -275,7 +277,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
                 Show more
               </Link>
             )}
-            {description.length >= 200 && showingFullDescription && (
+            {videoDescription.length >= 200 && showingFullDescription && (
               <Link
                 color='textDark'
                 fontSize='small'
@@ -362,14 +364,14 @@ const RecordingDetailsPage: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   // Recording metadata
-  id: state.recording.id,
-  thumbnailSrc: state.recording.thumbnailSrc,
-  title: state.recording.title,
-  description: state.recording.description,
-  hashtags: state.recording.hashtags,
+  videoId: state.recording.videoId,
+  videoThumbnailSrc: state.recording.videoThumbnailSrc,
+  videoTitle: state.recording.videoTitle,
+  videoDescription: state.recording.videoDescription,
+  hashtvideoHashtagsags: state.recording.videoHashtags,
 
   // Recording blob data
-  blobUrl: state.recording.blobUrl,
+  videoBlobUrl: state.recording.videoBlobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
