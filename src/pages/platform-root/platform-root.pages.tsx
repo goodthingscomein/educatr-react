@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -52,6 +52,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl,
       responseType: 'blob',
     })
       .then((response) => {
+        console.warn('RUNNING DOWNLOAD OF BLOB');
         const blob = response.data;
         const url = URL.createObjectURL(blob);
         setBlobUrl(url);
@@ -61,6 +62,9 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl,
         console.log(err);
       });
   }, [downloadUrl]);
+
+  // Check if we are on the recording details page to determine if we need to render the miniplayer...
+  const onRecordingDetailsPage = useLocation().pathname.match(/^\/recordings\/.+/g) != null;
 
   return (
     <PlatformRootPageContainer>
@@ -82,7 +86,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, downloadUrl, blobUrl,
               <Route path='/*' element={<NotFoundPage />} />
             </Routes>
           </ContentContainer>
-          {downloadUrl && <PlaybackBottomBar />}
+          {blobUrl && !onRecordingDetailsPage && <PlaybackBottomBar />}
         </ContentPaddingContainer>
       </Section>
     </PlatformRootPageContainer>
