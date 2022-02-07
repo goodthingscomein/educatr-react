@@ -9,28 +9,34 @@ import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
+// Import styles
+import { VideoContainer, Video } from './main-video.styles';
+
+// Import custom components
+import MainVideoOverlay from '../main-video-overlay/main-video-overlay.components';
+
 // Component Props Interface
 type Props = {
-  // Playback state
+  // Video metadata
+  videoThumbnailSrc: string;
+
+  // Video playback state
   isPlaying: boolean;
   isDraggingTime: boolean;
   isSkippingTime: boolean;
   currentTimeMilliseconds: number;
 
-  // Playback actions
+  // Video playback actions
   setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
   setIsSkippingTime: typeof setIsSkippingTime;
 
-  // Blob url for the miniplayer video
+  // Video urls
   videoBlobUrl: string;
-
-  // Playbar / miniplayer state
-  isShowingPlaybackBar: boolean;
-  isShowingMiniplayer: boolean;
 };
 
 // Render Component
 const MainVideo: React.FC<Props> = ({
+  videoThumbnailSrc,
   isPlaying,
   isDraggingTime,
   isSkippingTime,
@@ -38,13 +44,11 @@ const MainVideo: React.FC<Props> = ({
   setCurrentTimeMilliseconds,
   setIsSkippingTime,
   videoBlobUrl,
-  isShowingPlaybackBar,
-  isShowingMiniplayer,
 }) => {
   // Get the video component
-  const video: HTMLVideoElement | null = document.getElementById('miniplayer-video') as HTMLVideoElement;
+  const video: HTMLVideoElement | null = document.getElementById('main-video') as HTMLVideoElement;
 
-  // Manage the playback state of the miniplayer video
+  // Manage the playback state of the main video
   if (video) {
     // Play video
     if (isPlaying && !isDraggingTime && !isSkippingTime) {
@@ -62,21 +66,33 @@ const MainVideo: React.FC<Props> = ({
 
   // Render the video component
   return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
+    <VideoContainer>
+      {videoBlobUrl && (
+        <>
+          <Video id='main-video' preload='auto' poster={videoThumbnailSrc}>
+            <source src={videoBlobUrl} type='video/mp4' />
+            HTML5 videos not supported with this browser.
+          </Video>
+          {/* MAIN VIDEO OVERLAY BUTTONS */}
+          <MainVideoOverlay />
+        </>
+      )}
+    </VideoContainer>
   );
 };
 
 const mapStateToProps = (state: State) => ({
+  // Video metadata
+  videoThumbnailSrc: state.recording.videoThumbnailSrc,
+
+  // Video playback details
   isPlaying: state.recording.isPlaying,
   isDraggingTime: state.recording.isDraggingTime,
   isSkippingTime: state.recording.isSkippingTime,
   currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  // playing url
+
+  // Video urls
   videoBlobUrl: state.recording.videoBlobUrl,
-  isShowingPlaybackBar: state.playbackMiniplayer.isShowingPlaybackBar,
-  isShowingMiniplayer: state.playbackMiniplayer.isShowingMiniplayer,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

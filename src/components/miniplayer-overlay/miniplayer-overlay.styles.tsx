@@ -54,7 +54,7 @@ export const MiniplayerTimeSlider = styled.input`
   display: block;
   appearance: none;
   width: 100%;
-  height: 12px;
+  height: 8px;
   background: ${(props) => props.theme.themeColors.transparent};
   outline: none;
   opacity: 0.7;
@@ -74,7 +74,7 @@ export const MiniplayerTimeSlider = styled.input`
   &::-moz-range-track,
   &::-moz-range-progress {
     width: 100%;
-    height: 12px;
+    height: 8px;
     background: ${(props) => props.theme.themeColors.white};
   }
   &::-moz-range-progress {

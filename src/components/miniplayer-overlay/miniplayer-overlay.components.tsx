@@ -6,8 +6,6 @@ import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
-
-// Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
 import {
   setIsShowingMiniplayer,
@@ -59,6 +57,7 @@ import HideMiniplayerIcon from '@mui/icons-material/KeyboardArrowDown';
 type Props = {
   // Recording metadata
   videoId: string;
+  videoTitle: string;
   videoLengthSeconds: number;
 
   // Recording playback
@@ -93,6 +92,7 @@ type Props = {
 const MiniplayerOverlay: React.FC<Props> = ({
   // Video metadata
   videoId,
+  videoTitle,
   videoLengthSeconds,
 
   // Playback state
@@ -157,20 +157,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
-            padding='0'
-            margin='0 12px 0 0'
-            clickAction={() => navigateToVideoUrl()}
-          >
-            <Icon padding='12px'>
-              <BackToVideoIcon fontSize='medium' />
-            </Icon>
-          </Button>
-          <Button
-            variant='text'
-            size='small'
-            textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             margin='0 12px 0 0'
           >
@@ -178,10 +165,28 @@ const MiniplayerOverlay: React.FC<Props> = ({
               <FullscreenIcon fontSize='medium' />
             </Icon>
           </Button>
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            padding='0'
+            margin='0 12px 0 0'
+          >
             <Icon padding='12px'>
               <PipIcon />
             </Icon>
+          </Button>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='primaryAccent'
+            padding='0'
+            clickAction={() => navigateToVideoUrl()}
+          >
+            {videoTitle.substring(0, 30)}
+            {videoTitle.length >= 30 && '...'}
           </Button>
         </MiniplayerButtonsContainer>
         {/* TOP RIGHT BUTTONS */}
@@ -190,7 +195,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             clickAction={() => setIsShowingMiniplayer(false)}
           >
@@ -202,7 +207,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             margin='0 0 0 12px'
             clickAction={() => closePlaybackBarMiniplayer()}
@@ -218,9 +223,9 @@ const MiniplayerOverlay: React.FC<Props> = ({
         <MiniplayerMiddleButtonsContainer>
           <Button
             variant='text'
-            size='small'
+            size='x-small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             clickAction={() => rewindTime(15)}
           >
@@ -232,7 +237,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='x-large'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             margin='0 80px'
             clickAction={() => setIsPlaying(!isPlaying)}
@@ -241,9 +246,9 @@ const MiniplayerOverlay: React.FC<Props> = ({
           </Button>
           <Button
             variant='text'
-            size='small'
+            size='x-small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='primaryAccent'
             padding='0'
             clickAction={() => fastforwardTime(15)}
           >
@@ -276,6 +281,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   videoId: state.recording.videoId,
+  videoTitle: state.recording.videoTitle,
   videoLengthSeconds: state.recording.videoLengthSeconds,
   isPlaying: state.recording.isPlaying,
   isDraggingTime: state.recording.isDraggingTime,

@@ -35,6 +35,9 @@ import CopyText from '../../components/copy-text/copy-text.components';
 import Link from '../../components/link/link.components';
 import Button from '../../components/button/button.components';
 import Icon from '../../components/icon/icon-components';
+import Margin from '../../components/margin/margin.components';
+import Divider from '../../components/divider/divider.components';
+import MainVideo from '../../components/main-video/main-video.components';
 
 // Import custom icons
 import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -56,8 +59,6 @@ import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotesSubPage from './sub-pages/notes/notes.pages';
 import PracticeSubPage from './sub-pages/practice/practice.pages';
 import NotFoundPage from '../not-found/not-found.pages';
-import Margin from '../../components/margin/margin.components';
-import Divider from '../../components/divider/divider.components';
 
 type VideoRatingType = 'likes' | 'dislikes' | undefined;
 
@@ -175,14 +176,8 @@ const RecordingDetailsPage: React.FC<Props> = ({
             </Button>
           </AppBarSectionContainer>
         </AppBarContainer>
-        <VideoContainer>
-          {videoBlobUrl && (
-            <Video controls preload='auto' poster={videoThumbnailSrc}>
-              <source src={videoBlobUrl} type='video/mp4' />
-              HTML5 videos not supported with this browser.
-            </Video>
-          )}
-        </VideoContainer>
+        {/* VIDEO GOES HERE */}
+        <MainVideo />
         <AllContentContainer>
           <OverviewContentContainer>
             {/* Overview of video */}
