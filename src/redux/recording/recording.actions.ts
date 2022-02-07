@@ -58,6 +58,12 @@ export const setIsPip = (isInPip: boolean) =>
     payload: isInPip,
   } as RecordingAction);
 
+export const setVolume = (newVolume: number) =>
+  ({
+    type: RECORDING_TYPES.SET_VOLUME,
+    payload: newVolume,
+  } as RecordingAction);
+
 // Fastforward / rewind time of video
 export const fastforwardTime = (seconds: number) =>
   ({

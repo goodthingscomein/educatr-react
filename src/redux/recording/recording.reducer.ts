@@ -1,6 +1,6 @@
 import { RECORDING_TYPES } from './recording.enum';
 import { RecordingAction } from './recording.types';
-import { calculateFastforwardTime, calculateRewindTime } from './recording.utils';
+import { calculateFastforwardTime, calculateRewindTime, clampVolume } from './recording.utils';
 
 interface RecordingState {
   // Video meta data
@@ -24,6 +24,7 @@ interface RecordingState {
   currentTimeMilliseconds: number;
   isFullScreen: boolean;
   isPip: boolean;
+  currentVolume: number;
 }
 
 const INITIAL_STATE = {
@@ -46,6 +47,7 @@ const INITIAL_STATE = {
   currentTimeMilliseconds: 0,
   isFullScreen: false,
   isPip: false,
+  currentVolume: 3,
 } as RecordingState;
 
 const recordingReducer = (state: RecordingState = INITIAL_STATE, action: RecordingAction) => {
@@ -94,6 +96,11 @@ const recordingReducer = (state: RecordingState = INITIAL_STATE, action: Recordi
       return {
         ...state,
         isPip: action.payload,
+      };
+    case RECORDING_TYPES.SET_VOLUME:
+      return {
+        ...state,
+        currentVolume: clampVolume(action.payload),
       };
     case RECORDING_TYPES.FASTFORWARD_TIME:
       return {

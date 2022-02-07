@@ -15,6 +15,7 @@ import {
   setCurrentTimeMilliseconds,
   setIsFullscreen,
   setIsPip,
+  setVolume,
   fastforwardTime,
   rewindTime,
 } from '../../redux/recording/recording.actions';
@@ -28,7 +29,6 @@ import {
   VideoInteractionContainer,
   VideoInteractionItemsRowContainer,
   VideoMiddleButtonsContainer,
-  VideoSliderContainer,
   VideoTimeSlider,
   VideoVolumeSlider,
 } from './main-video-overlay.styles';
@@ -62,6 +62,7 @@ type Props = {
   currentTimeMilliseconds: number;
   isFullScreen: boolean;
   isPip: boolean;
+  currentVolume: number;
 
   // Set download / blob url
   setDownloadUrl: typeof setDownloadUrl;
@@ -73,6 +74,7 @@ type Props = {
   setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
   setIsFullscreen: typeof setIsFullscreen;
   setIsPip: typeof setIsPip;
+  setVolume: typeof setVolume;
   fastforwardTime: typeof fastforwardTime;
   rewindTime: typeof rewindTime;
 };
@@ -89,6 +91,7 @@ const MainVideoOverlay: React.FC<Props> = ({
   currentTimeMilliseconds,
   isFullScreen,
   isPip,
+  currentVolume,
 
   // Video link actions
   setDownloadUrl,
@@ -100,6 +103,7 @@ const MainVideoOverlay: React.FC<Props> = ({
   setCurrentTimeMilliseconds,
   setIsFullscreen,
   setIsPip,
+  setVolume,
   // Fastforward / rewind time
   fastforwardTime,
   rewindTime,
@@ -108,6 +112,11 @@ const MainVideoOverlay: React.FC<Props> = ({
   const dragTimeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
     if (!isDraggingTime) setIsDraggingTime(true);
     setCurrentTimeMilliseconds(parseInt(event.currentTarget.value));
+  };
+
+  // Drag volume slider
+  const dragVolumeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
+    setVolume(parseInt(event.currentTarget.value));
   };
 
   // Render the overlay
@@ -173,11 +182,18 @@ const MainVideoOverlay: React.FC<Props> = ({
             </Icon>
           </Button>
           {/* MUTE BUTTON */}
-          <Button variant='text' size='small' textColor='white' hoverTextColor='lightGrey' padding='0'>
-            <Icon padding='12px'>{isPlaying ? <MuteIcon /> : <VolumeIcon />}</Icon>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='lightGrey'
+            padding='0'
+            clickAction={() => setVolume(0)}
+          >
+            <Icon padding='12px'>{currentVolume === 0 ? <MuteIcon /> : <VolumeIcon />}</Icon>
           </Button>
           {/* VOLUME SLIDER */}
-          <VideoVolumeSlider type='range' min={0} max={10} />
+          <VideoVolumeSlider type='range' min={0} max={10} value={currentVolume} onInput={(e) => dragVolumeSlide(e)} />
         </VideoButtonsContainer>
         {/* RIGHT SIDE */}
         <VideoButtonsContainer>
@@ -229,6 +245,7 @@ const mapStateToProps = (state: State) => ({
   currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
   isFullScreen: state.recording.isFullScreen,
   isPip: state.recording.isPip,
+  currentVolume: state.recording.currentVolume,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -241,6 +258,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
   setIsFullscreen: (isFullscreen: boolean) => dispatch(setIsFullscreen(isFullscreen)),
   setIsPip: (isPip: boolean) => dispatch(setIsPip(isPip)),
+  setVolume: (newVolume: number) => dispatch(setVolume(newVolume)),
   fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
   rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),
 });

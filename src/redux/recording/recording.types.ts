@@ -58,6 +58,11 @@ interface SetIsPip {
   payload: boolean;
 }
 
+interface SetVolume {
+  type: RECORDING_TYPES.SET_VOLUME;
+  payload: number;
+}
+
 interface FastforwardTime {
   type: RECORDING_TYPES.FASTFORWARD_TIME;
   payload: number;
@@ -78,5 +83,6 @@ export type RecordingAction =
   | SetCurrentTimeMilliseconds
   | SetIsFullscreen
   | SetIsPip
+  | SetVolume
   | FastforwardTime
   | RewindTime;
