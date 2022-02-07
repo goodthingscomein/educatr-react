@@ -157,7 +157,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 12px 0 0'
           >
@@ -169,7 +169,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 12px 0 0'
           >
@@ -181,7 +181,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             clickAction={() => navigateToVideoUrl()}
           >
@@ -195,7 +195,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             clickAction={() => setIsShowingMiniplayer(false)}
           >
@@ -207,7 +207,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 0 0 12px'
             clickAction={() => closePlaybackBarMiniplayer()}
@@ -225,7 +225,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='x-small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             clickAction={() => rewindTime(15)}
           >
@@ -237,7 +237,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='x-large'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 80px'
             clickAction={() => setIsPlaying(!isPlaying)}
@@ -248,7 +248,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             variant='text'
             size='x-small'
             textColor='white'
-            hoverTextColor='primaryAccent'
+            hoverTextColor='lightGrey'
             padding='0'
             clickAction={() => fastforwardTime(15)}
           >

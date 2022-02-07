@@ -30,6 +30,7 @@ import {
   VideoMiddleButtonsContainer,
   VideoSliderContainer,
   VideoTimeSlider,
+  VideoVolumeSlider,
 } from './main-video-overlay.styles';
 
 // Import custom components
@@ -39,7 +40,6 @@ import CopyText from '../copy-text/copy-text.components';
 import Button from '../button/button.components';
 
 // Import custom icons
-import CloseIcon from '@mui/icons-material/Close';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipForwardIcon from '@mui/icons-material/FastForward';
@@ -48,7 +48,7 @@ import VolumeIcon from '@mui/icons-material/VolumeUp';
 import MuteIcon from '@mui/icons-material/VolumeOff';
 import FullscreenIcon from '@mui/icons-material/FitScreenOutlined';
 import PipIcon from '@mui/icons-material/PictureInPicture';
-import HideVideoIcon from '@mui/icons-material/KeyboardArrowDown';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 // Component Props Interface
 type Props = {
@@ -128,6 +128,7 @@ const MainVideoOverlay: React.FC<Props> = ({
         onInput={(e) => dragTimeSlide(e)}
         onClick={() => setIsDraggingTime(false)}
       />
+      <Margin height='8px' />
       {/* OVERLAY BOTTOM BUTTONS */}
       <VideoInteractionItemsRowContainer>
         {/* LEFT SIDE */}
@@ -137,7 +138,7 @@ const MainVideoOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='lightGrey'
             padding='0'
             clickAction={() => rewindTime(15)}
           >
@@ -150,7 +151,7 @@ const MainVideoOverlay: React.FC<Props> = ({
             variant='text'
             size='x-large'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 8px'
             clickAction={() => setIsPlaying(!isPlaying)}
@@ -162,9 +163,9 @@ const MainVideoOverlay: React.FC<Props> = ({
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='lightGrey'
             padding='0'
-            margin='0 12px 0 0'
+            margin='0 24px 0 0'
             clickAction={() => fastforwardTime(15)}
           >
             <Icon padding='12px'>
@@ -172,48 +173,41 @@ const MainVideoOverlay: React.FC<Props> = ({
             </Icon>
           </Button>
           {/* MUTE BUTTON */}
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
-            <Icon padding='12px'>
-              <Icon padding='12px'>{isPlaying ? <MuteIcon /> : <VolumeIcon />}</Icon>
-            </Icon>
+          <Button variant='text' size='small' textColor='white' hoverTextColor='lightGrey' padding='0'>
+            <Icon padding='12px'>{isPlaying ? <MuteIcon /> : <VolumeIcon />}</Icon>
           </Button>
+          {/* VOLUME SLIDER */}
+          <VideoVolumeSlider type='range' min={0} max={10} />
         </VideoButtonsContainer>
+        {/* RIGHT SIDE */}
         <VideoButtonsContainer>
-          <Button
-            variant='text'
-            size='small'
-            textColor='white'
-            hoverTextColor='primary'
-            padding='0'
-            margin='0 12px 0 0'
-          >
+          <Button variant='text' size='small' textColor='white' hoverTextColor='lightGrey' padding='0'>
             <Icon padding='12px'>
-              <FullscreenIcon fontSize='medium' />
-            </Icon>
-          </Button>
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
-            <Icon padding='12px'>
-              <PipIcon />
-            </Icon>
-          </Button>
-        </VideoButtonsContainer>
-        {/* TOP RIGHT BUTTONS */}
-        <VideoButtonsContainer>
-          <Button variant='text' size='small' textColor='white' hoverTextColor='primary' padding='0'>
-            <Icon padding='12px'>
-              <HideVideoIcon />
+              <SettingsIcon />
             </Icon>
           </Button>
           <Button
             variant='text'
             size='small'
             textColor='white'
-            hoverTextColor='primary'
+            hoverTextColor='lightGrey'
             padding='0'
             margin='0 0 0 12px'
           >
             <Icon padding='12px'>
-              <CloseIcon />
+              <PipIcon />
+            </Icon>
+          </Button>
+          <Button
+            variant='text'
+            size='small'
+            textColor='white'
+            hoverTextColor='lightGrey'
+            padding='0'
+            margin='0 0 0 12px'
+          >
+            <Icon padding='12px'>
+              <FullscreenIcon />
             </Icon>
           </Button>
         </VideoButtonsContainer>

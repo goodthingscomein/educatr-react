@@ -14,7 +14,7 @@ export const VideoInteractionContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 12px 20px 4px;
+  padding: 12px 20px 8px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -26,9 +26,6 @@ export const VideoInteractionContainer = styled.div`
   transition: 0.2s;
   :hover {
     opacity: 1;
-  }
-  :hover ${VideoInteractionItemsRowContainer} {
-    display: flex;
   }
 `;
 
@@ -82,6 +79,52 @@ export const VideoTimeSlider = styled.input`
   }
   &::-moz-range-progress {
     background: ${(props) => props.theme.themeColors.primary};
+  }
+
+  // Turn off the slider
+  &::-webkit-slider-thumb {
+    appearance: none;
+    background-color: ${(props) => props.theme.themeColors.transparent};
+    outline: none;
+    border: none;
+  }
+  // Firefox
+  &::-moz-range-thumb {
+    appearance: none;
+    background-color: ${(props) => props.theme.themeColors.transparent};
+    outline: none;
+    border: none;
+  }
+  // Edge
+  &::-ms-thumb {
+    appearance: none;
+    background-color: ${(props) => props.theme.themeColors.transparent};
+    outline: none;
+    border: none;
+  }
+`;
+
+export const VideoVolumeSlider = styled.input`
+  overflow: hidden;
+  display: block;
+  appearance: none;
+  width: 80px;
+  height: 4px;
+  background: ${(props) => props.theme.themeColors.transparent};
+  outline: none;
+  margin-left: 4px;
+  cursor: pointer;
+
+  // Change the track colors
+  // Firefox
+  &::-moz-range-track,
+  &::-moz-range-progress {
+    width: 100%;
+    height: 4px;
+    background: ${(props) => props.theme.themeColors.white}40;
+  }
+  &::-moz-range-progress {
+    background: ${(props) => props.theme.themeColors.white};
   }
 
   // Turn off the slider
