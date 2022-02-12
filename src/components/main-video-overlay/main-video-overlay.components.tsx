@@ -104,8 +104,6 @@ const MainVideoOverlay: React.FC<Props> = ({
   fastforwardTime,
   rewindTime,
 }) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
   // Video playback manager
   // Get the video component
   const video: HTMLVideoElement | null = document.getElementById('main-video') as HTMLVideoElement;
@@ -143,18 +141,34 @@ const MainVideoOverlay: React.FC<Props> = ({
     setVolume(parseInt(event.currentTarget.value));
   };
 
+  /*
+    Fullscreen Actions and variables
+  */
   const getFullscreenElement = () => document.fullscreenElement;
-
   // Fullscreen button
   const toggleFullscreen = () => {
     if (!video) return console.warn('Video element not found');
     if (!videoContainer) return console.warn('Video container element not found');
     if (!getFullscreenElement()) {
       videoContainer.requestFullscreen().catch((err) => console.error(err));
-      setIsFullscreen(true);
     } else {
       document.exitFullscreen();
-      setIsFullscreen(false);
+    }
+  };
+
+  /*
+    PIP Actions and variables
+  */
+  const isPipEnabled = () => document.pictureInPictureEnabled;
+  const getPipElement = () => document.pictureInPictureElement;
+  // PIP button
+  const togglePip = () => {
+    if (!isPipEnabled()) return console.warn('Picture in Picture is not enabled on this browser');
+    if (!video) return console.warn('Video element not found');
+    if (!getPipElement()) {
+      video.requestPictureInPicture().catch((err) => console.error(err));
+    } else {
+      document.exitPictureInPicture();
     }
   };
 
@@ -248,6 +262,7 @@ const MainVideoOverlay: React.FC<Props> = ({
             hoverTextColor='lightGrey'
             padding='0'
             margin='0 0 0 12px'
+            clickAction={() => togglePip()}
           >
             <Icon padding='12px'>
               <PipIcon />
@@ -262,7 +277,10 @@ const MainVideoOverlay: React.FC<Props> = ({
             margin='0 0 0 12px'
             clickAction={() => toggleFullscreen()}
           >
-            <Icon padding='12px'>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</Icon>
+            {/* <Icon padding='12px'>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</Icon> */}
+            <Icon padding='12px'>
+              <FullscreenIcon />
+            </Icon>
           </Button>
         </VideoButtonsContainer>
       </VideoInteractionItemsRowContainer>

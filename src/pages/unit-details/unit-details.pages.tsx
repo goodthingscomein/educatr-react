@@ -94,11 +94,13 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
             >
               {/* LINKS TO CHANGE UNIT FITLERS */}
               <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*$/g) ? 'tertiaryAccent' : 'textDark'}
+                color={
+                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/overview$/g) ? 'tertiaryAccent' : 'textDark'
+                }
                 hoverColor='tertiaryAccent'
                 underlineEffect='always'
                 margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}`)}
+                clickAction={() => handleNavigateClick(`/units/${unitId}/overview`)}
               >
                 Overview
               </Link>
@@ -208,7 +210,7 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
         </HeaderContainer>
         <ContentContainer>
           <Routes>
-            <Route path='/' element={<OverviewSubPage />} />
+            <Route path='/overview' element={<OverviewSubPage />} />
             <Route path='/recordings' element={<RecordingsSubPage />} />
             <Route path='/resources' element={<ResourcesSubPage />} />
             <Route path='/*' element={<NotFoundPage />} />

@@ -9,8 +9,8 @@ interface NavigationState {
 
 const INITIAL_STATE = {
   isDrawerOpen: false,
-  recordingsNavigationUrl: '/recordings',
-  yourUnitsNavigationUrl: '/units',
+  recordingsNavigationUrl: '/recordings/recent',
+  yourUnitsNavigationUrl: '/units/current',
 } as NavigationState;
 
 const navigationReducer = (state: NavigationState = INITIAL_STATE, action: NavigationAction) => {

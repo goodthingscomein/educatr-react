@@ -29,7 +29,6 @@ const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
 
   // These functions are used to stop the displaying of the overlay is the mouse has stopped moving
   const stopDisplayingOverlay = (currentMouseDragValue: number) => {
-    console.log(mouseDragValueRef.current);
     if (currentMouseDragValue === mouseDragValueRef.current) setIsDisplayingOverlay(false);
   };
   const stopDisplayingCursor = (currentMouseDragValue: number) => {

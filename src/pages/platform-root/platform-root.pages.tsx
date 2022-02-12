@@ -75,13 +75,29 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
           <ContentContainer>
             <DarkenScreen displaying={isDrawerOpen} />
             <Routes>
+              {/* ----- HOME ----- */}
               <Route path='/' element={<HomePage />} />
+              {/* ----- CALENDAR ----- */}
               <Route path='/calendar' element={<CalendarPage />} />
+              {/* ----- MESSAGES ----- */}
               <Route path='/messages' element={<MessagesPage />} />
-              <Route path='/units' element={<AllUnitsPage />} />
-              <Route path='/units/:unitId/*' element={<UnitDetailsPage />} />
-              <Route path='/recordings' element={<AllRecordingsPage />} />
-              <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
+              <Route path='/units'>
+                {/* ----- ALL UNITS (FILTERS) ----- */}
+                {['current', 'completed', 'upcoming', 'all'].map((path) => {
+                  return <Route key={path} path={path} element={<AllUnitsPage />} />;
+                })}
+                {/* ----- UNIT DETAILS ----- */}
+                <Route path=':unitId/*' element={<UnitDetailsPage />} />
+              </Route>
+              <Route path='/recordings'>
+                {/* ----- ALL RECORDINGS (FILTERS) ----- */}
+                {['recent', 'watched', 'favourites', 'all'].map((path) => {
+                  return <Route key={path} path={path} element={<AllRecordingsPage />} />;
+                })}
+                {/* ----- RECORDING DETAILS ----- */}
+                <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
+              </Route>
+              {/* ----- 404 (PAGE NOT FOUND) ----- */}
               <Route path='/*' element={<NotFoundPage />} />
             </Routes>
           </ContentContainer>

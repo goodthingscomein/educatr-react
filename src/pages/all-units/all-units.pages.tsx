@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Import development data
 import units from '../../data/units.data';
@@ -10,27 +10,11 @@ import { PageContainer, ContentContainer, AllUnitsGridContainer } from './all-un
 import AllUnitsHeader from '../../components/all-units-header/all-units-header.components';
 import UnitCard from '../../components/unit-card/unit-card.components';
 
-export type UnitsFilterTypes = 'current' | 'completed' | 'upcoming' | 'all';
-
 // Render Component
 const AllUnitsPage: React.FC = () => {
-  // State for the filtering of the units
-  const [unitsFilter, setUnitsFilter] = useState<UnitsFilterTypes>('current');
-
-  // State for search bar
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-
   return (
     <PageContainer>
-      <AllUnitsHeader
-        unitsFilter={unitsFilter}
-        setUnitsFilter={setUnitsFilter}
-        isSearching={isSearching}
-        setIsSearching={setIsSearching}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      <AllUnitsHeader />
       <ContentContainer>
         <AllUnitsGridContainer numberOfColumns={4} numberOfRows={4} cardHeight='375px'>
           {units.map((unit, index) => {

@@ -16,6 +16,7 @@ import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Import types for state management
 import { RecordingsFilterTypes } from '../../pages/all-recordings/all-recordings.pages';
+import NavigationTabs, { NavigationTab } from '../tabbed-navigation/tabbed-navigation.components';
 
 // Component props
 type Props = {
@@ -39,6 +40,30 @@ const AllRecordingsHeader: React.FC<Props> = ({
   searchValue,
   setSearchValue,
 }) => {
+  // The tabbed navigation items
+  const allRecordingsNavigationTabs: NavigationTab[] = [
+    {
+      label: 'Recent Recordings',
+      to: 'recent',
+      urlRegexMatch: /recent$/g,
+    },
+    {
+      label: 'Already Watched',
+      to: 'watched',
+      urlRegexMatch: /watched$/g,
+    },
+    {
+      label: 'Favourites',
+      to: 'favourites',
+      urlRegexMatch: /favourites$/g,
+    },
+    {
+      label: 'All Recordings',
+      to: 'all',
+      urlRegexMatch: /all$/g,
+    },
+  ];
+
   // Render component
   return (
     <HeaderContainer>
@@ -51,51 +76,7 @@ const AllRecordingsHeader: React.FC<Props> = ({
           height: fit-content;
         `}
       >
-        <HorizontalDiv
-          backgroundColor='transparent'
-          css={`
-            width: fit-content;
-            height: fit-content;
-          `}
-        >
-          {/* LINKS TO CHANGE UNIT FITLERS */}
-          <Link
-            color={recordingsFilter === 'new' ? 'tertiaryAccent' : 'textDark'}
-            hoverColor='tertiaryAccent'
-            underlineEffect='always'
-            margin='0 16px 0 0'
-            clickAction={() => setRecordingsFilter('new')}
-          >
-            Recent
-          </Link>
-          <Link
-            color={recordingsFilter === 'watched' ? 'tertiaryAccent' : 'textDark'}
-            hoverColor='tertiaryAccent'
-            underlineEffect='always'
-            margin='0 16px 0 0'
-            clickAction={() => setRecordingsFilter('watched')}
-          >
-            Already Watched
-          </Link>
-          <Link
-            color={recordingsFilter === 'favourite' ? 'tertiaryAccent' : 'textDark'}
-            hoverColor='tertiaryAccent'
-            underlineEffect='always'
-            margin='0 16px 0 0'
-            clickAction={() => setRecordingsFilter('favourite')}
-          >
-            Favourites
-          </Link>
-          <Link
-            color={recordingsFilter === 'all' ? 'tertiaryAccent' : 'textDark'}
-            hoverColor='tertiaryAccent'
-            underlineEffect='always'
-            margin='0 16px 0 0'
-            clickAction={() => setRecordingsFilter('all')}
-          >
-            All Recordings
-          </Link>
-        </HorizontalDiv>
+        <NavigationTabs navigationTabs={allRecordingsNavigationTabs} />
         <HorizontalDiv
           backgroundColor='transparent'
           css={`
