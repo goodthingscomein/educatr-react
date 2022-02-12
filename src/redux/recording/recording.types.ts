@@ -28,47 +28,47 @@ interface SetBlobUrlAction {
   payload: string;
 }
 
-interface SetIsPlaying {
+interface SetIsPlayingAction {
   type: RECORDING_TYPES.SET_IS_PLAYING;
   payload: boolean;
 }
 
-interface SetIsDraggingTime {
+interface SetIsDraggingTimeAction {
   type: RECORDING_TYPES.SET_IS_DRAGGING_TIME;
   payload: boolean;
 }
 
-interface SetIsSkippingTime {
+interface SetIsSkippingTimeAction {
   type: RECORDING_TYPES.SET_IS_SKIPPING_TIME;
   payload: boolean;
 }
 
-interface SetCurrentTimeMilliseconds {
+interface SetCurrentTimeMillisecondsAction {
   type: RECORDING_TYPES.SET_CURRENT_TIME_MILLISECONDS;
   payload: number;
 }
 
-interface SetIsFullscreen {
+interface SetIsFullscreenAction {
   type: RECORDING_TYPES.SET_IS_FULLSCREEN;
   payload: boolean;
 }
 
-interface SetIsPip {
+interface SetIsPipAction {
   type: RECORDING_TYPES.SET_IS_PIP;
   payload: boolean;
 }
 
-interface SetVolume {
+interface SetVolumeAction {
   type: RECORDING_TYPES.SET_VOLUME;
   payload: number;
 }
 
-interface FastforwardTime {
+interface FastforwardTimeAction {
   type: RECORDING_TYPES.FASTFORWARD_TIME;
   payload: number;
 }
 
-interface RewindTime {
+interface RewindTimeAction {
   type: RECORDING_TYPES.REWIND_TIME;
   payload: number;
 }
@@ -77,12 +77,12 @@ export type RecordingAction =
   | SetRecordingMetadataAction
   | SetDownloadUrlAction
   | SetBlobUrlAction
-  | SetIsPlaying
-  | SetIsDraggingTime
-  | SetIsSkippingTime
-  | SetCurrentTimeMilliseconds
-  | SetIsFullscreen
-  | SetIsPip
-  | SetVolume
-  | FastforwardTime
-  | RewindTime;
+  | SetIsPlayingAction
+  | SetIsDraggingTimeAction
+  | SetIsSkippingTimeAction
+  | SetCurrentTimeMillisecondsAction
+  | SetIsFullscreenAction
+  | SetIsPipAction
+  | SetVolumeAction
+  | FastforwardTimeAction
+  | RewindTimeAction;

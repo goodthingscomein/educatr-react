@@ -6,6 +6,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*::before {
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*::after {
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   margin: 0;
   font-weight: 400;

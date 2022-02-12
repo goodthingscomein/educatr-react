@@ -1,32 +1,38 @@
 import styled from 'styled-components';
 
+// Overlay props
+type VideoInteractionContainerProps = {
+  isDisplaying?: boolean;
+};
+
+export const VideoInteractionContainer = styled.div<VideoInteractionContainerProps>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 20px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(
+    ${(props) => props.theme.themeColors.transparent} 0%,
+    ${(props) => props.theme.themeColors.black} 100%
+  );
+  cursor: pointer;
+  transition: opacity ease-out 0.2s;
+  opacity: ${(props) => (props.isDisplaying ? 1 : 0)};
+
+  :hover {
+    opacity: 1;
+  }
+`;
+
 export const VideoInteractionItemsRowContainer = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const VideoInteractionContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 12px 20px 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background: linear-gradient(
-    ${(props) => props.theme.themeColors.transparent} 90%,
-    ${(props) => props.theme.themeColors.black} 100%
-  );
-  opacity: 0;
-  transition: 0.2s;
-  :hover {
-    opacity: 1;
-  }
 `;
 
 export const VideoButtonsContainer = styled.div`

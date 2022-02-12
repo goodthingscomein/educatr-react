@@ -20,7 +20,7 @@ export const MiniplayerInteractionContainer = styled.div`
   justify-content: space-between;
   background-color: ${(props) => props.theme.themeColors.darkShadow};
   opacity: 0;
-  transition: 0.2s linear 0.5s;
+  transition: 0.2s;
   :hover {
     opacity: 1;
   }

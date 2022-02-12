@@ -17,8 +17,6 @@ import {
   setIsPlaying,
   setIsDraggingTime,
   setCurrentTimeMilliseconds,
-  setIsFullscreen,
-  setIsPip,
   fastforwardTime,
   rewindTime,
 } from '../../redux/recording/recording.actions';
@@ -64,8 +62,6 @@ type Props = {
   isPlaying: boolean;
   isDraggingTime: boolean;
   currentTimeMilliseconds: number;
-  isFullScreen: boolean;
-  isPip: boolean;
 
   // Set the URL of the recording drawer button
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -82,8 +78,6 @@ type Props = {
   setIsPlaying: typeof setIsPlaying;
   setIsDraggingTime: typeof setIsDraggingTime;
   setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  setIsFullscreen: typeof setIsFullscreen;
-  setIsPip: typeof setIsPip;
   fastforwardTime: typeof fastforwardTime;
   rewindTime: typeof rewindTime;
 };
@@ -99,8 +93,6 @@ const MiniplayerOverlay: React.FC<Props> = ({
   isPlaying,
   isDraggingTime,
   currentTimeMilliseconds,
-  isFullScreen,
-  isPip,
 
   // Records drawer button url action
   setRecordingsNavigationUrl,
@@ -117,8 +109,6 @@ const MiniplayerOverlay: React.FC<Props> = ({
   setIsPlaying,
   setIsDraggingTime,
   setCurrentTimeMilliseconds,
-  setIsFullscreen,
-  setIsPip,
   // Fastforward / rewind time
   fastforwardTime,
   rewindTime,
@@ -286,8 +276,6 @@ const mapStateToProps = (state: State) => ({
   isPlaying: state.recording.isPlaying,
   isDraggingTime: state.recording.isDraggingTime,
   currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  isFullScreen: state.recording.isFullScreen,
-  isPip: state.recording.isPip,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -303,8 +291,6 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
   setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
   setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  setIsFullscreen: (isFullscreen: boolean) => dispatch(setIsFullscreen(isFullscreen)),
-  setIsPip: (isPip: boolean) => dispatch(setIsPip(isPip)),
   fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
   rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),
 });

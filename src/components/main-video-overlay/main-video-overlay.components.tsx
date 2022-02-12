@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Import utils
 import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
@@ -12,9 +12,8 @@ import {
   setBlobUrl,
   setIsPlaying,
   setIsDraggingTime,
+  setIsSkippingTime,
   setCurrentTimeMilliseconds,
-  setIsFullscreen,
-  setIsPip,
   setVolume,
   fastforwardTime,
   rewindTime,
@@ -46,22 +45,24 @@ import SkipForwardIcon from '@mui/icons-material/FastForward';
 import SkipBackIcon from '@mui/icons-material/FastRewind';
 import VolumeIcon from '@mui/icons-material/VolumeUp';
 import MuteIcon from '@mui/icons-material/VolumeOff';
-import FullscreenIcon from '@mui/icons-material/FitScreenOutlined';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PipIcon from '@mui/icons-material/PictureInPicture';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // Component Props Interface
 type Props = {
+  // If we are displaying the overlay or not
+  isDisplaying?: boolean;
+
   // Recording metadata
-  videoId: string;
   videoLengthSeconds: number;
 
   // Recording playback
   isPlaying: boolean;
   isDraggingTime: boolean;
+  isSkippingTime: boolean;
   currentTimeMilliseconds: number;
-  isFullScreen: boolean;
-  isPip: boolean;
   currentVolume: number;
 
   // Set download / blob url
@@ -71,9 +72,8 @@ type Props = {
   // Set recording playback
   setIsPlaying: typeof setIsPlaying;
   setIsDraggingTime: typeof setIsDraggingTime;
+  setIsSkippingTime: typeof setIsSkippingTime;
   setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  setIsFullscreen: typeof setIsFullscreen;
-  setIsPip: typeof setIsPip;
   setVolume: typeof setVolume;
   fastforwardTime: typeof fastforwardTime;
   rewindTime: typeof rewindTime;
@@ -81,33 +81,57 @@ type Props = {
 
 // Render Component
 const MainVideoOverlay: React.FC<Props> = ({
+  // If we are displaying the overlay or not
+  isDisplaying,
+
   // Video metadata
-  videoId,
   videoLengthSeconds,
 
   // Playback state
   isPlaying,
   isDraggingTime,
+  isSkippingTime,
   currentTimeMilliseconds,
-  isFullScreen,
-  isPip,
   currentVolume,
-
-  // Video link actions
-  setDownloadUrl,
-  setBlobUrl,
 
   // Playback actions
   setIsPlaying,
   setIsDraggingTime,
+  setIsSkippingTime,
   setCurrentTimeMilliseconds,
-  setIsFullscreen,
-  setIsPip,
   setVolume,
   // Fastforward / rewind time
   fastforwardTime,
   rewindTime,
 }) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Video playback manager
+  // Get the video component
+  const video: HTMLVideoElement | null = document.getElementById('main-video') as HTMLVideoElement;
+  const videoContainer: HTMLDivElement = document.getElementById('main-video-container') as HTMLDivElement;
+
+  // Manage the playback state of the main video
+  if (video && videoContainer) {
+    // Play video
+    if (isPlaying && !isDraggingTime && !isSkippingTime) {
+      video.play();
+      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
+    }
+    // Pause video
+    else {
+      video.pause();
+      video.currentTime = currentTimeMilliseconds / 1000;
+      // Stop pause if we are just skipping time
+      if (isSkippingTime) setIsSkippingTime(false);
+    }
+
+    // Double click to open in fullscreen
+    videoContainer.addEventListener('dblclick', () => {
+      toggleFullscreen();
+    });
+  }
+
   // Drag time slider
   const dragTimeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
     if (!isDraggingTime) setIsDraggingTime(true);
@@ -119,9 +143,24 @@ const MainVideoOverlay: React.FC<Props> = ({
     setVolume(parseInt(event.currentTarget.value));
   };
 
+  const getFullscreenElement = () => document.fullscreenElement;
+
+  // Fullscreen button
+  const toggleFullscreen = () => {
+    if (!video) return console.warn('Video element not found');
+    if (!videoContainer) return console.warn('Video container element not found');
+    if (!getFullscreenElement()) {
+      videoContainer.requestFullscreen().catch((err) => console.error(err));
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
   // Render the overlay
   return (
-    <VideoInteractionContainer>
+    <VideoInteractionContainer isDisplaying={isDisplaying}>
       {/* TIMESTAMP */}
       <CopyText size='x-small' color='white'>
         {secondsToTimeFormat(Math.floor(currentTimeMilliseconds / 1000))} /{' '}
@@ -221,10 +260,9 @@ const MainVideoOverlay: React.FC<Props> = ({
             hoverTextColor='lightGrey'
             padding='0'
             margin='0 0 0 12px'
+            clickAction={() => toggleFullscreen()}
           >
-            <Icon padding='12px'>
-              <FullscreenIcon />
-            </Icon>
+            <Icon padding='12px'>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</Icon>
           </Button>
         </VideoButtonsContainer>
       </VideoInteractionItemsRowContainer>
@@ -238,13 +276,11 @@ const MainVideoOverlay: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  videoId: state.recording.videoId,
   videoLengthSeconds: state.recording.videoLengthSeconds,
   isPlaying: state.recording.isPlaying,
   isDraggingTime: state.recording.isDraggingTime,
+  isSkippingTime: state.recording.isSkippingTime,
   currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  isFullScreen: state.recording.isFullScreen,
-  isPip: state.recording.isPip,
   currentVolume: state.recording.currentVolume,
 });
 
@@ -255,9 +291,8 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   // Recording playback
   setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
   setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
+  setIsSkippingTime: (isSkippingTime: boolean) => dispatch(setIsSkippingTime(isSkippingTime)),
   setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  setIsFullscreen: (isFullscreen: boolean) => dispatch(setIsFullscreen(isFullscreen)),
-  setIsPip: (isPip: boolean) => dispatch(setIsPip(isPip)),
   setVolume: (newVolume: number) => dispatch(setVolume(newVolume)),
   fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
   rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),

@@ -1,4 +1,4 @@
-export default (totalSeconds: number): string => {
+const secondsToTimeFormat = (totalSeconds: number): string => {
   // Calculate the timestamp
   const hrs = Math.floor(totalSeconds / 3600);
   const mins = Math.floor(totalSeconds / 60) - hrs * 60;
@@ -13,3 +13,5 @@ export default (totalSeconds: number): string => {
 
   return outputString;
 };
+
+export default secondsToTimeFormat;

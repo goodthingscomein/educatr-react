@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-export const VideoContainer = styled.div`
+// Video container props
+type VideoContainerProps = {
+  isDisplayingCursor?: boolean;
+};
+
+export const VideoContainer = styled.div<VideoContainerProps>`
   position: relative;
   width: 100%;
-  padding: 0 10%;
   background-color: ${(props) => props.theme.themeColors.textDark};
+  cursor: ${(props) => (props.isDisplayingCursor ? 'pointer' : 'none')};
 `;
 
 export const Video = styled.video`
   width: 100%;
-  height: 100%;
 `;
