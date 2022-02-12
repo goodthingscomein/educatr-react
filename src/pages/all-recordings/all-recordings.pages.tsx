@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Import development data
 import allRecordings from '../../data/recordings.data';
+
+// Import Connect Redux
+import { connect } from 'react-redux';
+
+// Import Required Redux Actions
+import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
 
 // Import styles
 import { PageContainer, ContentContainer } from './all-recordings.styles';
 
 // Import custom components
-import RecordingsCollection from '../../components/recordings-collection/recording-collection.components';
 import { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
 import SubPageHeader from '../../components/sub-page-header/sub-page-header.components';
+import CardCollection from '../../components/card-collection/card-collection.components';
+import RecordingCard from '../../components/recording-card/recording-card.components';
+
+type Props = {
+  // Drawer button nav url management
+  setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
+};
 
 // Render Component
-const AllRecordingsPage: React.FC = () => {
+const AllRecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
   // The tabbed navigation items
   const allRecordingsNavigationTabs: NavigationTabType[] = [
     {
@@ -46,12 +60,21 @@ const AllRecordingsPage: React.FC = () => {
         searchHint='Search all recordings...'
         onSearchSubmitListener={(input) => console.log(input)}
         rootUrl='/recordings'
+        navigationDispatch={setRecordingsNavigationUrl}
       />
       <ContentContainer>
-        <RecordingsCollection recordings={allRecordings} numberOfColumns={3}></RecordingsCollection>
+        <CardCollection numberOfColumns={3} numberOfCards={allRecordings.length}>
+          {allRecordings.map((recording, index) => {
+            return <RecordingCard key={index} recording={recording} />;
+          })}
+        </CardCollection>
       </ContentContainer>
     </PageContainer>
   );
 };
 
-export default AllRecordingsPage;
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
+});
+
+export default connect(null, mapDispatchToProps)(AllRecordingsPage);

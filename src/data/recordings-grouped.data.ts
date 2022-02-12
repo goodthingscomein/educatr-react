@@ -13,8 +13,7 @@ export default [
         videoId: '00000001',
         videoThumbnailSrc: 'https://picsum.photos/1280/720?random=1',
         videoLengthSeconds: 5,
-        videoTitle:
-          'Discrete Math - Principles of Discrete (Graph Theory) - This title is quite a long one, and allows us to test the title length cutoff!',
+        videoTitle: 'Discrete Math - Principles of Discrete (Graph Theory)',
         videoDescription:
           'This is the description of this video, it can be quite long, but that is sort of the point is it not?  Anyways, I think this is a pretty cool video, quite valuable and makes you a smarter person!',
         videoPostDate: '27/01/2022',

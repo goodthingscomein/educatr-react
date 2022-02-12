@@ -6,6 +6,7 @@ import { NavigationTabsContainer } from './tabbed-navigation.styles';
 
 // Import custom components
 import Link from '../link/link.components';
+import { NavigationAction } from '../../redux/navigation/navigation.types';
 
 export type NavigationTabType = {
   label: string;
@@ -19,13 +20,15 @@ export type NavigationTabType = {
 type Props = {
   navigationTabs: NavigationTabType[];
   rootUrl: string;
+  navigationDispatch: (newUrl: string) => NavigationAction;
 };
 
 // Render Component
-const TabbedNavigation: React.FC<Props> = ({ navigationTabs, rootUrl }) => {
+const TabbedNavigation: React.FC<Props> = ({ navigationTabs, rootUrl, navigationDispatch }) => {
   const navigate = useNavigate();
 
   const tabClickAction = (newUrl: string) => {
+    navigationDispatch(`${rootUrl}/${newUrl}`);
     navigate(`${rootUrl}/${newUrl}`);
   };
 

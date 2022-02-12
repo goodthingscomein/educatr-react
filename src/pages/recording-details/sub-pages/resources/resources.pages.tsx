@@ -7,18 +7,18 @@ import resourcesData from '../../../../data/resources.data';
 import { SubPageContainer } from './resources.styles';
 
 // Import custom components
-import Margin from '../../../../components/margin/margin.components';
-import CopyText from '../../../../components/copy-text/copy-text.components';
-
-// Import custom icons
-import Divider from '../../../../components/divider/divider.components';
-import ResourcesCollection from '../../../../components/resources-collection/resources-collection.components';
+import CardCollection from '../../../../components/card-collection/card-collection.components';
+import ResourceCard from '../../../../components/resource-card/resource-card.components';
 
 // Render Component
 const ResourcesSubPage: React.FC = () => {
   return (
     <SubPageContainer>
-      <ResourcesCollection resources={resourcesData.filter((val, i) => i < 8)} numberOfColumns={4} />
+      <CardCollection numberOfColumns={4} numberOfCards={resourcesData.length}>
+        {resourcesData.map((resource, index) => {
+          return <ResourceCard key={index} resource={resource} />;
+        })}
+      </CardCollection>
     </SubPageContainer>
   );
 };

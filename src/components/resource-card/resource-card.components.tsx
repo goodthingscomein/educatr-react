@@ -9,23 +9,23 @@ import CopyText from '../copy-text/copy-text.components';
 import Margin from '../margin/margin.components';
 import VerticalDiv from '../vertical-div/vertical-div.components';
 
+// Import custom data types
+import { ResourceDataType } from '../../data/resources.data';
+
 // Component Props Interface
 type Props = {
-  resourceUrl: string;
-  thumbnailSrc: string;
-  title: string;
-  description: string;
+  resource: ResourceDataType;
 };
 
 // Render Component
-const ResourceCard: React.FC<Props> = ({ resourceUrl, thumbnailSrc, title, description }) => {
+const ResourceCard: React.FC<Props> = ({ resource }) => {
   // Navigate url
   const navigate = useNavigate();
 
   return (
-    <ResourceCardContainer onClick={() => navigate(resourceUrl)}>
+    <ResourceCardContainer onClick={() => navigate(resource.resourceUrl)}>
       {/* Resource Thumbnail Image */}
-      <Thumbnail src={thumbnailSrc} />
+      <Thumbnail src={resource.imgSrc} />
       <CardTextContainer>
         {/* Resource Title + Description */}
         <VerticalDiv
@@ -38,13 +38,13 @@ const ResourceCard: React.FC<Props> = ({ resourceUrl, thumbnailSrc, title, descr
           `}
         >
           <CopyText size='medium' color='textDark' fontWeight={400}>
-            {title.substring(0, 28)}
-            {title.length >= 28 && '...'}
+            {resource.resourceTitle.substring(0, 28)}
+            {resource.resourceTitle.length >= 28 && '...'}
           </CopyText>
           <Margin width='100%' height='4px' />
           <CopyText size='x-small' color='textLight' fontWeight={300}>
-            {description.substring(0, 75)}
-            {description.length >= 75 && '...'}
+            {resource.description.substring(0, 75)}
+            {resource.description.length >= 75 && '...'}
           </CopyText>
         </VerticalDiv>
       </CardTextContainer>

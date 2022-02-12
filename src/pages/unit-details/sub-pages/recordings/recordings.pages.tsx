@@ -4,22 +4,24 @@ import React from 'react';
 import recordingsCollections from '../../../../data/recordings-grouped.data';
 
 // Import custom components
-import RecordingsCollectionGrouped from '../../../../components/recordings-collection-grouped/recording-collection-grouped.components';
-import Divider from '../../../../components/divider/divider.components';
+import CardCollection from '../../../../components/card-collection/card-collection.components';
+import RecordingCard from '../../../../components/recording-card/recording-card.components';
 
 // Render Component
 const RecordingsSubPage: React.FC = () => (
   <>
     {recordingsCollections.map((collection, index) => {
       return (
-        <>
-          <RecordingsCollectionGrouped
-            title={collection.collectionTitle}
-            recordings={collection.recordings}
-            numberOfColumns={3}
-          />
-          {recordingsCollections.length !== index + 1 && <Divider color='dark' margin='40px' />}
-        </>
+        <CardCollection
+          heading={collection.collectionTitle}
+          numberOfColumns={3}
+          numberOfCards={collection.recordings.length}
+          hasDivider={recordingsCollections.length !== index + 1}
+        >
+          {collection.recordings.map((recording, index) => {
+            return <RecordingCard key={index} recording={recording} />;
+          })}
+        </CardCollection>
       );
     })}
   </>

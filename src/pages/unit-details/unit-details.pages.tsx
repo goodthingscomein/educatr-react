@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes, useParams } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -10,14 +10,13 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { PageContainer, ScrollContainer, ContentContainer } from './unit-details.styles';
+import { PageContainer, ContentContainer } from './unit-details.styles';
 
 // Import sub pages
 import OverviewSubPage from './sub-pages/overview/overview.pages';
 import RecordingsSubPage from './sub-pages/recordings/recordings.pages';
 import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotFoundPage from '../not-found/not-found.pages';
-import Icon from '../../components/icon/icon-components';
 import SubPageHeader from '../../components/sub-page-header/sub-page-header.components';
 import { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
 
@@ -28,17 +27,8 @@ type Props = {
 
 // Render Component
 const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
-  // State for search bar
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-
-  const navigate = useNavigate();
+  // Get the unit ID params in the URL
   const { unitId } = useParams();
-
-  const handleNavigateClick = (url: string) => {
-    navigate(url);
-    setYourUnitsNavigationUrl(url);
-  };
 
   // The tabbed navigation items
   const unitDetailsNavigationTabs: NavigationTabType[] = [
@@ -83,6 +73,7 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
         onSearchSubmitListener={(input) => console.log(input)}
         rootUrl={`/units/${unitId}`}
         backNavUrl='/units/current'
+        navigationDispatch={setYourUnitsNavigationUrl}
       />
       <ContentContainer>
         <Routes>
