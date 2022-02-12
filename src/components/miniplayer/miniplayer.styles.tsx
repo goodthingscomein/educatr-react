@@ -10,7 +10,6 @@ type MiniplayerFrameProps = {
 export const MiniplayerFrame = styled.div<MiniplayerFrameProps>`
   position: fixed;
   right: 24px;
-  /* right: 400px; */
   bottom: calc(50px);
   height: fit-content;
   width: fit-content;
@@ -19,6 +18,7 @@ export const MiniplayerFrame = styled.div<MiniplayerFrameProps>`
   display: ${(props) => (props.isDisplaying ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
+  z-index: 2;
 `;
 
 export const MiniplayerVideo = styled.video`

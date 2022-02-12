@@ -11,18 +11,19 @@ export const AppBarContainer = styled.div`
   flex: 0 0 60px;
   padding: 0;
   background-color: ${(props) => props.theme.themeColors.textDark};
+  border-bottom: 1px solid ${(props) => props.theme.themeColors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const BackButtonContainer = styled.div`
-  height: 60%;
+  padding: 0 12px;
+  margin-right: 12px;
   border-right: 1px solid ${(props) => props.theme.themeColors.lighten};
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 12px;
 `;
 
 export const DrawerContainer = styled.div`

@@ -63,7 +63,8 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
   }, [videoDownloadUrl]);
 
   // Check if we are on the recording details page to determine if we need to render the miniplayer...
-  const onRecordingDetailsPage = useLocation().pathname.match(/^\/recordings\/.+/g) != null;
+  const onRecordingDetailsPage =
+    useLocation().pathname.match(/^\/recordings\/(?!(recent|watched|favourites|all)).+/g) != null;
 
   return (
     <PlatformRootPageContainer>

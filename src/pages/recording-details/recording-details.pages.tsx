@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, Navigate, useParams } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -19,8 +19,6 @@ import {
   AppBarSectionContainer,
   DrawerContainer,
   MainContainer,
-  VideoContainer,
-  Video,
   AllContentContainer,
   ContentSelectionBar,
   SubContentContainer,
@@ -34,13 +32,12 @@ import {
 import CopyText from '../../components/copy-text/copy-text.components';
 import Link from '../../components/link/link.components';
 import Button from '../../components/button/button.components';
-import Icon from '../../components/icon/icon-components';
 import Margin from '../../components/margin/margin.components';
 import Divider from '../../components/divider/divider.components';
 import MainVideo from '../../components/main-video/main-video.components';
+import BackButton from '../../components/back-button/back-button.components';
 
 // Import custom icons
-import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
 import FavouriteSolidIcon from '@mui/icons-material/Star';
 import FavouriteOutlineIcon from '@mui/icons-material/StarBorder';
 import HelpIcon from '@mui/icons-material/HelpOutline';
@@ -59,6 +56,7 @@ import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotesSubPage from './sub-pages/notes/notes.pages';
 import PracticeSubPage from './sub-pages/practice/practice.pages';
 import NotFoundPage from '../not-found/not-found.pages';
+import TabbedNavigation, { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
 
 type VideoRatingType = 'likes' | 'dislikes' | undefined;
 
@@ -83,38 +81,54 @@ type Props = {
 // Render Component
 const RecordingDetailsPage: React.FC<Props> = ({
   setRecordingsNavigationUrl,
-  videoId,
-  videoThumbnailSrc,
   videoTitle,
   videoDescription,
   videoHashtags,
   isFavourited,
   alreadyRated,
-  videoBlobUrl,
   setDownloadUrl,
 }) => {
   const [showingFullDescription, setShowingFullDescription] = useState(false);
   const [isFavourite, setIsFavourite] = useState(isFavourited || false);
   const [videoRating, setVideoRating] = useState<VideoRatingType>(alreadyRated);
 
-  // Adding timestamp functionality + short note input
-  const [isAddingTimestamp, setIsAddingTimestamp] = useState(false);
-  const [timestampNoteInput, setTimestampNoteInput] = useState('');
+  // // Adding timestamp functionality + short note input
+  // const [isAddingTimestamp, setIsAddingTimestamp] = useState(false);
+  // const [timestampNoteInput, setTimestampNoteInput] = useState('');
 
-  const navigate = useNavigate();
   const { recordingId } = useParams();
   const recordingURL = `http://localhost:4001/api/v1/vods/recordings/${recordingId}`;
-
-  const recordingsNavigation = (url: string) => {
-    navigate(url);
-    setRecordingsNavigationUrl(url);
-  };
 
   // Set the download link when we open the page
   useEffect(() => {
     setDownloadUrl(recordingURL);
   }, []);
 
+  // The tabbed navigation items
+  const recordingDetailsNavigationTabs: NavigationTabType[] = [
+    {
+      label: 'Discussion',
+      to: 'discussion',
+      urlRegexMatch: /discussion$/g,
+    },
+    {
+      label: 'Resources',
+      to: 'resources',
+      urlRegexMatch: /resources$/g,
+    },
+    {
+      label: 'Notes',
+      to: 'notes',
+      urlRegexMatch: /notes$/g,
+    },
+    {
+      label: 'Practice',
+      to: 'practice',
+      urlRegexMatch: /practice$/g,
+    },
+  ];
+
+  // Render the page
   return (
     <PageContainer>
       {/* Left side of page */}
@@ -123,20 +137,12 @@ const RecordingDetailsPage: React.FC<Props> = ({
         <AppBarContainer>
           <AppBarSectionContainer>
             <BackButtonContainer>
-              <Button
-                variant='text'
-                size='small'
-                textColor='white'
-                hoverTextColor='primaryAccent'
-                padding='8px'
-                margin='0 20px'
-                clickAction={() => recordingsNavigation('/recordings')}
-              >
-                <Icon padding='10px' margin='0 8px 0 0'>
-                  <LeftArrowIcon fontSize='small' />
-                </Icon>
-                Back
-              </Button>
+              <BackButton
+                backToUrl={'/recordings/recent'}
+                navigationDispatch={setRecordingsNavigationUrl}
+                color={'white'}
+                hoverColor={'primaryAccent'}
+              />
             </BackButtonContainer>
             <CopyText size='medium' color='white' fontWeight={300}>
               <i>{videoTitle}</i>
@@ -283,60 +289,13 @@ const RecordingDetailsPage: React.FC<Props> = ({
               </Link>
             )}
           </OverviewContentContainer>
+
           <ContentSelectionBar>
-            <Link
-              fontSize='large'
-              fontWeight={400}
-              color={
-                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/discussion$/g)
-                  ? 'tertiaryAccent'
-                  : 'textDark'
-              }
-              hoverColor='tertiaryAccent'
-              underlineEffect='always'
-              margin='0 16px 0 0'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/discussion`)}
-            >
-              Discussion
-            </Link>
-            <Link
-              fontSize='large'
-              fontWeight={400}
-              color={
-                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/resources$/g) ? 'tertiaryAccent' : 'textDark'
-              }
-              hoverColor='tertiaryAccent'
-              underlineEffect='always'
-              margin='0 16px 0 0'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/resources`)}
-            >
-              Resources
-            </Link>
-            <Link
-              fontSize='large'
-              fontWeight={400}
-              color={
-                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/notes$/g) ? 'tertiaryAccent' : 'textDark'
-              }
-              hoverColor='tertiaryAccent'
-              underlineEffect='always'
-              margin='0 16px 0 0'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/notes`)}
-            >
-              Notes
-            </Link>
-            <Link
-              fontSize='large'
-              fontWeight={400}
-              color={
-                useLocation().pathname.match(/^\/recordings\/[A-Za-z0-9]*\/practice$/g) ? 'tertiaryAccent' : 'textDark'
-              }
-              hoverColor='tertiaryAccent'
-              underlineEffect='always'
-              clickAction={() => recordingsNavigation(`/recordings/${recordingId}/practice`)}
-            >
-              Practice
-            </Link>
+            <TabbedNavigation
+              navigationTabs={recordingDetailsNavigationTabs}
+              rootUrl={`/recordings/${recordingId}`}
+              navigationDispatch={setRecordingsNavigationUrl}
+            />
           </ContentSelectionBar>
           <Margin height='24px' />
           <SubContentContainer>

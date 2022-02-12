@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   padding: 0 10%;
   background-color: ${(props) => props.theme.themeColors.white};
   box-shadow: 0 4px 6px ${(props) => props.theme.themeColors.shadow};
-  flex: 0 0 120px;
+  flex: 0 0 140px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

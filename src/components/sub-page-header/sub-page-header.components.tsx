@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 // Import styles
 import {
@@ -12,13 +11,11 @@ import {
 // Import custom components
 import NavigationTabs, { NavigationTabType } from '../tabbed-navigation/tabbed-navigation.components';
 import HeadingText from '../heading-text/heading-text.components';
-import Button from '../button/button.components';
-import Icon from '../icon/icon-components';
-
-// Import custom icons
-import BackArrowIcon from '@mui/icons-material/ArrowBackIosNew';
+import BackButton from '../back-button/back-button.components';
 import SearchBar from '../search-bar/search-bar.components';
 import OptionsButton from '../options-button/options-button.components';
+
+// Import custom data types
 import { NavigationAction } from '../../redux/navigation/navigation.types';
 
 // Component Props Interface
@@ -32,7 +29,6 @@ type Props = {
   onSearchSubmitListener: (input: string) => unknown;
 };
 
-// Render Component
 const SubPageHeader: React.FC<Props> = ({
   heading,
   backNavUrl,
@@ -42,33 +38,17 @@ const SubPageHeader: React.FC<Props> = ({
   searchHint,
   onSearchSubmitListener,
 }) => {
-  // Used to navigate back if needed
-  const navigate = useNavigate();
-
-  // On navigation tab click action
-  const backButtonClickAction = (newUrl: string) => {
-    navigationDispatch(newUrl);
-    navigate(newUrl);
-  };
-
-  // Render header
+  // Render sub-page header container
   return (
     <HeaderContainer>
       {backNavUrl && (
         <BackButtonContainer>
-          <Button
-            variant='text'
-            size='small'
-            textColor='textDark'
-            hoverTextColor='tertiaryAccent'
-            padding='0'
-            clickAction={() => backButtonClickAction(backNavUrl)}
-          >
-            <Icon padding='10px' margin='0 8px 0 0'>
-              <BackArrowIcon fontSize='small' />
-            </Icon>
-            Back
-          </Button>
+          <BackButton
+            backToUrl={backNavUrl}
+            navigationDispatch={navigationDispatch}
+            color={'textDark'}
+            hoverColor={'tertiaryAccent'}
+          />
         </BackButtonContainer>
       )}
       <HeadingText variant='h3' color='textDark'>

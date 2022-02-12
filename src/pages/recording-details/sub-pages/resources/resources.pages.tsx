@@ -12,10 +12,13 @@ import ResourceCard from '../../../../components/resource-card/resource-card.com
 
 // Render Component
 const ResourcesSubPage: React.FC = () => {
+  // Development test data
+  const resources = resourcesData.filter((val, i) => i < 3);
+
   return (
     <SubPageContainer>
-      <CardCollection numberOfColumns={4} numberOfCards={resourcesData.length}>
-        {resourcesData.map((resource, index) => {
+      <CardCollection numberOfColumns={4} numberOfCards={resources.length}>
+        {resources.map((resource, index) => {
           return <ResourceCard key={index} resource={resource} />;
         })}
       </CardCollection>
