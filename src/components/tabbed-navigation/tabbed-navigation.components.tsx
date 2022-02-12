@@ -7,7 +7,7 @@ import { NavigationTabsContainer } from './tabbed-navigation.styles';
 // Import custom components
 import Link from '../link/link.components';
 
-export type NavigationTab = {
+export type NavigationTabType = {
   label: string;
   to: string;
   urlRegexMatch: {
@@ -17,13 +17,17 @@ export type NavigationTab = {
 
 // Component Props Interface
 type Props = {
-  // rootUrl: string;
-  navigationTabs: NavigationTab[];
+  navigationTabs: NavigationTabType[];
+  rootUrl: string;
 };
 
 // Render Component
-const TabbedNavigation: React.FC<Props> = ({ navigationTabs }) => {
+const TabbedNavigation: React.FC<Props> = ({ navigationTabs, rootUrl }) => {
   const navigate = useNavigate();
+
+  const tabClickAction = (newUrl: string) => {
+    navigate(`${rootUrl}/${newUrl}`);
+  };
 
   // Render navigation tabs
   return (
@@ -36,7 +40,7 @@ const TabbedNavigation: React.FC<Props> = ({ navigationTabs }) => {
             hoverColor='tertiaryAccent'
             underlineEffect='always'
             margin='0 16px 0 0'
-            clickAction={() => navigate(`../${navigationTab.to}`)}
+            clickAction={() => tabClickAction(navigationTab.to)}
           >
             {navigationTab.label}
           </Link>

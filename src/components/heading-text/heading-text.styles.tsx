@@ -40,7 +40,6 @@ export const H3 = styled.h3<HeadingProps>`
   color: ${(props) => props.theme.getColor(props.color)};
   font-size: 160%;
   font-weight: 400;
-  margin-bottom: 12px;
 `;
 
 // H4

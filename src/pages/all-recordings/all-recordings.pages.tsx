@@ -7,30 +7,45 @@ import allRecordings from '../../data/recordings.data';
 import { PageContainer, ContentContainer } from './all-recordings.styles';
 
 // Import custom components
-import AllRecordingsHeader from '../../components/all-recordings-header/all-recordings-header.components';
 import RecordingsCollection from '../../components/recordings-collection/recording-collection.components';
-
-export type RecordingsFilterTypes = 'new' | 'watched' | 'favourite' | 'all';
+import { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
+import SubPageHeader from '../../components/sub-page-header/sub-page-header.components';
 
 // Render Component
 const AllRecordingsPage: React.FC = () => {
-  // State for the filtering of the units
-  const [recordingsFilter, setRecordingsFilter] = useState<RecordingsFilterTypes>('new');
-
-  // State for search bar
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  // The tabbed navigation items
+  const allRecordingsNavigationTabs: NavigationTabType[] = [
+    {
+      label: 'Recent Recordings',
+      to: 'recent',
+      urlRegexMatch: /recent$/g,
+    },
+    {
+      label: 'Already Watched',
+      to: 'watched',
+      urlRegexMatch: /watched$/g,
+    },
+    {
+      label: 'Favourites',
+      to: 'favourites',
+      urlRegexMatch: /favourites$/g,
+    },
+    {
+      label: 'All Recordings',
+      to: 'all',
+      urlRegexMatch: /all$/g,
+    },
+  ];
 
   // Render page
   return (
     <PageContainer>
-      <AllRecordingsHeader
-        recordingsFilter={recordingsFilter}
-        setRecordingsFilter={setRecordingsFilter}
-        isSearching={isSearching}
-        setIsSearching={setIsSearching}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+      <SubPageHeader
+        heading={'Recordings'}
+        navigationTabs={allRecordingsNavigationTabs}
+        searchHint='Search all recordings...'
+        onSearchSubmitListener={(input) => console.log(input)}
+        rootUrl='/recordings'
       />
       <ContentContainer>
         <RecordingsCollection recordings={allRecordings} numberOfColumns={3}></RecordingsCollection>

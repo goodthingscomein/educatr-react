@@ -132,7 +132,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
                 margin='0 20px'
                 clickAction={() => recordingsNavigation('/recordings')}
               >
-                <Icon padding='10px' margin='0 8px 0 0 '>
+                <Icon padding='10px' margin='0 8px 0 0'>
                   <LeftArrowIcon fontSize='small' />
                 </Icon>
                 Back

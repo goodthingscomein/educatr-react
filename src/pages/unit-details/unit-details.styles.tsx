@@ -16,8 +16,6 @@ export const ScrollContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  overflow-y: scroll;
-  scrollbar-width: thin;
 `;
 
 export const HeaderContainer = styled.div`
@@ -43,6 +41,8 @@ export const BackButtonContainer = styled.div`
 export const ContentContainer = styled.div`
   flex: 1 0 0;
   padding: 80px 10% 40px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 `;
 
 // Card Grid Container Props

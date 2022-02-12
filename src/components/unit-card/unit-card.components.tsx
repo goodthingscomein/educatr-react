@@ -48,8 +48,8 @@ const UnitCard: React.FC<Props> = ({ unit, index, setYourUnitsNavigationUrl }) =
   return (
     <UnitCardContainer>
       <CardImage
-        src={`https://picsum.photos/640/360?random=${index}`}
-        onClick={() => handleNavigateClick(`/units/${unit.code}`)}
+        src={`https://picsum.photos/480/240?random=${index}`}
+        onClick={() => handleNavigateClick(`/units/${unit.code}/overview`)}
       >
         <CardImageHoverText>
           <CopyText size={'small'} color={'white'}>

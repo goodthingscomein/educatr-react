@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -10,26 +10,7 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import {
-  PageContainer,
-  ScrollContainer,
-  HeaderContainer,
-  ContentContainer,
-  BackButtonContainer,
-} from './unit-details.styles';
-
-// Import custom components
-import HeadingText from '../../components/heading-text/heading-text.components';
-import Link from '../../components/link/link.components';
-import HorizontalDiv from '../../components/horizontal-div/horizontal-div.components';
-import Button from '../../components/button/button.components';
-import Input from '../../components/input/input.components';
-
-// Import custom icons
-import SearchIcon from '@mui/icons-material/Search';
-import HelpIcon from '@mui/icons-material/HelpOutline';
-import OptionsIcon from '@mui/icons-material/MoreVert';
-import LeftArrowIcon from '@mui/icons-material/ArrowBackIosNew';
+import { PageContainer, ScrollContainer, ContentContainer } from './unit-details.styles';
 
 // Import sub pages
 import OverviewSubPage from './sub-pages/overview/overview.pages';
@@ -37,6 +18,8 @@ import RecordingsSubPage from './sub-pages/recordings/recordings.pages';
 import ResourcesSubPage from './sub-pages/resources/resources.pages';
 import NotFoundPage from '../not-found/not-found.pages';
 import Icon from '../../components/icon/icon-components';
+import SubPageHeader from '../../components/sub-page-header/sub-page-header.components';
+import { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
 
 type Props = {
   // Drawer button nav url management
@@ -57,166 +40,58 @@ const UnitDetailsPage: React.FC<Props> = ({ setYourUnitsNavigationUrl }) => {
     setYourUnitsNavigationUrl(url);
   };
 
+  // The tabbed navigation items
+  const unitDetailsNavigationTabs: NavigationTabType[] = [
+    {
+      label: 'Overview',
+      to: 'overview',
+      urlRegexMatch: /overview$/g,
+    },
+    {
+      label: 'Recordings',
+      to: 'recordings',
+      urlRegexMatch: /recordings$/g,
+    },
+    {
+      label: 'Resources',
+      to: 'resources',
+      urlRegexMatch: /resources$/g,
+    },
+    {
+      label: 'Assessments',
+      to: 'assessments',
+      urlRegexMatch: /assessments$/g,
+    },
+    {
+      label: 'Grades',
+      to: 'grades',
+      urlRegexMatch: /grades$/g,
+    },
+    {
+      label: 'Discussions',
+      to: 'discussions',
+      urlRegexMatch: /discussions$/g,
+    },
+  ];
+
   return (
     <PageContainer>
-      <ScrollContainer>
-        <HeaderContainer>
-          <BackButtonContainer>
-            <Button
-              variant='text'
-              size='small'
-              textColor='textDark'
-              hoverTextColor='tertiaryAccent'
-              padding='4px'
-              clickAction={() => handleNavigateClick('/units')}
-            >
-              <Icon padding='10px' margin='0 8px 0 0 '>
-                <LeftArrowIcon fontSize='small' />
-              </Icon>
-              Back
-            </Button>
-          </BackButtonContainer>
-          <HorizontalDiv
-            backgroundColor='transparent'
-            justifyContent='space-between'
-            alignItems='flex-end'
-            css={`
-              width: 100%;
-              height: fit-content;
-            `}
-          >
-            <HorizontalDiv
-              backgroundColor='transparent'
-              css={`
-                width: fit-content;
-                height: fit-content;
-              `}
-            >
-              {/* LINKS TO CHANGE UNIT FITLERS */}
-              <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/overview$/g) ? 'tertiaryAccent' : 'textDark'
-                }
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/overview`)}
-              >
-                Overview
-              </Link>
-              <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/recordings$/g) ? 'tertiaryAccent' : 'textDark'
-                }
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/recordings`)}
-              >
-                Recordings
-              </Link>
-              <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/resources$/g) ? 'tertiaryAccent' : 'textDark'
-                }
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/resources`)}
-              >
-                Resources
-              </Link>
-              <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/assessments$/g) ? 'tertiaryAccent' : 'textDark'
-                }
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/assessments`)}
-              >
-                Assessments
-              </Link>
-              <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/grades$/g) ? 'tertiaryAccent' : 'textDark'}
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/grades`)}
-              >
-                Grades
-              </Link>
-              <Link
-                color={useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/faq$/g) ? 'tertiaryAccent' : 'textDark'}
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/faq`)}
-              >
-                FAQ
-              </Link>
-              <Link
-                color={
-                  useLocation().pathname.match(/^\/units\/[A-Za-z0-9]*\/discussions$/g) ? 'tertiaryAccent' : 'textDark'
-                }
-                hoverColor='tertiaryAccent'
-                underlineEffect='always'
-                margin='0 16px 0 0'
-                clickAction={() => handleNavigateClick(`/units/${unitId}/discussions`)}
-              >
-                Discussions
-              </Link>
-            </HorizontalDiv>
-            <HorizontalDiv
-              backgroundColor='transparent'
-              css={`
-                width: fit-content;
-                height: fit-content;
-              `}
-            >
-              {/* OPTIONS AND SEARCH */}
-              {/* Search bar */}
-              {isSearching ? (
-                <Input
-                  placeholder={`Search in ${unitId?.toUpperCase()}...`}
-                  value={searchValue}
-                  onChangeStateDispatch={setSearchValue}
-                />
-              ) : (
-                ''
-              )}
-              {/* Search button */}
-              <Button
-                variant='text'
-                padding='18px'
-                textColor='textDark'
-                hoverTextColor='tertiaryAccent'
-                size='medium'
-                clickAction={() => setIsSearching(!isSearching)}
-              >
-                <SearchIcon fontSize='medium' />
-              </Button>
-              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
-                <HelpIcon fontSize='medium' />
-              </Button>
-              <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
-                <OptionsIcon fontSize='medium' />
-              </Button>
-            </HorizontalDiv>
-          </HorizontalDiv>
-          <HeadingText variant='h3' color='textDark'>
-            {unitId?.toUpperCase()} - Fundamentals of Discrete Mathematics
-          </HeadingText>
-        </HeaderContainer>
-        <ContentContainer>
-          <Routes>
-            <Route path='/overview' element={<OverviewSubPage />} />
-            <Route path='/recordings' element={<RecordingsSubPage />} />
-            <Route path='/resources' element={<ResourcesSubPage />} />
-            <Route path='/*' element={<NotFoundPage />} />
-          </Routes>
-        </ContentContainer>
-      </ScrollContainer>
+      <SubPageHeader
+        heading={`${unitId?.toUpperCase()} - Fundamentals of Discrete Mathematics`}
+        navigationTabs={unitDetailsNavigationTabs}
+        searchHint={`Search in ${unitId?.toUpperCase()}...`}
+        onSearchSubmitListener={(input) => console.log(input)}
+        rootUrl={`/units/${unitId}`}
+        backNavUrl='/units/current'
+      />
+      <ContentContainer>
+        <Routes>
+          <Route path='/overview' element={<OverviewSubPage />} />
+          <Route path='/recordings' element={<RecordingsSubPage />} />
+          <Route path='/resources' element={<ResourcesSubPage />} />
+          <Route path='/*' element={<NotFoundPage />} />
+        </Routes>
+      </ContentContainer>
     </PageContainer>
   );
 };
