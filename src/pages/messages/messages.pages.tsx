@@ -3,25 +3,27 @@ import React, { useState } from 'react';
 // Import styles
 import {
   PageContainer,
-  Drawer,
-  DrawerHeader,
   DrawerContent,
   DrawerButton,
+  ButtonsGroupContainer,
   ContentContainer,
   MessagesContainer,
 } from './messages.styles';
 
 // Import custom components
-import HeadingText from '../../components/heading-text/heading-text.components';
-import Input from '../../components/input/input.components';
-import Margin from '../../components/margin/margin.components';
 import Message from '../../components/message/message.components';
 import MessagesBottomBar from '../../components/messages-bottom-bar/messages-bottom-bar.components';
-import MessagesTopBar from '../../components/messages-top-bar/messages-top-bar.components';
 import MessagesContact from '../../components/messages-contact/message-contact.components';
 import SubPageDrawer from '../../components/sub-page-drawer/sub-page-drawer.components';
 import SubPageDrawerHeader from '../../components/sub-page-drawer-header/sub-page-drawer-header.components';
 import SearchBar from '../../components/search-bar/search-bar.components';
+import SubPageTopBar from '../../components/sub-page-top-bar/sub-page-top-bar.components';
+import OptionsButton from '../../components/options-button/options-button.components';
+
+// Import custom icons
+import CallIcon from '@mui/icons-material/Call';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+import Button from '../../components/button/button.components';
 
 // Render Component
 const MessagesPage: React.FC = () => {
@@ -50,7 +52,33 @@ const MessagesPage: React.FC = () => {
         </DrawerContent>
       </SubPageDrawer>
       <ContentContainer>
-        <MessagesTopBar />
+        <SubPageTopBar backgroundColor='white' hasShadow>
+          {/* TOP BAR | LEFT SIDE */}
+          <ButtonsGroupContainer>
+            <MessagesContact
+              imageUrl='https://picsum.photos/80/80?random=1'
+              imageHeight='40px'
+              displayName='Jai Carey'
+              subText='Active 25 mins ago'
+              timestamp=''
+            />
+          </ButtonsGroupContainer>
+          {/* TOP BAR | RIGHT SIDE */}
+          <ButtonsGroupContainer>
+            <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
+              <CallIcon fontSize='medium' />
+            </Button>
+            <Button variant='text' padding='18px' textColor='textDark' hoverTextColor='tertiaryAccent' size='medium'>
+              <VideoCallIcon fontSize='medium' />
+            </Button>
+            <SearchBar
+              searchHint='Search for a message...'
+              onSearchSubmitListener={(input) => console.log(input)}
+              canToggle
+            />
+            <OptionsButton />
+          </ButtonsGroupContainer>
+        </SubPageTopBar>
         <MessagesContainer>
           <Message>
             test message! This is a really long test messagetest message! This is a really long test messagetest
@@ -61,47 +89,6 @@ const MessagesPage: React.FC = () => {
             test message! This is a really long test messagetest message! This is a really long test messagetest
             message! This is a really long test messagetest message! This is a really long test message
           </Message>
-          <Message ourMessage>test message!</Message>
-          <Message>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message>test message! test message!</Message>
-          <Message ourMessage>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message ourMessage>test message!</Message>
-          <Message>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message>test message! test message!</Message>
-          <Message ourMessage>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message ourMessage>test message!</Message>
-          <Message>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message>test message! test message!</Message>
-          <Message ourMessage>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message ourMessage>test message!</Message>
-          <Message>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message>test message! test message!</Message>
-          <Message ourMessage>
-            test message! This is a really long test messagetest message! This is a really long test messagetest
-            message! This is a really long test messagetest message! This is a really long test message
-          </Message>
-          <Message ourMessage>test message!</Message>
         </MessagesContainer>
         <MessagesBottomBar />
       </ContentContainer>

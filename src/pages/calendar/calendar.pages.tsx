@@ -20,7 +20,6 @@ import CopyText from '../../components/copy-text/copy-text.components';
 import CalendarViewButtons from '../../components/calendar-view-buttons/calendar-view-buttons.components';
 import CalendarViewCompact from '../../components/calendar-compact/calendar-compact.components';
 import CalendarFilters from '../../components/calendar-filters/calendar-filters.components';
-import CalendarTopBar from '../../components/calendar-top-bar/calendar-top-bar.components';
 import CalendarMonthGrid from '../../components/calendar-month-grid/calendar-month-grid.components';
 import CalendarWeekGrid from '../../components/calendar-week-grid/calendar-week-grid.components';
 import CalendarDayGrid from '../../components/calendar-day-grid/calendar-day-grid.components';
@@ -51,7 +50,7 @@ const CalendarPage: React.FC<Props> = ({ calendarView }) => {
         </DrawerContentContainer>
       </SubPageDrawer>
       <ContentContainer>
-        <SubPageTopBar backgroundColor={'primary'}>
+        <SubPageTopBar backgroundColor='primary'>
           {/* TOP BAR | LEFT SIDE */}
           <ButtonsGroupContainer>
             <Button

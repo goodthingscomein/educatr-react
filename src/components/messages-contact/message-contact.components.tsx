@@ -18,6 +18,7 @@ type Props = {
   subText: string;
   subTextLength?: number;
   timestamp?: string;
+  hasLightTheme?: boolean;
 };
 
 // Render Component
@@ -28,6 +29,7 @@ const MessagesContact: React.FC<Props> = ({
   subText,
   subTextLength,
   timestamp,
+  hasLightTheme,
 }) => (
   <MessagesContactContainer>
     <CircleImage
@@ -47,7 +49,7 @@ const MessagesContact: React.FC<Props> = ({
         margin-left: 12px;
       `}
     >
-      <CopyText size={'medium'} color={'textDark'} fontWeight={400}>
+      <CopyText size={'medium'} color={hasLightTheme ? 'white' : 'textDark'} fontWeight={400}>
         {displayName}
       </CopyText>
       <Margin height='2px' width='100%' />
@@ -59,12 +61,12 @@ const MessagesContact: React.FC<Props> = ({
           height: fit-content;
         `}
       >
-        <CopyText size={'x-small'} color={'textLight'} fontWeight={300}>
+        <CopyText size={'x-small'} color={hasLightTheme ? 'white' : 'textLight'} fontWeight={300}>
           {subText.substring(0, subTextLength || 24)}
           {subText.length >= (subTextLength || 24) && '...'}
         </CopyText>
         <Margin width='8px' />
-        <CopyText size={'x-small'} color={'textLight'} fontWeight={300}>
+        <CopyText size={'x-small'} color={hasLightTheme ? 'white' : 'textLight'} fontWeight={300}>
           {timestamp}
         </CopyText>
       </HorizontalDiv>

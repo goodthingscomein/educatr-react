@@ -62,6 +62,11 @@ export const DrawerButton = styled.a<ContactDrawerButtonProps>`
   }
 `;
 
+export const ButtonsGroupContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const ContentContainer = styled.div`
   height: 100%;
   flex: 1 0 0;
