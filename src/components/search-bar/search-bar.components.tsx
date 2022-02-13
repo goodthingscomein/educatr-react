@@ -12,13 +12,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 // Component Props Interface
 type Props = {
+  hasLightTheme?: boolean;
   searchHint: string;
   canToggle?: boolean;
   onSearchSubmitListener: (input: string) => unknown;
 };
 
 // Render Component
-const SearchBar: React.FC<Props> = ({ searchHint, canToggle, onSearchSubmitListener }) => {
+const SearchBar: React.FC<Props> = ({ hasLightTheme, searchHint, canToggle, onSearchSubmitListener }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState('');
 
@@ -28,42 +29,32 @@ const SearchBar: React.FC<Props> = ({ searchHint, canToggle, onSearchSubmitListe
     if (canToggle) setIsSearching((isSearching) => !isSearching); // If there is no input, show / hide
   };
 
+  // JSX components to render
+  const searchBar = <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />;
+  const searchButton = (
+    <Button
+      variant='text'
+      padding='6px'
+      margin='0 0 0 12px'
+      textColor={hasLightTheme ? 'white' : 'textDark'}
+      hoverTextColor={hasLightTheme ? 'primaryAccent' : 'tertiaryAccent'}
+      size='medium'
+      clickAction={() => onSubmitAction()}
+    >
+      <SearchIcon fontSize='medium' />
+    </Button>
+  );
+
   // Render the Search Bar and Search Button
   return (
     <SearchBarContainer>
       {/* NO TOGGLE, ALWAYS SHOW SEARCH BAR, ONLY SHOW BUTTON WITH INPUT */}
-      {!canToggle && <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />}
-      {!canToggle && searchInput.length > 0 && (
-        <Button
-          variant='text'
-          padding='6px'
-          margin='0 0 0 12px'
-          textColor='textDark'
-          hoverTextColor='tertiaryAccent'
-          size='medium'
-          clickAction={() => onSubmitAction()}
-        >
-          <SearchIcon fontSize='medium' />
-        </Button>
-      )}
+      {!canToggle ? searchBar : ''}
+      {!canToggle && searchInput.length > 0 ? searchButton : ''}
 
       {/* CAN TOGGLE, ALWAYS SHOW BUTTON, ONLY SHOW SEARCH BAR WITH TOGGLE BUTTON */}
-      {canToggle && isSearching && (
-        <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />
-      )}
-      {canToggle && (
-        <Button
-          variant='text'
-          padding='6px'
-          margin='0 0 0 12px'
-          textColor='textDark'
-          hoverTextColor='tertiaryAccent'
-          size='medium'
-          clickAction={() => onSubmitAction()}
-        >
-          <SearchIcon fontSize='medium' />
-        </Button>
-      )}
+      {canToggle && isSearching ? searchBar : ''}
+      {canToggle ? searchButton : ''}
     </SearchBarContainer>
   );
 };

@@ -8,18 +8,18 @@ import OptionsIcon from '@mui/icons-material/MoreVert';
 
 // Component Props Interface
 type Props = {
-  children?: React.ReactNode;
+  hasLightTheme?: boolean;
 };
 
 // Render Component
-const OptionsButton: React.FC<Props> = () => (
+const OptionsButton: React.FC<Props> = ({ hasLightTheme }) => (
   <Button
     variant='text'
     size='medium'
-    textColor='textDark'
-    hoverTextColor='tertiaryAccent'
+    textColor={hasLightTheme ? 'white' : 'textDark'}
+    hoverTextColor={hasLightTheme ? 'primaryAccent' : 'tertiaryAccent'}
     padding='10px'
-    margin='0 0 0 12px'
+    margin='0 0 0 16px'
   >
     <OptionsIcon />
   </Button>

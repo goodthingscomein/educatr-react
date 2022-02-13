@@ -26,17 +26,17 @@ type Props = {
 const CalendarViewButtons: React.FC<Props> = ({ calendarView, setCalendarView }) => (
   <ViewButtonsContainer>
     <ViewButton selected={calendarView === 'day'} onClick={() => setCalendarView('day')}>
-      <CopyText size='small' color={calendarView === 'day' ? 'white' : 'textDark'} fontWeight={700}>
+      <CopyText size='small' color={calendarView === 'day' ? 'white' : 'textDark'} fontWeight={600}>
         Day
       </CopyText>
     </ViewButton>
     <ViewButton selected={calendarView === 'week'} onClick={() => setCalendarView('week')}>
-      <CopyText size='small' color={calendarView === 'week' ? 'white' : 'textDark'} fontWeight={700}>
+      <CopyText size='small' color={calendarView === 'week' ? 'white' : 'textDark'} fontWeight={600}>
         Week
       </CopyText>
     </ViewButton>
     <ViewButton selected={calendarView === 'month'} onClick={() => setCalendarView('month')}>
-      <CopyText size='small' color={calendarView === 'month' ? 'white' : 'textDark'} fontWeight={700}>
+      <CopyText size='small' color={calendarView === 'month' ? 'white' : 'textDark'} fontWeight={600}>
         Month
       </CopyText>
     </ViewButton>

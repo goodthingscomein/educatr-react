@@ -20,6 +20,11 @@ export const DrawerContentContainer = styled.div`
   scrollbar-width: thin;
 `;
 
+export const ButtonsGroupContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const ContentContainer = styled.div`
   flex: 1 0 0;
   display: flex;
