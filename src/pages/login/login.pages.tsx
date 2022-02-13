@@ -9,13 +9,13 @@ import { validateLoginUserInputs } from '../../services/auth/validators/auth.val
 import { LoginPageContainer, SignUpText, ContentContainer } from './login.styles';
 
 // Import custom components
-import Card from '../../components/card/card.components';
+import FormCard from '../../components/form-card/form-card.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import HeadingText from '../../components/heading-text/heading-text.components';
 import FormInput from '../../components/form-input/form-input.components';
 import Link from '../../components/link/link.components';
 import Margin from '../../components/margin/margin.components';
-import Section from '../../components/section/section.components';
+import GradientContainer from '../../components/gradient-container/gradient-container.components';
 
 // Import SVGs
 import Form from '../../components/form/form.components';
@@ -51,18 +51,9 @@ const LoginPage: React.FC = () => {
   // Render Login Page
   return (
     <LoginPageContainer>
-      <Section
-        backgroundColor='primary'
-        hasColumns
-        padding='0'
-        minHeight='100vh'
-        hasGradientBackground
-        gradientColor1='primary'
-        gradientColor2='secondary'
-        gradientColor3='tertiary'
-      >
+      <GradientContainer gradientColor1='primary' gradientColor2='secondary' gradientColor3='tertiary'>
         <ContentContainer>
-          <Card>
+          <FormCard>
             <HeadingText variant='h4' color='textDark'>
               Log in
             </HeadingText>
@@ -109,9 +100,9 @@ const LoginPage: React.FC = () => {
                 Get started
               </Link>
             </SignUpText>
-          </Card>
+          </FormCard>
         </ContentContainer>
-      </Section>
+      </GradientContainer>
     </LoginPageContainer>
   );
 };

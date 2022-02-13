@@ -9,9 +9,9 @@ import { validateSignUpUserInputs } from '../../services/auth/validators/auth.va
 import { LoginText, SignUpPageContainer, ContentContainer } from './signup.styles';
 
 // Import custom components
-import Section from '../../components/section/section.components';
+import GradientContainer from '../../components/gradient-container/gradient-container.components';
+import FormCard from '../../components/form-card/form-card.components';
 import FormInput from '../../components/form-input/form-input.components';
-import Card from '../../components/card/card.components';
 import Margin from '../../components/margin/margin.components';
 import HeadingText from '../../components/heading-text/heading-text.components';
 import CopyText from '../../components/copy-text/copy-text.components';
@@ -53,18 +53,9 @@ const SignUpPage: React.FC = () => {
   // Render Sign Up Page
   return (
     <SignUpPageContainer>
-      <Section
-        backgroundColor='primary'
-        hasColumns
-        padding='0'
-        minHeight='100vh'
-        hasGradientBackground
-        gradientColor1='primary'
-        gradientColor2='secondary'
-        gradientColor3='tertiary'
-      >
+      <GradientContainer gradientColor1='primary' gradientColor2='secondary' gradientColor3='tertiary'>
         <ContentContainer>
-          <Card>
+          <FormCard>
             <HeadingText variant='h4' color='textDark'>
               Sign up
             </HeadingText>
@@ -119,9 +110,9 @@ const SignUpPage: React.FC = () => {
                 Log in
               </Link>
             </LoginText>
-          </Card>
+          </FormCard>
         </ContentContainer>
-      </Section>
+      </GradientContainer>
     </SignUpPageContainer>
   );
 };

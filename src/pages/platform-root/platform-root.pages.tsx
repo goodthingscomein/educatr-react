@@ -15,7 +15,6 @@ import { Action } from '../../redux/all-actions.types';
 import { PlatformRootPageContainer, ContentPaddingContainer, ContentContainer } from './platform-root.styles';
 
 // Import custom components
-import Section from '../../components/section/section.components';
 import AppBar from '../../components/app-bar/app-bar.components';
 import Drawer from '../../components/drawer/drawer.components';
 import PlaybackBottomBar from '../../components/playback-bottom-bar/playback-bottom-bar.components';
@@ -70,41 +69,39 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
     <PlatformRootPageContainer>
       <AppBar />
       <Drawer />
-      <Section backgroundColor='lightGrey' padding='0' minHeight='100vh'>
-        {/* MAIN CONTENT */}
-        <ContentPaddingContainer>
-          <ContentContainer>
-            <DarkenScreen displaying={isDrawerOpen} />
-            <Routes>
-              {/* ----- HOME ----- */}
-              <Route path='/' element={<HomePage />} />
-              {/* ----- CALENDAR ----- */}
-              <Route path='/calendar' element={<CalendarPage />} />
-              {/* ----- MESSAGES ----- */}
-              <Route path='/messages' element={<MessagesPage />} />
-              <Route path='/units'>
-                {/* ----- ALL UNITS (FILTERS) ----- */}
-                {['current', 'completed', 'upcoming', 'all'].map((path) => {
-                  return <Route key={path} path={path} element={<AllUnitsPage />} />;
-                })}
-                {/* ----- UNIT DETAILS ----- */}
-                <Route path=':unitId/*' element={<UnitDetailsPage />} />
-              </Route>
-              <Route path='/recordings'>
-                {/* ----- ALL RECORDINGS (FILTERS) ----- */}
-                {['recent', 'watched', 'favourites', 'all'].map((path) => {
-                  return <Route key={path} path={path} element={<AllRecordingsPage />} />;
-                })}
-                {/* ----- RECORDING DETAILS ----- */}
-                <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
-              </Route>
-              {/* ----- 404 (PAGE NOT FOUND) ----- */}
-              <Route path='/*' element={<NotFoundPage />} />
-            </Routes>
-          </ContentContainer>
-          {videoBlobUrl && !onRecordingDetailsPage && <PlaybackBottomBar />}
-        </ContentPaddingContainer>
-      </Section>
+      {/* MAIN CONTENT */}
+      <ContentPaddingContainer>
+        <ContentContainer>
+          <DarkenScreen displaying={isDrawerOpen} />
+          <Routes>
+            {/* ----- HOME ----- */}
+            <Route path='/' element={<HomePage />} />
+            {/* ----- CALENDAR ----- */}
+            <Route path='/calendar' element={<CalendarPage />} />
+            {/* ----- MESSAGES ----- */}
+            <Route path='/messages' element={<MessagesPage />} />
+            <Route path='/units'>
+              {/* ----- ALL UNITS (FILTERS) ----- */}
+              {['current', 'completed', 'upcoming', 'all'].map((path) => {
+                return <Route key={path} path={path} element={<AllUnitsPage />} />;
+              })}
+              {/* ----- UNIT DETAILS ----- */}
+              <Route path=':unitId/*' element={<UnitDetailsPage />} />
+            </Route>
+            <Route path='/recordings'>
+              {/* ----- ALL RECORDINGS (FILTERS) ----- */}
+              {['recent', 'watched', 'favourites', 'all'].map((path) => {
+                return <Route key={path} path={path} element={<AllRecordingsPage />} />;
+              })}
+              {/* ----- RECORDING DETAILS ----- */}
+              <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
+            </Route>
+            {/* ----- 404 (PAGE NOT FOUND) ----- */}
+            <Route path='/*' element={<NotFoundPage />} />
+          </Routes>
+        </ContentContainer>
+        {videoBlobUrl && !onRecordingDetailsPage && <PlaybackBottomBar />}
+      </ContentPaddingContainer>
     </PlatformRootPageContainer>
   );
 };

@@ -62,7 +62,7 @@ const FormInput: React.FC<Props> = ({ type, label, inputId, value, onChangeState
       />
       {hasPassword ? (
         <PasswordHiddenToggleButton onClick={() => togglePasswordHidden()}>
-          {passwordHidden ? <HiddenIcon fontSize='large' /> : <VisibleIcon fontSize='large' />}
+          {passwordHidden ? <HiddenIcon fontSize='medium' /> : <VisibleIcon fontSize='medium' />}
         </PasswordHiddenToggleButton>
       ) : (
         ''

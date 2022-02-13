@@ -14,10 +14,11 @@ export const LoginPageContainer = styled.div`
 export const ContentContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 80px;
+  padding: 120px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px;
+  align-content: center;
+  gap: 60px;
 `;
 
 export const SignUpText = styled.div`

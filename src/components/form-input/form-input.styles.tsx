@@ -58,7 +58,7 @@ export const PasswordHiddenToggleButton = styled.a`
   cursor: pointer;
   transition: 0.15s;
   :hover {
-    background-color: ${(props) => props.theme.themeColors.lightGrey};
+    background-color: ${(props) => props.theme.themeColors.darken};
   }
 `;
 
