@@ -17,6 +17,15 @@ export const AppBarContainer = styled.div`
   align-items: center;
 `;
 
+export const MainVideoContainer = styled.div`
+  width: 100%;
+  max-height: calc(85vh);
+  background-color: ${(props) => props.theme.themeColors.textDark};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const BackButtonContainer = styled.div`
   padding: 0 12px;
   margin-right: 12px;

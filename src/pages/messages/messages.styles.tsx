@@ -37,6 +37,7 @@ export const DrawerContent = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   overflow-y: auto;
+  scrollbar-width: thin;
 `;
 
 type ContactDrawerButtonProps = {
@@ -48,6 +49,7 @@ export const DrawerButton = styled.a<ContactDrawerButtonProps>`
   align-items: center;
   width: 100%;
   padding: 12px 20px;
+  user-select: none;
   background-color: ${(props) =>
     props.selected ? props.theme.themeColors.darken : props.theme.themeColors.transparent};
   :hover {

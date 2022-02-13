@@ -8,7 +8,7 @@ import { CalendarViewTypes } from '../../redux/calendar/calendar.types';
 import { State } from '../../redux/root-reducer';
 
 // Import styles
-import { PageContainer, Drawer, DrawerContent, ContentContainer } from './calendar.styles';
+import { PageContainer, DrawerContentContainer, ContentContainer } from './calendar.styles';
 
 // Import custom components
 import CalendarDrawerHeader from '../../components/calendar-drawer-header/calendar-drawer-header.components';
@@ -18,6 +18,9 @@ import CalendarTopBar from '../../components/calendar-top-bar/calendar-top-bar.c
 import CalendarMonthGrid from '../../components/calendar-month-grid/calendar-month-grid.components';
 import CalendarWeekGrid from '../../components/calendar-week-grid/calendar-week-grid.components';
 import CalendarDayGrid from '../../components/calendar-day-grid/calendar-day-grid.components';
+import SubPageDrawer from '../../components/sub-page-drawer/sub-page-drawer.components';
+import SubPageDrawerHeader from '../../components/sub-page-drawer-header/sub-page-drawer-header.components';
+import CreateButton from '../../components/create-button/create-button.components';
 
 // Component Props Interface
 type Props = {
@@ -28,14 +31,16 @@ type Props = {
 const CalendarPage: React.FC<Props> = ({ calendarView }) => {
   return (
     <PageContainer>
-      <Drawer>
-        <CalendarDrawerHeader />
-        <DrawerContent>
+      <SubPageDrawer>
+        <SubPageDrawerHeader heading='Calendar'>
+          <CreateButton />
+        </SubPageDrawerHeader>
+        <DrawerContentContainer>
           <CalendarViewCompact />
           <CalendarFilters />
           {/* Events coming up */}
-        </DrawerContent>
-      </Drawer>
+        </DrawerContentContainer>
+      </SubPageDrawer>
       <ContentContainer>
         <CalendarTopBar />
         {calendarView === 'month' && <CalendarMonthGrid />}

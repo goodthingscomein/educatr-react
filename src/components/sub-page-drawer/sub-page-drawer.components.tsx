@@ -1,17 +1,14 @@
 import React from 'react';
 
+// Import styles
+import { DrawerContainer } from './sub-page-drawer.styles';
+
 // Component Props Interface
 type Props = {
   children?: React.ReactNode;
-  // var-name: type
-  // var-function: () => any
 };
 
 // Render Component
-const SubPageDrawer: React.FC<Props> = ({ children }) => (
-  <div>
-    <h1>Hello World!</h1>
-  </div>
-);
+const SubPageDrawer: React.FC<Props> = ({ children }) => <DrawerContainer>{children}</DrawerContainer>;
 
 export default SubPageDrawer;

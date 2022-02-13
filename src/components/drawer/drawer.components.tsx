@@ -40,7 +40,6 @@ import SettingsSolidIcon from '@mui/icons-material/Settings';
 // Import custom components
 import DrawerSection from '../drawer-section/drawer-section.components';
 import DrawerButton from '../drawer-button/drawer-button.components';
-import Icon from '../icon/icon-components';
 import Divider from '../divider/divider.components';
 import Link from '../link/link.components';
 

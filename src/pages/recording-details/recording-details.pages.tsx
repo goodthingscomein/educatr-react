@@ -17,7 +17,6 @@ import {
   AppBarContainer,
   BackButtonContainer,
   AppBarSectionContainer,
-  DrawerContainer,
   MainContainer,
   AllContentContainer,
   ContentSelectionBar,
@@ -26,6 +25,7 @@ import {
   OverviewContentContainer,
   OverviewUnderHeadingContainer,
   RatingButtonsContainer,
+  MainVideoContainer,
 } from './recording-details.styles';
 
 // Import custom components
@@ -57,6 +57,9 @@ import NotesSubPage from './sub-pages/notes/notes.pages';
 import PracticeSubPage from './sub-pages/practice/practice.pages';
 import NotFoundPage from '../not-found/not-found.pages';
 import TabbedNavigation, { NavigationTabType } from '../../components/tabbed-navigation/tabbed-navigation.components';
+import SubPageDrawer from '../../components/sub-page-drawer/sub-page-drawer.components';
+import SubPageDrawerHeader from '../../components/sub-page-drawer-header/sub-page-drawer-header.components';
+import SearchBar from '../../components/search-bar/search-bar.components';
 
 type VideoRatingType = 'likes' | 'dislikes' | undefined;
 
@@ -183,7 +186,9 @@ const RecordingDetailsPage: React.FC<Props> = ({
           </AppBarSectionContainer>
         </AppBarContainer>
         {/* VIDEO GOES HERE */}
-        <MainVideo />
+        <MainVideoContainer>
+          <MainVideo />
+        </MainVideoContainer>
         <AllContentContainer>
           <OverviewContentContainer>
             {/* Overview of video */}
@@ -311,7 +316,11 @@ const RecordingDetailsPage: React.FC<Props> = ({
           </SubContentContainer>
         </AllContentContainer>
       </MainContainer>
-      <DrawerContainer></DrawerContainer>
+      <SubPageDrawer>
+        <SubPageDrawerHeader heading='Recording Sections'>
+          <SearchBar searchHint='Search sections...' onSearchSubmitListener={(input) => console.log(input)} />
+        </SubPageDrawerHeader>
+      </SubPageDrawer>
     </PageContainer>
   );
 };

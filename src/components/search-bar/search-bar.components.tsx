@@ -31,20 +31,39 @@ const SearchBar: React.FC<Props> = ({ searchHint, canToggle, onSearchSubmitListe
   // Render the Search Bar and Search Button
   return (
     <SearchBarContainer>
+      {/* NO TOGGLE, ALWAYS SHOW SEARCH BAR, ONLY SHOW BUTTON WITH INPUT */}
+      {!canToggle && <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />}
+      {!canToggle && searchInput.length > 0 && (
+        <Button
+          variant='text'
+          padding='6px'
+          margin='0 0 0 12px'
+          textColor='textDark'
+          hoverTextColor='tertiaryAccent'
+          size='medium'
+          clickAction={() => onSubmitAction()}
+        >
+          <SearchIcon fontSize='medium' />
+        </Button>
+      )}
+
+      {/* CAN TOGGLE, ALWAYS SHOW BUTTON, ONLY SHOW SEARCH BAR WITH TOGGLE BUTTON */}
       {canToggle && isSearching && (
         <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />
       )}
-      {!canToggle && <Input placeholder={searchHint} value={searchInput} onChangeStateDispatch={setSearchInput} />}
-      <Button
-        variant='text'
-        padding='18px'
-        textColor='textDark'
-        hoverTextColor='tertiaryAccent'
-        size='medium'
-        clickAction={() => onSubmitAction()}
-      >
-        <SearchIcon fontSize='medium' />
-      </Button>
+      {canToggle && (
+        <Button
+          variant='text'
+          padding='6px'
+          margin='0 0 0 12px'
+          textColor='textDark'
+          hoverTextColor='tertiaryAccent'
+          size='medium'
+          clickAction={() => onSubmitAction()}
+        >
+          <SearchIcon fontSize='medium' />
+        </Button>
+      )}
     </SearchBarContainer>
   );
 };

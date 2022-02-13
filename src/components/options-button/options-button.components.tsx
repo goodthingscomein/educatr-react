@@ -13,7 +13,14 @@ type Props = {
 
 // Render Component
 const OptionsButton: React.FC<Props> = () => (
-  <Button variant='text' size='medium' textColor='textDark' hoverTextColor='tertiaryAccent' padding='10px'>
+  <Button
+    variant='text'
+    size='medium'
+    textColor='textDark'
+    hoverTextColor='tertiaryAccent'
+    padding='10px'
+    margin='0 0 0 12px'
+  >
     <OptionsIcon />
   </Button>
 );

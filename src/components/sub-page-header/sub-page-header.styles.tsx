@@ -15,6 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const BottomRowContainer = styled.div`
   width: 100%;
+  height: 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;

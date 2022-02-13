@@ -19,6 +19,9 @@ import Message from '../../components/message/message.components';
 import MessagesBottomBar from '../../components/messages-bottom-bar/messages-bottom-bar.components';
 import MessagesTopBar from '../../components/messages-top-bar/messages-top-bar.components';
 import MessagesContact from '../../components/messages-contact/message-contact.components';
+import SubPageDrawer from '../../components/sub-page-drawer/sub-page-drawer.components';
+import SubPageDrawerHeader from '../../components/sub-page-drawer-header/sub-page-drawer-header.components';
+import SearchBar from '../../components/search-bar/search-bar.components';
 
 // Render Component
 const MessagesPage: React.FC = () => {
@@ -28,14 +31,11 @@ const MessagesPage: React.FC = () => {
   // Render page
   return (
     <PageContainer>
-      <Drawer>
-        <DrawerHeader>
-          <HeadingText variant='h5' color='textDark'>
-            Messages
-          </HeadingText>
-          <Margin height='18px' width='100%' />
-          <Input placeholder='Search...' value={searchValue} onChangeStateDispatch={setSearchValue} hasDropShadow />
-        </DrawerHeader>
+      <SubPageDrawer>
+        <SubPageDrawerHeader heading='Messages'>
+          <SearchBar searchHint='Search all messages...' onSearchSubmitListener={(input) => console.log(input)} />
+        </SubPageDrawerHeader>
+        {/* MAP OF ALL OF THE CONTACTS AND MESSAGES */}
         <DrawerContent>
           <DrawerButton selected>
             <MessagesContact
@@ -48,7 +48,7 @@ const MessagesPage: React.FC = () => {
             />
           </DrawerButton>
         </DrawerContent>
-      </Drawer>
+      </SubPageDrawer>
       <ContentContainer>
         <MessagesTopBar />
         <MessagesContainer>
