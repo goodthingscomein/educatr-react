@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Import utils
 import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
@@ -7,10 +7,9 @@ import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 import { connect } from 'react-redux';
 //Redux actions
 import {
-  setGlobalIsPlaying,
   setGlobalCurrentTimeMs,
   setGlobalCurrentVolume,
-  setGlobalIsMuted,
+  setVideoPlaybackState,
 } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
@@ -44,6 +43,7 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import PipIcon from '@mui/icons-material/PictureInPicture';
 import SettingsIcon from '@mui/icons-material/Settings';
 import skipTime from '../../utils/skipTime';
+import { VideoPlaybackState } from '../../redux/video-playback/video-playback.reducer';
 
 // Component Props Interface
 type Props = {
@@ -58,10 +58,7 @@ type Props = {
   globalCurrentTimeMs: number;
   globalCurrentVolume: number;
   globalIsMuted: boolean;
-  setGlobalIsPlaying: typeof setGlobalIsPlaying;
-  setGlobalCurrentTimeMs: typeof setGlobalCurrentTimeMs;
-  setGlobalCurrentVolume: typeof setGlobalCurrentVolume;
-  setGlobalIsMuted: typeof setGlobalIsMuted;
+  setVideoPlaybackState: typeof setVideoPlaybackState;
 };
 
 // Render Component
@@ -77,16 +74,86 @@ const VideoOverlay: React.FC<Props> = ({
   globalCurrentTimeMs,
   globalCurrentVolume,
   globalIsMuted,
+  setVideoPlaybackState,
 }) => {
+  // Has loaded hook
+  const [hasLoadedGlobalState, setHasLoadedGlobalState] = useState(false);
+  const [hasAssignedGlobalState, setHasAssignedGlobalState] = useState(false);
+
   // Local video playback state
   const [isPlaying, setIsPlaying] = useState(globalIsPlaying);
-  const [isDraggingTime, setIsDraggingTime] = useState(false);
-  const [isSkippingTime, setIsSkippingTime] = useState(false);
   const [currentTimeMs, setCurrentTimeMs] = useState(globalCurrentTimeMs);
   const [currentVolume, setCurrentVolume] = useState(globalCurrentVolume);
   const [isMuted, setIsMuted] = useState(globalIsMuted);
 
-  // Get the video component
+  // Use Refs for the useEffect (to update global state on dismount)
+  const isPlayingRef = useRef(isPlaying);
+  isPlayingRef.current = isPlaying;
+  const currentTimeMsRef = useRef(currentTimeMs);
+  currentTimeMsRef.current = currentTimeMs;
+  const currentVolumeRef = useRef(currentVolume);
+  currentVolumeRef.current = currentVolume;
+  const isMutedRef = useRef(isMuted);
+  isMutedRef.current = isMuted;
+
+  // Changing video time flags
+  const [isDraggingTime, setIsDraggingTime] = useState(false);
+  const [isSkippingTime, setIsSkippingTime] = useState(false);
+
+  // On component dismount | Set the Redux global video playback values
+  useEffect(() => {
+    // Get the video component for the
+    const video: HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement;
+    const videoContainer: HTMLDivElement = document.getElementById('video-container') as HTMLDivElement;
+
+    // Event listen functions
+    const setVideoCurrentTimeEvent = () => setCurrentTimeMs(Math.floor(video.currentTime * 1000));
+    const setVideoFullscreenEvent = () => toggleFullscreen();
+
+    // Subscribe to video event listeners
+    if (video && videoContainer) {
+      video.addEventListener('timeupdate', setVideoCurrentTimeEvent);
+      videoContainer.addEventListener('dblclick', setVideoFullscreenEvent);
+
+      // Setup video on load (sync)
+      if (hasLoadedGlobalState && !hasAssignedGlobalState) {
+        setIsPlaying(globalIsPlaying);
+        setCurrentTimeMs(globalCurrentTimeMs);
+        setCurrentVolume(globalCurrentVolume);
+        setIsMuted(globalIsMuted);
+        setHasAssignedGlobalState(true);
+      }
+
+      video.currentTime = currentTimeMs / 1000;
+    }
+
+    // Refreshes global state (when first loading, does not get's a delayed state)
+    if (!hasLoadedGlobalState) setHasLoadedGlobalState(true);
+
+    return () => {
+      if (hasLoadedGlobalState) {
+        setVideoPlaybackState({
+          globalIsPlaying: isPlayingRef.current,
+          globalCurrentTimeMs: currentTimeMsRef.current,
+          globalCurrentVolume: currentVolumeRef.current,
+          globalIsMuted: isMutedRef.current,
+        });
+      }
+      if (video && videoContainer) {
+        video.removeEventListener('timeupdate', setVideoCurrentTimeEvent);
+        videoContainer.removeEventListener('dblclick', setVideoFullscreenEvent);
+      }
+    };
+  }, [
+    globalIsPlaying,
+    globalCurrentTimeMs,
+    globalCurrentVolume,
+    globalIsMuted,
+    hasLoadedGlobalState,
+    hasAssignedGlobalState,
+  ]);
+
+  // Get the video component for the
   const video: HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement;
   const videoContainer: HTMLDivElement = document.getElementById('video-container') as HTMLDivElement;
 
@@ -95,7 +162,6 @@ const VideoOverlay: React.FC<Props> = ({
     // Play video
     if (isPlaying && !isDraggingTime && !isSkippingTime) {
       video.play();
-      video.ontimeupdate = () => setCurrentTimeMs(Math.floor(video.currentTime * 1000)); // used to update the slider
     }
     // Pause video
     else {
@@ -107,11 +173,6 @@ const VideoOverlay: React.FC<Props> = ({
 
     // Adjust the volume of the video
     isMuted ? (video.volume = 0) : (video.volume = currentVolume / 20);
-
-    // Double click to open in fullscreen
-    videoContainer.addEventListener('dblclick', () => {
-      toggleFullscreen();
-    });
   }
 
   // Drag time slider
@@ -302,10 +363,7 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   // Recording playback
-  setGlobalIsPlaying: (isPlaying: boolean) => dispatch(setGlobalIsPlaying(isPlaying)),
-  setGlobalCurrentTimeMs: (ms: number) => dispatch(setGlobalCurrentTimeMs(ms)),
-  setGlobalCurrentVolume: (volume: number) => dispatch(setGlobalCurrentVolume(volume)),
-  setGlobalIsMuted: (isMuted: boolean) => dispatch(setGlobalIsMuted(isMuted)),
+  setVideoPlaybackState: (playbackState: VideoPlaybackState) => dispatch(setVideoPlaybackState(playbackState)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoOverlay);

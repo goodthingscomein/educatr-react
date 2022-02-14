@@ -42,8 +42,14 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
   // Update the DOM when the timer stops to hide the overlay / mouse
   useEffect(() => {
     // Set a new timeout for the overlay and the cursor
-    setTimeout(stopDisplayingOverlay, 1000, mouseDragValue);
-    setTimeout(stopDisplayingCursor, 3000, mouseDragValue);
+    const overlayTimer = setTimeout(stopDisplayingOverlay, 1000, mouseDragValue);
+    const cursorTimer = setTimeout(stopDisplayingCursor, 3000, mouseDragValue);
+
+    // On dismount, clear the timers to stop memory leak
+    return () => {
+      clearTimeout(overlayTimer);
+      clearTimeout(cursorTimer);
+    };
   }, [mouseDragValue]);
 
   // Stop displaying timeout function attached to mouse move event

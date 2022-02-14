@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
 import { setVideoMetadata } from '../../redux/video-metadata/video-metadata.actions';
-import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
+import { resetVideoStreamState } from '../../redux/video-stream/video-stream.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -46,6 +46,9 @@ type Props = {
 
   // Set the current recording metadata
   setVideoMetadata: typeof setVideoMetadata;
+
+  // Set the video stream
+  resetVideoStreamState: typeof resetVideoStreamState;
 };
 
 // Render Component
@@ -54,22 +57,19 @@ const RecordingCard: React.FC<Props> = ({
   videoId,
   setRecordingsNavigationUrl,
   setVideoMetadata,
+  resetVideoStreamState,
 }) => {
   // Navigate url
   const navigate = useNavigate();
 
   const recordingsNavigation = (url: string) => {
-    navigate(url);
-    setRecordingsNavigationUrl(url); // set the nav url
-
     // If we have clicked on a new video
     if (video.videoId !== videoId) {
-      // set the current recording to play metadata
-      setVideoMetadata(video);
-      // Reset the current playing video
-      setDownloadUrl('');
-      setBlobUrl('');
+      setVideoMetadata(video); // Set new video metadata
+      resetVideoStreamState(); // Reset the video stream
     }
+    setRecordingsNavigationUrl(url); // set the nav url
+    navigate(url);
   };
 
   return (
@@ -131,8 +131,7 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
   setVideoMetadata: (video: VideoMetadataState) => dispatch(setVideoMetadata(video)),
-  setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
-  setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
+  resetVideoStreamState: () => dispatch(resetVideoStreamState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordingCard);

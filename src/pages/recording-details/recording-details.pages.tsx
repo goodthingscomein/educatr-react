@@ -77,7 +77,7 @@ type Props = {
   alreadyRated?: VideoRatingType;
 
   // Recording download redux state
-  videoBlobUrl: string;
+  videoDownloadUrl: string;
   setDownloadUrl: typeof setDownloadUrl;
 };
 
@@ -89,6 +89,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
   videoHashtags,
   isFavourited,
   alreadyRated,
+  videoDownloadUrl,
   setDownloadUrl,
 }) => {
   const [showingFullDescription, setShowingFullDescription] = useState(false);
@@ -104,7 +105,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
 
   // Set the download link when we open the page
   useEffect(() => {
-    setDownloadUrl(recordingURL);
+    if (videoDownloadUrl !== recordingURL) setDownloadUrl(recordingURL);
   }, []);
 
   // The tabbed navigation items
@@ -334,7 +335,7 @@ const mapStateToProps = (state: State) => ({
   hashtvideoHashtagsags: state.videoMetadata.videoHashtags,
 
   // Video stream
-  videoBlobUrl: state.videoStream.videoBlobUrl,
+  videoDownloadUrl: state.videoStream.videoDownloadUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
