@@ -10,7 +10,7 @@ export interface VideoPlaybackState {
   playbackRefreshed?: boolean;
 }
 
-const DEFAULT_STATE = {
+const INITIAL_STATE = {
   globalIsPlaying: false,
   globalCurrentTimeMs: 0,
   globalCurrentVolume: 20,
@@ -18,8 +18,14 @@ const DEFAULT_STATE = {
   playbackRefreshed: true,
 } as VideoPlaybackState;
 
+const DEFAULT_STATE = {
+  globalIsPlaying: false,
+  globalCurrentTimeMs: 0,
+  playbackRefreshed: true,
+} as VideoPlaybackState;
+
 const videoPlaybackReducer = (
-  state: VideoPlaybackState = DEFAULT_STATE,
+  state: VideoPlaybackState = INITIAL_STATE,
   action: VideoPlaybackAction
 ): VideoPlaybackState => {
   switch (action.type) {
