@@ -19,7 +19,7 @@ export const AppBarContainer = styled.div`
 
 export const MainVideoContainer = styled.div`
   width: 100%;
-  max-height: calc(85vh);
+  max-height: calc(75vh);
   background-color: ${(props) => props.theme.themeColors.textDark};
   display: flex;
   justify-content: center;

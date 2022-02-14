@@ -53,7 +53,7 @@ const DiscussionThread: React.FC<Props> = ({ headMessage, allReplies }) => {
             {allReplies.map((reply) => {
               return <DiscussionReplyMessage replyMessage={reply} />;
             })}
-            <Margin height='24px' />
+            <Margin height='48px' />
           </>
         )}
       </AllRepliesContainer>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Import development data
-import allRecordings from '../../data/recordings.data';
+import allVideos from '../../data/videos.data';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
@@ -63,9 +63,9 @@ const AllRecordingsPage: React.FC<Props> = ({ setRecordingsNavigationUrl }) => {
         navigationDispatch={setRecordingsNavigationUrl}
       />
       <ContentContainer>
-        <CardCollection numberOfColumns={3} numberOfCards={allRecordings.length}>
-          {allRecordings.map((recording, index) => {
-            return <RecordingCard key={index} recording={recording} />;
+        <CardCollection numberOfColumns={3} numberOfCards={allVideos.length}>
+          {allVideos.map((video, index) => {
+            return <RecordingCard key={index} video={video} />;
           })}
         </CardCollection>
       </ContentContainer>

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
-import { setDownloadUrl } from '../../redux/recording/recording.actions';
+import { setDownloadUrl } from '../../redux/video-stream/video-stream.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -326,15 +326,15 @@ const RecordingDetailsPage: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  // Recording metadata
-  videoId: state.recording.videoId,
-  videoThumbnailSrc: state.recording.videoThumbnailSrc,
-  videoTitle: state.recording.videoTitle,
-  videoDescription: state.recording.videoDescription,
-  hashtvideoHashtagsags: state.recording.videoHashtags,
+  // Video metadata
+  videoId: state.videoMetadata.videoId,
+  videoThumbnailSrc: state.videoMetadata.videoThumbnailSrc,
+  videoTitle: state.videoMetadata.videoTitle,
+  videoDescription: state.videoMetadata.videoDescription,
+  hashtvideoHashtagsags: state.videoMetadata.videoHashtags,
 
-  // Recording blob data
-  videoBlobUrl: state.recording.videoBlobUrl,
+  // Video stream
+  videoBlobUrl: state.videoStream.videoBlobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

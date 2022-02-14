@@ -53,7 +53,6 @@ export const CancelCommentButtonsContainer = styled.div`
 
 export const AllExistingDiscussionsContainer = styled.div`
   width: 100%;
-  padding: 0 60px;
   margin-top: 12px;
   display: flex;
   flex-direction: column;

@@ -4,12 +4,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Import Playback Miniplayer Actions
-import {
-  setIsShowingPlaybackBar,
-  setIsShowingMiniplayer,
-} from '../../redux/playback-miniplayer/playback-miniplayer.actions';
+import { setIsShowingPlaybackBar, setIsShowingMiniplayer } from '../../redux/miniplayer-view/miniplayer-view.actions';
 // Import recording url actions
-import { setDownloadUrl, setBlobUrl } from '../../redux/recording/recording.actions';
+import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -115,8 +112,8 @@ const PlaybackBottomBar: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  isShowingPlaybackBar: state.playbackMiniplayer.isShowingPlaybackBar,
-  isShowingMiniplayer: state.playbackMiniplayer.isShowingMiniplayer,
+  isShowingPlaybackBar: state.miniplayerView.isShowingPlaybackBar,
+  isShowingMiniplayer: state.miniplayerView.isShowingMiniplayer,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

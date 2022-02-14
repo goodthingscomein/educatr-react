@@ -74,7 +74,8 @@ export const SmallDisplayPhotoContainer = styled.div`
 export const AllRepliesContainer = styled.div`
   width: 100%;
   margin-top: 12px;
-  padding: 0 60px;
+  padding-left: 60px;
+  padding-right: 20%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
-import { setCurrentTimeMilliseconds, setIsSkippingTime } from '../../redux/recording/recording.actions';
+import { setGlobalCurrentTimeMilliseconds } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -18,16 +18,13 @@ import MiniplayerOverlay from '../miniplayer-overlay/miniplayer-overlay.componen
 // Component Props Interface
 type Props = {
   // Playback state
-  isPlaying: boolean;
-  isDraggingTime: boolean;
-  isSkippingTime: boolean;
-  currentTimeMilliseconds: number;
+  globalIsPlaying: boolean;
+  globalCurrentTimeMilliseconds: number;
 
   // Playback actions
-  setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  setIsSkippingTime: typeof setIsSkippingTime;
+  setGlobalCurrentTimeMilliseconds: typeof setGlobalCurrentTimeMilliseconds;
 
-  // Blob url for the miniplayer video
+  // Blob url
   videoBlobUrl: string;
 
   // Playbar / miniplayer state
@@ -37,12 +34,9 @@ type Props = {
 
 // Render Component
 const Miniplayer: React.FC<Props> = ({
-  isPlaying,
-  isDraggingTime,
-  isSkippingTime,
-  currentTimeMilliseconds,
-  setCurrentTimeMilliseconds,
-  setIsSkippingTime,
+  globalIsPlaying,
+  globalCurrentTimeMilliseconds,
+  setGlobalCurrentTimeMilliseconds,
   videoBlobUrl,
   isShowingPlaybackBar,
   isShowingMiniplayer,
@@ -50,20 +44,20 @@ const Miniplayer: React.FC<Props> = ({
   const video: HTMLVideoElement | null = document.getElementById('miniplayer-video') as HTMLVideoElement;
 
   // Manage the playback state of the miniplayer video
-  if (video) {
-    // Play video
-    if (isPlaying && !isDraggingTime && !isSkippingTime) {
-      video.play();
-      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
-    }
-    // Pause video
-    else {
-      video.pause();
-      video.currentTime = currentTimeMilliseconds / 1000;
-      // Stop pause if we are just skipping time
-      if (isSkippingTime) setIsSkippingTime(false);
-    }
-  }
+  // if (video) {
+  //   // Play video
+  //   if (isPlaying && !isDraggingTime && !isSkippingTime) {
+  //     video.play();
+  //     video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
+  //   }
+  //   // Pause video
+  //   else {
+  //     video.pause();
+  //     video.currentTime = currentTimeMilliseconds / 1000;
+  //     // Stop pause if we are just skipping time
+  //     if (isSkippingTime) setIsSkippingTime(false);
+  //   }
+  // }
 
   return (
     <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
@@ -82,20 +76,19 @@ const Miniplayer: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  isPlaying: state.recording.isPlaying,
-  isDraggingTime: state.recording.isDraggingTime,
-  isSkippingTime: state.recording.isSkippingTime,
-  currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  // playing url
-  videoBlobUrl: state.recording.videoBlobUrl,
-  isShowingPlaybackBar: state.playbackMiniplayer.isShowingPlaybackBar,
-  isShowingMiniplayer: state.playbackMiniplayer.isShowingMiniplayer,
+  // Video metadata
+  globalIsPlaying: state.videoPlayback.globalIsPlaying,
+  globalCurrentTimeMilliseconds: state.videoPlayback.globalCurrentTimeMilliseconds,
+  // Video stream
+  videoBlobUrl: state.videoStream.videoBlobUrl,
+  // Miniplayer view
+  isShowingPlaybackBar: state.miniplayerView.isShowingPlaybackBar,
+  isShowingMiniplayer: state.miniplayerView.isShowingMiniplayer,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   // Recording playback
-  setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  setIsSkippingTime: (isSkipping: boolean) => dispatch(setIsSkippingTime(isSkipping)),
+  setGlobalCurrentTimeMilliseconds: (ms: number) => dispatch(setGlobalCurrentTimeMilliseconds(ms)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Miniplayer);

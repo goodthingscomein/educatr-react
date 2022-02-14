@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Import utils
+import clampNumber from '../../utils/clampNumber';
 import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
+import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
 import {
-  setDownloadUrl,
-  setBlobUrl,
-  setIsPlaying,
-  setIsDraggingTime,
-  setIsSkippingTime,
-  setCurrentTimeMilliseconds,
-  setVolume,
-  fastforwardTime,
-  rewindTime,
-} from '../../redux/recording/recording.actions';
+  setGlobalIsPlaying,
+  setGlobalCurrentTimeMilliseconds,
+} from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -59,24 +54,19 @@ type Props = {
   videoLengthSeconds: number;
 
   // Recording playback
-  isPlaying: boolean;
-  isDraggingTime: boolean;
-  isSkippingTime: boolean;
-  currentTimeMilliseconds: number;
-  currentVolume: number;
+  // isPlaying: boolean;
+  // isDraggingTime: boolean;
+  // isSkippingTime: boolean;
+  // currentTimeMilliseconds: number;
+  // currentVolume: number;
 
   // Set download / blob url
   setDownloadUrl: typeof setDownloadUrl;
   setBlobUrl: typeof setBlobUrl;
 
   // Set recording playback
-  setIsPlaying: typeof setIsPlaying;
-  setIsDraggingTime: typeof setIsDraggingTime;
-  setIsSkippingTime: typeof setIsSkippingTime;
-  setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  setVolume: typeof setVolume;
-  fastforwardTime: typeof fastforwardTime;
-  rewindTime: typeof rewindTime;
+  setGlobalIsPlaying: typeof setGlobalIsPlaying;
+  setGlobalCurrentTimeMilliseconds: typeof setGlobalCurrentTimeMilliseconds;
 };
 
 // Render Component
@@ -86,24 +76,14 @@ const MainVideoOverlay: React.FC<Props> = ({
 
   // Video metadata
   videoLengthSeconds,
-
-  // Playback state
-  isPlaying,
-  isDraggingTime,
-  isSkippingTime,
-  currentTimeMilliseconds,
-  currentVolume,
-
-  // Playback actions
-  setIsPlaying,
-  setIsDraggingTime,
-  setIsSkippingTime,
-  setCurrentTimeMilliseconds,
-  setVolume,
-  // Fastforward / rewind time
-  fastforwardTime,
-  rewindTime,
 }) => {
+  // Playback management state
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isDraggingTime, setIsDraggingTime] = useState(false);
+  const [isSkippingTime, setIsSkippingTime] = useState(false);
+  const [currentTimeMilliseconds, setCurrentTimeMilliseconds] = useState(0);
+  const [currentVolume, setCurrentVolume] = useState(10);
+
   // Video playback manager
   // Get the video component
   const video: HTMLVideoElement | null = document.getElementById('main-video') as HTMLVideoElement;
@@ -114,7 +94,7 @@ const MainVideoOverlay: React.FC<Props> = ({
     // Play video
     if (isPlaying && !isDraggingTime && !isSkippingTime) {
       video.play();
-      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
+      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000)); // used to update the slider
     }
     // Pause video
     else {
@@ -138,7 +118,7 @@ const MainVideoOverlay: React.FC<Props> = ({
 
   // Drag volume slider
   const dragVolumeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
-    setVolume(parseInt(event.currentTarget.value));
+    setCurrentVolume(parseInt(event.currentTarget.value));
   };
 
   /*
@@ -202,7 +182,11 @@ const MainVideoOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() => rewindTime(15)}
+            clickAction={() =>
+              setCurrentTimeMilliseconds((currentTimeMilliseconds) =>
+                clampNumber(currentTimeMilliseconds - 15 * 1000, 0, videoLengthSeconds * 1000)
+              )
+            }
           >
             <Icon padding='12px'>
               <SkipBackIcon />
@@ -228,7 +212,11 @@ const MainVideoOverlay: React.FC<Props> = ({
             hoverTextColor='lightGrey'
             padding='0'
             margin='0 24px 0 0'
-            clickAction={() => fastforwardTime(15)}
+            clickAction={() =>
+              setCurrentTimeMilliseconds((currentTimeMilliseconds) =>
+                clampNumber(currentTimeMilliseconds + 15 * 1000, 0, videoLengthSeconds * 1000)
+              )
+            }
           >
             <Icon padding='12px'>
               <SkipForwardIcon />
@@ -241,7 +229,7 @@ const MainVideoOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() => setVolume(0)}
+            clickAction={() => setCurrentVolume(0)}
           >
             <Icon padding='12px'>{currentVolume === 0 ? <MuteIcon /> : <VolumeIcon />}</Icon>
           </Button>
@@ -294,12 +282,12 @@ const MainVideoOverlay: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  videoLengthSeconds: state.recording.videoLengthSeconds,
-  isPlaying: state.recording.isPlaying,
-  isDraggingTime: state.recording.isDraggingTime,
-  isSkippingTime: state.recording.isSkippingTime,
-  currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
-  currentVolume: state.recording.currentVolume,
+  // Video metadata
+  videoLengthSeconds: state.videoMetadata.videoLengthSeconds,
+  // Video playback
+  globalIsPlaying: state.videoPlayback.globalIsPlaying,
+  globalCurrentTimeMilliseconds: state.videoPlayback.globalCurrentTimeMilliseconds,
+  globalCurrentVolume: state.videoPlayback.globalCurrentVolume,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
@@ -307,13 +295,8 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
   setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
   // Recording playback
-  setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
-  setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
-  setIsSkippingTime: (isSkippingTime: boolean) => dispatch(setIsSkippingTime(isSkippingTime)),
-  setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  setVolume: (newVolume: number) => dispatch(setVolume(newVolume)),
-  fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
-  rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),
+  setGlobalIsPlaying: (isPlaying: boolean) => dispatch(setGlobalIsPlaying(isPlaying)),
+  setGlobalCurrentTimeMilliseconds: (ms: number) => dispatch(setGlobalCurrentTimeMilliseconds(ms)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainVideoOverlay);

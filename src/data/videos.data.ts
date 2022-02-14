@@ -1,6 +1,6 @@
-import { RecordingMetadataType } from '../redux/recording/recording.types';
+import { VideoMetadataState } from '../redux/video-metadata/video-metadata.reducer';
 
-const data: RecordingMetadataType[] = [
+const data: VideoMetadataState[] = [
   {
     videoId: '00000001',
     videoThumbnailSrc: 'https://picsum.photos/1280/720?random=1',

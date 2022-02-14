@@ -5,11 +5,11 @@ interface CalendarState {
   calendarView: CalendarViewTypes;
 }
 
-const INITIAL_STATE = {
+const DEFAULT_STATE = {
   calendarView: 'day',
 } as CalendarState;
 
-const calendarReducer = (state: CalendarState = INITIAL_STATE, action: CalendarAction) => {
+const calendarReducer = (state: CalendarState = DEFAULT_STATE, action: CalendarAction): CalendarState => {
   switch (action.type) {
     case CALENDAR_TYPES.SET_CALENDAR_VIEW:
       return {

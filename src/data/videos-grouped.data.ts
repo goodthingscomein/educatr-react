@@ -1,14 +1,14 @@
-import { RecordingMetadataType } from '../redux/recording/recording.types';
+import { VideoMetadataState } from '../redux/video-metadata/video-metadata.reducer';
 
-export type RecordingsCollectionDataType = {
+export type VideoCollectionDataType = {
   collectionTitle: string;
-  recordings: RecordingMetadataType[];
+  videos: VideoMetadataState[];
 };
 
 export default [
   {
     collectionTitle: 'Week 1 Recordings',
-    recordings: [
+    videos: [
       {
         videoId: '00000001',
         videoThumbnailSrc: 'https://picsum.photos/1280/720?random=1',
@@ -72,7 +72,7 @@ export default [
   },
   {
     collectionTitle: 'Week 2 Recordings',
-    recordings: [
+    videos: [
       {
         videoId: '00000006',
         videoThumbnailSrc: 'https://picsum.photos/1280/720?random=6',
@@ -101,7 +101,7 @@ export default [
   },
   {
     collectionTitle: 'Week 3 Recordings',
-    recordings: [
+    videos: [
       {
         videoId: '00000008',
         videoThumbnailSrc: 'https://picsum.photos/1280/720?random=8',
@@ -188,4 +188,4 @@ export default [
       },
     ],
   },
-] as RecordingsCollectionDataType[];
+] as VideoCollectionDataType[];

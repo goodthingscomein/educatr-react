@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
-import { setCurrentRecordingMetadata, setDownloadUrl, setBlobUrl } from '../../redux/recording/recording.actions';
+import { setVideoMetadata } from '../../redux/video-metadata/video-metadata.actions';
+import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -33,26 +34,26 @@ import HorizontalDiv from '../horizontal-div/horizontal-div.components';
 import PlayIcon from '@mui/icons-material/PlayArrow';
 
 // Import types
-import { RecordingMetadataType } from '../../redux/recording/recording.types';
+import { VideoMetadataState } from '../../redux/video-metadata/video-metadata.reducer';
 
 // Component Props Interface
 type Props = {
-  recording: RecordingMetadataType;
+  video: VideoMetadataState;
   videoId: string; // Existing ID of video already playing
 
   // Recordings drawer button url
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
 
   // Set the current recording metadata
-  setCurrentRecordingMetadata: typeof setCurrentRecordingMetadata;
+  setVideoMetadata: typeof setVideoMetadata;
 };
 
 // Render Component
 const RecordingCard: React.FC<Props> = ({
-  recording, // Associated recording metadata
+  video, // Associated recording metadata
   videoId,
   setRecordingsNavigationUrl,
-  setCurrentRecordingMetadata,
+  setVideoMetadata,
 }) => {
   // Navigate url
   const navigate = useNavigate();
@@ -62,9 +63,9 @@ const RecordingCard: React.FC<Props> = ({
     setRecordingsNavigationUrl(url); // set the nav url
 
     // If we have clicked on a new video
-    if (recording.videoId !== videoId) {
+    if (video.videoId !== videoId) {
       // set the current recording to play metadata
-      setCurrentRecordingMetadata(recording);
+      setVideoMetadata(video);
       // Reset the current playing video
       setDownloadUrl('');
       setBlobUrl('');
@@ -74,10 +75,10 @@ const RecordingCard: React.FC<Props> = ({
   return (
     <RecordingCardContainer>
       <Thumbnail
-        src={recording.videoThumbnailSrc}
-        onClick={() => recordingsNavigation(`/recordings/${recording.videoId}/discussion`)}
+        src={video.videoThumbnailSrc}
+        onClick={() => recordingsNavigation(`/recordings/${video.videoId}/discussion`)}
       >
-        <ThumbnailTimestamp>{secondsToTimeFormat(recording.videoLengthSeconds)}</ThumbnailTimestamp>
+        <ThumbnailTimestamp>{secondsToTimeFormat(video.videoLengthSeconds)}</ThumbnailTimestamp>
         <ThumbnailHoverButton>
           <PlayIcon fontSize='inherit' />
         </ThumbnailHoverButton>
@@ -94,8 +95,8 @@ const RecordingCard: React.FC<Props> = ({
           `}
         >
           <CopyText size='medium' color='textDark' fontWeight={700}>
-            {recording.videoTitle.substring(0, 115)}
-            {recording.videoTitle.length >= 115 && '...'}
+            {video.videoTitle.substring(0, 115)}
+            {video.videoTitle.length >= 115 && '...'}
           </CopyText>
           <Margin width='100%' height='' />
           <HorizontalDiv
@@ -108,9 +109,9 @@ const RecordingCard: React.FC<Props> = ({
             `}
           >
             <CopyText size='small' color='textDark' fontWeight={300}>
-              {recording.videoPostDate}
+              {video.videoPostDate}
             </CopyText>
-            {recording.alreadyWatched && (
+            {video.alreadyWatched && (
               <CopyText size='small' color='textDark' fontWeight={300}>
                 Already watched
               </CopyText>
@@ -124,12 +125,12 @@ const RecordingCard: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   // Recording metadata
-  videoId: state.recording.videoId,
+  videoId: state.videoMetadata.videoId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
-  setCurrentRecordingMetadata: (recording: RecordingMetadataType) => dispatch(setCurrentRecordingMetadata(recording)),
+  setVideoMetadata: (video: VideoMetadataState) => dispatch(setVideoMetadata(video)),
   setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
   setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
 });

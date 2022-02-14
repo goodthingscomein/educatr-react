@@ -1,3 +1,0 @@
-export enum AUTH_TYPES {
-	SET_AUTH_TOKEN = 'SET_AUTH_TOKEN',
-}

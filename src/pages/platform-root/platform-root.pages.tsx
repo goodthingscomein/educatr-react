@@ -6,7 +6,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // Import Required Redux Actions
-import { setBlobUrl } from '../../redux/recording/recording.actions';
+import { setBlobUrl } from '../../redux/video-stream/video-stream.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -108,8 +108,8 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
 
 const mapStateToProps = (state: State) => ({
   isDrawerOpen: state.navigation.isDrawerOpen,
-  videoDownloadUrl: state.recording.videoDownloadUrl,
-  videoBlobUrl: state.recording.videoBlobUrl,
+  videoDownloadUrl: state.videoStream.videoDownloadUrl,
+  videoBlobUrl: state.videoStream.videoBlobUrl,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

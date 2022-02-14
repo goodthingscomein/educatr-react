@@ -20,6 +20,7 @@ type Props = {
 
 // Render Component
 const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
+  // Mouse drag state to show / hide the overlay
   const [mouseDragValue, setMouseDragValue] = useState(0);
   const mouseDragValueRef = useRef(mouseDragValue);
   mouseDragValueRef.current = mouseDragValue;
@@ -27,7 +28,7 @@ const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
   const [isDisplayingOverlay, setIsDisplayingOverlay] = useState(false);
   const [isDisplayingCursor, setIsDisplayingCursor] = useState(true);
 
-  // These functions are used to stop the displaying of the overlay is the mouse has stopped moving
+  // Functions to stop displaying overlay + cursor if mouse not moving
   const stopDisplayingOverlay = (currentMouseDragValue: number) => {
     if (currentMouseDragValue === mouseDragValueRef.current) setIsDisplayingOverlay(false);
   };
@@ -35,11 +36,11 @@ const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
     if (currentMouseDragValue === mouseDragValueRef.current) setIsDisplayingCursor(false);
   };
 
-  // Use effect is used to update the DOM using setTimer (OTHERWISE THE DOM WILL NOT UPDATE)
+  // Update the DOM when the timer stops to hide the overlay / mouse
   useEffect(() => {
     // Set a new timeout for the overlay and the cursor
-    setTimeout(stopDisplayingOverlay, 2000, mouseDragValue);
-    setTimeout(stopDisplayingCursor, 5000, mouseDragValue);
+    setTimeout(stopDisplayingOverlay, 1000, mouseDragValue);
+    setTimeout(stopDisplayingCursor, 3000, mouseDragValue);
   }, [mouseDragValue]);
 
   // Stop displaying timeout function attached to mouse move event
@@ -72,8 +73,10 @@ const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
 };
 
 const mapStateToProps = (state: State) => ({
-  videoThumbnailSrc: state.recording.videoThumbnailSrc,
-  videoBlobUrl: state.recording.videoBlobUrl,
+  // Video metadata
+  videoThumbnailSrc: state.videoMetadata.videoThumbnailSrc,
+  // Video stream
+  videoBlobUrl: state.videoStream.videoBlobUrl,
 });
 
 export default connect(mapStateToProps)(MainVideo);

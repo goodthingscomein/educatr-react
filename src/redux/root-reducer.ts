@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux';
 
 import navigationReducer from './navigation/navigation.reducer';
-import playbackMiniplayerReducer from './playback-miniplayer/playback-miniplayer.reducer';
+import miniplayerViewReducer from './miniplayer-view/miniplayer-view.reducer';
 import calendarReducer from './calendar/calendar.reducer';
-import recordingReducer from './recording/recording.reducer';
-import authReducer from './auth/auth.reducer';
+import videoMetadataReducer from './video-metadata/video-metadata.reducer';
+import videoPlaybackReducer from './video-playback/video-playback.reducer';
+import videoStreamReducer from './video-stream/video-stream.reducer';
 
 const reducers = combineReducers({
   navigation: navigationReducer,
-  playbackMiniplayer: playbackMiniplayerReducer,
+  miniplayerView: miniplayerViewReducer,
   calendar: calendarReducer,
-  recording: recordingReducer,
-  auth: authReducer,
+  videoMetadata: videoMetadataReducer,
+  videoPlayback: videoPlaybackReducer,
+  videoStream: videoStreamReducer,
 });
 
 export default reducers;

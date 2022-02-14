@@ -7,13 +7,13 @@ interface NavigationState {
   yourUnitsNavigationUrl: string;
 }
 
-const INITIAL_STATE = {
+const DEFAULT_STATE = {
   isDrawerOpen: false,
   recordingsNavigationUrl: '/recordings/recent',
   yourUnitsNavigationUrl: '/units/current',
 } as NavigationState;
 
-const navigationReducer = (state: NavigationState = INITIAL_STATE, action: NavigationAction) => {
+const navigationReducer = (state: NavigationState = DEFAULT_STATE, action: NavigationAction): NavigationState => {
   switch (action.type) {
     case NAVIGATION_TYPES.SET_IS_DRAWER_OPEN:
       return {

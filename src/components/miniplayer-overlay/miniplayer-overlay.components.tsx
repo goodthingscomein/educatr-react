@@ -7,19 +7,12 @@ import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 // Import Connect Redux
 import { connect } from 'react-redux';
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
+import { setIsShowingMiniplayer, setIsShowingPlaybackBar } from '../../redux/miniplayer-view/miniplayer-view.actions';
+import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
 import {
-  setIsShowingMiniplayer,
-  setIsShowingPlaybackBar,
-} from '../../redux/playback-miniplayer/playback-miniplayer.actions';
-import {
-  setDownloadUrl,
-  setBlobUrl,
-  setIsPlaying,
-  setIsDraggingTime,
-  setCurrentTimeMilliseconds,
-  fastforwardTime,
-  rewindTime,
-} from '../../redux/recording/recording.actions';
+  setGlobalIsPlaying,
+  setGlobalCurrentTimeMilliseconds,
+} from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -53,15 +46,16 @@ import HideMiniplayerIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // Component Props Interface
 type Props = {
-  // Recording metadata
+  // Video metadata
   videoId: string;
   videoTitle: string;
   videoLengthSeconds: number;
 
-  // Recording playback
-  isPlaying: boolean;
-  isDraggingTime: boolean;
-  currentTimeMilliseconds: number;
+  // Video playback
+  globalIsPlaying: boolean;
+  globalCurrentTimeMilliseconds: number;
+  setGlobalIsPlaying: typeof setGlobalIsPlaying;
+  setGlobalCurrentTimeMilliseconds: typeof setGlobalCurrentTimeMilliseconds;
 
   // Set the URL of the recording drawer button
   setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
@@ -70,16 +64,9 @@ type Props = {
   setIsShowingMiniplayer: typeof setIsShowingMiniplayer;
   setIsShowingPlaybackBar: typeof setIsShowingPlaybackBar;
 
-  // Set download / blob url
+  // Video stream
   setDownloadUrl: typeof setDownloadUrl;
   setBlobUrl: typeof setBlobUrl;
-
-  // Set recording playback
-  setIsPlaying: typeof setIsPlaying;
-  setIsDraggingTime: typeof setIsDraggingTime;
-  setCurrentTimeMilliseconds: typeof setCurrentTimeMilliseconds;
-  fastforwardTime: typeof fastforwardTime;
-  rewindTime: typeof rewindTime;
 };
 
 // Render Component
@@ -90,9 +77,8 @@ const MiniplayerOverlay: React.FC<Props> = ({
   videoLengthSeconds,
 
   // Playback state
-  isPlaying,
-  isDraggingTime,
-  currentTimeMilliseconds,
+  globalIsPlaying,
+  globalCurrentTimeMilliseconds,
 
   // Records drawer button url action
   setRecordingsNavigationUrl,
@@ -106,12 +92,8 @@ const MiniplayerOverlay: React.FC<Props> = ({
   setBlobUrl,
 
   // Playback actions
-  setIsPlaying,
-  setIsDraggingTime,
-  setCurrentTimeMilliseconds,
-  // Fastforward / rewind time
-  fastforwardTime,
-  rewindTime,
+  setGlobalIsPlaying,
+  setGlobalCurrentTimeMilliseconds,
 }) => {
   const navigate = useNavigate();
   const recordingDetailsUrl = `/recordings/${videoId}/discussion`;
@@ -133,8 +115,8 @@ const MiniplayerOverlay: React.FC<Props> = ({
 
   // Drag time slider
   const dragTimeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
-    if (!isDraggingTime) setIsDraggingTime(true);
-    setCurrentTimeMilliseconds(parseInt(event.currentTarget.value));
+    // if (!isDraggingTime) setIsDraggingTime(true);
+    // setCurrentTimeMilliseconds(parseInt(event.currentTarget.value));
   };
 
   return (
@@ -217,7 +199,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() => rewindTime(15)}
+            // clickAction={() => rewindTime(15)}
           >
             <Icon>
               <SkipBackIcon fontSize='inherit' />
@@ -230,9 +212,12 @@ const MiniplayerOverlay: React.FC<Props> = ({
             hoverTextColor='lightGrey'
             padding='0'
             margin='0 80px'
-            clickAction={() => setIsPlaying(!isPlaying)}
+            // clickAction={() => setIsPlaying(!isPlaying)}
           >
-            <Icon>{isPlaying ? <PauseIcon fontSize='inherit' /> : <PlayIcon fontSize='inherit' />}</Icon>
+            {/* <Icon>{isPlaying ? <PauseIcon fontSize='inherit' /> : <PlayIcon fontSize='inherit' />}</Icon> */}
+            <Icon>
+              <PlayIcon fontSize='inherit' />
+            </Icon>
           </Button>
           <Button
             variant='text'
@@ -240,7 +225,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() => fastforwardTime(15)}
+            // clickAction={() => fastforwardTime(15)}
           >
             <Icon>
               <SkipForwardIcon fontSize='inherit' />
@@ -251,7 +236,7 @@ const MiniplayerOverlay: React.FC<Props> = ({
       <MiniplayerInteractionItemsRowContainer>
         <MiniplayerSliderContainer>
           <CopyText size='x-small' color='white'>
-            {secondsToTimeFormat(Math.floor(currentTimeMilliseconds / 1000))} /{' '}
+            {secondsToTimeFormat(Math.floor(globalCurrentTimeMilliseconds / 1000))} /{' '}
             {secondsToTimeFormat(Math.floor(videoLengthSeconds))}
           </CopyText>
           <Margin height='4px' />
@@ -259,9 +244,9 @@ const MiniplayerOverlay: React.FC<Props> = ({
             type='range'
             min={0}
             max={Math.floor(videoLengthSeconds * 1000)}
-            value={currentTimeMilliseconds}
+            value={globalCurrentTimeMilliseconds}
             onInput={(e) => dragTimeSlide(e)}
-            onClick={() => setIsDraggingTime(false)}
+            // onClick={() => setIsDraggingTime(false)}
           />
         </MiniplayerSliderContainer>
       </MiniplayerInteractionItemsRowContainer>
@@ -270,29 +255,27 @@ const MiniplayerOverlay: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: State) => ({
-  videoId: state.recording.videoId,
-  videoTitle: state.recording.videoTitle,
-  videoLengthSeconds: state.recording.videoLengthSeconds,
-  isPlaying: state.recording.isPlaying,
-  isDraggingTime: state.recording.isDraggingTime,
-  currentTimeMilliseconds: state.recording.currentTimeMilliseconds,
+  // Video metadata
+  videoId: state.videoMetadata.videoId,
+  videoTitle: state.videoMetadata.videoTitle,
+  videoLengthSeconds: state.videoMetadata.videoLengthSeconds,
+  // Video playback
+  globalIsPlaying: state.videoPlayback.globalIsPlaying,
+  globalCurrentTimeMilliseconds: state.videoPlayback.globalCurrentTimeMilliseconds,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  // Set recording drawer button url
+  // Recording drawer button url
   setRecordingsNavigationUrl: (url: string) => dispatch(setRecordingsNavigationUrl(url)),
-  // Playback / miniplayer
+  // Miniplayer view
   setIsShowingPlaybackBar: (isShowing: boolean) => dispatch(setIsShowingPlaybackBar(isShowing)),
   setIsShowingMiniplayer: (isShowing: boolean) => dispatch(setIsShowingMiniplayer(isShowing)),
-  // Recording urls
+  // Video stream
   setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
   setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
-  // Recording playback
-  setIsPlaying: (isPlaying: boolean) => dispatch(setIsPlaying(isPlaying)),
-  setIsDraggingTime: (isDraggingTime: boolean) => dispatch(setIsDraggingTime(isDraggingTime)),
-  setCurrentTimeMilliseconds: (ms: number) => dispatch(setCurrentTimeMilliseconds(ms)),
-  fastforwardTime: (seconds: number) => dispatch(fastforwardTime(seconds)),
-  rewindTime: (seconds: number) => dispatch(rewindTime(seconds)),
+  // Video playback
+  setGlobalIsPlaying: (isPlaying: boolean) => dispatch(setGlobalIsPlaying(isPlaying)),
+  setGlobalCurrentTimeMilliseconds: (ms: number) => dispatch(setGlobalCurrentTimeMilliseconds(ms)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniplayerOverlay);
