@@ -22,8 +22,8 @@ interface SetVideoDescriptionAction {
   payload: string;
 }
 
-interface SetVideoLengthSecondsAction {
-  type: VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_SECONDS;
+interface SetVideoLengthMsAction {
+  type: VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_MS;
   payload: number;
 }
 
@@ -56,7 +56,7 @@ export type VideoMetadataAction =
   | SetVideoThumbnailSrcAction
   | SetVideoTitleAction
   | SetVideoDescriptionAction
-  | SetVideoLengthSecondsAction
+  | SetVideoLengthMsAction
   | SetVideoPostDateAction
   | SetVideoAlreadyWatchedAction
   | SetVideoHashtagsAction

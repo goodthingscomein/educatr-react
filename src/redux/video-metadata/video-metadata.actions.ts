@@ -29,10 +29,10 @@ export const setVideoDescription = (description: string) =>
     payload: description,
   } as VideoMetadataAction);
 
-export const setVideoLengthSeconds = (lengthSeconds: number) =>
+export const setVideoLengthMs = (lengthMs: number) =>
   ({
-    type: VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_SECONDS,
-    payload: lengthSeconds,
+    type: VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_MS,
+    payload: lengthMs,
   } as VideoMetadataAction);
 
 export const setVideoPostDate = (postDate: string) =>

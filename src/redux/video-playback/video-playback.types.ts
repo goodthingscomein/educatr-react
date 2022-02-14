@@ -7,14 +7,19 @@ interface SetGlobalIsPlayingAction {
   payload: boolean;
 }
 
-interface SetGlobalCurrentTimeMillisecondsAction {
-  type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MILLISECONDS;
+interface SetGlobalCurrentTimeMsAction {
+  type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MS;
   payload: number;
 }
 
 interface SetGlobalCurrentVolumeAction {
   type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_VOLUME;
   payload: number;
+}
+
+interface SetGlobalIsMutedAction {
+  type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_MUTED;
+  payload: boolean;
 }
 
 interface SetVideoPlaybackStateAction {
@@ -28,7 +33,8 @@ interface ResetVideoPlaybackStateAction {
 
 export type VideoPlaybackAction =
   | SetGlobalIsPlayingAction
-  | SetGlobalCurrentTimeMillisecondsAction
+  | SetGlobalCurrentTimeMsAction
   | SetGlobalCurrentVolumeAction
+  | SetGlobalIsMutedAction
   | SetVideoPlaybackStateAction
   | ResetVideoPlaybackStateAction;

@@ -10,11 +10,13 @@ import { State } from '../../redux/root-reducer';
 import { VideoAndOverlayContainer, VideoContainer } from './video.styles';
 
 // Import custom components
-import MainVideoOverlay from '../video-overlay/video-overlay.components';
+import VideoOverlay from '../video-overlay/video-overlay.components';
 
 // Component Props Interface
 type Props = {
+  // Video metadata
   videoThumbnailSrc: string;
+  // Video stream
   videoBlobUrl: string;
 };
 
@@ -25,6 +27,7 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
   const mouseDragValueRef = useRef(mouseDragValue);
   mouseDragValueRef.current = mouseDragValue;
 
+  // State used to determine if showing the overlay + cursor
   const [isDisplayingOverlay, setIsDisplayingOverlay] = useState(false);
   const [isDisplayingCursor, setIsDisplayingCursor] = useState(true);
 
@@ -44,18 +47,17 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
   }, [mouseDragValue]);
 
   // Stop displaying timeout function attached to mouse move event
-  const startVideoOverlayTimers = () => {
-    // Show the overlay, cursor, and update the mouse moved counter
-    setIsDisplayingOverlay(true);
-    setIsDisplayingCursor(true);
-    setMouseDragValue(mouseDragValue + 1);
+  const startMouseMoveTimers = () => {
+    setIsDisplayingOverlay(true); // display overlay
+    setIsDisplayingCursor(true); // display cursor
+    setMouseDragValue(mouseDragValue + 1); // update the mouse move counter
   };
 
   // Render the video component
   return (
     <VideoAndOverlayContainer
       id='video-container'
-      onMouseMove={() => startVideoOverlayTimers()}
+      onMouseMove={() => startMouseMoveTimers()}
       isDisplayingCursor={isDisplayingCursor}
     >
       {videoBlobUrl && (
@@ -65,7 +67,7 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
             HTML5 videos not supported with this browser.
           </VideoContainer>
           {/* MAIN VIDEO OVERLAY BUTTONS */}
-          <MainVideoOverlay isDisplaying={isDisplayingOverlay} />
+          <VideoOverlay isDisplaying={isDisplayingOverlay} />
         </>
       )}
     </VideoAndOverlayContainer>

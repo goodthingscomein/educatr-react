@@ -4,14 +4,16 @@ import { clampVolume } from './video-playback.utils';
 
 export interface VideoPlaybackState {
   globalIsPlaying: boolean;
-  globalCurrentTimeMilliseconds: number;
+  globalCurrentTimeMs: number;
   globalCurrentVolume: number;
+  globalIsMuted: boolean;
 }
 
 const DEFAULT_STATE = {
   globalIsPlaying: false,
-  globalCurrentTimeMilliseconds: 0,
+  globalCurrentTimeMs: 0,
   globalCurrentVolume: 20,
+  globalIsMuted: false,
 } as VideoPlaybackState;
 
 const videoPlaybackReducer = (
@@ -24,15 +26,20 @@ const videoPlaybackReducer = (
         ...state,
         globalIsPlaying: action.payload,
       };
-    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MILLISECONDS:
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MS:
       return {
         ...state,
-        globalCurrentTimeMilliseconds: action.payload,
+        globalCurrentTimeMs: action.payload,
       };
     case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_VOLUME:
       return {
         ...state,
         globalCurrentVolume: clampVolume(action.payload),
+      };
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_MUTED:
+      return {
+        ...state,
+        globalIsMuted: action.payload,
       };
     case VIDEO_PLAYBACK_TYPES.SET_VIDEO_PLAYBACK_STATE:
       return {

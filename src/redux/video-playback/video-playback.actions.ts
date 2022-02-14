@@ -10,16 +10,22 @@ export const setGlobalIsPlaying = (isPlaying: boolean) =>
   } as VideoPlaybackAction);
 
 // Set the download and blob urls
-export const setGlobalCurrentTimeMilliseconds = (timeMilliseconds: number) =>
+export const setGlobalCurrentTimeMs = (ms: number) =>
   ({
-    type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MILLISECONDS,
-    payload: timeMilliseconds,
+    type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MS,
+    payload: ms,
   } as VideoPlaybackAction);
 
 export const setGlobalCurrentVolume = (currentVolume: number) =>
   ({
     type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_VOLUME,
     payload: currentVolume,
+  } as VideoPlaybackAction);
+
+export const setGlobalIsMuted = (isMuted: boolean) =>
+  ({
+    type: VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_MUTED,
+    payload: isMuted,
   } as VideoPlaybackAction);
 
 export const setVideoPlaybackState = (playbackState: VideoPlaybackState) =>

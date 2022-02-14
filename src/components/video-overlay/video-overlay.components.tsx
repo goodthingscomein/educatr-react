@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // Import utils
-import clampNumber from '../../utils/clampNumber';
 import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
-
-// Import Required Redux Actions
-import { setDownloadUrl, setBlobUrl } from '../../redux/video-stream/video-stream.actions';
+//Redux actions
 import {
   setGlobalIsPlaying,
-  setGlobalCurrentTimeMilliseconds,
+  setGlobalCurrentTimeMs,
+  setGlobalCurrentVolume,
+  setGlobalIsMuted,
 } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
@@ -41,9 +40,10 @@ import SkipBackIcon from '@mui/icons-material/FastRewind';
 import VolumeIcon from '@mui/icons-material/VolumeUp';
 import MuteIcon from '@mui/icons-material/VolumeOff';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+// import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PipIcon from '@mui/icons-material/PictureInPicture';
 import SettingsIcon from '@mui/icons-material/Settings';
+import skipTime from '../../utils/skipTime';
 
 // Component Props Interface
 type Props = {
@@ -51,15 +51,17 @@ type Props = {
   isDisplaying?: boolean;
 
   // Recording metadata
-  videoLengthSeconds: number;
+  videoLengthMs: number;
 
-  // Set download / blob url
-  setDownloadUrl: typeof setDownloadUrl;
-  setBlobUrl: typeof setBlobUrl;
-
-  // Set recording playback
+  // Video playback
+  globalIsPlaying: boolean;
+  globalCurrentTimeMs: number;
+  globalCurrentVolume: number;
+  globalIsMuted: boolean;
   setGlobalIsPlaying: typeof setGlobalIsPlaying;
-  setGlobalCurrentTimeMilliseconds: typeof setGlobalCurrentTimeMilliseconds;
+  setGlobalCurrentTimeMs: typeof setGlobalCurrentTimeMs;
+  setGlobalCurrentVolume: typeof setGlobalCurrentVolume;
+  setGlobalIsMuted: typeof setGlobalIsMuted;
 };
 
 // Render Component
@@ -68,14 +70,21 @@ const VideoOverlay: React.FC<Props> = ({
   isDisplaying,
 
   // Video metadata
-  videoLengthSeconds,
+  videoLengthMs,
+
+  // Global video playback values
+  globalIsPlaying,
+  globalCurrentTimeMs,
+  globalCurrentVolume,
+  globalIsMuted,
 }) => {
-  // Playback management state
-  const [isPlaying, setIsPlaying] = useState(false);
+  // Local video playback state
+  const [isPlaying, setIsPlaying] = useState(globalIsPlaying);
   const [isDraggingTime, setIsDraggingTime] = useState(false);
   const [isSkippingTime, setIsSkippingTime] = useState(false);
-  const [currentTimeMilliseconds, setCurrentTimeMilliseconds] = useState(0);
-  const [currentVolume, setCurrentVolume] = useState(10);
+  const [currentTimeMs, setCurrentTimeMs] = useState(globalCurrentTimeMs);
+  const [currentVolume, setCurrentVolume] = useState(globalCurrentVolume);
+  const [isMuted, setIsMuted] = useState(globalIsMuted);
 
   // Get the video component
   const video: HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement;
@@ -86,15 +95,18 @@ const VideoOverlay: React.FC<Props> = ({
     // Play video
     if (isPlaying && !isDraggingTime && !isSkippingTime) {
       video.play();
-      video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000)); // used to update the slider
+      video.ontimeupdate = () => setCurrentTimeMs(Math.floor(video.currentTime * 1000)); // used to update the slider
     }
     // Pause video
     else {
       video.pause();
-      video.currentTime = currentTimeMilliseconds / 1000;
+      video.currentTime = currentTimeMs / 1000;
       // Stop pause if we are just skipping time
       if (isSkippingTime) setIsSkippingTime(false);
     }
+
+    // Adjust the volume of the video
+    isMuted ? (video.volume = 0) : (video.volume = currentVolume / 20);
 
     // Double click to open in fullscreen
     videoContainer.addEventListener('dblclick', () => {
@@ -105,12 +117,13 @@ const VideoOverlay: React.FC<Props> = ({
   // Drag time slider
   const dragTimeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
     if (!isDraggingTime) setIsDraggingTime(true);
-    setCurrentTimeMilliseconds(parseInt(event.currentTarget.value));
+    setCurrentTimeMs(parseInt(event.currentTarget.value));
   };
 
   // Drag volume slider
   const dragVolumeSlide: React.FormEventHandler<HTMLInputElement> = (event) => {
     setCurrentVolume(parseInt(event.currentTarget.value));
+    setIsMuted(false); // Unmute
   };
 
   /*
@@ -135,8 +148,8 @@ const VideoOverlay: React.FC<Props> = ({
   const getPipElement = () => document.pictureInPictureElement;
   // PIP button
   const togglePip = () => {
-    if (!isPipEnabled()) return console.warn('Picture in Picture is not enabled on this browser');
     if (!video) return console.warn('Video element not found');
+    if (!isPipEnabled()) return console.warn('Picture in Picture is not enabled on this browser');
     if (!getPipElement()) {
       video.requestPictureInPicture().catch((err) => console.error(err));
     } else {
@@ -149,16 +162,16 @@ const VideoOverlay: React.FC<Props> = ({
     <VideoInteractionContainer isDisplaying={isDisplaying}>
       {/* TIMESTAMP */}
       <CopyText size='x-small' color='white'>
-        {secondsToTimeFormat(Math.floor(currentTimeMilliseconds / 1000))} /{' '}
-        {secondsToTimeFormat(Math.floor(videoLengthSeconds))}
+        {secondsToTimeFormat(Math.floor(currentTimeMs / 1000))} /{' '}
+        {secondsToTimeFormat(Math.floor(videoLengthMs / 1000))}
       </CopyText>
       <Margin height='4px' />
       {/* VIDEO SLIDER */}
       <VideoTimeSlider
         type='range'
         min={0}
-        max={Math.floor(videoLengthSeconds * 1000)}
-        value={currentTimeMilliseconds}
+        max={Math.floor(videoLengthMs)}
+        value={currentTimeMs}
         onInput={(e) => dragTimeSlide(e)}
         onClick={() => setIsDraggingTime(false)}
       />
@@ -174,11 +187,10 @@ const VideoOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() =>
-              setCurrentTimeMilliseconds((currentTimeMilliseconds) =>
-                clampNumber(currentTimeMilliseconds - 15 * 1000, 0, videoLengthSeconds * 1000)
-              )
-            }
+            clickAction={() => {
+              setIsSkippingTime(true);
+              setCurrentTimeMs((currentTimeMs) => skipTime(-15000, currentTimeMs, videoLengthMs));
+            }}
           >
             <Icon padding='12px'>
               <SkipBackIcon />
@@ -204,11 +216,10 @@ const VideoOverlay: React.FC<Props> = ({
             hoverTextColor='lightGrey'
             padding='0'
             margin='0 24px 0 0'
-            clickAction={() =>
-              setCurrentTimeMilliseconds((currentTimeMilliseconds) =>
-                clampNumber(currentTimeMilliseconds + 15 * 1000, 0, videoLengthSeconds * 1000)
-              )
-            }
+            clickAction={() => {
+              setIsSkippingTime(true);
+              setCurrentTimeMs((currentTimeMs) => skipTime(15000, currentTimeMs, videoLengthMs));
+            }}
           >
             <Icon padding='12px'>
               <SkipForwardIcon />
@@ -221,12 +232,18 @@ const VideoOverlay: React.FC<Props> = ({
             textColor='white'
             hoverTextColor='lightGrey'
             padding='0'
-            clickAction={() => setCurrentVolume(0)}
+            clickAction={() => setIsMuted((isMuted) => !isMuted)}
           >
-            <Icon padding='12px'>{currentVolume === 0 ? <MuteIcon /> : <VolumeIcon />}</Icon>
+            <Icon padding='12px'>{currentVolume === 0 || isMuted ? <MuteIcon /> : <VolumeIcon />}</Icon>
           </Button>
           {/* VOLUME SLIDER */}
-          <VideoVolumeSlider type='range' min={0} max={10} value={currentVolume} onInput={(e) => dragVolumeSlide(e)} />
+          <VideoVolumeSlider
+            type='range'
+            min={0}
+            max={20}
+            value={isMuted ? 0 : currentVolume}
+            onInput={(e) => dragVolumeSlide(e)}
+          />
         </VideoButtonsContainer>
         {/* RIGHT SIDE */}
         <VideoButtonsContainer>
@@ -275,20 +292,20 @@ const VideoOverlay: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   // Video metadata
-  videoLengthSeconds: state.videoMetadata.videoLengthSeconds,
+  videoLengthMs: state.videoMetadata.videoLengthMs,
   // Video playback
   globalIsPlaying: state.videoPlayback.globalIsPlaying,
-  globalCurrentTimeMilliseconds: state.videoPlayback.globalCurrentTimeMilliseconds,
+  globalCurrentTimeMs: state.videoPlayback.globalCurrentTimeMs,
   globalCurrentVolume: state.videoPlayback.globalCurrentVolume,
+  globalIsMuted: state.videoPlayback.globalIsMuted,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  // Recording urls
-  setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
-  setBlobUrl: (url: string) => dispatch(setBlobUrl(url)),
   // Recording playback
   setGlobalIsPlaying: (isPlaying: boolean) => dispatch(setGlobalIsPlaying(isPlaying)),
-  setGlobalCurrentTimeMilliseconds: (ms: number) => dispatch(setGlobalCurrentTimeMilliseconds(ms)),
+  setGlobalCurrentTimeMs: (ms: number) => dispatch(setGlobalCurrentTimeMs(ms)),
+  setGlobalCurrentVolume: (volume: number) => dispatch(setGlobalCurrentVolume(volume)),
+  setGlobalIsMuted: (isMuted: boolean) => dispatch(setGlobalIsMuted(isMuted)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoOverlay);

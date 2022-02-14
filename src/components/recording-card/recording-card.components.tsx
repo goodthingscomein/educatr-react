@@ -78,7 +78,7 @@ const RecordingCard: React.FC<Props> = ({
         src={video.videoThumbnailSrc}
         onClick={() => recordingsNavigation(`/recordings/${video.videoId}/discussion`)}
       >
-        <ThumbnailTimestamp>{secondsToTimeFormat(video.videoLengthSeconds)}</ThumbnailTimestamp>
+        <ThumbnailTimestamp>{secondsToTimeFormat(Math.floor(video.videoLengthMs / 1000))}</ThumbnailTimestamp>
         <ThumbnailHoverButton>
           <PlayIcon fontSize='inherit' />
         </ThumbnailHoverButton>

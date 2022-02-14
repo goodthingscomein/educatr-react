@@ -7,7 +7,7 @@ export interface VideoMetadataState {
   videoThumbnailSrc: string;
   videoTitle: string;
   videoDescription: string;
-  videoLengthSeconds: number;
+  videoLengthMs: number;
   videoPostDate: string;
   alreadyWatched?: boolean;
   videoHashtags?: string[];
@@ -19,7 +19,7 @@ const DEFAULT_STATE = {
   videoThumbnailSrc: '',
   videoTitle: '',
   videoDescription: '',
-  videoLengthSeconds: 0,
+  videoLengthMs: 0,
   videoPostDate: '',
 } as VideoMetadataState;
 
@@ -48,10 +48,10 @@ const videoMetadataReducer = (
         ...state,
         videoDescription: action.payload,
       };
-    case VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_SECONDS:
+    case VIDEO_METADATA_TYPES.SET_VIDEO_LENGTH_MS:
       return {
         ...state,
-        videoLengthSeconds: action.payload,
+        videoLengthMs: action.payload,
       };
     case VIDEO_METADATA_TYPES.SET_VIDEO_POST_DATE:
       return {
