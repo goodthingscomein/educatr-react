@@ -25,7 +25,7 @@ import {
   OverviewContentContainer,
   OverviewUnderHeadingContainer,
   RatingButtonsContainer,
-  MainVideoContainer,
+  VideoContainer,
 } from './recording-details.styles';
 
 // Import custom components
@@ -34,7 +34,7 @@ import Link from '../../components/link/link.components';
 import Button from '../../components/button/button.components';
 import Margin from '../../components/margin/margin.components';
 import Divider from '../../components/divider/divider.components';
-import MainVideo from '../../components/main-video/main-video.components';
+import Video from '../../components/video/video.components';
 import BackButton from '../../components/back-button/back-button.components';
 
 // Import custom icons
@@ -186,9 +186,9 @@ const RecordingDetailsPage: React.FC<Props> = ({
           </AppBarSectionContainer>
         </AppBarContainer>
         {/* VIDEO GOES HERE */}
-        <MainVideoContainer>
-          <MainVideo />
-        </MainVideoContainer>
+        <VideoContainer>
+          <Video />
+        </VideoContainer>
         <AllContentContainer>
           <OverviewContentContainer>
             {/* Overview of video */}

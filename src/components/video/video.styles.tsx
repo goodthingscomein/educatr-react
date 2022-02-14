@@ -5,7 +5,7 @@ type VideoContainerProps = {
   isDisplayingCursor?: boolean;
 };
 
-export const VideoContainer = styled.div<VideoContainerProps>`
+export const VideoAndOverlayContainer = styled.div<VideoContainerProps>`
   position: relative;
   height: 100%;
   width: 100%;
@@ -16,7 +16,7 @@ export const VideoContainer = styled.div<VideoContainerProps>`
   align-items: center;
 `;
 
-export const Video = styled.video`
+export const VideoContainer = styled.video`
   height: 100%;
   width: 100%;
 `;

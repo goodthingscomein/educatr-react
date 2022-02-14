@@ -25,7 +25,7 @@ import {
   VideoMiddleButtonsContainer,
   VideoTimeSlider,
   VideoVolumeSlider,
-} from './main-video-overlay.styles';
+} from './video-overlay.styles';
 
 // Import custom components
 import Icon from '../icon/icon-components';
@@ -53,13 +53,6 @@ type Props = {
   // Recording metadata
   videoLengthSeconds: number;
 
-  // Recording playback
-  // isPlaying: boolean;
-  // isDraggingTime: boolean;
-  // isSkippingTime: boolean;
-  // currentTimeMilliseconds: number;
-  // currentVolume: number;
-
   // Set download / blob url
   setDownloadUrl: typeof setDownloadUrl;
   setBlobUrl: typeof setBlobUrl;
@@ -70,7 +63,7 @@ type Props = {
 };
 
 // Render Component
-const MainVideoOverlay: React.FC<Props> = ({
+const VideoOverlay: React.FC<Props> = ({
   // If we are displaying the overlay or not
   isDisplaying,
 
@@ -84,10 +77,9 @@ const MainVideoOverlay: React.FC<Props> = ({
   const [currentTimeMilliseconds, setCurrentTimeMilliseconds] = useState(0);
   const [currentVolume, setCurrentVolume] = useState(10);
 
-  // Video playback manager
   // Get the video component
-  const video: HTMLVideoElement | null = document.getElementById('main-video') as HTMLVideoElement;
-  const videoContainer: HTMLDivElement = document.getElementById('main-video-container') as HTMLDivElement;
+  const video: HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement;
+  const videoContainer: HTMLDivElement = document.getElementById('video-container') as HTMLDivElement;
 
   // Manage the playback state of the main video
   if (video && videoContainer) {
@@ -299,4 +291,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setGlobalCurrentTimeMilliseconds: (ms: number) => dispatch(setGlobalCurrentTimeMilliseconds(ms)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainVideoOverlay);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoOverlay);

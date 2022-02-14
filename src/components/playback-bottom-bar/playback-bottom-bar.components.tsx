@@ -23,7 +23,7 @@ import {
 } from './playback-bottom-bar.styles';
 
 // Import custom components
-import Miniplayer from '../miniplayer/miniplayer.components';
+import Miniplayer from '../miniplayer-frame/miniplayer-frame.components';
 
 // Import custom icons
 import ShowBarIcon from '@mui/icons-material/ArrowForwardIos';

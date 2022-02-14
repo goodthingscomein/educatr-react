@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import { State } from '../../redux/root-reducer';
 
 // Import styles
-import { VideoContainer, Video } from './main-video.styles';
+import { VideoAndOverlayContainer, VideoContainer } from './video.styles';
 
 // Import custom components
-import MainVideoOverlay from '../main-video-overlay/main-video-overlay.components';
+import MainVideoOverlay from '../video-overlay/video-overlay.components';
 
 // Component Props Interface
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 };
 
 // Render Component
-const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
+const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
   // Mouse drag state to show / hide the overlay
   const [mouseDragValue, setMouseDragValue] = useState(0);
   const mouseDragValueRef = useRef(mouseDragValue);
@@ -53,22 +53,22 @@ const MainVideo: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
 
   // Render the video component
   return (
-    <VideoContainer
-      id='main-video-container'
+    <VideoAndOverlayContainer
+      id='video-container'
       onMouseMove={() => startVideoOverlayTimers()}
       isDisplayingCursor={isDisplayingCursor}
     >
       {videoBlobUrl && (
         <>
-          <Video id='main-video' preload='auto' poster={videoThumbnailSrc}>
+          <VideoContainer id='video' preload='auto' poster={videoThumbnailSrc}>
             <source src={videoBlobUrl} type='video/mp4' />
             HTML5 videos not supported with this browser.
-          </Video>
+          </VideoContainer>
           {/* MAIN VIDEO OVERLAY BUTTONS */}
           <MainVideoOverlay isDisplaying={isDisplayingOverlay} />
         </>
       )}
-    </VideoContainer>
+    </VideoAndOverlayContainer>
   );
 };
 
@@ -79,4 +79,4 @@ const mapStateToProps = (state: State) => ({
   videoBlobUrl: state.videoStream.videoBlobUrl,
 });
 
-export default connect(mapStateToProps)(MainVideo);
+export default connect(mapStateToProps)(Video);

@@ -10,10 +10,10 @@ import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { MiniplayerFrame, MiniplayerVideo } from './miniplayer.styles';
+import { MiniplayerFrame } from './miniplayer-frame.styles';
 
 // Import custom components
-import MiniplayerOverlay from '../miniplayer-overlay/miniplayer-overlay.components';
+import Video from '../video/video.components';
 
 // Component Props Interface
 type Props = {
@@ -43,34 +43,10 @@ const Miniplayer: React.FC<Props> = ({
 }) => {
   const video: HTMLVideoElement | null = document.getElementById('miniplayer-video') as HTMLVideoElement;
 
-  // Manage the playback state of the miniplayer video
-  // if (video) {
-  //   // Play video
-  //   if (isPlaying && !isDraggingTime && !isSkippingTime) {
-  //     video.play();
-  //     video.ontimeupdate = () => setCurrentTimeMilliseconds(Math.floor(video.currentTime * 1000));
-  //   }
-  //   // Pause video
-  //   else {
-  //     video.pause();
-  //     video.currentTime = currentTimeMilliseconds / 1000;
-  //     // Stop pause if we are just skipping time
-  //     if (isSkippingTime) setIsSkippingTime(false);
-  //   }
-  // }
-
   return (
     <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
       {/* VIDEO */}
-      {videoBlobUrl && (
-        <>
-          <MiniplayerVideo id='miniplayer-video'>
-            <source src={videoBlobUrl} type='video/mp4' />
-          </MiniplayerVideo>
-          {/* BUTTONS ON MINIPLAYER */}
-          <MiniplayerOverlay />
-        </>
-      )}
+      {videoBlobUrl && <Video />}
     </MiniplayerFrame>
   );
 };
