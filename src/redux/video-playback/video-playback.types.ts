@@ -22,6 +22,11 @@ interface SetGlobalIsMutedAction {
   payload: boolean;
 }
 
+interface SetPlaybackRefreshedAction {
+  type: VIDEO_PLAYBACK_TYPES.SET_PLAYBACK_REFRESHED;
+  payload: boolean;
+}
+
 interface SetVideoPlaybackStateAction {
   type: VIDEO_PLAYBACK_TYPES.SET_VIDEO_PLAYBACK_STATE;
   payload: VideoPlaybackState;
@@ -36,5 +41,6 @@ export type VideoPlaybackAction =
   | SetGlobalCurrentTimeMsAction
   | SetGlobalCurrentVolumeAction
   | SetGlobalIsMutedAction
+  | SetPlaybackRefreshedAction
   | SetVideoPlaybackStateAction
   | ResetVideoPlaybackStateAction;

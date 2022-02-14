@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // Import Required Redux Actions
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
 import { setDownloadUrl } from '../../redux/video-stream/video-stream.actions';
+import { setPlaybackRefreshed } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -79,6 +80,7 @@ type Props = {
   // Recording download redux state
   videoDownloadUrl: string;
   setDownloadUrl: typeof setDownloadUrl;
+  setPlaybackRefreshed: typeof setPlaybackRefreshed;
 };
 
 // Render Component
@@ -91,6 +93,7 @@ const RecordingDetailsPage: React.FC<Props> = ({
   alreadyRated,
   videoDownloadUrl,
   setDownloadUrl,
+  setPlaybackRefreshed,
 }) => {
   const [showingFullDescription, setShowingFullDescription] = useState(false);
   const [isFavourite, setIsFavourite] = useState(isFavourited || false);
@@ -105,7 +108,10 @@ const RecordingDetailsPage: React.FC<Props> = ({
 
   // Set the download link when we open the page
   useEffect(() => {
-    if (videoDownloadUrl !== recordingURL) setDownloadUrl(recordingURL);
+    if (videoDownloadUrl !== recordingURL) {
+      setDownloadUrl(recordingURL);
+      setPlaybackRefreshed(false);
+    }
   }, []);
 
   // The tabbed navigation items
@@ -341,6 +347,7 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
   setDownloadUrl: (url: string) => dispatch(setDownloadUrl(url)),
+  setPlaybackRefreshed: (playbackRefreshed: boolean) => dispatch(setPlaybackRefreshed(playbackRefreshed)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordingDetailsPage);

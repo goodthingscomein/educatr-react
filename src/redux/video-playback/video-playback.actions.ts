@@ -28,6 +28,12 @@ export const setGlobalIsMuted = (isMuted: boolean) =>
     payload: isMuted,
   } as VideoPlaybackAction);
 
+export const setPlaybackRefreshed = (playbackRefreshed: boolean) =>
+  ({
+    type: VIDEO_PLAYBACK_TYPES.SET_PLAYBACK_REFRESHED,
+    payload: playbackRefreshed,
+  } as VideoPlaybackAction);
+
 export const setVideoPlaybackState = (playbackState: VideoPlaybackState) =>
   ({
     type: VIDEO_PLAYBACK_TYPES.SET_VIDEO_PLAYBACK_STATE,

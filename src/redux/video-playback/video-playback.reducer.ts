@@ -7,6 +7,7 @@ export interface VideoPlaybackState {
   globalCurrentTimeMs: number;
   globalCurrentVolume: number;
   globalIsMuted: boolean;
+  playbackRefreshed?: boolean;
 }
 
 const DEFAULT_STATE = {
@@ -14,6 +15,7 @@ const DEFAULT_STATE = {
   globalCurrentTimeMs: 0,
   globalCurrentVolume: 20,
   globalIsMuted: false,
+  playbackRefreshed: true,
 } as VideoPlaybackState;
 
 const videoPlaybackReducer = (
@@ -21,36 +23,61 @@ const videoPlaybackReducer = (
   action: VideoPlaybackAction
 ): VideoPlaybackState => {
   switch (action.type) {
-    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_PLAYING:
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_PLAYING: {
+      if (!state.playbackRefreshed) {
+        return {
+          ...state,
+          globalIsPlaying: action.payload,
+        };
+      }
+      return state;
+    }
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MS: {
+      if (!state.playbackRefreshed) {
+        return {
+          ...state,
+          globalCurrentTimeMs: action.payload,
+        };
+      }
+      return state;
+    }
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_VOLUME: {
+      if (!state.playbackRefreshed) {
+        return {
+          ...state,
+          globalCurrentVolume: clampVolume(action.payload),
+        };
+      }
+      return state;
+    }
+    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_MUTED: {
+      if (!state.playbackRefreshed) {
+        return {
+          ...state,
+          globalIsMuted: action.payload,
+        };
+      }
+      return state;
+    }
+    case VIDEO_PLAYBACK_TYPES.SET_PLAYBACK_REFRESHED:
       return {
         ...state,
-        globalIsPlaying: action.payload,
-      };
-    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_TIME_MS:
-      return {
-        ...state,
-        globalCurrentTimeMs: action.payload,
-      };
-    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_CURRENT_VOLUME:
-      return {
-        ...state,
-        globalCurrentVolume: clampVolume(action.payload),
-      };
-    case VIDEO_PLAYBACK_TYPES.SET_GLOBAL_IS_MUTED:
-      return {
-        ...state,
-        globalIsMuted: action.payload,
+        playbackRefreshed: action.payload,
       };
     case VIDEO_PLAYBACK_TYPES.SET_VIDEO_PLAYBACK_STATE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case VIDEO_PLAYBACK_TYPES.RESET_VIDEO_PLAYBACK_STATE:
+      if (!state.playbackRefreshed) {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      }
+      return state;
+    case VIDEO_PLAYBACK_TYPES.RESET_VIDEO_PLAYBACK_STATE: {
       return {
         ...state,
         ...DEFAULT_STATE,
       };
+    }
     default:
       return state;
   }

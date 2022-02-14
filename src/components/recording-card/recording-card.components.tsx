@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
 import { setVideoMetadata } from '../../redux/video-metadata/video-metadata.actions';
 import { resetVideoStreamState } from '../../redux/video-stream/video-stream.actions';
+import { resetVideoPlaybackState } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -47,8 +48,9 @@ type Props = {
   // Set the current recording metadata
   setVideoMetadata: typeof setVideoMetadata;
 
-  // Set the video stream
+  // Reset redux actions
   resetVideoStreamState: typeof resetVideoStreamState;
+  resetVideoPlaybackState: typeof resetVideoPlaybackState;
 };
 
 // Render Component
@@ -58,6 +60,7 @@ const RecordingCard: React.FC<Props> = ({
   setRecordingsNavigationUrl,
   setVideoMetadata,
   resetVideoStreamState,
+  resetVideoPlaybackState,
 }) => {
   // Navigate url
   const navigate = useNavigate();
@@ -67,6 +70,7 @@ const RecordingCard: React.FC<Props> = ({
     if (video.videoId !== videoId) {
       setVideoMetadata(video); // Set new video metadata
       resetVideoStreamState(); // Reset the video stream
+      resetVideoPlaybackState(); // Reset the video playback
     }
     setRecordingsNavigationUrl(url); // set the nav url
     navigate(url);
@@ -132,6 +136,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   setRecordingsNavigationUrl: (newUrl: string) => dispatch(setRecordingsNavigationUrl(newUrl)),
   setVideoMetadata: (video: VideoMetadataState) => dispatch(setVideoMetadata(video)),
   resetVideoStreamState: () => dispatch(resetVideoStreamState()),
+  resetVideoPlaybackState: () => dispatch(resetVideoPlaybackState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordingCard);

@@ -6,11 +6,7 @@ import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
 // Import Connect Redux
 import { connect } from 'react-redux';
 //Redux actions
-import {
-  setGlobalCurrentTimeMs,
-  setGlobalCurrentVolume,
-  setVideoPlaybackState,
-} from '../../redux/video-playback/video-playback.actions';
+import { setVideoPlaybackState } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
 import { Action } from '../../redux/all-actions.types';
@@ -47,10 +43,11 @@ import { VideoPlaybackState } from '../../redux/video-playback/video-playback.re
 
 // Component Props Interface
 type Props = {
-  // If we are displaying the overlay or not
+  // Passed in props
   isDisplaying?: boolean;
 
   // Recording metadata
+  videoId: string;
   videoLengthMs: number;
 
   // Video playback
@@ -63,7 +60,7 @@ type Props = {
 
 // Render Component
 const VideoOverlay: React.FC<Props> = ({
-  // If we are displaying the overlay or not
+  // Passed in props
   isDisplaying,
 
   // Video metadata
@@ -81,10 +78,10 @@ const VideoOverlay: React.FC<Props> = ({
   const [hasAssignedGlobalState, setHasAssignedGlobalState] = useState(false);
 
   // Local video playback state
-  const [isPlaying, setIsPlaying] = useState(globalIsPlaying);
-  const [currentTimeMs, setCurrentTimeMs] = useState(globalCurrentTimeMs);
-  const [currentVolume, setCurrentVolume] = useState(globalCurrentVolume);
-  const [isMuted, setIsMuted] = useState(globalIsMuted);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTimeMs, setCurrentTimeMs] = useState(0);
+  const [currentVolume, setCurrentVolume] = useState(20);
+  const [isMuted, setIsMuted] = useState(false);
 
   // Use Refs for the useEffect (to update global state on dismount)
   const isPlayingRef = useRef(isPlaying);
@@ -115,7 +112,7 @@ const VideoOverlay: React.FC<Props> = ({
       video.addEventListener('timeupdate', setVideoCurrentTimeEvent);
       videoContainer.addEventListener('dblclick', setVideoFullscreenEvent);
 
-      // Setup video on load (sync)
+      // Sync the video (switching between main video & miniplayer)
       if (hasLoadedGlobalState && !hasAssignedGlobalState) {
         setIsPlaying(globalIsPlaying);
         setCurrentTimeMs(globalCurrentTimeMs);
@@ -131,6 +128,7 @@ const VideoOverlay: React.FC<Props> = ({
     if (!hasLoadedGlobalState) setHasLoadedGlobalState(true);
 
     return () => {
+      // If global state has already loaded and we are on the same video
       if (hasLoadedGlobalState) {
         setVideoPlaybackState({
           globalIsPlaying: isPlayingRef.current,
@@ -144,14 +142,7 @@ const VideoOverlay: React.FC<Props> = ({
         videoContainer.removeEventListener('dblclick', setVideoFullscreenEvent);
       }
     };
-  }, [
-    globalIsPlaying,
-    globalCurrentTimeMs,
-    globalCurrentVolume,
-    globalIsMuted,
-    hasLoadedGlobalState,
-    hasAssignedGlobalState,
-  ]);
+  }, [hasLoadedGlobalState, hasAssignedGlobalState]);
 
   // Get the video component for the
   const video: HTMLVideoElement | null = document.getElementById('video') as HTMLVideoElement;
@@ -353,6 +344,7 @@ const VideoOverlay: React.FC<Props> = ({
 
 const mapStateToProps = (state: State) => ({
   // Video metadata
+  videoId: state.videoMetadata.videoId,
   videoLengthMs: state.videoMetadata.videoLengthMs,
   // Video playback
   globalIsPlaying: state.videoPlayback.globalIsPlaying,
