@@ -11,15 +11,16 @@ export interface VideoPlaybackState {
 }
 
 const INITIAL_STATE = {
-  globalIsPlaying: false,
+  globalIsPlaying: true,
   globalCurrentTimeMs: 0,
   globalCurrentVolume: 20,
   globalIsMuted: false,
   playbackRefreshed: true,
 } as VideoPlaybackState;
 
+// Default state used when we refresh this redux state
 const DEFAULT_STATE = {
-  globalIsPlaying: false,
+  globalIsPlaying: true,
   globalCurrentTimeMs: 0,
   playbackRefreshed: true,
 } as VideoPlaybackState;

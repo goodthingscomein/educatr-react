@@ -1,27 +1,51 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
-
-// Import Required Redux Actions
+import { setRecordingsNavigationUrl } from '../../redux/navigation/navigation.actions';
 import { State } from '../../redux/root-reducer';
+import { Dispatch } from 'redux';
+import { Action } from '../../redux/all-actions.types';
 
 // Import styles
-import { VideoAndOverlayContainer, VideoContainer } from './video.styles';
+import {
+  VideoAndOverlayContainer,
+  VideoEntireOverlayContainer,
+  VideoTitleContainer,
+  VideoContainer,
+} from './video.styles';
 
 // Import custom components
 import VideoOverlay from '../video-overlay/video-overlay.components';
+import Link from '../link/link.components';
 
 // Component Props Interface
 type Props = {
+  // Passed props
+  showTitleOverlayButton?: boolean;
+
   // Video metadata
+  videoId: string;
+  videoTitle: string;
   videoThumbnailSrc: string;
+
   // Video stream
   videoBlobUrl: string;
+
+  // Set the recording drawer button URL
+  setRecordingsNavigationUrl: typeof setRecordingsNavigationUrl;
 };
 
 // Render Component
-const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
+const Video: React.FC<Props> = ({
+  showTitleOverlayButton,
+  videoId,
+  videoTitle,
+  videoThumbnailSrc,
+  videoBlobUrl,
+  setRecordingsNavigationUrl,
+}) => {
   // Mouse drag state to show / hide the overlay
   const [mouseDragValue, setMouseDragValue] = useState(0);
   const mouseDragValueRef = useRef(mouseDragValue);
@@ -59,6 +83,14 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
     setMouseDragValue(mouseDragValue + 1); // update the mouse move counter
   };
 
+  const navigate = useNavigate();
+  const recordingDetailsUrl = `/recordings/${videoId}/discussion`;
+
+  const titleClickAction = () => {
+    setRecordingsNavigationUrl(recordingDetailsUrl);
+    navigate(recordingDetailsUrl);
+  };
+
   // Render the video component
   return (
     <VideoAndOverlayContainer
@@ -73,7 +105,16 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
             HTML5 videos not supported with this browser.
           </VideoContainer>
           {/* MAIN VIDEO OVERLAY BUTTONS */}
-          <VideoOverlay isDisplaying={isDisplayingOverlay} />
+          <VideoEntireOverlayContainer>
+            <VideoTitleContainer>
+              {showTitleOverlayButton && (
+                <Link color='white' hoverColor='primaryAccent' clickAction={() => titleClickAction()}>
+                  {videoTitle.substring(0, 50)} {videoTitle.length >= 50 && '...'}
+                </Link>
+              )}
+            </VideoTitleContainer>
+            <VideoOverlay isDisplaying={isDisplayingOverlay} showShadow />
+          </VideoEntireOverlayContainer>
         </>
       )}
     </VideoAndOverlayContainer>
@@ -82,9 +123,16 @@ const Video: React.FC<Props> = ({ videoThumbnailSrc, videoBlobUrl }) => {
 
 const mapStateToProps = (state: State) => ({
   // Video metadata
+  videoId: state.videoMetadata.videoId,
+  videoTitle: state.videoMetadata.videoTitle,
   videoThumbnailSrc: state.videoMetadata.videoThumbnailSrc,
   // Video stream
   videoBlobUrl: state.videoStream.videoBlobUrl,
 });
 
-export default connect(mapStateToProps)(Video);
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  // Set recording drawer button url
+  setRecordingsNavigationUrl: (url: string) => dispatch(setRecordingsNavigationUrl(url)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Video);

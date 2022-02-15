@@ -27,7 +27,7 @@ const Miniplayer: React.FC<Props> = ({ videoBlobUrl, isShowingPlaybackBar, isSho
   return (
     <MiniplayerFrame isDisplaying={isShowingPlaybackBar && isShowingMiniplayer}>
       {/* VIDEO */}
-      {videoBlobUrl && <Video />}
+      {videoBlobUrl && <Video showTitleOverlayButton />}
     </MiniplayerFrame>
   );
 };

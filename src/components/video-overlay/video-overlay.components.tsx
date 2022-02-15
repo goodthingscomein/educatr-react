@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 
 // Import utils
 import secondsToTimeFormat from '../../utils/secondsToTimeFormat';
+import skipTime from '../../utils/skipTime';
 
 // Import Connect Redux
 import { connect } from 'react-redux';
-//Redux actions
 import { setVideoPlaybackState } from '../../redux/video-playback/video-playback.actions';
 import { State } from '../../redux/root-reducer';
 import { Dispatch } from 'redux';
@@ -26,6 +26,7 @@ import Icon from '../icon/icon-components';
 import Margin from '../margin/margin.components';
 import CopyText from '../copy-text/copy-text.components';
 import Button from '../button/button.components';
+import { VideoPlaybackState } from '../../redux/video-playback/video-playback.reducer';
 
 // Import custom icons
 import PlayIcon from '@mui/icons-material/PlayArrow';
@@ -35,16 +36,15 @@ import SkipBackIcon from '@mui/icons-material/FastRewind';
 import VolumeIcon from '@mui/icons-material/VolumeUp';
 import MuteIcon from '@mui/icons-material/VolumeOff';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-// import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PipIcon from '@mui/icons-material/PictureInPicture';
 import SettingsIcon from '@mui/icons-material/Settings';
-import skipTime from '../../utils/skipTime';
-import { VideoPlaybackState } from '../../redux/video-playback/video-playback.reducer';
 
 // Component Props Interface
 type Props = {
   // Passed in props
   isDisplaying?: boolean;
+  showShadow?: boolean;
 
   // Recording metadata
   videoId: string;
@@ -62,6 +62,7 @@ type Props = {
 const VideoOverlay: React.FC<Props> = ({
   // Passed in props
   isDisplaying,
+  showShadow,
 
   // Video metadata
   videoLengthMs,
@@ -83,7 +84,7 @@ const VideoOverlay: React.FC<Props> = ({
   const [currentVolume, setCurrentVolume] = useState(20);
   const [isMuted, setIsMuted] = useState(false);
 
-  // Use Refs for the useEffect (to update global state on dismount)
+  // Use Refs to update the global playback state in the use effect hook
   const isPlayingRef = useRef(isPlaying);
   isPlayingRef.current = isPlaying;
   const currentTimeMsRef = useRef(currentTimeMs);
@@ -93,9 +94,10 @@ const VideoOverlay: React.FC<Props> = ({
   const isMutedRef = useRef(isMuted);
   isMutedRef.current = isMuted;
 
-  // Changing video time flags
+  // Local state for other aspects of the video / overlay
   const [isDraggingTime, setIsDraggingTime] = useState(false);
   const [isSkippingTime, setIsSkippingTime] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(document.fullscreenElement);
 
   // On component dismount | Set the Redux global video playback values
   useEffect(() => {
@@ -106,30 +108,32 @@ const VideoOverlay: React.FC<Props> = ({
     // Event listen functions
     const setVideoCurrentTimeEvent = () => setCurrentTimeMs(Math.floor(video.currentTime * 1000));
     const setVideoFullscreenEvent = () => toggleFullscreen();
+    const setIsFullscreenEvent = () => setIsFullscreen(document.fullscreenElement);
 
     // Subscribe to video event listeners
     if (video && videoContainer) {
       video.addEventListener('timeupdate', setVideoCurrentTimeEvent);
       videoContainer.addEventListener('dblclick', setVideoFullscreenEvent);
-
-      // Sync the video (switching between main video & miniplayer)
-      if (hasLoadedGlobalState && !hasAssignedGlobalState) {
-        setIsPlaying(globalIsPlaying);
-        setCurrentTimeMs(globalCurrentTimeMs);
-        setCurrentVolume(globalCurrentVolume);
-        setIsMuted(globalIsMuted);
-        setHasAssignedGlobalState(true);
-      }
+      document.addEventListener('fullscreenchange', setIsFullscreenEvent);
 
       video.currentTime = currentTimeMs / 1000;
     }
 
-    // Refreshes global state (when first loading, does not get's a delayed state)
+    // Gets the global playback state
     if (!hasLoadedGlobalState) setHasLoadedGlobalState(true);
+
+    // Syncs the video (switching between main video & miniplayer)
+    if (hasLoadedGlobalState && !hasAssignedGlobalState) {
+      setIsPlaying(globalIsPlaying);
+      setCurrentTimeMs(globalCurrentTimeMs);
+      setCurrentVolume(globalCurrentVolume);
+      setIsMuted(globalIsMuted);
+      setHasAssignedGlobalState(true);
+    }
 
     return () => {
       // If global state has already loaded and we are on the same video
-      if (hasLoadedGlobalState) {
+      if (hasLoadedGlobalState && hasAssignedGlobalState) {
         setVideoPlaybackState({
           globalIsPlaying: isPlayingRef.current,
           globalCurrentTimeMs: currentTimeMsRef.current,
@@ -140,6 +144,7 @@ const VideoOverlay: React.FC<Props> = ({
       if (video && videoContainer) {
         video.removeEventListener('timeupdate', setVideoCurrentTimeEvent);
         videoContainer.removeEventListener('dblclick', setVideoFullscreenEvent);
+        document.removeEventListener('fullscreenchange', setIsFullscreenEvent);
       }
     };
   }, [hasLoadedGlobalState, hasAssignedGlobalState]);
@@ -211,7 +216,7 @@ const VideoOverlay: React.FC<Props> = ({
 
   // Render the overlay
   return (
-    <VideoInteractionContainer isDisplaying={isDisplaying}>
+    <VideoInteractionContainer isDisplaying={isDisplaying} showShadow={showShadow}>
       {/* TIMESTAMP */}
       <CopyText size='x-small' color='white'>
         {secondsToTimeFormat(Math.floor(currentTimeMs / 1000))} /{' '}
@@ -326,10 +331,7 @@ const VideoOverlay: React.FC<Props> = ({
             margin='0 0 0 12px'
             clickAction={() => toggleFullscreen()}
           >
-            {/* <Icon padding='12px'>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</Icon> */}
-            <Icon padding='12px'>
-              <FullscreenIcon />
-            </Icon>
+            <Icon padding='12px'>{isFullscreen ? <FullscreenExitIcon /> : <FullscreenIcon />}</Icon>
           </Button>
         </VideoButtonsContainer>
       </VideoInteractionItemsRowContainer>

@@ -32,14 +32,13 @@ import RecordingDetailsPage from '../recording-details/recording-details.pages';
 import NotFoundPage from '../not-found/not-found.pages';
 
 type Props = {
-  isDrawerOpen: boolean;
   videoDownloadUrl: string;
   videoBlobUrl: string;
   setBlobUrl: typeof setBlobUrl;
 };
 
 // Render Component
-const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, videoBlobUrl, setBlobUrl }) => {
+const PlatformRootPage: React.FC<Props> = ({ videoDownloadUrl, videoBlobUrl, setBlobUrl }) => {
   // Listens for changes in the downloadUrl link, streams using link to a blob, creates blob URL and sets the URL in redux
   useEffect(() => {
     // First check if download Url is not null (it will be null when we are not watching a video)
@@ -72,7 +71,7 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
       {/* MAIN CONTENT */}
       <ContentPaddingContainer>
         <ContentContainer>
-          <DarkenScreen displaying={isDrawerOpen} />
+          <DarkenScreen />
           <Routes>
             {/* ----- HOME ----- */}
             <Route path='/' element={<HomePage />} />
@@ -107,7 +106,6 @@ const PlatformRootPage: React.FC<Props> = ({ isDrawerOpen, videoDownloadUrl, vid
 };
 
 const mapStateToProps = (state: State) => ({
-  isDrawerOpen: state.navigation.isDrawerOpen,
   videoDownloadUrl: state.videoStream.videoDownloadUrl,
   videoBlobUrl: state.videoStream.videoBlobUrl,
 });
