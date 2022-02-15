@@ -28,6 +28,7 @@ import AllUnitsPage from '../all-units/all-units.pages';
 import UnitDetailsPage from '../unit-details/unit-details.pages';
 import AllRecordingsPage from '../all-recordings/all-recordings.pages';
 import RecordingDetailsPage from '../recording-details/recording-details.pages';
+import NotesPage from '../notes/notes.pages';
 // 404 Page
 import NotFoundPage from '../not-found/not-found.pages';
 
@@ -95,6 +96,8 @@ const PlatformRootPage: React.FC<Props> = ({ videoDownloadUrl, videoBlobUrl, set
               {/* ----- RECORDING DETAILS ----- */}
               <Route path='/recordings/:recordingId/*' element={<RecordingDetailsPage />} />
             </Route>
+            {/* ----- NOTES PAGE ----- */}
+            <Route path='/notes/*' element={<NotesPage />} />
             {/* ----- 404 (PAGE NOT FOUND) ----- */}
             <Route path='/*' element={<NotFoundPage />} />
           </Routes>

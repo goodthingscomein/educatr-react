@@ -5,12 +5,14 @@ interface NavigationState {
   isDrawerOpen: boolean;
   recordingsNavigationUrl: string;
   yourUnitsNavigationUrl: string;
+  yourNotesNavigationUrl: string;
 }
 
 const DEFAULT_STATE = {
   isDrawerOpen: false,
   recordingsNavigationUrl: '/recordings/recent',
   yourUnitsNavigationUrl: '/units/current',
+  yourNotesNavigationUrl: '/notes',
 } as NavigationState;
 
 const navigationReducer = (state: NavigationState = DEFAULT_STATE, action: NavigationAction): NavigationState => {
@@ -29,6 +31,11 @@ const navigationReducer = (state: NavigationState = DEFAULT_STATE, action: Navig
       return {
         ...state,
         yourUnitsNavigationUrl: action.payload,
+      };
+    case NAVIGATION_TYPES.SET_YOUR_NOTES_NAVIGATION_URL:
+      return {
+        ...state,
+        yourNotesNavigationUrl: action.payload,
       };
     default:
       return state;

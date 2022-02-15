@@ -27,9 +27,6 @@ import Button from '../../components/button/button.components';
 
 // Render Component
 const MessagesPage: React.FC = () => {
-  // Local page Sstate
-  const [searchValue, setSearchValue] = useState('');
-
   // Render page
   return (
     <PageContainer>

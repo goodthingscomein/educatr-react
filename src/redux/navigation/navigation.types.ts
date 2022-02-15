@@ -15,7 +15,13 @@ interface SetRecordingsNavigationUrlAction {
   payload: string;
 }
 
+interface SetYourNotesNavigationUrlAction {
+  type: NAVIGATION_TYPES.SET_YOUR_NOTES_NAVIGATION_URL;
+  payload: string;
+}
+
 export type NavigationAction =
   | SetIsDrawerOpenAction
   | SetYourUnitsNavigationUrlAction
-  | SetRecordingsNavigationUrlAction;
+  | SetRecordingsNavigationUrlAction
+  | SetYourNotesNavigationUrlAction;

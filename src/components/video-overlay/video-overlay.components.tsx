@@ -39,6 +39,7 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PipIcon from '@mui/icons-material/PictureInPicture';
 import SettingsIcon from '@mui/icons-material/Settings';
+import VideoPlaybackButtons from '../video-playback-buttons/video-playback-buttons.components';
 
 // Component Props Interface
 type Props = {
@@ -237,51 +238,18 @@ const VideoOverlay: React.FC<Props> = ({
       <VideoInteractionItemsRowContainer>
         {/* LEFT SIDE */}
         <VideoButtonsContainer>
-          {/* REWIND BUTTON */}
-          <Button
-            variant='text'
-            size='small'
-            textColor='white'
-            hoverTextColor='lightGrey'
-            padding='0'
-            clickAction={() => {
+          <VideoPlaybackButtons
+            isPlaying={isPlaying}
+            rewindButtonAction={() => {
               setIsSkippingTime(true);
               setCurrentTimeMs((currentTimeMs) => skipTime(-15000, currentTimeMs, videoLengthMs));
             }}
-          >
-            <Icon padding='12px'>
-              <SkipBackIcon />
-            </Icon>
-          </Button>
-          {/* PLAY / PAUSE BUTTON */}
-          <Button
-            variant='text'
-            size='x-large'
-            textColor='white'
-            hoverTextColor='lightGrey'
-            padding='0'
-            margin='0 8px'
-            clickAction={() => setIsPlaying(!isPlaying)}
-          >
-            <Icon padding='12px'>{isPlaying ? <PauseIcon fontSize='large' /> : <PlayIcon fontSize='large' />}</Icon>
-          </Button>
-          {/* FASTFORWARD BUTTON */}
-          <Button
-            variant='text'
-            size='small'
-            textColor='white'
-            hoverTextColor='lightGrey'
-            padding='0'
-            margin='0 24px 0 0'
-            clickAction={() => {
+            playPauseButtonAction={() => setIsPlaying((isPlaying) => !isPlaying)}
+            fastForwardButtonAction={() => {
               setIsSkippingTime(true);
               setCurrentTimeMs((currentTimeMs) => skipTime(15000, currentTimeMs, videoLengthMs));
             }}
-          >
-            <Icon padding='12px'>
-              <SkipForwardIcon />
-            </Icon>
-          </Button>
+          />
           {/* MUTE BUTTON */}
           <Button
             variant='text'
@@ -339,7 +307,6 @@ const VideoOverlay: React.FC<Props> = ({
       <VideoInteractionItemsRowContainer>
         <VideoMiddleButtonsContainer></VideoMiddleButtonsContainer>
       </VideoInteractionItemsRowContainer>
-      <VideoInteractionItemsRowContainer></VideoInteractionItemsRowContainer>
     </VideoInteractionContainer>
   );
 };
