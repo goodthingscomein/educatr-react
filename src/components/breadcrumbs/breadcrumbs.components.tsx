@@ -61,10 +61,9 @@ const Breadcrumbs: React.FC<Props> = ({
   // Root breadcrumb component
   const RootBreadcrumbComponent = (
     <Link color={'white'} clickAction={() => breadcrumbClickAction(rootBreadcrumbUrl)}>
-      <Icon padding='8px'>
+      <Icon padding='10px'>
         <NotesIcon fontSize='small' />
       </Icon>
-      <Margin width='2px' />
     </Link>
   );
 

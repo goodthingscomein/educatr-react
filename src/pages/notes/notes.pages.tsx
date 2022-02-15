@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Import development data
+import notesDataTree from '../../data/notes-tree.data';
+
 // Import Redux
 import { connect } from 'react-redux';
 import { setYourNotesNavigationUrl } from '../../redux/navigation/navigation.actions';
@@ -24,6 +27,7 @@ import SearchBar from '../../components/search-bar/search-bar.components';
 import OptionsButton from '../../components/options-button/options-button.components';
 import CopyText from '../../components/copy-text/copy-text.components';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs.components';
+import SubPageDrawerButton from '../../components/sub-page-drawer-button/sub-page-drawer-button.components';
 
 // Component props
 type Props = {
@@ -32,12 +36,19 @@ type Props = {
 
 // Render Component
 const NotesPage: React.FC<Props> = ({ setYourNotesNavigationUrl }) => {
+  // const
+
   return (
     <PageContainer>
       <SubPageDrawer>
         <SubPageDrawerHeader heading='Notes'>
           <SearchBar searchHint={'Search all notes...'} onSearchSubmitListener={(input) => console.log(input)} />
         </SubPageDrawerHeader>
+        <SubPageDrawerButton>
+          <CopyText size={'medium'} color={'textDark'}>
+            Test
+          </CopyText>
+        </SubPageDrawerButton>
       </SubPageDrawer>
       <ContentContainer>
         <SubPageTopBar backgroundColor={'primary'}>
@@ -57,12 +68,7 @@ const NotesPage: React.FC<Props> = ({ setYourNotesNavigationUrl }) => {
         <BreadcrumbsTopBarContainer>
           <Breadcrumbs
             rootBreadcrumbUrl={'/notes'}
-            additionalBreadcrumbs={[
-              { name: 'ACCG', url: '/notes/accg' },
-              { name: 'ACCG1000', url: '/notes/accg/accg1000' },
-              { name: 'Week 7', url: '/notes/accg/accg1000/week7' },
-              { name: 'Ella is cute', url: '/notes/accg/accg1000/week7/ella-is-cute' },
-            ]}
+            additionalBreadcrumbs={[]}
             navigationDispatch={setYourNotesNavigationUrl}
           />
         </BreadcrumbsTopBarContainer>

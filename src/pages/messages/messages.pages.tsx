@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Import styles
 import {
   PageContainer,
   DrawerContent,
-  DrawerButton,
   ButtonsGroupContainer,
   ContentContainer,
   MessagesContainer,
@@ -19,6 +18,7 @@ import SubPageDrawerHeader from '../../components/sub-page-drawer-header/sub-pag
 import SearchBar from '../../components/search-bar/search-bar.components';
 import SubPageTopBar from '../../components/sub-page-top-bar/sub-page-top-bar.components';
 import OptionsButton from '../../components/options-button/options-button.components';
+import SubPageDrawerButton from '../../components/sub-page-drawer-button/sub-page-drawer-button.components';
 
 // Import custom icons
 import CallIcon from '@mui/icons-material/Call';
@@ -36,7 +36,7 @@ const MessagesPage: React.FC = () => {
         </SubPageDrawerHeader>
         {/* MAP OF ALL OF THE CONTACTS AND MESSAGES */}
         <DrawerContent>
-          <DrawerButton selected>
+          <SubPageDrawerButton selected>
             <MessagesContact
               imageUrl='https://picsum.photos/80/80?random=1'
               imageHeight='36px'
@@ -45,7 +45,7 @@ const MessagesPage: React.FC = () => {
               subTextLength={25}
               timestamp='2:45pm'
             />
-          </DrawerButton>
+          </SubPageDrawerButton>
         </DrawerContent>
       </SubPageDrawer>
       <ContentContainer>

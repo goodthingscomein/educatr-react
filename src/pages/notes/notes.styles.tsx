@@ -22,6 +22,18 @@ export const DrawerContentContainer = styled.div`
   flex-direction: column;
 `;
 
+// // Notes Drawer Button props
+
+// export const NotesDrawerButton = styled.a`
+//   width: 100%;
+//   height: 48px;
+//   padding: 0 20px;
+//   border-bottom: 1px solid ${(props) => props.theme.themeColors.borderColor};
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+// `;
+
 export const ContentContainer = styled.div`
   height: 100%;
   flex: 1 0 0;
